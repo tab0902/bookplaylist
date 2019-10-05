@@ -1,0 +1,12 @@
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+/bookplaylist/media/*
+/bookplaylist/static/*
+!/bookplaylist/static/css/
+!/bookplaylist/static/fonts/
+!/bookplaylist/static/img/
+!/bookplaylist/static/js/
