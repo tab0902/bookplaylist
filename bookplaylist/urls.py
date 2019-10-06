@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+admin.site.site_title = 'BookPlayList 管理サイト'
+admin.site.site_header = 'BookPlayList 管理サイト'
+admin.site.index_title = 'トップページ'
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/f8ebb747-e59e-4540-94ac-34714c847267/', admin.site.urls),
 ]
