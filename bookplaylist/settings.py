@@ -138,12 +138,16 @@ STATIC_URL = '/static/'
 
 ADMIN_REORDER = (
     {
-        'app': 'accounts',
-        'models': ('accounts.User', 'auth.Group', )
-    },
-    {
         'app': 'main',
         'models': ('main.Book', 'main.Playlist', )
+    },
+    {
+        'app': 'accounts',
+        'models': ('accounts.User', )
+    },
+    {
+        'app': 'auth',
+        'models': ('auth.Group', )
     },
 )
 
