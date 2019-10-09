@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 00:58+0900\n"
+"POT-Creation-Date: 2019-10-10 02:00+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,9 @@ msgstr ""
 
 #: accounts/models.py:62
 msgid "Required. 150 characters or fewer. Letters, digits and _ only."
-msgstr "この項目は必須です。半角アルファベット、半角数字、_ で150文字以下にしてください。"
+msgstr ""
+"この項目は必須です。半角アルファベット、半角数字、_ で150文字以下にしてくださ"
+"い。"
 
 #: accounts/models.py:65
 msgid "A user with that username already exists."

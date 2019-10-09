@@ -19,7 +19,7 @@ from django.utils.translation import gettext_lazy as _
 
 admin.site.site_title = _('BookPlayList site admin')
 admin.site.site_header = _('BookPlayList administration')
-admin.site.index_title = _('TOP')
+admin.site.index_title = _('Home')
 
 urlpatterns = [
     path('admin/f8ebb747-e59e-4540-94ac-34714c847267/', admin.site.urls),
