@@ -37,8 +37,8 @@ class Migration(migrations.Migration):
                 ('hopes_newsletters', models.BooleanField(default=True, verbose_name='newsletter status')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='updated at')),
+                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='date created')),
+                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='date updated')),
             ],
             options={
                 'verbose_name': 'user',

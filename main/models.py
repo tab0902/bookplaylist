@@ -21,7 +21,7 @@ class Book(BaseModel):
     volume = models.CharField(_('volume'), max_length=50, blank=True, null=True)
     series = models.CharField(_('series'), max_length=255, blank=True, null=True)
     publisher = models.CharField(_('publisher'), max_length=255, blank=True, null=True)
-    pubdate = models.CharField(_('publication date'), max_length=10, blank=True, null=True)
+    pubdate = models.CharField(_('date published'), max_length=10, blank=True, null=True)
     cover = models.URLField(_('cover'), blank=True, null=True)
     author = models.CharField(_('author'), max_length=255, blank=True, null=True)
     amazon_url = models.URLField(_('Amazon URL'), blank=True, null=True)
