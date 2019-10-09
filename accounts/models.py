@@ -65,7 +65,16 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
             'unique': _("A user with that username already exists."),
         },
     )
-    email = models.EmailField(_('email address'), unique=True, blank=True, null=True)
+    email = models.EmailField(
+        _('email address'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text=_('Required. Enter a valid email address.'),
+        error_messages={
+            'unique': _("A user with that email address already exists."),
+        },
+    )
     first_name = models.CharField(_('first name'), max_length=30, blank=True, null=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True, null=True)
     is_staff = models.BooleanField(
