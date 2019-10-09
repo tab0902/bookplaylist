@@ -136,6 +136,10 @@ ADMIN_REORDER = (
         'app': 'accounts',
         'models': ('accounts.User', 'auth.Group', )
     },
+    {
+        'app': 'main',
+        'models': ('main.Book', 'main.Playlist', )
+    },
 )
 
 

@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
+from main.admin import PlaylistInline
 from .forms import (
     UserCreationForm, UserChangeForm,
 )
@@ -34,3 +35,4 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('username', 'email', 'twitter_id', 'facebook_id', 'first_name', 'last_name', 'comment', )
     ordering = ('-last_login', )
     filter_horizontal = ('groups', 'user_permissions', )
+    inlines = [PlaylistInline]
