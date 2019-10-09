@@ -16,14 +16,14 @@ class Book(BaseModel):
         blank=True,
     )
     isbn = models.CharField(_('ISBN'), max_length=13, unique=True)
-    title = models.CharField(_('タイトル'), max_length=255)
-    title_collation_key = models.CharField(_('タイトル順序照合キー'), max_length=255, blank=True, null=True)
-    volume = models.CharField(_('巻数'), max_length=50, blank=True, null=True)
-    series = models.CharField(_('シリーズ'), max_length=255, blank=True, null=True)
-    publisher = models.CharField(_('出版社'), max_length=255, blank=True, null=True)
-    pubdate = models.CharField(_('出版日'), max_length=10, blank=True, null=True)
-    cover = models.URLField(_('書影'), blank=True, null=True)
-    author = models.CharField(_('著者'), max_length=255, blank=True, null=True)
+    title = models.CharField(_('title'), max_length=255)
+    title_collation_key = models.CharField(_('collation key'), max_length=255, blank=True, null=True)
+    volume = models.CharField(_('volume'), max_length=50, blank=True, null=True)
+    series = models.CharField(_('series'), max_length=255, blank=True, null=True)
+    publisher = models.CharField(_('publisher'), max_length=255, blank=True, null=True)
+    pubdate = models.CharField(_('publication date'), max_length=10, blank=True, null=True)
+    cover = models.URLField(_('cover'), blank=True, null=True)
+    author = models.CharField(_('author'), max_length=255, blank=True, null=True)
     amazon_url = models.URLField(_('Amazon URL'), blank=True, null=True)
 
     class Meta:
@@ -44,8 +44,8 @@ class Playlist(BaseModel):
         verbose_name=_('books'),
     )
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
-    title = models.CharField(_('タイトル'), max_length=50)
-    description = models.TextField(_('説明文'))
+    title = models.CharField(_('title'), max_length=50)
+    description = models.TextField(_('description'))
 
     class Meta:
         db_table = 'playlists'
@@ -60,7 +60,7 @@ class Playlist(BaseModel):
 class PlaylistBook(BaseModel):
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
     book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'))
-    description = models.TextField(_('説明文'))
+    description = models.TextField(_('description'))
 
     class Meta:
         db_table = 'playlists_books'

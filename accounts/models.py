@@ -59,7 +59,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         unique=True,
         blank=True,
         null=True,
-        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=_('Required. 150 characters or fewer. Letters, digits and _ only.'),
         validators=[username_validator],
         error_messages={
             'unique': _("A user with that username already exists."),
@@ -82,11 +82,11 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    comment = models.CharField(_('ひとこと'), max_length=50, blank=True, null=True)
+    comment = models.CharField(_('comment'), max_length=50, blank=True, null=True)
     twitter_id = models.CharField(_('Twitter ID'), max_length=255, unique=True, blank=True, null=True)
     facebook_id = models.CharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
-    is_verified = models.BooleanField(_('認証完了'), default=False)
-    hopes_newsletters = models.BooleanField(_('配信希望'), default=True)
+    is_verified = models.BooleanField(_('email status'), default=False)
+    hopes_newsletters = models.BooleanField(_('newsletter status'), default=True)
 
     objects = UserManager()
 
