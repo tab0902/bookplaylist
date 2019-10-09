@@ -41,6 +41,12 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
 ]
 
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.ModelBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -127,8 +133,8 @@ STATIC_URL = '/static/'
 
 ADMIN_REORDER = (
     {
-        'app': 'auth',
-        'models': ('auth.Group', )
+        'app': 'accounts',
+        'models': ('accounts.User', 'auth.Group', )
     },
 )
 
