@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-09 22:44+0900\n"
+"POT-Creation-Date: 2019-10-10 00:58+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr "この項目は必須です。半角アルファベット、半角数字
 msgid "A user with that username already exists."
 msgstr ""
 
-#: accounts/models.py:68
+#: accounts/models.py:69
 msgid "email address"
 msgstr ""
 
@@ -58,61 +58,61 @@ msgstr "この項目は必須です。有効なメールアドレスを入力し
 msgid "A user with that email address already exists."
 msgstr "同じメールアドレスが既に登録済みです。"
 
-#: accounts/models.py:69
+#: accounts/models.py:78
 msgid "first name"
 msgstr ""
 
-#: accounts/models.py:70
+#: accounts/models.py:79
 msgid "last name"
 msgstr ""
 
-#: accounts/models.py:72
+#: accounts/models.py:81
 msgid "staff status"
 msgstr ""
 
-#: accounts/models.py:74
+#: accounts/models.py:83
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: accounts/models.py:77
+#: accounts/models.py:86
 msgid "active"
 msgstr ""
 
-#: accounts/models.py:80
+#: accounts/models.py:89
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: accounts/models.py:84
+#: accounts/models.py:93
 msgid "date joined"
 msgstr ""
 
-#: accounts/models.py:85
+#: accounts/models.py:94
 msgid "comment"
 msgstr "ひとこと"
 
-#: accounts/models.py:86
+#: accounts/models.py:95
 msgid "Twitter ID"
 msgstr "ツイッターID"
 
-#: accounts/models.py:87
+#: accounts/models.py:96
 msgid "Facebook ID"
 msgstr "フェイスブックID"
 
-#: accounts/models.py:88
+#: accounts/models.py:97
 msgid "email status"
 msgstr "メール認証"
 
-#: accounts/models.py:89
+#: accounts/models.py:98
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:100
+#: accounts/models.py:109 main/models.py:46
 msgid "user"
 msgstr ""
 
-#: accounts/models.py:101
+#: accounts/models.py:110
 msgid "users"
 msgstr ""
 
@@ -129,6 +129,18 @@ msgstr "作成日時"
 #: bookplaylist/models.py:12
 msgid "updated at"
 msgstr "更新日時"
+
+#: bookplaylist/urls.py:20
+msgid "BookPlayList site admin"
+msgstr "BookPlayList サイト管理"
+
+#: bookplaylist/urls.py:21
+msgid "BookPlayList administration"
+msgstr "BookPlayList 管理サイト"
+
+#: bookplaylist/urls.py:22
+msgid "TOP"
+msgstr ""
 
 #: main/apps.py:7
 msgid "main"
