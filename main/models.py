@@ -25,8 +25,6 @@ class Book(BaseModel):
     cover = models.URLField(_('書影'), blank=True, null=True)
     author = models.CharField(_('著者'), max_length=255, blank=True, null=True)
     amazon_url = models.URLField(_('Amazon URL'), blank=True, null=True)
-    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
 
     class Meta:
         db_table = 'books'
@@ -48,8 +46,6 @@ class Playlist(BaseModel):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
     title = models.CharField(_('タイトル'), max_length=50)
     description = models.TextField(_('説明文'))
-    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
 
     class Meta:
         db_table = 'playlists'
@@ -65,8 +61,6 @@ class PlaylistBook(BaseModel):
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
     book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'))
     description = models.TextField(_('説明文'))
-    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
 
     class Meta:
         db_table = 'playlists_books'
