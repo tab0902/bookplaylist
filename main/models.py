@@ -2,12 +2,12 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from bookplaylist.models import UUIDModel
+from bookplaylist.models import BaseModel
 
 # Create your models here.
 
 
-class Book(UUIDModel):
+class Book(BaseModel):
     playlists = models.ManyToManyField(
         'Playlist',
         through='PlaylistBook',
@@ -38,7 +38,7 @@ class Book(UUIDModel):
         return '%s' % self.title
 
 
-class Playlist(UUIDModel):
+class Playlist(BaseModel):
     books = models.ManyToManyField(
         'Book',
         through='PlaylistBook',
@@ -61,7 +61,7 @@ class Playlist(UUIDModel):
         return '%s' % self.title
 
 
-class PlaylistBook(UUIDModel):
+class PlaylistBook(BaseModel):
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
     book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'))
     description = models.TextField(_('説明文'))

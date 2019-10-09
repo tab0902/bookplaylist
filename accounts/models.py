@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from .validators import UnicodeUsernameValidator
-from bookplaylist.models import UUIDModel
+from bookplaylist.models import BaseModel
 
 
 # Create your models here.
@@ -50,7 +50,7 @@ class UserManager(BaseUserManager):
         return self._create_user(username, email, password, **extra_fields)
 
 
-class User(UUIDModel, AbstractBaseUser, PermissionsMixin):
+class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
 
     username = models.CharField(
