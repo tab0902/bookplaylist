@@ -16,7 +16,7 @@ from main.admin import PlaylistInline
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'twitter_id', 'facebook_id', 'password', )}),
-        (_('Personal info'), {'fields': ('comment', 'last_name', 'first_name', 'is_verified', 'hopes_newsletters', )}),
+        (_('Personal info'), {'fields': ('comment', 'last_name', 'first_name', 'is_verified', 'hopes_newsletter', )}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', ),
         }),
@@ -31,7 +31,7 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     list_display = ('username', 'email', 'twitter_id', 'facebook_id', 'is_staff', 'last_login', 'date_joined', )
-    list_filter = ('is_staff', 'is_superuser', 'is_active', 'is_verified', 'hopes_newsletters', 'groups', 'last_login', 'date_joined', )
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'is_verified', 'hopes_newsletter', 'groups', 'last_login', 'date_joined', )
     search_fields = ('username', 'email', 'twitter_id', 'facebook_id', 'first_name', 'last_name', 'comment', )
     ordering = ('-last_login', )
     filter_horizontal = ('groups', 'user_permissions', )

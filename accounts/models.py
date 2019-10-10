@@ -40,7 +40,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_verified', True)
-        extra_fields.setdefault('hopes_newsletters', False)
+        extra_fields.setdefault('hopes_newsletter', False)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -95,7 +95,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     twitter_id = models.CharField(_('Twitter ID'), max_length=255, unique=True, blank=True, null=True)
     facebook_id = models.CharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
     is_verified = models.BooleanField(_('email status'), default=False)
-    hopes_newsletters = models.BooleanField(_('newsletter status'), default=True)
+    hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
 
     objects = UserManager()
 
