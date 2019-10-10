@@ -103,11 +103,15 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
-    class Meta:
+    class Meta(BaseModel.Meta):
         db_table = 'users'
         ordering = ['-last_login']
         verbose_name = _('user')
         verbose_name_plural = _('users')
+        indexes =  [
+            models.Index(fields=['date_joined'], name='date_joined'),
+            models.Index(fields=['last_login'], name='last_login'),
+        ] + BaseModel._meta.indexes
 
     def __str__(self):
         return '%s' % (self.get_username() or self.pk)
