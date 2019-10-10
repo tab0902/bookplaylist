@@ -13,3 +13,7 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+        indexes = [
+            models.Index(fields=['created_at'], name='created_at'),
+            models.Index(fields=['updated_at'], name='updated_at'),
+        ]
