@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-10 02:00+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: accounts/admin.py:19
+msgid "Personal info"
+msgstr ""
+
+#: accounts/admin.py:20
+msgid "Permissions"
+msgstr ""
+
+#: accounts/admin.py:23
+msgid "Important dates"
+msgstr ""
+
+#: accounts/apps.py:7
+msgid "accounts"
+msgstr "アカウント"
+
+#: accounts/models.py:57
+msgid "username"
+msgstr ""
+
+#: accounts/models.py:62
+msgid "Required. 150 characters or fewer. Letters, digits and _ only."
+msgstr ""
+"この項目は必須です。半角アルファベット、半角数字、_ で150文字以下にしてくださ"
+"い。"
+
+#: accounts/models.py:65
+msgid "A user with that username already exists."
+msgstr ""
+
+#: accounts/models.py:69
+msgid "email address"
+msgstr ""
+
+#: accounts/models.py:73
+msgid "Required. Enter a valid email address."
+msgstr "この項目は必須です。有効なメールアドレスを入力してください。"
+
+#: accounts/models.py:75
+msgid "A user with that email address already exists."
+msgstr "同じメールアドレスが既に登録済みです。"
+
+#: accounts/models.py:78
+msgid "first name"
+msgstr ""
+
+#: accounts/models.py:79
+msgid "last name"
+msgstr ""
+
+#: accounts/models.py:81
+msgid "staff status"
+msgstr ""
+
+#: accounts/models.py:83
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: accounts/models.py:86
+msgid "active"
+msgstr ""
+
+#: accounts/models.py:89
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: accounts/models.py:93
+msgid "date joined"
+msgstr ""
+
+#: accounts/models.py:94
+msgid "comment"
+msgstr "ひとこと"
+
+#: accounts/models.py:95
+msgid "Twitter ID"
+msgstr "ツイッターID"
+
+#: accounts/models.py:96
+msgid "Facebook ID"
+msgstr "フェイスブックID"
+
+#: accounts/models.py:97
+msgid "email status"
+msgstr "メール認証"
+
+#: accounts/models.py:98
+msgid "newsletter status"
+msgstr "メール配信希望"
+
+#: accounts/models.py:109 main/models.py:46
+msgid "user"
+msgstr ""
+
+#: accounts/models.py:110
+msgid "users"
+msgstr ""
+
+#: accounts/validators.py:10
+msgid ""
+"Enter a valid username. This value may contain only letters, numbers, and _ "
+"characters."
+msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
+
+#: bookplaylist/models.py:11
+msgid "date created"
+msgstr "作成日時"
+
+#: bookplaylist/models.py:12
+msgid "date updated"
+msgstr "更新日時"
+
+#: bookplaylist/urls.py:20
+msgid "BookPlayList site admin"
+msgstr "BookPlayList サイト管理"
+
+#: bookplaylist/urls.py:21
+msgid "BookPlayList administration"
+msgstr "BookPlayList 管理サイト"
+
+#: bookplaylist/urls.py:22
+msgid "TOP"
+msgstr ""
+
+#: main/apps.py:7
+msgid "main"
+msgstr "メイン"
+
+#: main/models.py:15 main/models.py:54
+msgid "playlists"
+msgstr "プレイリスト"
+
+#: main/models.py:18
+msgid "ISBN"
+msgstr ""
+
+#: main/models.py:19 main/models.py:47
+msgid "title"
+msgstr "タイトル"
+
+#: main/models.py:20
+msgid "collation key"
+msgstr "照合キー"
+
+#: main/models.py:21
+msgid "volume"
+msgstr "巻数"
+
+#: main/models.py:22
+msgid "series"
+msgstr "シリーズ"
+
+#: main/models.py:23
+msgid "publisher"
+msgstr "出版社"
+
+#: main/models.py:24
+msgid "date published"
+msgstr "出版日"
+
+#: main/models.py:25
+msgid "cover"
+msgstr "書影"
+
+#: main/models.py:26
+msgid "author"
+msgstr "著者"
+
+#: main/models.py:27
+msgid "Amazon URL"
+msgstr "アマゾンURL"
+
+#: main/models.py:32 main/models.py:62
+msgid "book"
+msgstr "書籍"
+
+#: main/models.py:33 main/models.py:44
+msgid "books"
+msgstr "書籍"
+
+#: main/models.py:48 main/models.py:63
+msgid "description"
+msgstr "説明文"
+
+#: main/models.py:53 main/models.py:61
+msgid "playlist"
+msgstr "プレイリスト"
+
+#: main/models.py:68
+msgid "book in playlist"
+msgstr "リスト内の書籍"
+
+#: main/models.py:69
+msgid "books in playlists"
+msgstr "リスト内の書籍"
