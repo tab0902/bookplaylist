@@ -23,5 +23,6 @@ admin.site.index_title = _('Home')
 
 urlpatterns = [
     path('admin/f8ebb747-e59e-4540-94ac-34714c847267/', admin.site.urls),
+    path('', include('main.urls')),
     path('accounts/', include('accounts.urls')),
 ]
