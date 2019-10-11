@@ -1,5 +1,5 @@
 from django.contrib.auth import (
-    get_user_model, login as auth_login
+    get_user_model, login as auth_login, views as auth_views
 )
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
@@ -40,6 +40,15 @@ class ContextMixin:
 class ProfileView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/profile.html'
     title = _('Profile')
+
+
+class LoginView(ContextMixin, auth_views.LoginView):
+    template_name = 'accounts/login.html'
+    title = _('Log in')
+
+
+class LogoutView(ContextMixin, auth_views.LogoutView):
+    next_page = reverse_lazy('accounts:login')
 
 
 class SignupView(ContextMixin, generic.FormView):

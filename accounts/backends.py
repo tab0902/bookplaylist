@@ -15,7 +15,7 @@ class ModelBackend(BaseModelBackend):
         try:
             user = UserModel.objects.get(Q(username=username)|Q(email=username))
         except UserModel.DoesNotExist:
-            UserModel.set_password(password)
+            UserModel().set_password(password)
         else:
             if user.check_password(password) and self.user_can_authenticate(user):
                 return user

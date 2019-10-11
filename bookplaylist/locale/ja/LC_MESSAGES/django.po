@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-11 22:54+0900\n"
+"POT-Creation-Date: 2019-10-11 23:59+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,14 +122,29 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: accounts/templates/accounts/signup.html:2 accounts/views.py:36
+#: accounts/templates/accounts/login.html:12 accounts/views.py:58
 msgid "Signup"
 msgstr "ユーザー登録"
 
-#: accounts/templates/accounts/signup_complete.html:2
-#: accounts/templates/accounts/signup_subject.html:2
-msgid "Signup complete"
-msgstr "仮登録完了"
+#: accounts/templates/accounts/profile.html:4
+msgid "Welcome,"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:6
+msgid "Your playlists"
+msgstr "あなたのプレイリスト"
+
+#: accounts/templates/accounts/profile.html:11
+msgid "No data"
+msgstr "データなし"
+
+#: accounts/templates/accounts/profile.html:15
+msgid "Log out"
+msgstr ""
+
+#: accounts/templates/accounts/signup.html:12 accounts/views.py:47
+msgid "Log in"
+msgstr ""
 
 #: accounts/templates/accounts/signup_email.html:2
 msgid "Your account is created successfully. Registered infomation is below:"
@@ -148,17 +163,13 @@ msgstr "メールアドレス"
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
-#: accounts/templates/accounts/verification.html:2 accounts/views.py:60
-msgid "Verification complete"
-msgstr "本登録完了"
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:71
+msgid "Signup complete"
+msgstr "仮登録完了"
 
-#: accounts/templates/accounts/verification.html:4
+#: accounts/templates/accounts/verification.html:4 accounts/views.py:42
 msgid "Profile"
 msgstr "マイアカウント"
-
-#: accounts/templates/accounts/verification_again.html:2 accounts/views.py:106
-msgid "Verification failed"
-msgstr "認証失敗"
 
 #: accounts/templates/accounts/verification_again.html:3
 msgid "Submit the form below if you want to recieve email again."
@@ -169,15 +180,23 @@ msgstr ""
 msgid "Account verification"
 msgstr "アカウント認証"
 
-#: accounts/templates/accounts/verification_sent.html:2
-msgid "Email for verification sent"
-msgstr "認証メール送信完了"
-
 #: accounts/validators.py:10
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers, and _ "
 "characters."
 msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
+
+#: accounts/views.py:83
+msgid "Verification complete"
+msgstr "本登録完了"
+
+#: accounts/views.py:129
+msgid "Verification failed"
+msgstr "認証失敗"
+
+#: accounts/views.py:142
+msgid "Email for verification sent"
+msgstr "認証メール送信完了"
 
 #: bookplaylist/models.py:11
 msgid "date created"

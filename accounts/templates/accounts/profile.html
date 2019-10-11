@@ -1,0 +1,15 @@
+{% load i18n %}
+<h2>{{ title }}</h2>
+
+<p>{% trans 'Welcome,' %} {{ user }}</p>
+
+<p>{% trans 'Your playlists' %}</p>
+<ul>
+    {% for playlist in user.playlist_set.all %}
+        <li>{{ playlist }}</li>
+    {% empty %}
+        <li>{% trans 'No data' %}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a>
