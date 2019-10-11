@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-12 03:20+0900\n"
+"POT-Creation-Date: 2019-10-12 03:35+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,10 +156,14 @@ msgid "Your username, in case you've forgotten:"
 msgstr ""
 
 #: accounts/templates/accounts/password_reset_email.html:10
+#: accounts/templates/accounts/signup_email.html:11
+#: accounts/templates/accounts/verification_again_email.html:6
 msgid "Thanks for using our site!"
 msgstr ""
 
 #: accounts/templates/accounts/password_reset_email.html:12
+#: accounts/templates/accounts/signup_email.html:13
+#: accounts/templates/accounts/verification_again_email.html:8
 #, python-format
 msgid "The %(site_name)s team"
 msgstr ""
