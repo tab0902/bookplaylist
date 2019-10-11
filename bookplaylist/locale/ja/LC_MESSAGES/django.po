@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 02:00+0900\n"
+"POT-Creation-Date: 2019-10-11 17:48+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,29 +88,29 @@ msgstr ""
 
 #: accounts/models.py:93
 msgid "date joined"
-msgstr ""
+msgstr "登録日時"
 
 #: accounts/models.py:94
+msgid "date verified"
+msgstr "認証日時"
+
+#: accounts/models.py:95
 msgid "comment"
 msgstr "ひとこと"
 
-#: accounts/models.py:95
+#: accounts/models.py:96
 msgid "Twitter ID"
 msgstr "ツイッターID"
 
-#: accounts/models.py:96
+#: accounts/models.py:97
 msgid "Facebook ID"
 msgstr "フェイスブックID"
-
-#: accounts/models.py:97
-msgid "email status"
-msgstr "メール認証"
 
 #: accounts/models.py:98
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:109 main/models.py:46
+#: accounts/models.py:109 main/models.py:56
 msgid "user"
 msgstr ""
 
@@ -141,14 +141,14 @@ msgid "BookPlayList administration"
 msgstr "BookPlayList 管理サイト"
 
 #: bookplaylist/urls.py:22
-msgid "TOP"
+msgid "Home"
 msgstr ""
 
 #: main/apps.py:7
 msgid "main"
 msgstr "メイン"
 
-#: main/models.py:15 main/models.py:54
+#: main/models.py:15 main/models.py:64
 msgid "playlists"
 msgstr "プレイリスト"
 
@@ -156,7 +156,7 @@ msgstr "プレイリスト"
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:19 main/models.py:47
+#: main/models.py:19 main/models.py:57
 msgid "title"
 msgstr "タイトル"
 
@@ -192,26 +192,26 @@ msgstr "著者"
 msgid "Amazon URL"
 msgstr "アマゾンURL"
 
-#: main/models.py:32 main/models.py:62
+#: main/models.py:32 main/models.py:77
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:33 main/models.py:44
+#: main/models.py:33 main/models.py:54
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:48 main/models.py:63
+#: main/models.py:58 main/models.py:78
 msgid "description"
 msgstr "説明文"
 
-#: main/models.py:53 main/models.py:61
+#: main/models.py:63 main/models.py:76
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:68
+#: main/models.py:83
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:69
+#: main/models.py:84
 msgid "books in playlists"
 msgstr "リスト内の書籍"
