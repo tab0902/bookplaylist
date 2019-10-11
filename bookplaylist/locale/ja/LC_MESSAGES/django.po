@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-11 23:59+0900\n"
+"POT-Creation-Date: 2019-10-12 00:02+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgid "users"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:12 accounts/views.py:58
-msgid "Signup"
+msgid "Sign up"
 msgstr "ユーザー登録"
 
 #: accounts/templates/accounts/profile.html:4
@@ -164,7 +164,7 @@ msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
 #: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:71
-msgid "Signup complete"
+msgid "Sign up complete"
 msgstr "仮登録完了"
 
 #: accounts/templates/accounts/verification.html:4 accounts/views.py:42

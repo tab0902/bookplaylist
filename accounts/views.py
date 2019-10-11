@@ -55,7 +55,7 @@ class SignupView(ContextMixin, generic.FormView):
     form_class = SignupForm
     success_url = reverse_lazy('accounts:signup_complete')
     template_name = 'accounts/signup.html'
-    title = _('Signup')
+    title = _('Sign up')
 
     def form_valid(self, form):
         opts = {
@@ -68,7 +68,7 @@ class SignupView(ContextMixin, generic.FormView):
 
 class SignupCompleteView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/signup_complete.html'
-    title = _('Signup complete')
+    title = _('Sign up complete')
 
 
 INTERNAL_VERIFICATION_SESSION_TOKEN = '_verification_token'
