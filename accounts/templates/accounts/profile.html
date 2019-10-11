@@ -1,5 +1,14 @@
 {% load i18n %}
-<h2>{{ title }}</h2>
+
+{% if messages %}
+<ul>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+     {% endfor %}
+ </ul>
+ {% endif %}
+
+ <h2>{{ title }}</h2>
 
 <p>{% trans 'Welcome,' %} {{ user }}</p>
 
@@ -12,4 +21,5 @@
     {% endfor %}
 </ul>
 
+<a href="{% url 'accounts:password_change' %}">{% trans 'Password change' %}</a>
 <a href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a>

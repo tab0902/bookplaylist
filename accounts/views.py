@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import (
     get_user_model, login as auth_login, views as auth_views
 )
@@ -40,6 +41,16 @@ class ContextMixin:
 class ProfileView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/profile.html'
     title = _('Profile')
+
+
+@method_decorator(login_required, name='dispatch')
+class PasswordChangeView(auth_views.PasswordChangeView):
+    template_name = 'accounts/password_change.html'
+    success_url = reverse_lazy('accounts:profile')
+
+    def form_valid(self, form):
+        messages.success(self.request, _('Password changed successfully.'))
+        return super().form_valid(form)
 
 
 class LoginView(ContextMixin, auth_views.LoginView):
