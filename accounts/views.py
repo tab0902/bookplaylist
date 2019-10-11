@@ -170,6 +170,6 @@ class VerificationAgainView(ContextMixin, generic.FormView):
         return super().form_valid(form)
 
 
-class VerificationAgainSentView(ContextMixin, generic.TemplateView):
+class VerificationSentView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/verification_sent.html'
     title = _('Email for verification sent')

@@ -16,5 +16,5 @@ urlpatterns = [
     path('signup/complete/', views.SignupCompleteView.as_view(), name='signup_complete'),
     path('verification/<uidb64>/<token>/', views.VerificationView.as_view(), name='verification'),
     path('verification/again/', views.VerificationAgainView.as_view(), name='verification_again'),
-    path('verification/sent/', views.VerificationAgainSentView.as_view(), name='verification_sent'),
+    path('verification/sent/', views.VerificationSentView.as_view(), name='verification_sent'),
 ]
