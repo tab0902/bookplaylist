@@ -53,6 +53,28 @@ class PasswordChangeView(auth_views.PasswordChangeView):
         return super().form_valid(form)
 
 
+class PasswordResetView(auth_views.PasswordResetView):
+    email_template_name = 'accounts/password_reset_email.html'
+    success_url = reverse_lazy('accounts:password_reset_done')
+    template_name = 'accounts/password_reset.html'
+
+
+INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+
+class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name = 'accounts/password_reset_done.html'
+
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    success_url = reverse_lazy('accounts:password_reset_complete')
+    template_name = 'accounts/password_reset_confirm.html'
+
+
+class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name = 'accounts/password_reset_complete.html'
+
+
 class LoginView(ContextMixin, auth_views.LoginView):
     template_name = 'accounts/login.html'
     title = _('Log in')
