@@ -1,21 +1,36 @@
-from django.views import generic
+from django.contrib.auth import (
+    get_user_model, login as auth_login
+)
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.tokens import default_token_generator
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
+from django.views import generic
 
 from .forms import (
-    SignupForm,
+    SignupForm, VerificationAgainForm
 )
 
 from .models import User
 
+UserModel = get_user_model()
+
 # Create your views here.
 
 
+@method_decorator(login_required, name='dispatch')
+class ProfileView(generic.TemplateView):
+    template_name = 'accounts/profile.html'
+
+
 class SignupView(generic.FormView):
-    extra_email_context = None
     form_class = SignupForm
-    model = User
     success_url = reverse_lazy('accounts:signup_complete')
     template_name = 'accounts/signup.html'
     title = _('Signup')
@@ -24,7 +39,6 @@ class SignupView(generic.FormView):
         opts = {
             'use_https': self.request.is_secure(),
             'request': self.request,
-            'extra_email_context': self.extra_email_context,
         }
         form.save(**opts)
         return super().form_valid(form)
@@ -34,5 +48,71 @@ class SignupCompleteView(generic.TemplateView):
     template_name = 'accounts/signup_complete.html'
 
 
+INTERNAL_VERIFICATION_SESSION_TOKEN = '_verification_token'
+
+
 class VerificationView(generic.TemplateView):
+    complete_url_token = 'complete'
+    error_url = reverse_lazy('accounts:verification_again')
+    post_verification_login = True
+    post_verification_login_backend = 'accounts.backends.ModelBackend'
     template_name = 'accounts/verification.html'
+    title = _('Verification complete')
+    token_generator = default_token_generator
+
+    def dispatch(self, *args, **kwargs):
+        assert 'uidb64' in kwargs and 'token' in kwargs
+
+        self.validlink = False
+        self.user = self.get_user(kwargs['uidb64'])
+
+        if self.user is not None:
+            token = kwargs['token']
+            if token == self.complete_url_token:
+                session_token = self.request.session.get(INTERNAL_VERIFICATION_SESSION_TOKEN)
+                if self.token_generator.check_token(self.user, session_token):
+                    self.validlink = True
+                    return super().dispatch(*args, **kwargs)
+            else:
+                if self.token_generator.check_token(self.user, token):
+                    self.request.session[INTERNAL_VERIFICATION_SESSION_TOKEN] = token
+                    redirect_url = self.request.path.replace(token, self.complete_url_token)
+                    return HttpResponseRedirect(redirect_url)
+
+        return HttpResponseRedirect(self.error_url)
+
+    def get_user(self, uidb64):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = UserModel._default_manager.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist, ValidationError):
+            user = None
+        return user
+
+    def get(self, request, *args, **kwargs):
+        if not self.user.is_active and self.user.date_verified == None:
+            self.user.is_active = True
+            self.user.date_verified = timezone.now()
+            self.user.save()
+            if self.post_reset_login:
+                auth_login(self.request, self.user, self.post_reset_login_backend)
+        return super().get(request, *args, **kwargs)
+
+
+class VerificationAgainView(generic.FormView):
+    form_class = VerificationAgainForm
+    success_url = reverse_lazy('accounts:verification_sent')
+    template_name = 'accounts/verification_again.html'
+    title = _('Verification failed')
+
+    def form_valid(self, form):
+        opts = {
+            'use_https': self.request.is_secure(),
+            'request': self.request,
+        }
+        form.save(**opts)
+        return super().form_valid(form)
+
+
+class VerificationAgainSentView(generic.TemplateView):
+    template_name = 'accounts/verification_sent.html'

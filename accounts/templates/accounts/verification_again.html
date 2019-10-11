@@ -1,0 +1,11 @@
+{% load i18n %}
+<h2>{% blocktrans %}Verification failed{% endblocktrans %}</h2>
+<p>{% blocktrans %}Submit the form below if you want to recieve email again.{% endblocktrans %}</p>
+
+<form action="" method="post">
+    <table>
+        {{ form.as_table }}
+    </table>
+    {% csrf_token %}
+    <p class="text-center"><input type="submit"></p>
+</form>

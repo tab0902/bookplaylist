@@ -1,0 +1,4 @@
+{% load i18n %}
+{% blocktrans %}Follow the link below to verify your account:{% endblocktrans %}
+
+{{ protocol}}://{{ domain }}{% url 'accounts:verification' uidb64=uid token=token %}
