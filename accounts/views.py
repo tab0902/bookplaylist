@@ -24,12 +24,25 @@ UserModel = get_user_model()
 # Create your views here.
 
 
+class ContextMixin:
+    extra_context = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'title': self.title,
+            **(self.extra_context or {})
+        })
+        return context
+
+
 @method_decorator(login_required, name='dispatch')
-class ProfileView(generic.TemplateView):
+class ProfileView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/profile.html'
+    title = _('Profile')
 
 
-class SignupView(generic.FormView):
+class SignupView(ContextMixin, generic.FormView):
     form_class = SignupForm
     success_url = reverse_lazy('accounts:signup_complete')
     template_name = 'accounts/signup.html'
@@ -44,14 +57,15 @@ class SignupView(generic.FormView):
         return super().form_valid(form)
 
 
-class SignupCompleteView(generic.TemplateView):
+class SignupCompleteView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/signup_complete.html'
+    title = _('Signup complete')
 
 
 INTERNAL_VERIFICATION_SESSION_TOKEN = '_verification_token'
 
 
-class VerificationView(generic.TemplateView):
+class VerificationView(ContextMixin, generic.TemplateView):
     complete_url_token = 'complete'
     error_url = reverse_lazy('accounts:verification_again')
     post_verification_login = True
@@ -94,12 +108,12 @@ class VerificationView(generic.TemplateView):
             self.user.is_active = True
             self.user.date_verified = timezone.now()
             self.user.save()
-            if self.post_reset_login:
-                auth_login(self.request, self.user, self.post_reset_login_backend)
+            if self.post_verification_login:
+                auth_login(self.request, self.user, self.post_verification_login_backend)
         return super().get(request, *args, **kwargs)
 
 
-class VerificationAgainView(generic.FormView):
+class VerificationAgainView(ContextMixin, generic.FormView):
     form_class = VerificationAgainForm
     success_url = reverse_lazy('accounts:verification_sent')
     template_name = 'accounts/verification_again.html'
@@ -114,5 +128,6 @@ class VerificationAgainView(generic.FormView):
         return super().form_valid(form)
 
 
-class VerificationAgainSentView(generic.TemplateView):
+class VerificationAgainSentView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/verification_sent.html'
+    title = _('Email for verification sent')
