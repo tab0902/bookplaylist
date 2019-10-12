@@ -19,6 +19,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from .forms import (
     PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
 )
+from bookplaylist.views import ContextMixin
 
 # Create your views here.
 
@@ -27,18 +28,6 @@ UserModel = get_user_model()
 
 login_required_m = method_decorator(login_required, name='dispatch')
 sensitive_post_parameters_m  = method_decorator(sensitive_post_parameters(), name='dispatch')
-
-
-class ContextMixin:
-    extra_context = None
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update({
-            'title': self.title,
-            **(self.extra_context or {})
-        })
-        return context
 
 
 @login_required_m
