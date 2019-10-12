@@ -91,10 +91,10 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
     comment = models.CharField(_('comment'), max_length=50, blank=True, null=True)
     twitter_id = models.CharField(_('Twitter ID'), max_length=255, unique=True, blank=True, null=True)
     facebook_id = models.CharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
-    is_verified = models.BooleanField(_('email status'), default=False)
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
 
     objects = UserManager()

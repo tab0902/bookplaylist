@@ -1,0 +1,15 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}Your account is created successfully. Registered infomation is below:{% endblocktrans %}
+
+{% trans 'Username' %}: {{ user.username }}
+{% trans 'Email address' %}: {{ email }}
+
+{% blocktrans %}Follow the link below to verify your account:{% endblocktrans %}
+
+{{ protocol}}://{{ domain }}{% url 'accounts:verification' uidb64=uid token=token %}
+
+{% trans "Thanks for using our site!" %}
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endautoescape %}

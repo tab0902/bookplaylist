@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 02:00+0900\n"
+"POT-Creation-Date: 2019-10-12 17:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,26 @@ msgstr ""
 #: accounts/apps.py:7
 msgid "accounts"
 msgstr "アカウント"
+
+#: accounts/forms.py:54
+msgid "The two password fields didn’t match."
+msgstr ""
+
+#: accounts/forms.py:57 accounts/templates/accounts/profile.html:17
+msgid "Password"
+msgstr ""
+
+#: accounts/forms.py:63
+msgid "Password (again)"
+msgstr ""
+
+#: accounts/forms.py:66
+msgid "Enter the same password as before, for verification."
+msgstr ""
+
+#: accounts/forms.py:158
+msgid "Email"
+msgstr ""
 
 #: accounts/models.py:57
 msgid "username"
@@ -88,29 +108,29 @@ msgstr ""
 
 #: accounts/models.py:93
 msgid "date joined"
-msgstr ""
+msgstr "登録日時"
 
 #: accounts/models.py:94
+msgid "date verified"
+msgstr "認証日時"
+
+#: accounts/models.py:95
 msgid "comment"
 msgstr "ひとこと"
 
-#: accounts/models.py:95
+#: accounts/models.py:96
 msgid "Twitter ID"
 msgstr "ツイッターID"
 
-#: accounts/models.py:96
+#: accounts/models.py:97
 msgid "Facebook ID"
 msgstr "フェイスブックID"
-
-#: accounts/models.py:97
-msgid "email status"
-msgstr "メール認証"
 
 #: accounts/models.py:98
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:109 main/models.py:46
+#: accounts/models.py:109 main/models.py:56
 msgid "user"
 msgstr ""
 
@@ -118,11 +138,167 @@ msgstr ""
 msgid "users"
 msgstr ""
 
+#: accounts/templates/accounts/index.html:4
+msgid "Welcome,"
+msgstr ""
+
+#: accounts/templates/accounts/index.html:6
+msgid "Your playlists"
+msgstr "あなたのプレイリスト"
+
+#: accounts/templates/accounts/index.html:11
+msgid "No data"
+msgstr "データなし"
+
+#: accounts/templates/accounts/index.html:15 accounts/views.py:57
+msgid "Profile"
+msgstr "アカウント設定"
+
+#: accounts/templates/accounts/index.html:16
+msgid "Log out"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:12 accounts/views.py:133
+msgid "Sign up"
+msgstr "ユーザー登録"
+
+#: accounts/templates/accounts/login.html:13
+msgid "Password reset"
+msgstr ""
+
+#: accounts/templates/accounts/password_change.html:12
+#: accounts/templates/accounts/password_reset.html:12
+#: accounts/templates/accounts/profile.html:45
+msgid "Back"
+msgstr "戻る"
+
+#: accounts/templates/accounts/password_reset_complete.html:4
+#: accounts/templates/accounts/signup.html:12 accounts/views.py:122
+msgid "Log in"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:10
+#: accounts/templates/accounts/signup_email.html:11
+#: accounts/templates/accounts/verification_again_email.html:6
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:12
+#: accounts/templates/accounts/signup_email.html:13
+#: accounts/templates/accounts/verification_again_email.html:8
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:22
+msgid "Facebook"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:24
+#: accounts/templates/accounts/profile.html:33
+msgid "Associated"
+msgstr "連携済み"
+
+#: accounts/templates/accounts/profile.html:26
+#: accounts/templates/accounts/profile.html:35
+msgid "Not associated"
+msgstr "未連携"
+
+#: accounts/templates/accounts/profile.html:27
+#: accounts/templates/accounts/profile.html:36
+msgid "Associate"
+msgstr "連携する"
+
+#: accounts/templates/accounts/profile.html:31
+msgid "Twitter"
+msgstr ""
+
+#: accounts/templates/accounts/signup_email.html:2
+msgid "Your account is created successfully. Registered infomation is below:"
+msgstr "仮登録が完了しました。登録された情報は以下の通りです。"
+
+#: accounts/templates/accounts/signup_email.html:4
+msgid "Username"
+msgstr "ユーザー名"
+
+#: accounts/templates/accounts/signup_email.html:5
+msgid "Email address"
+msgstr "メールアドレス"
+
+#: accounts/templates/accounts/signup_email.html:7
+#: accounts/templates/accounts/verification_again_email.html:2
+msgid "Follow the link below to verify your account:"
+msgstr "下のURLから本登録を完了させてください。"
+
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:146
+msgid "Sign up complete"
+msgstr "仮登録完了"
+
+#: accounts/templates/accounts/verification.html:4 accounts/views.py:47
+msgid "My page"
+msgstr "マイページ"
+
+#: accounts/templates/accounts/verification_again.html:3
+msgid "Submit the form below if you want to recieve email again."
+msgstr ""
+"もう一度認証メールを受け取りたい場合は、以下のフォームを送信してください。"
+
+#: accounts/templates/accounts/verification_again_subject.html:2
+msgid "Account verification"
+msgstr "アカウント認証"
+
 #: accounts/validators.py:10
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers, and _ "
 "characters."
 msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
+
+#: accounts/views.py:54
+msgid "Password change"
+msgstr ""
+
+#: accounts/views.py:62
+msgid "No password set."
+msgstr ""
+
+#: accounts/views.py:63 accounts/views.py:90
+msgid "Password set"
+msgstr "パスワード設定"
+
+#: accounts/views.py:70
+msgid "Profile updated successfully."
+msgstr "アカウント情報を更新しました。"
+
+#: accounts/views.py:94
+msgid "Password changed successfully."
+msgstr ""
+
+#: accounts/views.py:158
+msgid "Verification complete"
+msgstr "本登録完了"
+
+#: accounts/views.py:204
+msgid "Verification failed"
+msgstr "認証失敗"
+
+#: accounts/views.py:217
+msgid "Email for verification sent"
+msgstr "認証メール送信完了"
 
 #: bookplaylist/models.py:11
 msgid "date created"
@@ -141,14 +317,14 @@ msgid "BookPlayList administration"
 msgstr "BookPlayList 管理サイト"
 
 #: bookplaylist/urls.py:22
-msgid "TOP"
+msgid "Home"
 msgstr ""
 
 #: main/apps.py:7
 msgid "main"
 msgstr "メイン"
 
-#: main/models.py:15 main/models.py:54
+#: main/models.py:15 main/models.py:64
 msgid "playlists"
 msgstr "プレイリスト"
 
@@ -156,7 +332,7 @@ msgstr "プレイリスト"
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:19 main/models.py:47
+#: main/models.py:19 main/models.py:57
 msgid "title"
 msgstr "タイトル"
 
@@ -192,26 +368,26 @@ msgstr "著者"
 msgid "Amazon URL"
 msgstr "アマゾンURL"
 
-#: main/models.py:32 main/models.py:62
+#: main/models.py:32 main/models.py:77
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:33 main/models.py:44
+#: main/models.py:33 main/models.py:54
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:48 main/models.py:63
+#: main/models.py:58 main/models.py:78
 msgid "description"
 msgstr "説明文"
 
-#: main/models.py:53 main/models.py:61
+#: main/models.py:63 main/models.py:76
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:68
+#: main/models.py:83
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:69
+#: main/models.py:84
 msgid "books in playlists"
 msgstr "リスト内の書籍"
