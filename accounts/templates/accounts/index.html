@@ -6,9 +6,9 @@
 <p>{% trans 'Your playlists' %}:</p>
 <ul>
     {% for playlist in user.playlist_set.all %}
-        <li>{{ playlist }}</li>
+    <li>{{ playlist }}</li>
     {% empty %}
-        <li>{% trans 'No data' %}</li>
+    <li>{% trans 'No data' %}</li>
     {% endfor %}
 </ul>
 

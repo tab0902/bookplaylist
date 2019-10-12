@@ -11,10 +11,10 @@
 
 <dl>
     {% for playlist in playlists %}
-        <dt>{{ playlist.title }}</dt>
-        <dd>{{ playlist.description }}</dd>
+    <dt>{{ playlist.title }}</dt>
+    <dd>{{ playlist.description }}</dd>
     {% empty %}
-        <dt>{% trans 'No data' %}</dt>
+    <dt>{% trans 'No data' %}</dt>
     {% endfor %}
 </dl>
 
