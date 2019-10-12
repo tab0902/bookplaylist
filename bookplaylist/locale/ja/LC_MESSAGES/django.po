@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-12 17:14+0900\n"
+"POT-Creation-Date: 2019-10-12 22:54+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,23 +34,23 @@ msgstr ""
 msgid "accounts"
 msgstr "アカウント"
 
-#: accounts/forms.py:54
+#: accounts/forms.py:53
 msgid "The two password fields didn’t match."
 msgstr ""
 
-#: accounts/forms.py:57 accounts/templates/accounts/profile.html:17
+#: accounts/forms.py:56 accounts/templates/accounts/profile.html:17
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:63
+#: accounts/forms.py:62
 msgid "Password (again)"
 msgstr ""
 
-#: accounts/forms.py:66
+#: accounts/forms.py:65
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: accounts/forms.py:158
+#: accounts/forms.py:141
 msgid "Email"
 msgstr ""
 
@@ -150,7 +150,7 @@ msgstr "あなたのプレイリスト"
 msgid "No data"
 msgstr "データなし"
 
-#: accounts/templates/accounts/index.html:15 accounts/views.py:57
+#: accounts/templates/accounts/index.html:15 accounts/views.py:46
 msgid "Profile"
 msgstr "アカウント設定"
 
@@ -158,7 +158,7 @@ msgstr "アカウント設定"
 msgid "Log out"
 msgstr ""
 
-#: accounts/templates/accounts/login.html:12 accounts/views.py:133
+#: accounts/templates/accounts/login.html:12 accounts/views.py:122
 msgid "Sign up"
 msgstr "ユーザー登録"
 
@@ -173,7 +173,8 @@ msgid "Back"
 msgstr "戻る"
 
 #: accounts/templates/accounts/password_reset_complete.html:4
-#: accounts/templates/accounts/signup.html:12 accounts/views.py:122
+#: accounts/templates/accounts/signup.html:12 accounts/views.py:111
+#: main/templates/main/index.html:12
 msgid "Log in"
 msgstr ""
 
@@ -245,11 +246,11 @@ msgstr "メールアドレス"
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
-#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:146
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:135
 msgid "Sign up complete"
 msgstr "仮登録完了"
 
-#: accounts/templates/accounts/verification.html:4 accounts/views.py:47
+#: accounts/templates/accounts/verification.html:4 accounts/views.py:36
 msgid "My page"
 msgstr "マイページ"
 
@@ -268,35 +269,35 @@ msgid ""
 "characters."
 msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
 
-#: accounts/views.py:54
+#: accounts/views.py:43
 msgid "Password change"
 msgstr ""
 
-#: accounts/views.py:62
+#: accounts/views.py:51
 msgid "No password set."
 msgstr ""
 
-#: accounts/views.py:63 accounts/views.py:90
+#: accounts/views.py:52 accounts/views.py:79
 msgid "Password set"
 msgstr "パスワード設定"
 
-#: accounts/views.py:70
+#: accounts/views.py:59
 msgid "Profile updated successfully."
 msgstr "アカウント情報を更新しました。"
 
-#: accounts/views.py:94
+#: accounts/views.py:83
 msgid "Password changed successfully."
 msgstr ""
 
-#: accounts/views.py:158
+#: accounts/views.py:147
 msgid "Verification complete"
 msgstr "本登録完了"
 
-#: accounts/views.py:204
+#: accounts/views.py:193
 msgid "Verification failed"
 msgstr "認証失敗"
 
-#: accounts/views.py:217
+#: accounts/views.py:206
 msgid "Email for verification sent"
 msgstr "認証メール送信完了"
 
@@ -323,6 +324,10 @@ msgstr ""
 #: main/apps.py:7
 msgid "main"
 msgstr "メイン"
+
+#: main/forms.py:7
+msgid "Search playlists"
+msgstr "プレイリストを検索"
 
 #: main/models.py:15 main/models.py:64
 msgid "playlists"
@@ -391,3 +396,11 @@ msgstr "リスト内の書籍"
 #: main/models.py:84
 msgid "books in playlists"
 msgstr "リスト内の書籍"
+
+#: main/views.py:21
+msgid "TOP"
+msgstr ""
+
+#: main/views.py:32
+msgid "Playlist list"
+msgstr "プレイリスト一覧"
