@@ -25,7 +25,7 @@ class IndexView(ContextMixin, generic.FormView):
         return super().form_valid(form)
 
 
-class PlayListView(ContextMixin, generic.FormView):
+class PlaylistView(ContextMixin, generic.FormView):
     form_class = PlaylistSearchForm
     success_url = reverse_lazy('main:playlist')
     template_name = 'main/playlist/list.html'
