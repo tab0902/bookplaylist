@@ -11,7 +11,7 @@
 
 <dl>
     {% for playlist in playlists %}
-    <dt>{{ playlist.title }}</dt>
+    <dt><a href="{% url 'main:playlist_detail' playlist.pk %}">{{ playlist.title }}</a></dt>
     <dd>{{ playlist.description }}</dd>
     {% empty %}
     <dt>{% trans 'No data' %}</dt>

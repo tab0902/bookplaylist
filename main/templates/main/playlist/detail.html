@@ -1,0 +1,28 @@
+{% load i18n %}
+<h2>{{ title }}</h2>
+
+<table>
+    <tbody>
+        <tr>
+            <th>{% trans 'title' %}:</th>
+            <td>{{ playlist.title }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'description' %}:</th>
+            <td>{{ playlist.description }}</td>
+        </tr>
+    </tbody>
+
+    <table>
+        {% for elm in playlist.playlistbook_set.all %}
+        <tr>
+            <td rowspan="2"><img src='{{ elm.book.cover }}'></td>
+            <td rowspan="1">{{ elm.book.title }}</td>
+        </tr>
+        <tr>
+            <td>{{ elm.description }}</td>
+        </tr>
+        {% endfor %}
+</table>
+
+<a href="{% if 'q=' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'main:playlist' %}{% endif %}">{% trans 'Back' %}</a>

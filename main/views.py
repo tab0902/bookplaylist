@@ -52,3 +52,14 @@ class PlaylistView(ContextMixin, generic.FormView):
     def form_valid(self, form):
         self.success_url += '?q={}'.format(form.cleaned_data['query'])
         return super().form_valid(form)
+
+
+class PlaylistDetailView(ContextMixin, generic.DetailView):
+    model = Playlist
+    template_name = 'main/playlist/detail.html'
+    title = None
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=None)
+        self.title = obj.title
+        return obj
