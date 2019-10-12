@@ -12,8 +12,10 @@
             <td>{{ playlist.description }}</td>
         </tr>
     </tbody>
+</table>
 
-    <table>
+<table>
+    <tbody>
         {% for elm in playlist.playlistbook_set.all %}
         <tr>
             <td rowspan="2"><img src='{{ elm.book.cover }}'></td>
@@ -23,6 +25,7 @@
             <td>{{ elm.description }}</td>
         </tr>
         {% endfor %}
+    </tbody>
 </table>
 
 <a href="{% if 'q=' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'main:playlist' %}{% endif %}">{% trans 'Back' %}</a>
