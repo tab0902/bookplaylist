@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
 from .forms import (
-    UserCreationForm, UserChangeForm,
+    UserChangeForm, UserCreationForm,
 )
 from .models import User
 from main.admin import PlaylistInline
