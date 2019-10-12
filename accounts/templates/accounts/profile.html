@@ -1,25 +1,45 @@
 {% load i18n %}
+<h2>{{ title }}</h2>
 
 {% if messages %}
 <ul>
     {% for message in messages %}
         <li>{{ message }}</li>
-     {% endfor %}
- </ul>
- {% endif %}
-
- <h2>{{ title }}</h2>
-
-<p>{% trans 'Welcome,' %} {{ user }}</p>
-
-<p>{% trans 'Your playlists' %}</p>
-<ul>
-    {% for playlist in user.playlist_set.all %}
-        <li>{{ playlist }}</li>
-    {% empty %}
-        <li>{% trans 'No data' %}</li>
     {% endfor %}
 </ul>
+{% endif %}
 
-<a href="{% url 'accounts:password_change' %}">{% trans 'Password change' %}</a>
-<a href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a>
+<form action="" method="post">
+    <table>
+        <tbody>
+            {{ form.as_table }}
+            <tr>
+                <th>{% trans 'Password' %}:</th>
+                    <td>{{ password_text }}</td>
+                    <td><a href="{% url 'accounts:password_change' %}">{{ password_link_text }}</a></td>
+            </tr>
+            <tr>
+                <th>{% trans 'Facebook' %}:</th>
+                {% if user.facebook_id %}
+                    <td>{% trans 'Associated' %}</td>
+                {% else %}
+                    <td>{% trans 'Not associated' %}</td>
+                    <td><a href="">{% trans 'Associate' %}</a></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>{% trans 'Twitter' %}:</th>
+                {% if user.twitter_id %}
+                    <td>{% trans 'Associated' %}</td>
+                {% else %}
+                    <td>{% trans 'Not associated' %}</td>
+                    <td><a href="">{% trans 'Associate' %}</a></td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    {% csrf_token %}
+    <p class="text-center"><input type="submit"></p>
+</form>
+
+<a href="{% url 'accounts:index' %}">{% trans 'Back' %}</a>

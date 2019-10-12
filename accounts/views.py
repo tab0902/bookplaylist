@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import (
-    get_user_model, login as auth_login, views as auth_views
+    get_user_model, login as auth_login, views as auth_views,
 )
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import is_password_usable
 from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
@@ -13,16 +14,19 @@ from django.utils.decorators import method_decorator
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
+from django.views.decorators.debug import sensitive_post_parameters
 
 from .forms import (
-    SignupForm, VerificationAgainForm
+    PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
 )
 
-from .models import User
+# Create your views here.
+
 
 UserModel = get_user_model()
 
-# Create your views here.
+login_required_m = method_decorator(login_required, name='dispatch')
+sensitive_post_parameters_m  = method_decorator(sensitive_post_parameters(), name='dispatch')
 
 
 class ContextMixin:
@@ -37,16 +41,54 @@ class ContextMixin:
         return context
 
 
-@method_decorator(login_required, name='dispatch')
-class ProfileView(ContextMixin, generic.TemplateView):
+@login_required_m
+class IndexView(ContextMixin, generic.TemplateView):
+    template_name = 'accounts/index.html'
+    title = _('My page')
+
+
+@login_required_m
+class ProfileView(ContextMixin, generic.UpdateView):
+    form_class = UserProfileUpdateForm
+    password_text = '************'
+    password_link_text = _('Password change')
+    success_url = reverse_lazy('accounts:profile')
     template_name = 'accounts/profile.html'
     title = _('Profile')
 
+    def dispatch(self, *args, **kwargs):
+        self.user = self.request.user
+        if not is_password_usable(self.user.password):
+            self.password_text = _('No password set.')
+            self.password_link_text = _('Password set')
+        return super().dispatch(*args, **kwargs)
 
-@method_decorator(login_required, name='dispatch')
+    def get_object(self, queryset=None):
+        return self.user
+
+    def form_valid(self, form):
+        messages.success(self.request, _('Profile updated successfully.'))
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['password_text'] = self.password_text
+        context['password_link_text'] = self.password_link_text
+        return context
+
+
+@login_required_m
+@sensitive_post_parameters_m
 class PasswordChangeView(auth_views.PasswordChangeView):
-    template_name = 'accounts/password_change.html'
     success_url = reverse_lazy('accounts:profile')
+    template_name = 'accounts/password_change.html'
+
+    def dispatch(self, *args, **kwargs):
+        self.user = self.request.user
+        if not is_password_usable(self.user.password):
+            self.form_class = PasswordCreationForm
+            self.title = _('Password set')
+        return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         messages.success(self.request, _('Password changed successfully.'))

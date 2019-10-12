@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-12 03:35+0900\n"
+"POT-Creation-Date: 2019-10-12 17:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,23 @@ msgstr ""
 msgid "accounts"
 msgstr "アカウント"
 
-#: accounts/forms.py:96
+#: accounts/forms.py:54
+msgid "The two password fields didn’t match."
+msgstr ""
+
+#: accounts/forms.py:57 accounts/templates/accounts/profile.html:17
+msgid "Password"
+msgstr ""
+
+#: accounts/forms.py:63
+msgid "Password (again)"
+msgstr ""
+
+#: accounts/forms.py:66
+msgid "Enter the same password as before, for verification."
+msgstr ""
+
+#: accounts/forms.py:158
 msgid "Email"
 msgstr ""
 
@@ -122,7 +138,27 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: accounts/templates/accounts/login.html:12 accounts/views.py:91
+#: accounts/templates/accounts/index.html:4
+msgid "Welcome,"
+msgstr ""
+
+#: accounts/templates/accounts/index.html:6
+msgid "Your playlists"
+msgstr "あなたのプレイリスト"
+
+#: accounts/templates/accounts/index.html:11
+msgid "No data"
+msgstr "データなし"
+
+#: accounts/templates/accounts/index.html:15 accounts/views.py:57
+msgid "Profile"
+msgstr "アカウント設定"
+
+#: accounts/templates/accounts/index.html:16
+msgid "Log out"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:12 accounts/views.py:133
 msgid "Sign up"
 msgstr "ユーザー登録"
 
@@ -132,11 +168,12 @@ msgstr ""
 
 #: accounts/templates/accounts/password_change.html:12
 #: accounts/templates/accounts/password_reset.html:12
+#: accounts/templates/accounts/profile.html:45
 msgid "Back"
 msgstr "戻る"
 
 #: accounts/templates/accounts/password_reset_complete.html:4
-#: accounts/templates/accounts/signup.html:12 accounts/views.py:80
+#: accounts/templates/accounts/signup.html:12 accounts/views.py:122
 msgid "Log in"
 msgstr ""
 
@@ -168,24 +205,27 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:13
-msgid "Welcome,"
+#: accounts/templates/accounts/profile.html:22
+msgid "Facebook"
 msgstr ""
-
-#: accounts/templates/accounts/profile.html:15
-msgid "Your playlists"
-msgstr "あなたのプレイリスト"
-
-#: accounts/templates/accounts/profile.html:20
-msgid "No data"
-msgstr "データなし"
 
 #: accounts/templates/accounts/profile.html:24
-msgid "Password change"
-msgstr ""
+#: accounts/templates/accounts/profile.html:33
+msgid "Associated"
+msgstr "連携済み"
 
-#: accounts/templates/accounts/profile.html:25
-msgid "Log out"
+#: accounts/templates/accounts/profile.html:26
+#: accounts/templates/accounts/profile.html:35
+msgid "Not associated"
+msgstr "未連携"
+
+#: accounts/templates/accounts/profile.html:27
+#: accounts/templates/accounts/profile.html:36
+msgid "Associate"
+msgstr "連携する"
+
+#: accounts/templates/accounts/profile.html:31
+msgid "Twitter"
 msgstr ""
 
 #: accounts/templates/accounts/signup_email.html:2
@@ -205,13 +245,13 @@ msgstr "メールアドレス"
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
-#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:104
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:146
 msgid "Sign up complete"
 msgstr "仮登録完了"
 
-#: accounts/templates/accounts/verification.html:4 accounts/views.py:43
-msgid "Profile"
-msgstr "マイアカウント"
+#: accounts/templates/accounts/verification.html:4 accounts/views.py:47
+msgid "My page"
+msgstr "マイページ"
 
 #: accounts/templates/accounts/verification_again.html:3
 msgid "Submit the form below if you want to recieve email again."
@@ -228,19 +268,35 @@ msgid ""
 "characters."
 msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
 
-#: accounts/views.py:52
+#: accounts/views.py:54
+msgid "Password change"
+msgstr ""
+
+#: accounts/views.py:62
+msgid "No password set."
+msgstr ""
+
+#: accounts/views.py:63 accounts/views.py:90
+msgid "Password set"
+msgstr "パスワード設定"
+
+#: accounts/views.py:70
+msgid "Profile updated successfully."
+msgstr "アカウント情報を更新しました。"
+
+#: accounts/views.py:94
 msgid "Password changed successfully."
 msgstr ""
 
-#: accounts/views.py:116
+#: accounts/views.py:158
 msgid "Verification complete"
 msgstr "本登録完了"
 
-#: accounts/views.py:162
+#: accounts/views.py:204
 msgid "Verification failed"
 msgstr "認証失敗"
 
-#: accounts/views.py:175
+#: accounts/views.py:217
 msgid "Email for verification sent"
 msgstr "認証メール送信完了"
 

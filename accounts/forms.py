@@ -1,8 +1,10 @@
 from django import forms
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UsernameField
-from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
-from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm
+from django.contrib.auth import (
+    get_user_model, password_validation,
+)
+from django.contrib.auth.forms import (
+    ReadOnlyPasswordHashField, UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm, UsernameField,
+)
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
@@ -24,9 +26,8 @@ class UserCreationForm(BaseUserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        for field in self.fields:
-            self.fields[field].required = True
+        for fieldname in self.fields:
+            self.fields[fieldname].required = True
 
 
 class UserChangeForm(BaseUserChangeForm):
@@ -34,6 +35,67 @@ class UserChangeForm(BaseUserChangeForm):
     class Meta:
         model = User
         fields = '__all__'
+
+
+class UserProfileUpdateForm(forms.ModelForm):
+
+    class Meta(UserChangeForm.Meta):
+        model = User
+        fields = ('username', 'email')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fieldname in self.fields:
+            self.fields[fieldname].help_text = None
+
+
+class PasswordCreationForm(forms.Form):
+    error_messages = {
+        'password_mismatch': _('The two password fields didn’t match.'),
+    }
+    password1 = forms.CharField(
+        label=_("Password"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'autofocus': True}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    password2 = forms.CharField(
+        label=_("Password (again)"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        strip=False,
+        help_text=_("Enter the same password as before, for verification."),
+    )
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'],
+                    code='password_mismatch',
+                )
+        password_validation.validate_password(password2, self.user)
+        return password2
+
+    def save(self, commit=True):
+        password = self.cleaned_data["password1"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user
+
+    @property
+    def changed_data(self):
+        data = super().changed_data
+        for name in self.fields:
+            if name not in data:
+                return []
+        return ['password']
 
 
 class SendEmailMixin:
