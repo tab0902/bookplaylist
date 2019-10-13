@@ -30,6 +30,8 @@ class SearchFormView(generic.FormView):
         return query
 
     def form_valid(self, form):
-        query = self._encode_query(form.cleaned_data['q'])
-        self.success_url += '?{}'.format(query)
+        self.query = self._encode_query(form.cleaned_data['q'])
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return super().get_success_url() + '?{}'.format(self.query)

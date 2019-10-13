@@ -1,0 +1,54 @@
+{% load i18n %}
+<h2>{{ title }}</h2>
+
+<form action="" method="post">
+    <table>
+        {{ form.as_table }}
+    </table>
+    {% csrf_token %}
+    <input type="submit">
+</form>
+
+<table>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td rowspan="5"><img src='{{ book.cover }}'></td>
+            <td>{{ book.title }}</td>
+        </tr>
+        <tr>
+            <td>{{ book.author }}</td>
+        </tr>
+        <tr>
+            <td>{{ book.publisher }}</td>
+        </tr>
+        <tr>
+            <td>{{ book.pubdate }}</td>
+        </tr>
+        <tr>
+            <td>
+                {% if book.pk|stringformat:'s' in books_in_session %}
+                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' pk book.pk %}'" disabled>{% trans 'Add book' %}</button>
+                {% trans 'This book is already in the playlist.' %}
+                {% else %}
+                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' pk book.pk %}'">{% trans 'Add book' %}</button>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>{% trans 'No data' %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if mode|add:'/book' in request.META.HTTP_REFERER %}
+{% if mode == 'create' %}
+<a href="{% url 'main:playlist_create' %}">{% trans 'Back' %}</a>
+{% elif mode == 'update' %}
+<a href="{% url 'main:playlist_update' pk %}">{% trans 'Back' %}</a>
+{% endif %}
+{% else %}
+<a href="{{ request.META.HTTP_REFERER }}">{% trans 'Back' %}</a>
+{% endif %}

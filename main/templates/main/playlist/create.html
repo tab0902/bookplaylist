@@ -9,4 +9,10 @@
     <input type="submit">
 </form>
 
-<a href="{% if 'complete' in request.META.HTTP_REFERER %}{% url 'accounts:index' %}{% else %}{{ request.META.HTTP_REFERER }}{% endif %}">{% trans 'Back' %}</a>
+<a href="{% url 'main:playlist_create_book' %}">{% trans 'Add book' %}</a>
+
+{% if 'complete' in request.META.HTTP_REFERER or 'create/book' in request.META.HTTP_REFERER %}
+<a href="{% url 'accounts:index' %}">{% trans 'Back' %}</a>
+{% else %}
+<a href="{{ request.META.HTTP_REFERER }}">{% trans 'Back' %}</a>
+{% endif %}
