@@ -203,7 +203,7 @@ class PlaylistUpdateBookStoreView(BasePlaylistBookStoreView):
 @login_required
 class PlaylistCreateCompleteView(ContextMixin, generic.TemplateView):
     template_name = 'main/playlist/create_complete.html'
-    title = _('Playlist created')
+    title = _('Playlist created successfully.')
 
 
 @login_required

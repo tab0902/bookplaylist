@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-12 23:03+0900\n"
+"POT-Creation-Date: 2019-10-14 01:54+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,28 +138,38 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: accounts/templates/accounts/index.html:4
+#: accounts/templates/accounts/index.html:12
 msgid "Welcome,"
 msgstr ""
 
-#: accounts/templates/accounts/index.html:6
+#: accounts/templates/accounts/index.html:14
 msgid "Your playlists"
 msgstr "あなたのプレイリスト"
 
-#: accounts/templates/accounts/index.html:11
+#: accounts/templates/accounts/index.html:20
+#: main/templates/main/playlist/books.html:40
 #: main/templates/main/playlist/list.html:17
 msgid "No data"
 msgstr "データなし"
 
-#: accounts/templates/accounts/index.html:15 accounts/views.py:46
+#: accounts/templates/accounts/index.html:24 main/templates/main/index.html:13
+#: main/views.py:85
+msgid "Create playlist"
+msgstr "プレイリスト作成"
+
+#: accounts/templates/accounts/index.html:25 accounts/views.py:42
 msgid "Profile"
 msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:16
+#: accounts/templates/accounts/index.html:26 main/views.py:28
+msgid "TOP"
+msgstr ""
+
+#: accounts/templates/accounts/index.html:27
 msgid "Log out"
 msgstr ""
 
-#: accounts/templates/accounts/login.html:12 accounts/views.py:122
+#: accounts/templates/accounts/login.html:12 accounts/views.py:118
 msgid "Sign up"
 msgstr "ユーザー登録"
 
@@ -170,13 +180,22 @@ msgstr ""
 #: accounts/templates/accounts/password_change.html:12
 #: accounts/templates/accounts/password_reset.html:12
 #: accounts/templates/accounts/profile.html:45
+#: main/templates/main/playlist/books.html:48
+#: main/templates/main/playlist/books.html:50
+#: main/templates/main/playlist/books.html:53
+#: main/templates/main/playlist/create.html:15
+#: main/templates/main/playlist/create.html:17
+#: main/templates/main/playlist/delete.html:10
+#: main/templates/main/playlist/detail.html:44
 #: main/templates/main/playlist/list.html:21
+#: main/templates/main/playlist/update.html:15
+#: main/templates/main/playlist/update.html:17
 msgid "Back"
 msgstr "戻る"
 
 #: accounts/templates/accounts/password_reset_complete.html:4
-#: accounts/templates/accounts/signup.html:12 accounts/views.py:111
-#: main/templates/main/index.html:12
+#: accounts/templates/accounts/signup.html:12 accounts/views.py:107
+#: main/templates/main/index.html:16
 msgid "Log in"
 msgstr ""
 
@@ -248,11 +267,13 @@ msgstr "メールアドレス"
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
-#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:135
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:131
 msgid "Sign up complete"
 msgstr "仮登録完了"
 
-#: accounts/templates/accounts/verification.html:4 accounts/views.py:36
+#: accounts/templates/accounts/verification.html:4 accounts/views.py:32
+#: main/templates/main/index.html:14
+#: main/templates/main/playlist/create_complete.html:5
 msgid "My page"
 msgstr "マイページ"
 
@@ -271,35 +292,35 @@ msgid ""
 "characters."
 msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
 
-#: accounts/views.py:43
+#: accounts/views.py:39
 msgid "Password change"
 msgstr ""
 
-#: accounts/views.py:51
+#: accounts/views.py:47
 msgid "No password set."
 msgstr ""
 
-#: accounts/views.py:52 accounts/views.py:79
+#: accounts/views.py:48 accounts/views.py:75
 msgid "Password set"
 msgstr "パスワード設定"
 
-#: accounts/views.py:59
+#: accounts/views.py:55
 msgid "Profile updated successfully."
 msgstr "アカウント情報を更新しました。"
 
-#: accounts/views.py:83
+#: accounts/views.py:79
 msgid "Password changed successfully."
 msgstr ""
 
-#: accounts/views.py:147
+#: accounts/views.py:143
 msgid "Verification complete"
 msgstr "本登録完了"
 
-#: accounts/views.py:193
+#: accounts/views.py:189
 msgid "Verification failed"
 msgstr "認証失敗"
 
-#: accounts/views.py:206
+#: accounts/views.py:202
 msgid "Email for verification sent"
 msgstr "認証メール送信完了"
 
@@ -327,9 +348,9 @@ msgstr ""
 msgid "main"
 msgstr "メイン"
 
-#: main/forms.py:7
-msgid "Search playlists"
-msgstr "プレイリストを検索"
+#: main/forms.py:11
+msgid "Search words"
+msgstr "検索"
 
 #: main/models.py:15 main/models.py:64
 msgid "playlists"
@@ -340,6 +361,7 @@ msgid "ISBN"
 msgstr ""
 
 #: main/models.py:19 main/models.py:57
+#: main/templates/main/playlist/detail.html:15
 msgid "title"
 msgstr "タイトル"
 
@@ -384,6 +406,7 @@ msgid "books"
 msgstr "書籍"
 
 #: main/models.py:58 main/models.py:78
+#: main/templates/main/playlist/detail.html:19
 msgid "description"
 msgstr "説明文"
 
@@ -399,10 +422,45 @@ msgstr "リスト内の書籍"
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
-#: main/views.py:21
-msgid "TOP"
-msgstr ""
+#: main/templates/main/playlist/books.html:31
+#: main/templates/main/playlist/books.html:34
+#: main/templates/main/playlist/create.html:12
+#: main/templates/main/playlist/update.html:12
+msgid "Add book"
+msgstr "本を追加"
 
-#: main/views.py:32
+#: main/templates/main/playlist/books.html:32
+msgid "This book is already in the playlist."
+msgstr "この本はすでに選択されています。"
+
+#: main/templates/main/playlist/create_complete.html:4
+msgid "Create one more playlist"
+msgstr "もう一つプレイリストを追加する"
+
+#: main/templates/main/playlist/detail.html:40 main/views.py:105
+msgid "Update playlist"
+msgstr "プレイリストを更新"
+
+#: main/templates/main/playlist/detail.html:41 main/views.py:214
+msgid "Delete playlist"
+msgstr "プレイリストを削除"
+
+#: main/views.py:35
 msgid "Playlist list"
 msgstr "プレイリスト一覧"
+
+#: main/views.py:119
+msgid "Playlist updated successfully."
+msgstr "プレイリストを更新しました。"
+
+#: main/views.py:131
+msgid "Search Book"
+msgstr ""
+
+#: main/views.py:206
+msgid "Playlist created successfully."
+msgstr "プレイリストが完成しました。"
+
+#: main/views.py:217
+msgid "Playlist deleted successfully."
+msgstr "プレイリストを削除しました。"
