@@ -6,9 +6,9 @@ from .models import (
 )
 
 
-class PlaylistSearchForm(forms.Form):
+class SearchForm(forms.Form):
     q = forms.CharField(
-        label = _('Search playlists')
+        label = _('Search words')
     )
 
 

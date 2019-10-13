@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    PlaylistForm, PlaylistSearchForm,
+    PlaylistForm, SearchForm,
 )
 from .models import Playlist
 from bookplaylist.views import (
@@ -20,14 +20,14 @@ from bookplaylist.views import (
 
 
 class IndexView(ContextMixin, SearchFormView):
-    form_class = PlaylistSearchForm
+    form_class = SearchForm
     success_url = reverse_lazy('main:playlist')
     template_name = 'main/index.html'
     title = _('TOP')
 
 
 class PlaylistView(ContextMixin, SearchFormView):
-    form_class = PlaylistSearchForm
+    form_class = SearchForm
     success_url = reverse_lazy('main:playlist')
     template_name = 'main/playlist/list.html'
     title = _('Playlist list')
