@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 01:54+0900\n"
+"POT-Creation-Date: 2019-10-14 02:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -437,11 +437,16 @@ msgstr "この本はすでに選択されています。"
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
+#: main/templates/main/playlist/delete.html:5
+#, python-format
+msgid "Are you sure you want to delete \"%(playlist)s\"?"
+msgstr "\"%(playlist)s\"を削除しますか？"
+
 #: main/templates/main/playlist/detail.html:40 main/views.py:105
 msgid "Update playlist"
 msgstr "プレイリストを更新"
 
-#: main/templates/main/playlist/detail.html:41 main/views.py:214
+#: main/templates/main/playlist/detail.html:41 main/views.py:212
 msgid "Delete playlist"
 msgstr "プレイリストを削除"
 
@@ -457,10 +462,10 @@ msgstr "プレイリストを更新しました。"
 msgid "Search Book"
 msgstr ""
 
-#: main/views.py:206
+#: main/views.py:204
 msgid "Playlist created successfully."
 msgstr "プレイリストが完成しました。"
 
-#: main/views.py:217
+#: main/views.py:215
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

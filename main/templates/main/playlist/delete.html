@@ -2,7 +2,7 @@
 <h2>{{ title }}</h2>
 
 <form method="post">
-    <p>Are you sure you want to delete "{{ playlist }}"?</p>
+    <p>{% blocktrans %}Are you sure you want to delete "{{ playlist }}"?{% endblocktrans %}</p>
     {% csrf_token %}
     <input type="submit" value="Confirm">
 </form>
