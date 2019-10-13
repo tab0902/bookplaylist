@@ -1,6 +1,14 @@
 {% load i18n %}
 <h2>{{ title }}</h2>
 
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <table>
     <tbody>
         <tr>
@@ -27,5 +35,9 @@
         {% endfor %}
     </tbody>
 </table>
+
+{% if playlist.user == request.user %}
+<a href="{% url 'main:playlist_update' playlist.pk %}">{% trans 'Update playlist' %}</a>
+{% endif %}
 
 <a href="{% if 'q=' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'main:playlist' %}{% endif %}">{% trans 'Back' %}</a>

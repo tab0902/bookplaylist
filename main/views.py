@@ -1,6 +1,7 @@
 import re
 from functools import reduce
 
+from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -76,3 +77,22 @@ class PlaylistCreateView(ContextMixin, generic.CreateView):
 class PlaylistCreateCompleteView(ContextMixin, generic.TemplateView):
     template_name = 'main/playlist/create_complete.html'
     title = _('Playlist created')
+
+
+class PlaylistUpdateView(ContextMixin, generic.UpdateView):
+    form_class = PlaylistForm
+    model = Playlist
+    template_name = 'main/playlist/update.html'
+    title = _('Update playlist')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        messages.success(self.request, _('Playlist updated successfully.'))
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('main:playlist_detail', args=(self.kwargs.get('pk'),))
