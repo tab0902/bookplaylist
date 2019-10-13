@@ -38,7 +38,6 @@
 
 {% if playlist.user == request.user %}
 <a href="{% url 'main:playlist_update' playlist.pk %}">{% trans 'Update playlist' %}</a>
-<a href="{% url 'main:playlist_delete' playlist.pk %}">{% trans 'Delete playlist' %}</a>
 {% endif %}
 
 <a href="{% if 'q=' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'accounts:index' %}{% endif %}">{% trans 'Back' %}</a>

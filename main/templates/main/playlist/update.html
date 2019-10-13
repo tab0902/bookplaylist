@@ -11,6 +11,8 @@
 
 <a href="{% url 'main:playlist_update_book' playlist.pk %}">{% trans 'Add book' %}</a>
 
+<a href="{% url 'main:playlist_delete' playlist.pk %}">{% trans 'Delete playlist' %}</a>
+
 {% if 'complete' in request.META.HTTP_REFERER or 'update/book' in request.META.HTTP_REFERER %}
 <a href="{% url 'main:playlist_detail' playlist.pk %}">{% trans 'Back' %}</a>
 {% else %}
