@@ -25,3 +25,10 @@ class PlaylistForm(forms.ModelForm):
     def save(self, commit=True):
         self.instance.user = self.user
         return super().save(commit=commit)
+
+
+class PlaylistBookForm(forms.ModelForm):
+
+    class Meta:
+        model = PlaylistBook
+        fields = ('book', 'description', )

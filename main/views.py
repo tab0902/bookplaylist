@@ -185,13 +185,11 @@ class BasePlaylistBookStoreView(ModeMixin, generic.RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-@login_required
 class PlaylistCreateBookStoreView(BasePlaylistBookStoreView):
     mode = MODE_CREATE
     url = reverse_lazy('main:playlist_create')
 
 
-@login_required
 class PlaylistUpdateBookStoreView(BasePlaylistBookStoreView):
     mode = MODE_UPDATE
 
