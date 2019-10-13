@@ -68,7 +68,7 @@ MODE_CREATE = 'create'
 MODE_UPDATE = 'update'
 
 
-class BookMixin:
+class ModeMixin:
     mode = None
 
     def _get_key_name(self):
@@ -76,7 +76,7 @@ class BookMixin:
 
 
 @login_required
-class PlaylistCreateView(ContextMixin, BookMixin, generic.CreateView):
+class PlaylistCreateView(ContextMixin, ModeMixin, generic.CreateView):
     form_class = PlaylistForm
     mode = MODE_CREATE
     model = Playlist
@@ -97,7 +97,7 @@ class PlaylistCreateView(ContextMixin, BookMixin, generic.CreateView):
 
 
 @login_required
-class PlaylistUpdateView(ContextMixin, BookMixin, generic.UpdateView):
+class PlaylistUpdateView(ContextMixin, ModeMixin, generic.UpdateView):
     form_class = PlaylistForm
     mode = MODE_UPDATE
     model = Playlist
@@ -124,7 +124,7 @@ class PlaylistUpdateView(ContextMixin, BookMixin, generic.UpdateView):
 
 
 @login_required
-class BasePlaylistBookView(ContextMixin, BookMixin, SearchFormView):
+class BasePlaylistBookView(ContextMixin, ModeMixin, SearchFormView):
     form_class = SearchForm
     success_url = None
     template_name = 'main/playlist/books.html'
@@ -167,7 +167,7 @@ class PlaylistUpdateBookView(BasePlaylistBookView):
 
 
 @login_required
-class BasePlaylistBookStoreView(BookMixin, generic.RedirectView):
+class BasePlaylistBookStoreView(ModeMixin, generic.RedirectView):
     url = None
 
     def dispatch(self, *args, **kwargs):
