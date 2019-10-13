@@ -3,6 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class PlaylistSearchForm(forms.Form):
-    query = forms.CharField(
+    q = forms.CharField(
         label = _('Search playlists')
     )
