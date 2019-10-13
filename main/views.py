@@ -13,13 +13,10 @@ from .forms import (
 )
 from .models import Playlist
 from bookplaylist.views import (
-    ContextMixin, SearchFormView,
+    ContextMixin, SearchFormView, login_required,
 )
 
 # Create your views here.
-
-
-login_required_m = method_decorator(login_required, name='dispatch')
 
 
 class IndexView(ContextMixin, SearchFormView):
@@ -64,7 +61,7 @@ class PlaylistDetailView(ContextMixin, generic.DetailView):
         return obj
 
 
-@login_required_m
+@login_required
 class PlaylistCreateView(ContextMixin, generic.CreateView):
     form_class = PlaylistForm
     model = Playlist
@@ -78,13 +75,13 @@ class PlaylistCreateView(ContextMixin, generic.CreateView):
         return kwargs
 
 
-@login_required_m
+@login_required
 class PlaylistCreateCompleteView(ContextMixin, generic.TemplateView):
     template_name = 'main/playlist/create_complete.html'
     title = _('Playlist created')
 
 
-@login_required_m
+@login_required
 class PlaylistUpdateView(ContextMixin, generic.UpdateView):
     form_class = PlaylistForm
     model = Playlist
@@ -104,7 +101,7 @@ class PlaylistUpdateView(ContextMixin, generic.UpdateView):
         return reverse_lazy('main:playlist_detail', args=(self.kwargs.get('pk'),))
 
 
-@login_required_m
+@login_required
 class PlaylistDeleteView(ContextMixin, generic.DeleteView):
     model = Playlist
     success_url = reverse_lazy('accounts:index')
