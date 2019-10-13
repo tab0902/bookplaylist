@@ -27,11 +27,20 @@
         </tr>
         <tr>
             <td>
+                {% if mode == 'create' %}
+                {% if book.pk|stringformat:'s' in books_in_session %}
+                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' book.pk %}'" disabled>{% trans 'Add book' %}</button>
+                {% trans 'This book is already in the playlist.' %}
+                {% else %}
+                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' book.pk %}'">{% trans 'Add book' %}</button>
+                {% endif %}
+                {% elif mode == 'update' %}
                 {% if book.pk|stringformat:'s' in books_in_session %}
                 <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' pk book.pk %}'" disabled>{% trans 'Add book' %}</button>
                 {% trans 'This book is already in the playlist.' %}
                 {% else %}
                 <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' pk book.pk %}'">{% trans 'Add book' %}</button>
+                {% endif %}
                 {% endif %}
             </td>
         </tr>
