@@ -12,5 +12,7 @@
     {% endfor %}
 </ul>
 
+<a href="{% url 'main:playlist_create' %}">{% trans 'Create playlist' %}</a>
 <a href="{% url 'accounts:profile' %}">{% trans 'Profile' %}</a>
+<a href="{% url 'main:index' %}">{% trans 'TOP' %}</a>
 <a href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a>

@@ -7,7 +7,9 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from .forms import PlaylistSearchForm
+from .forms import (
+    PlaylistForm, PlaylistSearchForm,
+)
 from .models import Playlist
 from bookplaylist.views import (
     ContextMixin, SearchFormView,
@@ -56,3 +58,21 @@ class PlaylistDetailView(ContextMixin, generic.DetailView):
         obj = super().get_object(queryset=None)
         self.title = obj.title
         return obj
+
+
+class PlaylistCreateView(ContextMixin, generic.CreateView):
+    form_class = PlaylistForm
+    model = Playlist
+    success_url = reverse_lazy('main:playlist_create_complete')
+    template_name = 'main/playlist/create.html'
+    title = _('Create playlist')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+
+class PlaylistCreateCompleteView(ContextMixin, generic.TemplateView):
+    template_name = 'main/playlist/create_complete.html'
+    title = _('Playlist created')
