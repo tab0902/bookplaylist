@@ -9,4 +9,4 @@
     <input type="submit">
 </form>
 
-<a href="{{ request.META.HTTP_REFERER }}">{% trans 'Back' %}</a>
+<a href="{% if 'complete' in request.META.HTTP_REFERER %}{% url 'accounts:index' %}{% else %}{{ request.META.HTTP_REFERER }}{% endif %}">{% trans 'Back' %}</a>

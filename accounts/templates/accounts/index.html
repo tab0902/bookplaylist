@@ -12,13 +12,14 @@
 <h3>{% trans 'Welcome,' %} {{ user }}</h3>
 
 <p>{% trans 'Your playlists' %}:</p>
-<ul>
+<dl>
     {% for playlist in user.playlist_set.all %}
-    <li>{{ playlist }}</li>
+    <dt><a href="{% url 'main:playlist_detail' playlist.pk %}">{{ playlist.title }}</a></dt>
+    <dd>{{ playlist.description }}</dd>
     {% empty %}
-    <li>{% trans 'No data' %}</li>
+    <dt>{% trans 'No data' %}</dt>
     {% endfor %}
-</ul>
+</dl>
 
 <a href="{% url 'main:playlist_create' %}">{% trans 'Create playlist' %}</a>
 <a href="{% url 'accounts:profile' %}">{% trans 'Profile' %}</a>
