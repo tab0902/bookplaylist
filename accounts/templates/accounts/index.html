@@ -1,6 +1,14 @@
 {% load i18n %}
 <h2>{{ title }}</h2>
 
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <h3>{% trans 'Welcome,' %} {{ user }}</h3>
 
 <p>{% trans 'Your playlists' %}:</p>

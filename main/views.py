@@ -96,3 +96,14 @@ class PlaylistUpdateView(ContextMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('main:playlist_detail', args=(self.kwargs.get('pk'),))
+
+
+class PlaylistDeleteView(ContextMixin, generic.DeleteView):
+    model = Playlist
+    success_url = reverse_lazy('accounts:index')
+    template_name = 'main/playlist/delete.html'
+    title = _('Delete playlist')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, _('Playlist deleted successfully.'))
+        return super().delete(request, *args, **kwargs)

@@ -1,0 +1,10 @@
+{% load i18n %}
+<h2>{{ title }}</h2>
+
+<form method="post">
+    <p>Are you sure you want to delete "{{ playlist }}"?</p>
+    {% csrf_token %}
+    <input type="submit" value="Confirm">
+</form>
+
+<a href="{% url 'main:playlist_detail' playlist.pk %}">{% trans 'Back' %}</a>
