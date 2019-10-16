@@ -46,7 +46,7 @@
     <input type="submit" name="add_book" value="{% trans 'Add book' %}">
 </form>
 
-{% if 'complete' in request.META.HTTP_REFERER or 'create/book' in request.META.HTTP_REFERER %}
+{% if 'create' in request.META.HTTP_REFERER %}
 <a href="{% url 'accounts:index' %}">{% trans 'Back' %}</a>
 {% else %}
 <a href="{{ request.META.HTTP_REFERER }}">{% trans 'Back' %}</a>
