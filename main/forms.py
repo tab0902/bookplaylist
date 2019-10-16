@@ -5,23 +5,6 @@ from .models import (
     Category, Playlist, PlaylistBook,
 )
 
-class InlineFormSetMixin:
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.formset = self.formset_class(
-            instance=self.instance,
-            data=self.data if self.is_bound else None,
-        )
-
-    def is_valid(self):
-        return super().is_valid() and self.formset.is_valid()
-
-    def save(self, commit=True):
-        instance = super().save(commit)
-        self.formset.save(commit)
-        return instance
-
 
 class BasePlaylistForm(forms.ModelForm):
     use_required_attribute = False
