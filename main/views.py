@@ -145,6 +145,7 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
             messages.error(self.request, _('You have to add at least one book to your playlist.'.format(self.mode)))
+            self.request.session[SESSION_KEY_FORM] = self.request.POST
             url = reverse_lazy('main:playlist_{}'.format(self.mode)) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
         if not formset.is_valid():
@@ -192,6 +193,7 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
             messages.error(self.request, _('You have to add at least one book to your playlist.'.format(self.mode)))
+            self.request.session[SESSION_KEY_FORM] = self.request.POST
             args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
             url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
