@@ -250,7 +250,6 @@ class BasePlaylistBookStoreView(generic.RedirectView):
     url = None
 
     def dispatch(self, *args, **kwargs):
-        self.request.session[SESSION_KEY_FORM] = None
         form_data = self.request.session.get(SESSION_KEY_FORM)
         book_data = self.request.session.get(SESSION_KEY_BOOK)
         if not form_data or not SESSION_KEY_BOOK in self.request.session:
