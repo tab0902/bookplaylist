@@ -9,13 +9,30 @@
     <input type="submit">
 </form>
 
-<dl>
-    {% for playlist in playlists %}
-    <dt><a href="{% url 'main:playlist_detail' playlist.pk %}">{{ playlist.title }}</a></dt>
-    <dd>{{ playlist.description }}</dd>
-    {% empty %}
-    <dt>{% trans 'No data' %}</dt>
-    {% endfor %}
-</dl>
+<table>
+    <tbody>
+        {% for playlist in playlists %}
+        <tr>
+            <th>{{ forloop.counter }}.</th>
+        </tr>
+        <tr>
+            <th>{% trans 'title' %}:</th>
+            <td>{{ playlist.title }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'category' %}:</th>
+            <td>{{ playlist.category }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'description' %}:</th>
+            <td>{{ playlist.description }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>{% trans 'No data' %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <a href="{% url 'main:index' %}">{% trans 'Back' %}</a>

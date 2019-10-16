@@ -24,15 +24,16 @@ class ContextMixin:
 
 
 class SearchFormView(generic.FormView):
+    query = {}
 
-    def _encode_query(self, raw_query):
+    def _format_query(self, raw_query):
         query_list = [x for x in list(dict.fromkeys(re.split('[\s　]', raw_query))) if x != '']
-        query = urlencode({'q': ' '.join(query_list)})
+        query = ' '.join(query_list)
         return query
 
     def form_valid(self, form):
-        self.query = self._encode_query(form.cleaned_data['q'])
+        self.query['q'] = self._format_query(form.cleaned_data['q'])
         return super().form_valid(form)
 
     def get_success_url(self):
-        return super().get_success_url() + '?{}'.format(self.query)
+        return super().get_success_url() + '?{}'.format(urlencode(self.query))

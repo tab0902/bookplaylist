@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from .models import (
-    Playlist, PlaylistBook,
+    Category, Playlist, PlaylistBook,
 )
 
 class InlineFormSetMixin:
@@ -46,7 +46,7 @@ class PlaylistForm(BasePlaylistForm):
 
     class Meta:
         model = Playlist
-        fields = ('title', 'description',)
+        fields = ('title', 'category', 'description',)
 
     def save(self, commit=True):
         self.instance.user = self.request.user
@@ -75,4 +75,12 @@ PlaylistBookFormSet = forms.inlineformset_factory(
 class SearchForm(forms.Form):
     q = forms.CharField(
         label = _('Search words')
+    )
+
+
+class PlaylistSearchForm(SearchForm):
+    category = forms.ModelChoiceField(
+        Category.objects.all(),
+        required=False,
+        empty_label=_('All'),
     )

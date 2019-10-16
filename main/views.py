@@ -12,10 +12,10 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    PlaylistForm, PlaylistBookFormSet, SearchForm,
+    PlaylistForm, PlaylistBookFormSet, PlaylistSearchForm, SearchForm,
 )
 from .models import (
-    Book, Playlist,
+    Book, Category, Playlist,
 )
 from bookplaylist.views import (
     ContextMixin, SearchFormView, login_required,
@@ -24,15 +24,22 @@ from bookplaylist.views import (
 # Create your views here.
 
 
-class IndexView(ContextMixin, SearchFormView):
-    form_class = SearchForm
+class PlaylistSearchFormView(SearchFormView):
+
+    def form_valid(self, form):
+        self.query['category'] = form.cleaned_data['category'] or ''
+        return super().form_valid(form)
+
+
+class IndexView(ContextMixin, PlaylistSearchFormView):
+    form_class = PlaylistSearchForm
     success_url = reverse_lazy('main:playlist')
     template_name = 'main/index.html'
     title = _('TOP')
 
 
-class PlaylistView(ContextMixin, SearchFormView):
-    form_class = SearchForm
+class PlaylistView(ContextMixin, PlaylistSearchFormView):
+    form_class = PlaylistSearchForm
     success_url = reverse_lazy('main:playlist')
     template_name = 'main/playlist/list.html'
     title = _('Playlist list')
@@ -40,6 +47,7 @@ class PlaylistView(ContextMixin, SearchFormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q')
+        category = self.request.GET.get('category')
         if query:
             q_list = re.split('\s', query)
             conditions = [Q(title__icontains=q) for q in q_list]\
@@ -48,7 +56,10 @@ class PlaylistView(ContextMixin, SearchFormView):
                        + [Q(books__title_collation_key__icontains=q) for q in q_list]\
                        + [Q(books__author__icontains=q) for q in q_list]
             conditions = reduce(lambda x, y: x | y, conditions)
-            playlists = Playlist.objects.filter(conditions)
+            if category:
+                playlists = Playlist.objects.filter(conditions, category__name=category)
+            else:
+                playlists = Playlist.objects.filter(conditions)
         else:
             playlists = Playlist.objects.all()
         context['playlists'] = playlists
