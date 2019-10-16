@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-16 22:34+0900\n"
+"POT-Creation-Date: 2019-10-16 22:45+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:109 main/models.py:75
+#: accounts/models.py:109 main/models.py:77
 msgid "user"
 msgstr ""
 
@@ -146,20 +146,20 @@ msgstr ""
 msgid "Your playlists"
 msgstr "あなたのプレイリスト"
 
-#: accounts/templates/accounts/index.html:22 main/models.py:38
-#: main/models.py:77 main/templates/main/playlist/detail.html:15
+#: accounts/templates/accounts/index.html:22 main/models.py:40
+#: main/models.py:79 main/templates/main/playlist/detail.html:15
 #: main/templates/main/playlist/list.html:19
 msgid "title"
 msgstr "タイトル"
 
-#: accounts/templates/accounts/index.html:26 main/models.py:18
-#: main/models.py:76 main/templates/main/playlist/detail.html:19
+#: accounts/templates/accounts/index.html:26 main/models.py:19
+#: main/models.py:78 main/templates/main/playlist/detail.html:19
 #: main/templates/main/playlist/list.html:23
 msgid "category"
 msgstr "カテゴリ"
 
-#: accounts/templates/accounts/index.html:30 main/models.py:13
-#: main/models.py:78 main/models.py:98
+#: accounts/templates/accounts/index.html:30 main/models.py:14
+#: main/models.py:80 main/models.py:100
 #: main/templates/main/playlist/detail.html:23
 #: main/templates/main/playlist/list.html:27
 msgid "description"
@@ -379,70 +379,74 @@ msgid "category name"
 msgstr "カテゴリ名"
 
 #: main/models.py:12
+msgid "slug"
+msgstr "スラッグ"
+
+#: main/models.py:13
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:19
+#: main/models.py:20
 msgid "categories"
 msgstr "カテゴリ"
 
-#: main/models.py:34 main/models.py:84
+#: main/models.py:36 main/models.py:86
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models.py:37
+#: main/models.py:39
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:39
+#: main/models.py:41
 msgid "collation key"
 msgstr "照合キー"
 
-#: main/models.py:40
+#: main/models.py:42
 msgid "volume"
 msgstr "巻数"
 
-#: main/models.py:41
+#: main/models.py:43
 msgid "series"
 msgstr "シリーズ"
 
-#: main/models.py:42
+#: main/models.py:44
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models.py:43
+#: main/models.py:45
 msgid "date published"
 msgstr "出版日"
 
-#: main/models.py:44
+#: main/models.py:46
 msgid "cover"
 msgstr "書影"
 
-#: main/models.py:45
+#: main/models.py:47
 msgid "author"
 msgstr "著者"
 
-#: main/models.py:46
+#: main/models.py:48
 msgid "Amazon URL"
 msgstr "アマゾンURL"
 
-#: main/models.py:51 main/models.py:97
+#: main/models.py:53 main/models.py:99
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:52 main/models.py:73
+#: main/models.py:54 main/models.py:75
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:83 main/models.py:96
+#: main/models.py:85 main/models.py:98
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:103
+#: main/models.py:105
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:104
+#: main/models.py:106
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 

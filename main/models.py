@@ -9,6 +9,7 @@ from bookplaylist.models import BaseModel
 
 class Category(BaseModel):
     name = models.CharField(_('category name'), max_length=50)
+    slug = models.SlugField(_('slug'))
     sequence = models.SmallIntegerField(_('sequence'))
     description = models.TextField(_('description'), blank=True, null=True)
 
@@ -19,6 +20,7 @@ class Category(BaseModel):
         verbose_name_plural = _('categories')
         indexes = [
             models.Index(fields=['name'], name='name'),
+            models.Index(fields=['slug'], name='slug'),
             models.Index(fields=['sequence'], name='sequence'),
         ] + BaseModel._meta.indexes
 
