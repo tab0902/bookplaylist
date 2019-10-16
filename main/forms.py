@@ -81,6 +81,7 @@ class SearchForm(forms.Form):
 class PlaylistSearchForm(SearchForm):
     category = forms.ModelChoiceField(
         Category.objects.all(),
+        to_field_name='slug',
         required=False,
         empty_label=_('All'),
     )
