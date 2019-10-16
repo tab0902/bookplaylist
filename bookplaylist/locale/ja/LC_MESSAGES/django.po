@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-16 14:14+0900\n"
+"POT-Creation-Date: 2019-10-16 19:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:109 main/models.py:56
+#: accounts/models.py:109 main/models.py:75
 msgid "user"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgid "No data"
 msgstr "データなし"
 
 #: accounts/templates/accounts/index.html:24 main/templates/main/index.html:13
-#: main/views.py:114
+#: main/views.py:112
 msgid "Create playlist"
 msgstr "プレイリスト作成"
 
@@ -161,7 +161,7 @@ msgstr "プレイリスト作成"
 msgid "Profile"
 msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:26 main/views.py:33
+#: accounts/templates/accounts/index.html:26 main/views.py:31
 msgid "TOP"
 msgstr ""
 
@@ -351,73 +351,89 @@ msgstr "メイン"
 msgid "Search words"
 msgstr "検索"
 
-#: main/models.py:15 main/models.py:64
-msgid "playlists"
-msgstr "プレイリスト"
+#: main/models.py:11
+msgid "category name"
+msgstr "カテゴリ名"
 
-#: main/models.py:18
-msgid "ISBN"
-msgstr ""
+#: main/models.py:12
+msgid "sequence"
+msgstr "表示順"
 
-#: main/models.py:19 main/models.py:57
-#: main/templates/main/playlist/detail.html:15
-msgid "title"
-msgstr "タイトル"
-
-#: main/models.py:20
-msgid "collation key"
-msgstr "照合キー"
-
-#: main/models.py:21
-msgid "volume"
-msgstr "巻数"
-
-#: main/models.py:22
-msgid "series"
-msgstr "シリーズ"
-
-#: main/models.py:23
-msgid "publisher"
-msgstr "出版社"
-
-#: main/models.py:24
-msgid "date published"
-msgstr "出版日"
-
-#: main/models.py:25
-msgid "cover"
-msgstr "書影"
-
-#: main/models.py:26
-msgid "author"
-msgstr "著者"
-
-#: main/models.py:27
-msgid "Amazon URL"
-msgstr "アマゾンURL"
-
-#: main/models.py:32 main/models.py:77
-msgid "book"
-msgstr "書籍"
-
-#: main/models.py:33 main/models.py:54
-msgid "books"
-msgstr "書籍"
-
-#: main/models.py:58 main/models.py:78
+#: main/models.py:13 main/models.py:78 main/models.py:98
 #: main/templates/main/playlist/detail.html:19
 msgid "description"
 msgstr "説明文"
 
-#: main/models.py:63 main/models.py:76
+#: main/models.py:18 main/models.py:76
+msgid "category"
+msgstr "カテゴリ"
+
+#: main/models.py:19
+msgid "categories"
+msgstr "カテゴリ"
+
+#: main/models.py:34 main/models.py:84
+msgid "playlists"
+msgstr "プレイリスト"
+
+#: main/models.py:37
+msgid "ISBN"
+msgstr ""
+
+#: main/models.py:38 main/models.py:77
+#: main/templates/main/playlist/detail.html:15
+msgid "title"
+msgstr "タイトル"
+
+#: main/models.py:39
+msgid "collation key"
+msgstr "照合キー"
+
+#: main/models.py:40
+msgid "volume"
+msgstr "巻数"
+
+#: main/models.py:41
+msgid "series"
+msgstr "シリーズ"
+
+#: main/models.py:42
+msgid "publisher"
+msgstr "出版社"
+
+#: main/models.py:43
+msgid "date published"
+msgstr "出版日"
+
+#: main/models.py:44
+msgid "cover"
+msgstr "書影"
+
+#: main/models.py:45
+msgid "author"
+msgstr "著者"
+
+#: main/models.py:46
+msgid "Amazon URL"
+msgstr "アマゾンURL"
+
+#: main/models.py:51 main/models.py:97
+msgid "book"
+msgstr "書籍"
+
+#: main/models.py:52 main/models.py:73
+msgid "books"
+msgstr "書籍"
+
+#: main/models.py:83 main/models.py:96
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:83
+#: main/models.py:103
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:84
+#: main/models.py:104
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
@@ -444,39 +460,38 @@ msgstr "もう一つプレイリストを追加する"
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
 msgstr "\"%(playlist)s\"を削除しますか？"
 
-#: main/templates/main/playlist/detail.html:40 main/views.py:151
+#: main/templates/main/playlist/detail.html:40 main/views.py:149
 msgid "Update playlist"
 msgstr "プレイリストを更新"
 
-#: main/templates/main/playlist/update.html:49 main/views.py:288
+#: main/templates/main/playlist/update.html:49 main/views.py:286
 msgid "Delete playlist"
 msgstr "プレイリストを削除"
 
-#: main/views.py:40
+#: main/views.py:38
 msgid "Playlist list"
 msgstr "プレイリスト一覧"
 
-#: main/views.py:135 main/views.py:181
+#: main/views.py:133 main/views.py:179
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:191
+#: main/views.py:189
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:205
+#: main/views.py:203
 msgid "Search Book"
-msgstr ""
+msgstr "本を検索する"
 
-#: main/views.py:247
-#, python-format
+#: main/views.py:245
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:280
+#: main/views.py:278
 msgid "Playlist created successfully."
 msgstr "プレイリストが完成しました。"
 
-#: main/views.py:291
+#: main/views.py:289
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

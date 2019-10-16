@@ -7,6 +7,25 @@ from bookplaylist.models import BaseModel
 # Create your models here.
 
 
+class Category(BaseModel):
+    name = models.CharField(_('category name'), max_length=50)
+    sequence = models.SmallIntegerField(_('sequence'))
+    description = models.TextField(_('description'), blank=True, null=True)
+
+    class Meta(BaseModel.Meta):
+        db_table = 'categories'
+        ordering = ['sequence']
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
+        indexes = [
+            models.Index(fields=['name'], name='name'),
+            models.Index(fields=['sequence'], name='sequence'),
+        ] + BaseModel._meta.indexes
+
+    def __str__(self):
+        return '%s' % self.name
+
+
 class Book(BaseModel):
     playlists = models.ManyToManyField(
         'Playlist',
@@ -54,6 +73,7 @@ class Playlist(BaseModel):
         verbose_name=_('books'),
     )
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name=_('category'))
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'))
 
