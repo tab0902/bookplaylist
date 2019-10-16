@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <th>{% trans 'title' %}:</th>
-            <td>{{ playlist.title }}</td>
+            <td><a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}">{{ playlist.title }}</a></td>
         </tr>
         <tr>
             <th>{% trans 'category' %}:</th>

@@ -7,4 +7,4 @@
     <input type="submit" value="Confirm">
 </form>
 
-<a href="{% url 'main:playlist_update' playlist.pk %}">{% trans 'Back' %}</a>
+<a href="{% url 'main:playlist_update' playlist.category.slug playlist.pk %}">{% trans 'Back' %}</a>

@@ -29,17 +29,17 @@
             <td>
                 {% if mode == 'create' %}
                 {% if book.pk|stringformat:'s' in books_in_session %}
-                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' book.pk %}'" disabled>{% trans 'Add book' %}</button>
+                <button onclick="location.href='{% url 'main:playlist_create_book_store' book.pk %}'" disabled>{% trans 'Add book' %}</button>
                 {% trans 'This book is already in the playlist.' %}
                 {% else %}
-                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' book.pk %}'">{% trans 'Add book' %}</button>
+                <button onclick="location.href='{% url 'main:playlist_create_book_store' book.pk %}'">{% trans 'Add book' %}</button>
                 {% endif %}
                 {% elif mode == 'update' %}
                 {% if book.pk|stringformat:'s' in books_in_session %}
-                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' kwargs.pk book.pk %}'" disabled>{% trans 'Add book' %}</button>
+                <button onclick="location.href='{% url 'main:playlist_update_book_store' kwargs.category kwargs.pk book.pk %}'" disabled>{% trans 'Add book' %}</button>
                 {% trans 'This book is already in the playlist.' %}
                 {% else %}
-                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' kwargs.pk book.pk %}'">{% trans 'Add book' %}</button>
+                <button onclick="location.href='{% url 'main:playlist_update_book_store' kwargs.category kwargs.pk book.pk %}'">{% trans 'Add book' %}</button>
                 {% endif %}
                 {% endif %}
             </td>
@@ -56,7 +56,7 @@
 {% if mode == 'create' %}
 <a href="{% url 'main:playlist_create' %}?continue=True">{% trans 'Back' %}</a>
 {% elif mode == 'update' %}
-<a href="{% url 'main:playlist_update' kwargs.pk %}?continue=True">{% trans 'Back' %}</a>
+<a href="{% url 'main:playlist_update' kwargs.category kwargs.pk %}?continue=True">{% trans 'Back' %}</a>
 {% endif %}
 {% else %}
 <a href="{{ request.META.HTTP_REFERER }}{% if 'continue' not in request.META.HTTP_REFERER %}?continue=True{% endif %}">{% trans 'Back' %}</a>

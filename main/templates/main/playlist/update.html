@@ -46,6 +46,6 @@
     <input type="submit" name="add_book" value="{% trans 'Add book' %}">
 </form>
 
-<a href="{% url 'main:playlist_delete' playlist.pk %}">{% trans 'Delete playlist' %}</a>
+<a href="{% url 'main:playlist_delete' playlist.category.slug playlist.pk %}">{% trans 'Delete playlist' %}</a>
 
-<a href="{% url 'main:playlist_detail' playlist.pk %}">{% trans 'Back' %}</a>
+<a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}">{% trans 'Back' %}</a>

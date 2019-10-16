@@ -182,13 +182,14 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
             self.request.POST = self.request.POST.copy()
             del self.request.POST[POST_KEY_ADD_BOOK]
             self.request.session[SESSION_KEY_FORM] = self.request.POST
+            category = str(self.kwargs.get('category'))
             pk = str(self.kwargs.get('pk'))
-            return redirect('main:playlist_{}_book'.format(self.mode), pk=pk)
+            return redirect('main:playlist_{}_book'.format(self.mode), category=category, pk=pk)
         instance = form.save(commit=False)
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
             messages.error(self.request, _('You have to add at least one book to your playlist.'.format(self.mode)))
-            args = (str(self.kwargs.get('pk')),)
+            args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
             url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
         if not formset.is_valid():
@@ -201,7 +202,7 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        args = (str(self.kwargs.get('pk')),)
+        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
         self.success_url = reverse_lazy('main:playlist_detail', args=args)
         return super().get_success_url()
 
@@ -231,7 +232,7 @@ class BasePlaylistBookView(ContextMixin, SearchFormView):
         return context
 
     def get_success_url(self):
-        args = (str(self.kwargs.get('pk')),) if self.kwargs.get('pk') else tuple()
+        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
         self.success_url = reverse_lazy('main:playlist_{}_book'.format(self.mode), args=args)
         return super().get_success_url()
 
@@ -270,7 +271,7 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         return super().dispatch(*args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
-        args = (str(self.kwargs.get('pk')),) if self.kwargs.get('pk') else tuple()
+        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
         self.url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
         return super().get_redirect_url(*args, **kwargs)
 
