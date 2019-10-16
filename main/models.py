@@ -20,7 +20,6 @@ class Category(BaseModel):
         verbose_name_plural = _('categories')
         indexes = [
             models.Index(fields=['name'], name='name'),
-            models.Index(fields=['slug'], name='slug'),
             models.Index(fields=['sequence'], name='sequence'),
         ] + BaseModel._meta.indexes
 
