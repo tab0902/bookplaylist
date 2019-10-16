@@ -211,7 +211,7 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
 class BasePlaylistBookView(ContextMixin, SearchFormView):
     form_class = SearchForm
     success_url = None
-    template_name = 'main/playlist/books.html'
+    template_name = 'main/playlist/book.html'
     title = _('Search Book')
 
     def get_context_data(self, **kwargs):
