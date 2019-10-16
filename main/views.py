@@ -1,6 +1,5 @@
 import re
 from functools import reduce
-from itertools import zip_longest
 
 from django import forms
 from django.contrib import messages
@@ -12,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    PlaylistForm, PlaylistBookFormSet, PlaylistSearchForm, SearchForm,
+    PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm, SearchForm,
 )
 from .models import (
     Book, Category, Playlist,
