@@ -8,8 +8,8 @@ from bookplaylist.models import BaseModel
 
 
 class Category(BaseModel):
-    name = models.CharField(_('category name'), max_length=50)
-    slug = models.SlugField(_('slug'))
+    name = models.CharField(_('category name'), max_length=50, unique=True)
+    slug = models.SlugField(_('slug'), unique=True)
     sequence = models.SmallIntegerField(_('sequence'))
     description = models.TextField(_('description'), blank=True, null=True)
 
