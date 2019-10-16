@@ -1,15 +1,50 @@
 {% load i18n %}
 <h2>{{ title }}</h2>
 
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <form action="" method="post">
     <table>
         {{ form.as_table }}
+        {% for book_form, book_data in book_formset %}
+        <tr>
+            <td rowspan="4"><img src="{{ book_data.cover }}"></td>
+            <td colspan="2">{{ forloop.counter }}. {{ book_data.title }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ book_data.author }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {{ book_form.description.errors }}
+                {{ book_form.description }}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ book_form.DELETE.label_tag }}</td>
+            <td>
+                {{ book_form.DELETE.errors }}
+                {{ book_form.DELETE }}
+                {% for hidden_field in book_form.hidden_fields %}
+                {{ hidden_field }}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
     </table>
+    {{ formset.management_form }}
     {% csrf_token %}
-    <input type="submit">
-</form>
+    <input type="submit" name="create">
 
-<a href="{% url 'main:playlist_create_book' %}">{% trans 'Add book' %}</a>
+<form action="" method="post">
+    <input type="submit" name="add_book" value="{% trans 'Add book' %}">
+</form>
 
 {% if 'complete' in request.META.HTTP_REFERER or 'create/book' in request.META.HTTP_REFERER %}
 <a href="{% url 'accounts:index' %}">{% trans 'Back' %}</a>

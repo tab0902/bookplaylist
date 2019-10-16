@@ -36,10 +36,10 @@
                 {% endif %}
                 {% elif mode == 'update' %}
                 {% if book.pk|stringformat:'s' in books_in_session %}
-                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' pk book.pk %}'" disabled>{% trans 'Add book' %}</button>
+                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' kwargs.pk book.pk %}'" disabled>{% trans 'Add book' %}</button>
                 {% trans 'This book is already in the playlist.' %}
                 {% else %}
-                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' pk book.pk %}'">{% trans 'Add book' %}</button>
+                <button onclick="location.href='{% url 'main:playlist_'|add:mode|add:'_book_store' kwargs.pk book.pk %}'">{% trans 'Add book' %}</button>
                 {% endif %}
                 {% endif %}
             </td>
@@ -54,10 +54,10 @@
 
 {% if mode|add:'/book' in request.META.HTTP_REFERER %}
 {% if mode == 'create' %}
-<a href="{% url 'main:playlist_create' %}">{% trans 'Back' %}</a>
+<a href="{% url 'main:playlist_create' %}?continue=True">{% trans 'Back' %}</a>
 {% elif mode == 'update' %}
-<a href="{% url 'main:playlist_update' pk %}">{% trans 'Back' %}</a>
+<a href="{% url 'main:playlist_update' kwargs.pk %}?continue=True">{% trans 'Back' %}</a>
 {% endif %}
 {% else %}
-<a href="{{ request.META.HTTP_REFERER }}">{% trans 'Back' %}</a>
+<a href="{{ request.META.HTTP_REFERER }}{% if 'continue' not in request.META.HTTP_REFERER %}?continue=True{% endif %}">{% trans 'Back' %}</a>
 {% endif %}
