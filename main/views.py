@@ -27,7 +27,8 @@ from bookplaylist.views import (
 class PlaylistSearchFormView(SearchFormView):
 
     def form_valid(self, form):
-        self.query['category'] = form.cleaned_data['category'] or ''
+        category = form.cleaned_data['category']
+        self.query['category'] = category.slug if category else ''
         return super().form_valid(form)
 
 
@@ -57,7 +58,7 @@ class PlaylistView(ContextMixin, PlaylistSearchFormView):
                        + [Q(books__author__icontains=q) for q in q_list]
             conditions = reduce(lambda x, y: x | y, conditions)
             if category:
-                playlists = Playlist.objects.filter(conditions, category__name=category)
+                playlists = Playlist.objects.filter(conditions, category__slug=category)
             else:
                 playlists = Playlist.objects.filter(conditions)
         else:
