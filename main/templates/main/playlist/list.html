@@ -1,20 +1,17 @@
 {% load i18n %}
 <h2>{{ title }}</h2>
 
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+<form action="" method="post">
+    <table>
+        {{ form.as_table }}
+    </table>
+    {% csrf_token %}
+    <input type="submit">
+</form>
 
-<h3>{% trans 'Welcome,' %} {{ user }}</h3>
-
-<p>{% trans 'Your playlists' %}:</p>
 <table>
     <tbody>
-        {% for playlist in user.playlist_set.all %}
+        {% for playlist in playlists %}
         <tr>
             <th>{{ forloop.counter }}.</th>
         </tr>
@@ -38,7 +35,4 @@
     </tbody>
 </table>
 
-<a href="{% url 'main:playlist_create' %}">{% trans 'Create playlist' %}</a>
-<a href="{% url 'accounts:profile' %}">{% trans 'Profile' %}</a>
-<a href="{% url 'main:index' %}">{% trans 'TOP' %}</a>
-<a href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a>
+<a href="{% url 'main:index' %}">{% trans 'Back' %}</a>

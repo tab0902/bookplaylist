@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-12 17:14+0900\n"
+"POT-Creation-Date: 2019-10-16 23:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,23 +34,23 @@ msgstr ""
 msgid "accounts"
 msgstr "アカウント"
 
-#: accounts/forms.py:54
+#: accounts/forms.py:53
 msgid "The two password fields didn’t match."
 msgstr ""
 
-#: accounts/forms.py:57 accounts/templates/accounts/profile.html:17
+#: accounts/forms.py:56 accounts/templates/accounts/profile.html:17
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:63
+#: accounts/forms.py:62
 msgid "Password (again)"
 msgstr ""
 
-#: accounts/forms.py:66
+#: accounts/forms.py:65
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: accounts/forms.py:158
+#: accounts/forms.py:141
 msgid "Email"
 msgstr ""
 
@@ -130,7 +130,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:109 main/models.py:56
+#: accounts/models.py:109 main/models.py:76
 msgid "user"
 msgstr ""
 
@@ -138,27 +138,57 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: accounts/templates/accounts/index.html:4
+#: accounts/templates/accounts/index.html:12
 msgid "Welcome,"
 msgstr ""
 
-#: accounts/templates/accounts/index.html:6
+#: accounts/templates/accounts/index.html:14
 msgid "Your playlists"
 msgstr "あなたのプレイリスト"
 
-#: accounts/templates/accounts/index.html:11
+#: accounts/templates/accounts/index.html:22 main/models.py:39
+#: main/models.py:78 main/templates/main/playlist/detail.html:15
+#: main/templates/main/playlist/list.html:19
+msgid "title"
+msgstr "タイトル"
+
+#: accounts/templates/accounts/index.html:26 main/models.py:19
+#: main/models.py:77 main/templates/main/playlist/detail.html:19
+#: main/templates/main/playlist/list.html:23
+msgid "category"
+msgstr "カテゴリ"
+
+#: accounts/templates/accounts/index.html:30 main/models.py:14
+#: main/models.py:79 main/models.py:99
+#: main/templates/main/playlist/detail.html:23
+#: main/templates/main/playlist/list.html:27
+msgid "description"
+msgstr "説明文"
+
+#: accounts/templates/accounts/index.html:35
+#: main/templates/main/playlist/book.html:49
+#: main/templates/main/playlist/list.html:32
 msgid "No data"
 msgstr "データなし"
 
-#: accounts/templates/accounts/index.html:15 accounts/views.py:57
+#: accounts/templates/accounts/index.html:41 main/templates/main/index.html:13
+#: main/views.py:124
+msgid "Create playlist"
+msgstr "プレイリスト作成"
+
+#: accounts/templates/accounts/index.html:42 accounts/views.py:42
 msgid "Profile"
 msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:16
+#: accounts/templates/accounts/index.html:43 main/views.py:39
+msgid "TOP"
+msgstr ""
+
+#: accounts/templates/accounts/index.html:44
 msgid "Log out"
 msgstr ""
 
-#: accounts/templates/accounts/login.html:12 accounts/views.py:133
+#: accounts/templates/accounts/login.html:12 accounts/views.py:118
 msgid "Sign up"
 msgstr "ユーザー登録"
 
@@ -169,11 +199,21 @@ msgstr ""
 #: accounts/templates/accounts/password_change.html:12
 #: accounts/templates/accounts/password_reset.html:12
 #: accounts/templates/accounts/profile.html:45
+#: main/templates/main/playlist/book.html:57
+#: main/templates/main/playlist/book.html:59
+#: main/templates/main/playlist/book.html:62
+#: main/templates/main/playlist/create.html:50
+#: main/templates/main/playlist/create.html:52
+#: main/templates/main/playlist/delete.html:10
+#: main/templates/main/playlist/detail.html:47
+#: main/templates/main/playlist/list.html:38
+#: main/templates/main/playlist/update.html:51
 msgid "Back"
 msgstr "戻る"
 
 #: accounts/templates/accounts/password_reset_complete.html:4
-#: accounts/templates/accounts/signup.html:12 accounts/views.py:122
+#: accounts/templates/accounts/signup.html:12 accounts/views.py:107
+#: main/templates/main/index.html:16
 msgid "Log in"
 msgstr ""
 
@@ -245,11 +285,13 @@ msgstr "メールアドレス"
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
-#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:146
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:131
 msgid "Sign up complete"
 msgstr "仮登録完了"
 
-#: accounts/templates/accounts/verification.html:4 accounts/views.py:47
+#: accounts/templates/accounts/verification.html:4 accounts/views.py:32
+#: main/templates/main/index.html:14
+#: main/templates/main/playlist/create_complete.html:5
 msgid "My page"
 msgstr "マイページ"
 
@@ -268,35 +310,35 @@ msgid ""
 "characters."
 msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
 
-#: accounts/views.py:54
+#: accounts/views.py:39
 msgid "Password change"
 msgstr ""
 
-#: accounts/views.py:62
+#: accounts/views.py:47
 msgid "No password set."
 msgstr ""
 
-#: accounts/views.py:63 accounts/views.py:90
+#: accounts/views.py:48 accounts/views.py:75
 msgid "Password set"
 msgstr "パスワード設定"
 
-#: accounts/views.py:70
+#: accounts/views.py:55
 msgid "Profile updated successfully."
 msgstr "アカウント情報を更新しました。"
 
-#: accounts/views.py:94
+#: accounts/views.py:79
 msgid "Password changed successfully."
 msgstr ""
 
-#: accounts/views.py:158
+#: accounts/views.py:143
 msgid "Verification complete"
 msgstr "本登録完了"
 
-#: accounts/views.py:204
+#: accounts/views.py:189
 msgid "Verification failed"
 msgstr "認証失敗"
 
-#: accounts/views.py:217
+#: accounts/views.py:202
 msgid "Email for verification sent"
 msgstr "認証メール送信完了"
 
@@ -324,70 +366,145 @@ msgstr ""
 msgid "main"
 msgstr "メイン"
 
-#: main/models.py:15 main/models.py:64
+#: main/forms.py:77
+msgid "Search words"
+msgstr "検索"
+
+#: main/forms.py:86
+msgid "All"
+msgstr ""
+
+#: main/models.py:11
+msgid "category name"
+msgstr "カテゴリ名"
+
+#: main/models.py:12
+msgid "slug"
+msgstr "スラッグ"
+
+#: main/models.py:13
+msgid "sequence"
+msgstr "表示順"
+
+#: main/models.py:20
+msgid "categories"
+msgstr "カテゴリ"
+
+#: main/models.py:35 main/models.py:85
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models.py:18
+#: main/models.py:38
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:19 main/models.py:57
-msgid "title"
-msgstr "タイトル"
-
-#: main/models.py:20
+#: main/models.py:40
 msgid "collation key"
 msgstr "照合キー"
 
-#: main/models.py:21
+#: main/models.py:41
 msgid "volume"
 msgstr "巻数"
 
-#: main/models.py:22
+#: main/models.py:42
 msgid "series"
 msgstr "シリーズ"
 
-#: main/models.py:23
+#: main/models.py:43
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models.py:24
+#: main/models.py:44
 msgid "date published"
 msgstr "出版日"
 
-#: main/models.py:25
+#: main/models.py:45
 msgid "cover"
 msgstr "書影"
 
-#: main/models.py:26
+#: main/models.py:46
 msgid "author"
 msgstr "著者"
 
-#: main/models.py:27
+#: main/models.py:47
 msgid "Amazon URL"
 msgstr "アマゾンURL"
 
-#: main/models.py:32 main/models.py:77
+#: main/models.py:52 main/models.py:98
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:33 main/models.py:54
+#: main/models.py:53 main/models.py:74
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:58 main/models.py:78
-msgid "description"
-msgstr "説明文"
-
-#: main/models.py:63 main/models.py:76
+#: main/models.py:84 main/models.py:97
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:83
+#: main/models.py:104
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:84
+#: main/models.py:105
 msgid "books in playlists"
 msgstr "リスト内の書籍"
+
+#: main/templates/main/playlist/book.html:32
+#: main/templates/main/playlist/book.html:35
+#: main/templates/main/playlist/book.html:39
+#: main/templates/main/playlist/book.html:42
+#: main/templates/main/playlist/create.html:46
+#: main/templates/main/playlist/update.html:46
+msgid "Add book"
+msgstr "本を追加"
+
+#: main/templates/main/playlist/book.html:33
+#: main/templates/main/playlist/book.html:40
+msgid "This book is already in the playlist."
+msgstr "この本はすでに選択されています。"
+
+#: main/templates/main/playlist/create_complete.html:4
+msgid "Create one more playlist"
+msgstr "もう一つプレイリストを追加する"
+
+#: main/templates/main/playlist/delete.html:5
+#, python-format
+msgid "Are you sure you want to delete \"%(playlist)s\"?"
+msgstr "\"%(playlist)s\"を削除しますか？"
+
+#: main/templates/main/playlist/detail.html:44 main/views.py:161
+msgid "Update playlist"
+msgstr "プレイリストを更新"
+
+#: main/templates/main/playlist/update.html:49 main/views.py:298
+msgid "Delete playlist"
+msgstr "プレイリストを削除"
+
+#: main/views.py:46
+msgid "Playlist list"
+msgstr "プレイリスト一覧"
+
+#: main/views.py:145 main/views.py:192
+msgid "You have to add at least one book to your playlist."
+msgstr "プレイリストに本が登録されていません。"
+
+#: main/views.py:202
+msgid "Playlist updated successfully."
+msgstr "プレイリストを更新しました。"
+
+#: main/views.py:216
+msgid "Search Book"
+msgstr "本を検索する"
+
+#: main/views.py:257
+msgid "Session timeout. Please retry from the beginning."
+msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
+
+#: main/views.py:290
+msgid "Playlist created successfully."
+msgstr "プレイリストが完成しました。"
+
+#: main/views.py:301
+msgid "Playlist deleted successfully."
+msgstr "プレイリストを削除しました。"

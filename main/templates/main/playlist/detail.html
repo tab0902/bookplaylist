@@ -1,0 +1,47 @@
+{% load i18n %}
+<h2>{{ title }}</h2>
+
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<table>
+    <tbody>
+        <tr>
+            <th>{% trans 'title' %}:</th>
+            <td>{{ playlist.title }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'category' %}:</th>
+            <td>{{ playlist.category }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'description' %}:</th>
+            <td>{{ playlist.description }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+        {% for elm in playlist.playlistbook_set.all %}
+        <tr>
+            <td rowspan="2"><img src='{{ elm.book.cover }}'></td>
+            <td rowspan="1">{{ elm.book.title }}</td>
+        </tr>
+        <tr>
+            <td>{{ elm.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if playlist.user == request.user %}
+<a href="{% url 'main:playlist_update' playlist.category.slug playlist.pk %}">{% trans 'Update playlist' %}</a>
+{% endif %}
+
+<a href="{% if 'q=' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'accounts:index' %}{% endif %}">{% trans 'Back' %}</a>

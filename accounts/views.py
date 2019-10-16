@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth import (
     get_user_model, login as auth_login, views as auth_views,
 )
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import is_password_usable
 from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ValidationError
@@ -10,14 +9,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.utils.decorators import method_decorator
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
-from django.views.decorators.debug import sensitive_post_parameters
 
 from .forms import (
     PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
+)
+from bookplaylist.views import (
+    ContextMixin, login_required, sensitive_post_parameters,
 )
 
 # Create your views here.
@@ -25,29 +25,14 @@ from .forms import (
 
 UserModel = get_user_model()
 
-login_required_m = method_decorator(login_required, name='dispatch')
-sensitive_post_parameters_m  = method_decorator(sensitive_post_parameters(), name='dispatch')
 
-
-class ContextMixin:
-    extra_context = None
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update({
-            'title': self.title,
-            **(self.extra_context or {})
-        })
-        return context
-
-
-@login_required_m
+@login_required
 class IndexView(ContextMixin, generic.TemplateView):
     template_name = 'accounts/index.html'
     title = _('My page')
 
 
-@login_required_m
+@login_required
 class ProfileView(ContextMixin, generic.UpdateView):
     form_class = UserProfileUpdateForm
     password_text = '************'
@@ -77,8 +62,8 @@ class ProfileView(ContextMixin, generic.UpdateView):
         return context
 
 
-@login_required_m
-@sensitive_post_parameters_m
+@login_required
+@sensitive_post_parameters
 class PasswordChangeView(auth_views.PasswordChangeView):
     success_url = reverse_lazy('accounts:profile')
     template_name = 'accounts/password_change.html'

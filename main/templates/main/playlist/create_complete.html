@@ -1,0 +1,5 @@
+{% load i18n %}
+<h2>{{ title }}</h2>
+
+<a href="{% url 'main:playlist_create' %}">{% trans 'Create one more playlist' %}</a>
+<a href="{% url 'accounts:index' %}">{% trans 'My page' %}</a>

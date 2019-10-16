@@ -1,0 +1,10 @@
+{% load i18n %}
+<h2>{{ title }}</h2>
+
+<form method="post">
+    <p>{% blocktrans %}Are you sure you want to delete "{{ playlist }}"?{% endblocktrans %}</p>
+    {% csrf_token %}
+    <input type="submit">
+</form>
+
+<a href="{% url 'main:playlist_update' playlist.category.slug playlist.pk %}">{% trans 'Back' %}</a>

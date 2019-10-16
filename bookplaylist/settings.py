@@ -146,7 +146,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('accounts:index')
 ADMIN_REORDER = (
     {
         'app': 'main',
-        'models': ('main.Book', 'main.Playlist', )
+        'models': ('main.Category', 'main.Book', 'main.Playlist', )
     },
     {
         'app': 'accounts',

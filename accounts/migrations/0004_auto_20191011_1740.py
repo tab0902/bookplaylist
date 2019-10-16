@@ -19,4 +19,8 @@ class Migration(migrations.Migration):
             name='date_verified',
             field=models.DateTimeField(blank=True, null=True, verbose_name='date verified'),
         ),
+        migrations.RunSQL(
+            "ALTER TABLE `users` MODIFY `date_verified` DATETIME(6) AFTER `date_joined`",
+            migrations.RunSQL.noop,
+        ),
     ]
