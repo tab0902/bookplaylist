@@ -40,9 +40,9 @@
     </table>
     {{ formset.management_form }}
     {% csrf_token %}
-    <input type="submit">
+    <input type="submit" name="update">
 
-<form action="/" method="post">
+<form action="" method="post">
     <input type="submit" name="add_book" value="{% trans 'Add book' %}">
 </form>
 
