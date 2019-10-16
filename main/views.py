@@ -24,6 +24,13 @@ from bookplaylist.views import (
 
 
 class PlaylistSearchFormView(SearchFormView):
+    form_class = PlaylistSearchForm
+    success_url = reverse_lazy('main:playlist')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['category'] = self.request.GET.get('category') or None
+        return kwargs
 
     def form_valid(self, form):
         category = form.cleaned_data['category']
@@ -32,15 +39,11 @@ class PlaylistSearchFormView(SearchFormView):
 
 
 class IndexView(ContextMixin, PlaylistSearchFormView):
-    form_class = PlaylistSearchForm
-    success_url = reverse_lazy('main:playlist')
     template_name = 'main/index.html'
     title = _('TOP')
 
 
 class PlaylistView(ContextMixin, PlaylistSearchFormView):
-    form_class = PlaylistSearchForm
-    success_url = reverse_lazy('main:playlist')
     template_name = 'main/playlist/list.html'
     title = _('Playlist list')
 

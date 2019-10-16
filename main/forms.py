@@ -60,6 +60,10 @@ class SearchForm(forms.Form):
         label = _('Search words')
     )
 
+    def __init__(self, q='', *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['q'].initial = q
+
 
 class PlaylistSearchForm(SearchForm):
     category = forms.ModelChoiceField(
@@ -68,3 +72,7 @@ class PlaylistSearchForm(SearchForm):
         required=False,
         empty_label=_('All'),
     )
+
+    def __init__(self, q='', category=None, *args, **kwargs):
+        super().__init__(q=q, *args, **kwargs)
+        self.fields['category'].initial = category

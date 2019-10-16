@@ -26,6 +26,11 @@ class ContextMixin:
 class SearchFormView(generic.FormView):
     query = {}
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['q'] = self.request.GET.get('q') or ''
+        return kwargs
+
     def _format_query(self, raw_query):
         query_list = [x for x in list(dict.fromkeys(re.split('[\s　]', raw_query))) if x != '']
         query = ' '.join(query_list)
