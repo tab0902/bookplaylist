@@ -63,7 +63,10 @@ class PlaylistView(ContextMixin, PlaylistSearchFormView):
             else:
                 playlists = Playlist.objects.filter(conditions)
         else:
-            playlists = Playlist.objects.all()
+            if category:
+                playlists = Playlist.objects.filter(category__slug=category)
+            else:
+                playlists = Playlist.objects.all()
         context['playlists'] = playlists
         return context
 
