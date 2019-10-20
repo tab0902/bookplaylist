@@ -34,7 +34,7 @@ class PlaylistSearchFormView(SearchFormView):
 
     def form_valid(self, form):
         category = form.cleaned_data['category']
-        self.query['category'] = category.slug if category else ''
+        self.param['category'] = category.slug if category else ''
         return super().form_valid(form)
 
 
@@ -52,7 +52,7 @@ class PlaylistView(ContextMixin, PlaylistSearchFormView):
         query = self.request.GET.get('q')
         category = self.request.GET.get('category')
         if query:
-            q_list = re.split('\s', query)
+            q_list = self._format_query(query)
             conditions = [Q(title__icontains=q) for q in q_list]\
                        + [Q(description__icontains=q) for q in q_list]\
                        + [Q(books__title__icontains=q) for q in q_list]\
@@ -223,7 +223,7 @@ class BasePlaylistBookView(ContextMixin, SearchFormView):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q')
         if query:
-            q_list = re.split('\s', query)
+            q_list = self._format_query(query)
             conditions = [Q(title__icontains=q) for q in q_list]\
                        + [Q(title_collation_key__icontains=q) for q in q_list]\
                        + [Q(author__icontains=q) for q in q_list]
