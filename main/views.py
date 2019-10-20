@@ -50,6 +50,8 @@ class PlaylistView(ContextMixin, PlaylistSearchFormView):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q')
         category = self.request.GET.get('category')
+        condition_list = []
+        condition_dict = {}
         if query:
             q_list = self._format_query(query)
             conditions = [Q(title__icontains=q) for q in q_list]\
@@ -57,17 +59,10 @@ class PlaylistView(ContextMixin, PlaylistSearchFormView):
                        + [Q(books__title__icontains=q) for q in q_list]\
                        + [Q(books__title_collation_key__icontains=q) for q in q_list]\
                        + [Q(books__author__icontains=q) for q in q_list]
-            conditions = reduce(lambda x, y: x | y, conditions)
-            if category:
-                playlists = Playlist.objects.filter(conditions, category__slug=category)
-            else:
-                playlists = Playlist.objects.filter(conditions)
-        else:
-            if category:
-                playlists = Playlist.objects.filter(category__slug=category)
-            else:
-                playlists = Playlist.objects.all()
-        context['playlists'] = playlists
+            condition_list.append(reduce(lambda x, y: x | y, conditions))
+        if category:
+            condition_dict['category__slug'] = category
+        context['playlists'] = Playlist.objects.filter(*condition_list, **condition_dict)
         return context
 
 
