@@ -1,4 +1,3 @@
-import re
 from functools import reduce
 
 from django import forms
