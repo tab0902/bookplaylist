@@ -17,7 +17,6 @@ class ContextMixin:
         context = super().get_context_data(**kwargs)
         context.update({
             'title': self.title,
-            'kwargs': self.kwargs,
             **(self.extra_context or {})
         })
         return context
