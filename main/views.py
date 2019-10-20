@@ -86,7 +86,6 @@ GET_KEY_CONTINUE = 'continue'
 POST_KEY_SEARCH = 'search'
 POST_KEY_ADD_BOOK = 'add_book'
 SESSION_KEY_FORM = 'playlist_form_data'
-SESSION_KEY_FORMSET = 'playlist_formset_data'
 SESSION_KEY_BOOK = 'playlist_book_data'
 
 
