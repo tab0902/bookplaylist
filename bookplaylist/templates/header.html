@@ -1,0 +1,37 @@
+<header id="header" class="fixed container-fluid">
+    <div class="row">
+        <div id="site-title" class="col-10 col-md-8">
+            <a href="{% url 'main:index' %}">
+                <h1>BookPlayList</h1>
+            </a>
+        </div>
+        {# <div id="icon-area" class="row"> #}
+        {% if not request.user.is_authenticated %}
+        <div class="col-md-2 d-none d-md-block">
+            <a href="{% url 'accounts:login' %}">
+                <p class="icon-text text-center">ログイン</p>
+            </a>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <a href="{% url 'accounts:signup' %}">
+                <p class="icon-text text-center">会員登録</p>
+            </a>
+        </div>
+        {% else %}
+        <div class="col-md-2 d-none d-md-block">
+            <a href="{% url 'accounts:index' %}">
+                <p class="icon-text text-center">マイページ</p>
+            </a>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <a href="{% url 'accounts:logout' %}">
+                <p class="icon-text text-center">ログアウト</p>
+            </a>
+        </div>
+        {% endif %}
+        {# </div> #}
+        <div id="hamburger" class="col-2 d-md-none text-right">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
