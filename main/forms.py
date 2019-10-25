@@ -57,7 +57,7 @@ PlaylistBookFormSet = forms.inlineformset_factory(
 
 class SearchForm(forms.Form):
     q = forms.CharField(
-        label = _('Search words')
+        label = _('Key words')
     )
 
     def __init__(self, q='', *args, **kwargs):
@@ -70,9 +70,11 @@ class PlaylistSearchForm(SearchForm):
         Category.objects.all(),
         to_field_name='slug',
         required=False,
-        empty_label=_('All'),
+        label = _('Category'),
+        empty_label=_('All categories'),
     )
 
     def __init__(self, q='', category=None, *args, **kwargs):
         super().__init__(q=q, *args, **kwargs)
         self.fields['category'].initial = category
+        self.fields['q'].widget.attrs['placeholder'] = _('Input theme, title and so on')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-16 23:37+0900\n"
+"POT-Creation-Date: 2019-10-25 23:27+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,16 +171,16 @@ msgstr "説明文"
 msgid "No data"
 msgstr "データなし"
 
-#: accounts/templates/accounts/index.html:41 main/templates/main/index.html:13
-#: main/views.py:124
+#: accounts/templates/accounts/index.html:41 main/templates/main/index.html:9
+#: main/templates/main/index.html:37 main/views.py:122
 msgid "Create playlist"
-msgstr "プレイリスト作成"
+msgstr "プレイリストを作成する"
 
 #: accounts/templates/accounts/index.html:42 accounts/views.py:42
 msgid "Profile"
 msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:43 main/views.py:39
+#: accounts/templates/accounts/index.html:43 main/views.py:42
 msgid "TOP"
 msgstr ""
 
@@ -213,7 +213,6 @@ msgstr "戻る"
 
 #: accounts/templates/accounts/password_reset_complete.html:4
 #: accounts/templates/accounts/signup.html:12 accounts/views.py:107
-#: main/templates/main/index.html:16
 msgid "Log in"
 msgstr ""
 
@@ -290,7 +289,6 @@ msgid "Sign up complete"
 msgstr "仮登録完了"
 
 #: accounts/templates/accounts/verification.html:4 accounts/views.py:32
-#: main/templates/main/index.html:14
 #: main/templates/main/playlist/create_complete.html:5
 msgid "My page"
 msgstr "マイページ"
@@ -366,13 +364,21 @@ msgstr ""
 msgid "main"
 msgstr "メイン"
 
-#: main/forms.py:77
-msgid "Search words"
-msgstr "検索"
+#: main/forms.py:60
+msgid "Key words"
+msgstr "キーワード"
 
-#: main/forms.py:86
-msgid "All"
-msgstr ""
+#: main/forms.py:73
+msgid "Category"
+msgstr "カテゴリ"
+
+#: main/forms.py:74
+msgid "All categories"
+msgstr "すべてのカテゴリ"
+
+#: main/forms.py:80
+msgid "Input theme, title and so on"
+msgstr "テーマ、書名などを入力"
 
 #: main/models.py:11
 msgid "category name"
@@ -450,6 +456,30 @@ msgstr "リスト内の書籍"
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
+#: main/templates/main/index.html:8
+msgid "Share Book Playlists<br>on your SNS."
+msgstr "本のプレイリストを<br>SNSでシェアしよう。"
+
+#: main/templates/main/index.html:12 main/templates/main/index.html:38
+msgid "Create your playlist in 2 minutes, and share it easily."
+msgstr "2分で本のプレイリストを作成してSNSで簡単にシェアしよう。"
+
+#: main/templates/main/index.html:15 main/templates/main/index.html:39
+msgid "Create"
+msgstr "作成する"
+
+#: main/templates/main/index.html:18 main/templates/main/index.html:45
+msgid "Search playlist"
+msgstr "プレイリストを検索する"
+
+#: main/templates/main/index.html:26 main/templates/main/index.html:53
+msgid "Search"
+msgstr "検索する"
+
+#: main/templates/main/index.html:32
+msgid "Share Book Playlists<br class=\"d-sm-none\">on your SNS."
+msgstr "本のプレイリストを<br class=\"d-sm-none\">SNSでシェアしよう。"
+
 #: main/templates/main/playlist/book.html:32
 #: main/templates/main/playlist/book.html:35
 #: main/templates/main/playlist/book.html:39
@@ -473,7 +503,7 @@ msgstr "もう一つプレイリストを追加する"
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
 msgstr "\"%(playlist)s\"を削除しますか？"
 
-#: main/templates/main/playlist/detail.html:44 main/views.py:161
+#: main/templates/main/playlist/detail.html:44 main/views.py:160
 msgid "Update playlist"
 msgstr "プレイリストを更新"
 
@@ -481,11 +511,11 @@ msgstr "プレイリストを更新"
 msgid "Delete playlist"
 msgstr "プレイリストを削除"
 
-#: main/views.py:46
+#: main/views.py:47
 msgid "Playlist list"
 msgstr "プレイリスト一覧"
 
-#: main/views.py:145 main/views.py:192
+#: main/views.py:143 main/views.py:191
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
