@@ -140,6 +140,10 @@ LOCALE_PATHS = (
 STATIC_URL = '/static/'
 
 
+CERT_ROOT = os.path.join(os.path.dirname(BASE_DIR), '.well-known')
+CERT_URL = '/.well-known/'
+
+
 LOGIN_REDIRECT_URL = reverse_lazy('accounts:index')
 
 
