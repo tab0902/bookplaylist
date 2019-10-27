@@ -5,6 +5,7 @@
     {% for field in form %}
     <label class="mt-3">{{ field.label }}</label>
     {{ field }}
+    {{ field.errors }}
     {% endfor %}
 
     {% for book_form, book_data in book_formset %}
