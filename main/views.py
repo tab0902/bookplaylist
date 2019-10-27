@@ -16,7 +16,7 @@ from .models import (
     Book, Category, Playlist,
 )
 from bookplaylist.views import (
-    ContextMixin, SearchFormView, login_required,
+    SearchFormView, login_required,
 )
 
 # Create your views here.
@@ -37,14 +37,12 @@ class PlaylistSearchFormView(SearchFormView):
         return super().form_valid(form)
 
 
-class IndexView(ContextMixin, PlaylistSearchFormView):
+class IndexView(PlaylistSearchFormView):
     template_name = 'main/index.html'
-    title = _('TOP')
 
 
-class PlaylistView(ContextMixin, PlaylistSearchFormView):
+class PlaylistView(PlaylistSearchFormView):
     template_name = 'main/playlist/list.html'
-    title = _('Playlist list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,14 +65,12 @@ class PlaylistView(ContextMixin, PlaylistSearchFormView):
         return context
 
 
-class PlaylistDetailView(ContextMixin, generic.DetailView):
+class PlaylistDetailView(generic.DetailView):
     model = Playlist
     template_name = 'main/playlist/detail.html'
-    title = None
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=None)
-        self.title = obj.title
         return obj
 
 
@@ -87,7 +83,7 @@ SESSION_KEY_FORM = 'playlist_form_data'
 SESSION_KEY_BOOK = 'playlist_book_data'
 
 
-class BasePlaylistView(ContextMixin):
+class BasePlaylistView:
     form_class = PlaylistForm
     model = Playlist
 
@@ -120,7 +116,6 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
     mode = MODE_CREATE
     success_url = reverse_lazy('main:playlist_create_complete')
     template_name = 'main/playlist/create.html'
-    title = _('Create playlist')
 
     def get(self, request, *args, **kwargs):
         initial = {
@@ -158,7 +153,6 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
 class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
     mode = MODE_UPDATE
     template_name = 'main/playlist/update.html'
-    title = _('Update playlist')
 
     def get(self, request, *args, **kwargs):
         initial = {
@@ -210,11 +204,10 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
 
 
 @login_required
-class BasePlaylistBookView(ContextMixin, SearchFormView):
+class BasePlaylistBookView(SearchFormView):
     form_class = SearchForm
     success_url = None
     template_name = 'main/playlist/book.html'
-    title = _('Search Book')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -286,17 +279,15 @@ class PlaylistUpdateBookStoreView(BasePlaylistBookStoreView):
 
 
 @login_required
-class PlaylistCreateCompleteView(ContextMixin, generic.TemplateView):
+class PlaylistCreateCompleteView(generic.TemplateView):
     template_name = 'main/playlist/create_complete.html'
-    title = _('Playlist created successfully.')
 
 
 @login_required
-class PlaylistDeleteView(ContextMixin, generic.DeleteView):
+class PlaylistDeleteView(generic.DeleteView):
     model = Playlist
     success_url = reverse_lazy('accounts:index')
     template_name = 'main/playlist/delete.html'
-    title = _('Delete playlist')
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, _('Playlist deleted successfully.'))

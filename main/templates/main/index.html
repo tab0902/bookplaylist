@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+
+{% block title %}
+{% trans 'Share Book Playlists on your SNS.' %} | BooxMix
+{% endblock %}
+
 {% block content %}
 
 <section id="top-pc" class="top-bg d-none d-md-block" style="background-image:url('{% static 'img/top-pc.jpg' %}');">
