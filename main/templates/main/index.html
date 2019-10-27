@@ -40,18 +40,9 @@
         <div class="line-gray my-4"></div>
     </section>
 
-
     <section id="search-playlist" class="d-md-none">
         <h2>{% trans 'Search playlist' %}</h2>
-        <form action="" method="post">{% csrf_token %}
-            {% for field in form %}
-            <div class="mt-2">
-                <label>{{ field.label }}</label>
-                {{ field }}
-            </div>
-            {% endfor %}
-            <input type="submit" class="btn btn-main w-100 mt-3" value="{% trans 'Search' %}">
-        </form>
+        {% include 'main/playlist/layouts/search-playlist.html' %}
     </section>
 </div>
 

@@ -63,6 +63,7 @@ class PlaylistView(ContextMixin, PlaylistSearchFormView):
         if category:
             condition_dict['category__slug'] = category
         context['playlists'] = Playlist.objects.filter(*condition_list, **condition_dict)
+        context['query'] = query
         return context
 
 

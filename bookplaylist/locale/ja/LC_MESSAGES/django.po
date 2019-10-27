@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-25 23:27+0900\n"
+"POT-Creation-Date: 2019-10-27 17:05+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,31 +148,27 @@ msgstr "あなたのプレイリスト"
 
 #: accounts/templates/accounts/index.html:22 main/models.py:39
 #: main/models.py:78 main/templates/main/playlist/detail.html:15
-#: main/templates/main/playlist/list.html:19
 msgid "title"
 msgstr "タイトル"
 
 #: accounts/templates/accounts/index.html:26 main/models.py:19
 #: main/models.py:77 main/templates/main/playlist/detail.html:19
-#: main/templates/main/playlist/list.html:23
 msgid "category"
 msgstr "カテゴリ"
 
 #: accounts/templates/accounts/index.html:30 main/models.py:14
 #: main/models.py:79 main/models.py:99
 #: main/templates/main/playlist/detail.html:23
-#: main/templates/main/playlist/list.html:27
 msgid "description"
 msgstr "説明文"
 
 #: accounts/templates/accounts/index.html:35
 #: main/templates/main/playlist/book.html:49
-#: main/templates/main/playlist/list.html:32
 msgid "No data"
 msgstr "データなし"
 
 #: accounts/templates/accounts/index.html:41 main/templates/main/index.html:9
-#: main/templates/main/index.html:37 main/views.py:122
+#: main/templates/main/index.html:37 main/views.py:123
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
@@ -206,7 +202,6 @@ msgstr ""
 #: main/templates/main/playlist/create.html:52
 #: main/templates/main/playlist/delete.html:10
 #: main/templates/main/playlist/detail.html:47
-#: main/templates/main/playlist/list.html:38
 #: main/templates/main/playlist/update.html:51
 msgid "Back"
 msgstr "戻る"
@@ -348,15 +343,15 @@ msgstr "作成日時"
 msgid "date updated"
 msgstr "更新日時"
 
-#: bookplaylist/urls.py:20
+#: bookplaylist/urls.py:22
 msgid "BookPlayList site admin"
 msgstr "BookPlayList サイト管理"
 
-#: bookplaylist/urls.py:21
+#: bookplaylist/urls.py:23
 msgid "BookPlayList administration"
 msgstr "BookPlayList 管理サイト"
 
-#: bookplaylist/urls.py:22
+#: bookplaylist/urls.py:24
 msgid "Home"
 msgstr ""
 
@@ -468,11 +463,13 @@ msgstr "2分で本のプレイリストを作成してSNSで簡単にシェア�
 msgid "Create"
 msgstr "作成する"
 
-#: main/templates/main/index.html:18 main/templates/main/index.html:45
+#: main/templates/main/index.html:18 main/templates/main/index.html:44
 msgid "Search playlist"
 msgstr "プレイリストを検索する"
 
-#: main/templates/main/index.html:26 main/templates/main/index.html:53
+#: main/templates/main/index.html:26
+#: main/templates/main/playlist/layouts/search-playlist-wide.html:13
+#: main/templates/main/playlist/layouts/search-playlist.html:11
 msgid "Search"
 msgstr "検索する"
 
@@ -503,11 +500,24 @@ msgstr "もう一つプレイリストを追加する"
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
 msgstr "\"%(playlist)s\"を削除しますか？"
 
-#: main/templates/main/playlist/detail.html:44 main/views.py:160
+#: main/templates/main/playlist/detail.html:44 main/views.py:161
 msgid "Update playlist"
 msgstr "プレイリストを更新"
 
-#: main/templates/main/playlist/update.html:49 main/views.py:298
+#: main/templates/main/playlist/list.html:12
+#, python-format
+msgid "Playlists related with \"%(query)s\""
+msgstr "\"%(query)s\"が含まれるリスト一覧"
+
+#: main/templates/main/playlist/list.html:31
+msgid "Show more"
+msgstr "詳細を見る"
+
+#: main/templates/main/playlist/list.html:36
+msgid "No playlist found. Please search by other conditions."
+msgstr "お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
+
+#: main/templates/main/playlist/update.html:49 main/views.py:299
 msgid "Delete playlist"
 msgstr "プレイリストを削除"
 
@@ -515,26 +525,26 @@ msgstr "プレイリストを削除"
 msgid "Playlist list"
 msgstr "プレイリスト一覧"
 
-#: main/views.py:143 main/views.py:191
+#: main/views.py:144 main/views.py:192
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:202
+#: main/views.py:203
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:216
+#: main/views.py:217
 msgid "Search Book"
 msgstr "本を検索する"
 
-#: main/views.py:257
+#: main/views.py:258
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:290
+#: main/views.py:291
 msgid "Playlist created successfully."
 msgstr "プレイリストが完成しました。"
 
-#: main/views.py:301
+#: main/views.py:302
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

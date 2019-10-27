@@ -1,38 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
+{% block content %}
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-    </table>
-    {% csrf_token %}
-    <input type="submit">
-</form>
+<div class="container">
+    <section id="search-playlist-wide">
+        <div class="mt-4">
+            {% include 'main/playlist/layouts/search-playlist-wide.html' %}
+        </div>
+        <h2 class="mt-4 d-none d-md-inline-block">{% blocktrans %}Playlists related with "{{ query }}"{% endblocktrans %}
+    </section>
 
-<table>
-    <tbody>
-        {% for playlist in playlists %}
-        <tr>
-            <th>{{ forloop.counter }}.</th>
-        </tr>
-        <tr>
-            <th>{% trans 'title' %}:</th>
-            <td><a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}">{{ playlist.title }}</a></td>
-        </tr>
-        <tr>
-            <th>{% trans 'category' %}:</th>
-            <td>{{ playlist.category }}</td>
-        </tr>
-        <tr>
-            <th>{% trans 'description' %}:</th>
-            <td>{{ playlist.description }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td>{% trans 'No data' %}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <section id="playlist-list">
+        <div class="line-gray mt-4 mb-5 d-none"></div>
+        <div class="row mt-4">
+            {% for playlist in playlists %}
+            <div class="playlist-item col-sm-6 col-lg-4">
+                <a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}" class="color-gray">
+                    <div class="line-gray my-4 my-sm-5"></div>
+                    <div class="playlist-img scroll-wrapper scroll-wrapper-cover">
+                        <div class="playlist-img scroll-inner scroll-inner-cover">
+                            {% for book in playlist.books.all %}
+                            <img class="scroll-box scroll-box-cover" src="{{ book.cover }}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <h2 class="mt-3">{{ playlist.title }}</h2>
+                    <p>{{ playlist.description | truncatechars:50 }}</p>
+                    <button type="button" class="btn btn-outline-main w-100">{% trans 'Show more' %}</button>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <h4>{% trans 'No playlist found. Please search by other conditions.' %}</h4>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
 
-<a href="{% url 'main:index' %}">{% trans 'Back' %}</a>
+{% endblock %}
