@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 19:31+0900\n"
+"POT-Creation-Date: 2019-10-27 21:07+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,7 @@ msgid "No data"
 msgstr "データなし"
 
 #: accounts/templates/accounts/index.html:41 main/templates/main/index.html:14
-#: main/templates/main/index.html:42
+#: main/templates/main/index.html:42 main/templates/main/playlist/create.html:6
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
@@ -197,8 +197,8 @@ msgstr ""
 #: main/templates/main/playlist/book.html:57
 #: main/templates/main/playlist/book.html:59
 #: main/templates/main/playlist/book.html:62
-#: main/templates/main/playlist/create.html:50
-#: main/templates/main/playlist/create.html:52
+#: main/templates/main/playlist/create.html:67
+#: main/templates/main/playlist/create.html:69
 #: main/templates/main/playlist/delete.html:10
 #: main/templates/main/playlist/update.html:51
 msgid "Back"
@@ -345,19 +345,19 @@ msgstr ""
 msgid "main"
 msgstr "メイン"
 
-#: main/forms.py:60
+#: main/forms.py:61
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:73
+#: main/forms.py:74
 msgid "Category"
 msgstr "カテゴリ"
 
-#: main/forms.py:74
+#: main/forms.py:75
 msgid "All categories"
 msgstr "すべてのカテゴリ"
 
-#: main/forms.py:80
+#: main/forms.py:81
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
@@ -471,15 +471,23 @@ msgstr "本のプレイリストを<br class=\"d-sm-none\">SNSでシェアしよ
 #: main/templates/main/playlist/book.html:35
 #: main/templates/main/playlist/book.html:39
 #: main/templates/main/playlist/book.html:42
-#: main/templates/main/playlist/create.html:46
+#: main/templates/main/playlist/create.html:54
 #: main/templates/main/playlist/update.html:46
 msgid "Add book"
-msgstr "本を追加"
+msgstr "本を追加する"
 
 #: main/templates/main/playlist/book.html:33
 #: main/templates/main/playlist/book.html:40
 msgid "This book is already in the playlist."
 msgstr "この本はすでに選択されています。"
+
+#: main/templates/main/playlist/create.html:33
+msgid "Delete book"
+msgstr "本を削除する"
+
+#: main/templates/main/playlist/create.html:57
+msgid "Complete"
+msgstr "完成"
 
 #: main/templates/main/playlist/create_complete.html:4
 msgid "Create one more playlist"

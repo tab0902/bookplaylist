@@ -20,6 +20,11 @@
     max-width: 920px;
   }
 }
+@media screen and (min-width: 768px) {
+  .container-slim {
+    max-width: 640px;
+  }
+}
 
 /* fonts */
 body {
@@ -93,7 +98,7 @@ select {
   font-size: 14px;
   outline: none;
 }
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
   border-color: #9C44A6;
 }
 select {
@@ -106,6 +111,11 @@ input:-ms-input-placeholder {
   font-size:14px;
   padding-left: 4px;
 }
+/* @media screen and (max-width: 991.98px) { */
+  textarea {
+    max-height: 6rem;
+  }
+/* } */
 
 /* button */
 .btn {
@@ -118,7 +128,6 @@ input:-ms-input-placeholder {
 }
 @media screen and (min-width: 576px) {
   .btn {
-    padding: 12px 20px;
     border-width: 1px;
   }
 }
@@ -440,4 +449,8 @@ input:-ms-input-placeholder {
 
 .playlist-detail-title {
   line-height: 2rem;
+}
+
+.playlist-form-books textarea {
+  height: 4rem;
 }

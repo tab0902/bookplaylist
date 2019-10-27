@@ -52,6 +52,7 @@ PlaylistBookFormSet = forms.inlineformset_factory(
     model=PlaylistBook,
     form=PlaylistBookForm,
     extra=0,
+    can_delete=False,
 )
 
 
