@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 17:05+0900\n"
+"POT-Creation-Date: 2019-10-27 18:59+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,18 +147,18 @@ msgid "Your playlists"
 msgstr "あなたのプレイリスト"
 
 #: accounts/templates/accounts/index.html:22 main/models.py:39
-#: main/models.py:78 main/templates/main/playlist/detail.html:15
+#: main/models.py:78 main/templates/main/playlist/detail.html:84
 msgid "title"
 msgstr "タイトル"
 
 #: accounts/templates/accounts/index.html:26 main/models.py:19
-#: main/models.py:77 main/templates/main/playlist/detail.html:19
+#: main/models.py:77 main/templates/main/playlist/detail.html:88
 msgid "category"
 msgstr "カテゴリ"
 
 #: accounts/templates/accounts/index.html:30 main/models.py:14
 #: main/models.py:79 main/models.py:99
-#: main/templates/main/playlist/detail.html:23
+#: main/templates/main/playlist/detail.html:92
 msgid "description"
 msgstr "説明文"
 
@@ -201,7 +201,7 @@ msgstr ""
 #: main/templates/main/playlist/create.html:50
 #: main/templates/main/playlist/create.html:52
 #: main/templates/main/playlist/delete.html:10
-#: main/templates/main/playlist/detail.html:47
+#: main/templates/main/playlist/detail.html:116
 #: main/templates/main/playlist/update.html:51
 msgid "Back"
 msgstr "戻る"
@@ -500,22 +500,30 @@ msgstr "もう一つプレイリストを追加する"
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
 msgstr "\"%(playlist)s\"を削除しますか？"
 
-#: main/templates/main/playlist/detail.html:44 main/views.py:161
-msgid "Update playlist"
-msgstr "プレイリストを更新"
+#: main/templates/main/playlist/detail.html:17
+msgid "Edit"
+msgstr "編集する"
 
-#: main/templates/main/playlist/list.html:12
+#: main/templates/main/playlist/detail.html:41
+#: main/templates/main/playlist/detail.html:51
+#: main/templates/main/playlist/list.html:35
+msgid "Show more"
+msgstr "詳細を見る"
+
+#: main/templates/main/playlist/detail.html:69
+#: main/templates/main/playlist/list.html:11
 #, python-format
 msgid "Playlists related with \"%(query)s\""
 msgstr "\"%(query)s\"が含まれるリスト一覧"
 
-#: main/templates/main/playlist/list.html:31
-msgid "Show more"
-msgstr "詳細を見る"
+#: main/templates/main/playlist/detail.html:113 main/views.py:161
+msgid "Update playlist"
+msgstr "プレイリストを更新"
 
-#: main/templates/main/playlist/list.html:36
+#: main/templates/main/playlist/list.html:40
 msgid "No playlist found. Please search by other conditions."
-msgstr "お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
+msgstr ""
+"お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
 
 #: main/templates/main/playlist/update.html:49 main/views.py:299
 msgid "Delete playlist"
