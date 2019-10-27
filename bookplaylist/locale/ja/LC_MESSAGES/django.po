@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 21:07+0900\n"
+"POT-Creation-Date: 2019-10-27 22:09+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,6 +168,7 @@ msgstr "データなし"
 
 #: accounts/templates/accounts/index.html:41 main/templates/main/index.html:14
 #: main/templates/main/index.html:42 main/templates/main/playlist/create.html:6
+#: main/templates/main/playlist/create.html:13
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
@@ -197,10 +198,7 @@ msgstr ""
 #: main/templates/main/playlist/book.html:57
 #: main/templates/main/playlist/book.html:59
 #: main/templates/main/playlist/book.html:62
-#: main/templates/main/playlist/create.html:67
-#: main/templates/main/playlist/create.html:69
 #: main/templates/main/playlist/delete.html:10
-#: main/templates/main/playlist/update.html:51
 msgid "Back"
 msgstr "戻る"
 
@@ -471,8 +469,7 @@ msgstr "本のプレイリストを<br class=\"d-sm-none\">SNSでシェアしよ
 #: main/templates/main/playlist/book.html:35
 #: main/templates/main/playlist/book.html:39
 #: main/templates/main/playlist/book.html:42
-#: main/templates/main/playlist/create.html:54
-#: main/templates/main/playlist/update.html:46
+#: main/templates/main/playlist/layouts/playlist-form.html:46
 msgid "Add book"
 msgstr "本を追加する"
 
@@ -480,14 +477,6 @@ msgstr "本を追加する"
 #: main/templates/main/playlist/book.html:40
 msgid "This book is already in the playlist."
 msgstr "この本はすでに選択されています。"
-
-#: main/templates/main/playlist/create.html:33
-msgid "Delete book"
-msgstr "本を削除する"
-
-#: main/templates/main/playlist/create.html:57
-msgid "Complete"
-msgstr "完成"
 
 #: main/templates/main/playlist/create_complete.html:4
 msgid "Create one more playlist"
@@ -508,6 +497,14 @@ msgstr "編集する"
 msgid "Show more"
 msgstr "詳細を見る"
 
+#: main/templates/main/playlist/layouts/playlist-form.html:24
+msgid "Delete book"
+msgstr "本を削除する"
+
+#: main/templates/main/playlist/layouts/playlist-form.html:49
+msgid "Complete"
+msgstr "完成"
+
 #: main/templates/main/playlist/list.html:16
 #, python-format
 msgid "Playlists related with \"%(query)s\""
@@ -518,7 +515,13 @@ msgid "No playlist found. Please search by other conditions."
 msgstr ""
 "お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
 
-#: main/templates/main/playlist/update.html:49
+#: main/templates/main/playlist/update.html:6
+#: main/templates/main/playlist/update.html:15
+msgid "Update playlist"
+msgstr "プレイリストを編集する"
+
+#: main/templates/main/playlist/update.html:19
+#: main/templates/main/playlist/update.html:25
 msgid "Delete playlist"
 msgstr "プレイリストを削除"
 

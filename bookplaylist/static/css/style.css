@@ -74,6 +74,9 @@ a:hover {
 a.color-gray:hover, a.color-gray:active {
   color: #484848;
 }
+.text-sm {
+   font-size: 14px;
+}
 
 /* form */
 input[type=text],

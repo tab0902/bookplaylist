@@ -1,51 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
 
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+{% block title %}
+{% trans 'Update playlist' %} | BooxMix
+{% endblock %}
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-        {% for book_form, book_data in book_formset %}
-        <tr>
-            <td rowspan="4"><img src="{{ book_data.cover }}"></td>
-            <td colspan="2">{{ forloop.counter }}. {{ book_data.title }}</td>
-        </tr>
-        <tr>
-            <td colspan="2">{{ book_data.author }}</td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                {{ book_form.description.errors }}
-                {{ book_form.description }}
-            </td>
-        </tr>
-        <tr>
-            <td>{{ book_form.DELETE.label_tag }}</td>
-            <td>
-                {{ book_form.DELETE.errors }}
-                {{ book_form.DELETE }}
-                {% for hidden_field in book_form.hidden_fields %}
-                {{ hidden_field }}
-                {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {{ formset.management_form }}
-    {% csrf_token %}
-    <input type="submit" name="update">
+{% block content %}
 
-<form action="" method="post">
-    <input type="submit" name="add_book" value="{% trans 'Add book' %}">
-</form>
+<div class="container container-slim">
+    <section id="playlist-form">
+        <div class="row mt-4">
+            <div class="col-sm-8">
+                <h2>{% trans 'Update playlist' %}</h2>
+            </div>
+            <div class="col-4 d-none d-sm-block">
+                <a href="{% url 'main:playlist_delete' playlist.category.slug playlist.pk %}" class="btn btn-inline-sub text-sm float-right">
+                    {% trans 'Delete playlist' %}
+                </a>
+            </div>
+        </div>
+        {% include 'main/playlist/layouts/playlist-form.html' %}
+        <a href="{% url 'main:playlist_delete' playlist.category.slug playlist.pk %}" class="btn btn-inline-sub w-100 d-sm-none mt-5 text-center">
+            {% trans 'Delete playlist' %}
+        </a>
+    </section>
+</div>
 
-<a href="{% url 'main:playlist_delete' playlist.category.slug playlist.pk %}">{% trans 'Delete playlist' %}</a>
-
-<a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}">{% trans 'Back' %}</a>
+{% endblock %}
