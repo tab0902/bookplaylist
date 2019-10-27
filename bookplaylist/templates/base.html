@@ -25,13 +25,11 @@
     {% include 'header.html' %}
     {% include 'drawer.html' %}
     <main id="content">
-        {% if messages %}
-        <div class="callout alert small" data-closable>
-            {% for message in messages %}
-            <p{% if message.tags %} class="text-center {{ message.tags }}"{% endif %}>{{ message|linebreaksbr }}</p>
-            {% endfor %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} text-center" role="alert" data-closable>
+            {{ message|linebreaksbr }}
         </div>
-        {% endif %}
+        {% endfor %}
 
         {% block content %}
         {% endblock %}

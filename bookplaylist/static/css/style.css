@@ -241,6 +241,16 @@ input:-ms-input-placeholder {
 .line-gray {
   border-top: 1px solid #e5e5e5;
 }
+.errorlist {
+  list-style-type: none;
+  padding-left: 0;
+  color: #9C44A6;
+}
+@media screen and (min-width: 768px) {
+  .alert {
+    font-size: 16px;
+  }
+}
 
 
 /*---------------------------------
