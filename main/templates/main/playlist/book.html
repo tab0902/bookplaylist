@@ -47,7 +47,6 @@
     <section id="book-list">
         <div class="row mt-4">
             {% for book in books %}
-            {% for _ in ''|center:12 %}
             <div class="book-item col-sm-3 col-lg-2">
                 <div class="line-gray my-4"></div>
                 <div class="row">
@@ -75,7 +74,6 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
             {% empty %}
             {% if request.GET.q %}
             <div class="col-12">
