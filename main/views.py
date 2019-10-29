@@ -69,10 +69,6 @@ class PlaylistDetailView(generic.DetailView):
     model = Playlist
     template_name = 'main/playlist/detail.html'
 
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=None)
-        return obj
-
 
 MODE_CREATE = 'create'
 MODE_UPDATE = 'update'
@@ -114,7 +110,6 @@ class BasePlaylistView:
 @login_required
 class PlaylistCreateView(BasePlaylistView, generic.CreateView):
     mode = MODE_CREATE
-    success_url = reverse_lazy('main:playlist_create_complete')
     template_name = 'main/playlist/create.html'
 
     def get(self, request, *args, **kwargs):
@@ -147,6 +142,11 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
         del self.request.session[SESSION_KEY_FORM]
         del self.request.session[SESSION_KEY_BOOK]
         return super().form_valid(form)
+
+    def get_success_url(self):
+        args = (str(self.object.pk),)
+        self.success_url = reverse_lazy('main:playlist_create_complete', args=args)
+        return super().get_success_url()
 
 
 @login_required
@@ -280,7 +280,8 @@ class PlaylistUpdateBookStoreView(BasePlaylistBookStoreView):
 
 
 @login_required
-class PlaylistCreateCompleteView(generic.TemplateView):
+class PlaylistCreateCompleteView(generic.DetailView):
+    model = Playlist
     template_name = 'main/playlist/create_complete.html'
 
 

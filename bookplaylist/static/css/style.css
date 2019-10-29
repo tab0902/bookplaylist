@@ -167,6 +167,8 @@ textarea {
   color: #df2a00;
   border-color: #df2a00;
 }
+
+/* button (sub, inline) */
 .btn-inline-main {
   padding: 0;
   color: #ff4812;
@@ -204,6 +206,30 @@ textarea {
 }
 .btn-inline-sub:hover, .btn-inline-sub:focus, .btn-inline-sub:active {
   color: #7C2496;
+}
+
+/* button (twitter) */
+.btn-twitter {
+  color: #fff;
+  background-color: #55acee;
+  border-color: #55acee;
+}
+.btn-twitter:hover, .btn-twitter:focus, .btn-twitter:active {
+  color: #fff;
+  background: #55acee;
+  border-color: #55acee;
+}
+
+/* button (facebook) */
+.btn-facebook {
+  color: #fff;
+  background-color: #3B5998;
+  border-color: #3B5998;
+}
+.btn-facebook:hover, .btn-facebook:focus, .btn-facebook:active {
+  color: #fff;
+  background: #3B5998;
+  border-color: #3B5998;
 }
 
 /* horizontal scroll */

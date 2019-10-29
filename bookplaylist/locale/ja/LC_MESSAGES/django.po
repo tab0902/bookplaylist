@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-29 13:06+0900\n"
+"POT-Creation-Date: 2019-10-29 15:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -195,7 +195,8 @@ msgstr ""
 #: accounts/templates/accounts/password_reset.html:12
 #: accounts/templates/accounts/profile.html:45
 #: main/templates/main/playlist/book.html:41
-#: main/templates/main/playlist/delete.html:26
+#: main/templates/main/playlist/delete.html:21
+#: main/templates/main/playlist/delete.html:30
 msgid "Back"
 msgstr "戻る"
 
@@ -277,7 +278,7 @@ msgid "Sign up complete"
 msgstr "仮登録完了"
 
 #: accounts/templates/accounts/verification.html:4
-#: main/templates/main/playlist/create_complete.html:5
+#: main/templates/main/playlist/create_complete.html:42
 msgid "My page"
 msgstr "マイページ"
 
@@ -505,7 +506,20 @@ msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
-#: main/templates/main/playlist/create_complete.html:4
+#: main/templates/main/playlist/create_complete.html:6
+#: main/templates/main/playlist/create_complete.html:13
+msgid "Playlist created successfully!"
+msgstr "プレイリストが完成しました！"
+
+#: main/templates/main/playlist/create_complete.html:30
+msgid "Share on Twitter"
+msgstr "Twitterでシェアする"
+
+#: main/templates/main/playlist/create_complete.html:35
+msgid "Share on Facrebook"
+msgstr "Facebookでシェアする"
+
+#: main/templates/main/playlist/create_complete.html:39
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
@@ -516,14 +530,18 @@ msgstr "もう一つプレイリストを追加する"
 msgid "Delete playlist"
 msgstr "プレイリストを削除する"
 
-#: main/templates/main/playlist/delete.html:16
+#: main/templates/main/playlist/delete.html:15
 #, python-format
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
 msgstr "\"%(playlist)s\"を削除しますか？"
 
-#: main/templates/main/playlist/delete.html:17
+#: main/templates/main/playlist/delete.html:16
 msgid "Note: You can't cancel this action."
 msgstr "※この操作は取り消せません。"
+
+#: main/templates/main/playlist/delete.html:25
+msgid "Delete"
+msgstr "削除する"
 
 #: main/templates/main/playlist/detail.html:22
 msgid "Edit"
@@ -562,7 +580,7 @@ msgstr ""
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
 
-#: main/views.py:139 main/views.py:186
+#: main/views.py:134 main/views.py:186
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
@@ -574,6 +592,6 @@ msgstr "プレイリストを更新しました。"
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:294
+#: main/views.py:295
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
