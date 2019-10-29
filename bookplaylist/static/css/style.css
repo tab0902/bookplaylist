@@ -50,6 +50,9 @@ h4 {
 h5 {
   font-size: 14px;
 }
+h6 {
+  font-size: 12px;
+}
 p {
   font-size: 16px;
   color: #222;
@@ -114,11 +117,9 @@ input:-ms-input-placeholder {
   font-size:14px;
   padding-left: 4px;
 }
-/* @media screen and (max-width: 991.98px) { */
-  textarea {
-    max-height: 6rem;
-  }
-/* } */
+textarea {
+  max-height: 6rem;
+}
 
 /* button */
 .btn {
@@ -129,18 +130,23 @@ input:-ms-input-placeholder {
 .btn:focus {
     box-shadow:none;
 }
+.btn:disabled {
+  opacity: .3;
+}
 @media screen and (min-width: 576px) {
   .btn {
     border-width: 1px;
   }
 }
 
+/* button (fit) */
 .btn-fit {
   height: calc(100% - 5px);
   width: 100%;
   padding: 0;
 }
 
+/* button (main) */
 .btn-main {
   color: #fff;
   background-color: #ff4812;
@@ -152,6 +158,7 @@ input:-ms-input-placeholder {
   border-color: #df2a00;
 }
 
+/* button (main, outline) */
 .btn-outline-main {
   color: #ff4812;
   border-color: #ff4812;
@@ -168,6 +175,7 @@ input:-ms-input-placeholder {
   color: #df2a00;
 }
 
+/* button (sub) */
 .btn-sub {
   color: #fff;
   background-color: #9C44A6;
@@ -178,6 +186,8 @@ input:-ms-input-placeholder {
   background: #7C2496;
   border-color: #7C2496;
 }
+
+/* button (sub, outline) */
 .btn-outline-sub {
   color: #9C44A6;
   border-color: #9C44A6;
@@ -186,6 +196,8 @@ input:-ms-input-placeholder {
   color: #7C2496;
   border-color: #7C2496;
 }
+
+/* button (sub, inline) */
 .btn-inline-sub {
   padding: 0;
   color: #9C44A6;
@@ -437,16 +449,16 @@ input:-ms-input-placeholder {
 
 @media screen and (min-width: 992px) {
   .playlist-item:nth-child(3n+1) {
-    padding-left: 15px;
-    padding-right: 25px;
+    padding-left: 15px !important;
+    padding-right: 25px !important;
   }
   .playlist-item:nth-child(3n+2) {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
   .playlist-item:nth-child(3n) {
-    padding-left: 25px;
-    padding-right: 15px;
+    padding-left: 25px !important;
+    padding-right: 15px !important;
   }
   .playlist-item:nth-child(3) .line-gray {
     display: none;
@@ -456,14 +468,60 @@ input:-ms-input-placeholder {
 
 /*---------------------------------
 
-  playlist/<category>/<pk>
+  playlist/<category>/<pk>/
 
 ---------------------------------*/
 
 .playlist-detail-title {
   line-height: 2rem;
 }
-
 .playlist-form-books textarea {
   height: 4rem;
+}
+
+
+/*---------------------------------
+
+  (?:create|update/<category>/<pk>)/book/
+
+---------------------------------*/
+
+.book-item:nth-child(1) .line-gray {
+  display: none;
+}
+
+@media screen and (min-width: 576px) {
+  .book-item:nth-child(4n+1) {
+    padding-left: 15px;
+    padding-right: 25px;
+  }
+  .book-item:not(:nth-child(4n+1)):not(:nth-child(4n)) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .book-item:nth-child(4n) {
+    padding-left: 25px;
+    padding-right: 15px;
+  }
+  .book-item:nth-child(n+1):nth-child(-n+4) .line-gray {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .book-item:nth-child(6n+1) {
+    padding-left: 15px !important;
+    padding-right: 25px !important;
+  }
+  .book-item:not(:nth-child(6n+1)):not(:nth-child(6n)) {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .book-item:nth-child(6n) {
+    padding-left: 25px !important;
+    padding-right: 15px !important;
+  }
+  .book-item:nth-child(n+1):nth-child(-n+6) .line-gray {
+    display: none;
+  }
 }

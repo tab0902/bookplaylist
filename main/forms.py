@@ -64,6 +64,7 @@ class SearchForm(forms.Form):
     def __init__(self, q='', *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['q'].initial = q
+        self.fields['q'].widget.attrs['placeholder'] = _('Input key words')
 
 
 class PlaylistSearchForm(SearchForm):
@@ -79,3 +80,10 @@ class PlaylistSearchForm(SearchForm):
         super().__init__(q=q, *args, **kwargs)
         self.fields['category'].initial = category
         self.fields['q'].widget.attrs['placeholder'] = _('Input theme, title and so on')
+
+
+class BookSearchForm(SearchForm):
+
+    def __init__(self, q='', category=None, *args, **kwargs):
+        super().__init__(q=q, *args, **kwargs)
+        self.fields['q'].widget.attrs['placeholder'] = _('Input title or author name')

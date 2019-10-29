@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm, SearchForm,
+    BookSearchForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
     Book, Category, Playlist,
@@ -205,7 +205,7 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
 
 @login_required
 class BasePlaylistBookView(SearchFormView):
-    form_class = SearchForm
+    form_class = BookSearchForm
     success_url = None
     template_name = 'main/playlist/book.html'
 
@@ -223,6 +223,7 @@ class BasePlaylistBookView(SearchFormView):
             books = None
         context['books'] = books
         context['books_in_session'] = [x['id'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
+        context['query'] = query
         context['mode'] = self.mode
         return context
 
