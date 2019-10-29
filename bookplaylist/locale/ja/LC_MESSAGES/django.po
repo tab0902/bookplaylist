@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-29 15:32+0900\n"
+"POT-Creation-Date: 2019-10-29 20:15+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,52 +138,91 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: accounts/templates/accounts/index.html:12
-msgid "Welcome,"
-msgstr ""
+#: accounts/templates/accounts/index.html:6
+#: main/templates/main/playlist/create_complete.html:6
+#: main/templates/main/playlist/create_complete.html:13
+msgid "Playlist created successfully!"
+msgstr "プレイリストが完成しました！"
 
-#: accounts/templates/accounts/index.html:14
-msgid "Your playlists"
-msgstr "あなたのプレイリスト"
+#: accounts/templates/accounts/index.html:15
+#: accounts/templates/accounts/index.html:73
+msgid "%(user)s's my page"
+msgstr "%(user)s さんのマイページ"
 
-#: accounts/templates/accounts/index.html:22 main/models.py:39
-#: main/models.py:78
-msgid "title"
-msgstr "タイトル"
+#: accounts/templates/accounts/index.html:18
+#: accounts/templates/accounts/index.html:103
+#: bookplaylist/templates/drawer.html:16
+msgid "Profile"
+msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:26 main/models.py:19
-#: main/models.py:77
-msgid "category"
-msgstr "カテゴリ"
-
-#: accounts/templates/accounts/index.html:30 main/models.py:14
-#: main/models.py:79 main/models.py:99
-msgid "description"
-msgstr "説明文"
-
-#: accounts/templates/accounts/index.html:35
-msgid "No data"
-msgstr "データなし"
-
-#: accounts/templates/accounts/index.html:41 main/templates/main/index.html:14
+#: accounts/templates/accounts/index.html:23
+#: accounts/templates/accounts/index.html:102 main/templates/main/index.html:14
 #: main/templates/main/index.html:43 main/templates/main/playlist/create.html:6
 #: main/templates/main/playlist/create.html:13
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
-#: accounts/templates/accounts/index.html:42
-msgid "Profile"
-msgstr "アカウント設定"
+#: accounts/templates/accounts/index.html:24 main/templates/main/index.html:17
+#: main/templates/main/index.html:44
+msgid "Create your playlist in 2 minutes, and share it easily."
+msgstr "2分で本のプレイリストを作成してSNSで簡単にシェアしよう。"
 
-#: accounts/templates/accounts/index.html:43
+#: accounts/templates/accounts/index.html:27 main/templates/main/index.html:20
+#: main/templates/main/index.html:45
+msgid "Create"
+msgstr "作成する"
+
+#: accounts/templates/accounts/index.html:33
+msgid "%(user)s's playlists"
+msgstr "%(user)s さんのプレイリスト"
+
+#: accounts/templates/accounts/index.html:50
+#: main/templates/main/playlist/detail.html:45
+#: main/templates/main/playlist/detail.html:55
+#: main/templates/main/playlist/list.html:36
+msgid "Show more"
+msgstr "詳細を見る"
+
+#: accounts/templates/accounts/index.html:55
+#: main/templates/main/playlist/list.html:41
+msgid "No playlist found. Please search by other conditions."
+msgstr ""
+"お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
+
+#: accounts/templates/accounts/index.html:75
+msgid "Your playlists"
+msgstr "あなたのプレイリスト"
+
+#: accounts/templates/accounts/index.html:83 main/models.py:39
+#: main/models.py:78
+msgid "title"
+msgstr "タイトル"
+
+#: accounts/templates/accounts/index.html:87 main/models.py:19
+#: main/models.py:77
+msgid "category"
+msgstr "カテゴリ"
+
+#: accounts/templates/accounts/index.html:91 main/models.py:14
+#: main/models.py:79 main/models.py:99
+msgid "description"
+msgstr "説明文"
+
+#: accounts/templates/accounts/index.html:96
+msgid "No data"
+msgstr "データなし"
+
+#: accounts/templates/accounts/index.html:104
 msgid "TOP"
 msgstr ""
 
-#: accounts/templates/accounts/index.html:44
+#: accounts/templates/accounts/index.html:105
+#: bookplaylist/templates/drawer.html:17 bookplaylist/templates/header.html:31
 msgid "Log out"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:12
+#: bookplaylist/templates/drawer.html:13 bookplaylist/templates/header.html:20
 msgid "Sign up"
 msgstr "ユーザー登録"
 
@@ -202,6 +241,7 @@ msgstr "戻る"
 
 #: accounts/templates/accounts/password_reset_complete.html:4
 #: accounts/templates/accounts/signup.html:12
+#: bookplaylist/templates/drawer.html:12 bookplaylist/templates/header.html:15
 msgid "Log in"
 msgstr ""
 
@@ -278,7 +318,8 @@ msgid "Sign up complete"
 msgstr "仮登録完了"
 
 #: accounts/templates/accounts/verification.html:4
-#: main/templates/main/playlist/create_complete.html:42
+#: bookplaylist/templates/drawer.html:15 bookplaylist/templates/header.html:26
+#: main/templates/main/playlist/create_complete.html:40
 msgid "My page"
 msgstr "マイページ"
 
@@ -465,14 +506,6 @@ msgstr "本のプレイリストをSNSでシェアしよう。"
 msgid "Share Book Playlists<br>on your SNS."
 msgstr "本のプレイリストを<br>SNSでシェアしよう。"
 
-#: main/templates/main/index.html:17 main/templates/main/index.html:44
-msgid "Create your playlist in 2 minutes, and share it easily."
-msgstr "2分で本のプレイリストを作成してSNSで簡単にシェアしよう。"
-
-#: main/templates/main/index.html:20 main/templates/main/index.html:45
-msgid "Create"
-msgstr "作成する"
-
 #: main/templates/main/index.html:23 main/templates/main/index.html:50
 msgid "Search playlist"
 msgstr "プレイリストを検索する"
@@ -497,29 +530,24 @@ msgstr "追加する本を探す"
 msgid "Books related with \"%(query)s\""
 msgstr "\"%(query)s\"が含まれるリスト一覧"
 
-#: main/templates/main/playlist/book.html:72
+#: main/templates/main/playlist/book.html:71
 msgid "Add"
 msgstr "追加する"
 
-#: main/templates/main/playlist/book.html:82
+#: main/templates/main/playlist/book.html:80
 msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
-#: main/templates/main/playlist/create_complete.html:6
-#: main/templates/main/playlist/create_complete.html:13
-msgid "Playlist created successfully!"
-msgstr "プレイリストが完成しました！"
-
-#: main/templates/main/playlist/create_complete.html:30
+#: main/templates/main/playlist/create_complete.html:28
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlist/create_complete.html:35
+#: main/templates/main/playlist/create_complete.html:33
 msgid "Share on Facrebook"
 msgstr "Facebookでシェアする"
 
-#: main/templates/main/playlist/create_complete.html:39
+#: main/templates/main/playlist/create_complete.html:37
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
@@ -547,12 +575,6 @@ msgstr "削除する"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlist/detail.html:45
-#: main/templates/main/playlist/detail.html:55
-#: main/templates/main/playlist/list.html:36
-msgid "Show more"
-msgstr "詳細を見る"
-
 #: main/templates/main/playlist/layouts/playlist-form.html:26
 msgid "Delete book"
 msgstr "本を削除する"
@@ -569,11 +591,6 @@ msgstr "完成"
 #, python-format
 msgid "Playlists related with \"%(query)s\""
 msgstr "\"%(query)s\"が含まれるリスト一覧"
-
-#: main/templates/main/playlist/list.html:41
-msgid "No playlist found. Please search by other conditions."
-msgstr ""
-"お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
 
 #: main/templates/main/playlist/update.html:6
 #: main/templates/main/playlist/update.html:15

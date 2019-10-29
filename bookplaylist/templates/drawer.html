@@ -1,3 +1,6 @@
+{% load static %}
+{% load i18n %}
+
 <nav id="drawer" class="sticky">
     <div class="drawer-div drawer-div-first">
     </div>
@@ -6,11 +9,12 @@
     </div>
     <div class="drawer-div">
         {% if not request.user.is_authenticated %}
-        <p class="text-center"><a href="{% url 'accounts:login' %}">ログイン</a></p>
-        <p class="text-center"><a href="{% url 'accounts:signup' %}">新規登録</a></p>
+        <p class="text-center"><a href="{% url 'accounts:login' %}">{% trans 'Log in' %}</a></p>
+        <p class="text-center"><a href="{% url 'accounts:signup' %}">{% trans 'Sign up' %}</a></p>
         {% else %}
-        <p class="text-center"><a href="{% url 'accounts:index' %}">マイページ</a></p>
-        <p class="text-center"><a href="{% url 'accounts:logout' %}">ログアウト</a></p>
+        <p class="text-center"><a href="{% url 'accounts:index' %}">{% trans 'My page' %}</a></p>
+        <p class="text-center"><a href="{% url 'accounts:profile' %}">{% trans 'Profile' %}</a></p>
+        <p class="text-center"><a href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a></p>
         {% endif %}
     </div>
 </nav>

@@ -1,3 +1,6 @@
+{% load static %}
+{% load i18n %}
+
 <header id="header" class="fixed container-fluid">
     <div class="row">
         <div id="site-title" class="col-10 col-md-8">
@@ -9,23 +12,23 @@
         {% if not request.user.is_authenticated %}
         <div class="col-md-2 d-none d-md-block">
             <a href="{% url 'accounts:login' %}">
-                <p class="icon-text text-center">ログイン</p>
+                <p class="icon-text text-center">{% trans 'Log in' %}</p>
             </a>
         </div>
         <div class="col-md-2 d-none d-md-block">
             <a href="{% url 'accounts:signup' %}">
-                <p class="icon-text text-center">会員登録</p>
+                <p class="icon-text text-center">{% trans 'Sign up' %}</p>
             </a>
         </div>
         {% else %}
         <div class="col-md-2 d-none d-md-block">
             <a href="{% url 'accounts:index' %}">
-                <p class="icon-text text-center">マイページ</p>
+                <p class="icon-text text-center">{% trans 'My page' %}</p>
             </a>
         </div>
         <div class="col-md-2 d-none d-md-block">
             <a href="{% url 'accounts:logout' %}">
-                <p class="icon-text text-center">ログアウト</p>
+                <p class="icon-text text-center">{% trans 'Log out' %}</p>
             </a>
         </div>
         {% endif %}
