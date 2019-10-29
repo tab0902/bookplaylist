@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-29 12:55+0900\n"
+"POT-Creation-Date: 2019-10-29 13:06+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,8 +194,8 @@ msgstr ""
 #: accounts/templates/accounts/password_change.html:12
 #: accounts/templates/accounts/password_reset.html:12
 #: accounts/templates/accounts/profile.html:45
-#: main/templates/main/playlist/book.html:40
-#: main/templates/main/playlist/delete.html:10
+#: main/templates/main/playlist/book.html:41
+#: main/templates/main/playlist/delete.html:26
 msgid "Back"
 msgstr "戻る"
 
@@ -509,10 +509,21 @@ msgstr ""
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
-#: main/templates/main/playlist/delete.html:5
+#: main/templates/main/playlist/delete.html:6
+#: main/templates/main/playlist/delete.html:13
+#: main/templates/main/playlist/update.html:19
+#: main/templates/main/playlist/update.html:25
+msgid "Delete playlist"
+msgstr "プレイリストを削除する"
+
+#: main/templates/main/playlist/delete.html:16
 #, python-format
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
 msgstr "\"%(playlist)s\"を削除しますか？"
+
+#: main/templates/main/playlist/delete.html:17
+msgid "Note: You can't cancel this action."
+msgstr "※この操作は取り消せません。"
 
 #: main/templates/main/playlist/detail.html:22
 msgid "Edit"
@@ -550,11 +561,6 @@ msgstr ""
 #: main/templates/main/playlist/update.html:15
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
-
-#: main/templates/main/playlist/update.html:19
-#: main/templates/main/playlist/update.html:25
-msgid "Delete playlist"
-msgstr "プレイリストを削除"
 
 #: main/views.py:139 main/views.py:186
 msgid "You have to add at least one book to your playlist."
