@@ -31,6 +31,12 @@ class PlaylistForm(BasePlaylistForm):
         model = Playlist
         fields = ('title', 'category', 'description',)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].empty_label = _('(Select a catagory)')
+        self.fields['title'].widget.attrs['placeholder'] = _('Describe us the overview of your playlist')
+        self.fields['description'].widget.attrs['placeholder'] = _('Tell us why you are create this playlist')
+
     def save(self, commit=True):
         self.instance.user = self.request.user
         return super().save(commit=commit)
@@ -45,6 +51,7 @@ class PlaylistBookForm(BasePlaylistForm):
     def __init__(self, request, *args, **kwargs):
         super().__init__(request, *args, **kwargs)
         self.fields['book'].widget = forms.HiddenInput()
+        self.fields['description'].widget.attrs['placeholder'] = _('Please explain why you recommend this book')
 
 
 PlaylistBookFormSet = forms.inlineformset_factory(

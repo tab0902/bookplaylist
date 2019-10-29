@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-29 12:49+0900\n"
+"POT-Creation-Date: 2019-10-29 12:55+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -340,27 +340,43 @@ msgstr ""
 msgid "main"
 msgstr "メイン"
 
-#: main/forms.py:61
+#: main/forms.py:36
+msgid "(Select a catagory)"
+msgstr "(カテゴリを選択)"
+
+#: main/forms.py:37
+msgid "Describe us the overview of your playlist"
+msgstr "プレイリストのタイトルを入力"
+
+#: main/forms.py:38
+msgid "Tell us why you are create this playlist"
+msgstr "このプレイリストを作成する背景を教えて下さい"
+
+#: main/forms.py:54
+msgid "Please explain why you recommend this book"
+msgstr "この本を追加する理由はなんですか？"
+
+#: main/forms.py:68
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:67
+#: main/forms.py:74
 msgid "Input key words"
 msgstr "キーワードを入力"
 
-#: main/forms.py:75
+#: main/forms.py:82
 msgid "Category"
 msgstr "カテゴリ"
 
-#: main/forms.py:76
+#: main/forms.py:83
 msgid "All categories"
 msgstr "すべてのカテゴリ"
 
-#: main/forms.py:82
+#: main/forms.py:89
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:89
+#: main/forms.py:96
 msgid "Input title or author name"
 msgstr "書名、著者名を入力"
 
@@ -485,11 +501,9 @@ msgid "Add"
 msgstr "追加する"
 
 #: main/templates/main/playlist/book.html:82
-#, fuzzy
-#| msgid "No playlist found. Please search by other conditions."
 msgid "No book found. Please search by other words."
 msgstr ""
-"お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
+"お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
 #: main/templates/main/playlist/create_complete.html:4
 msgid "Create one more playlist"
