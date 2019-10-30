@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 14:59+0900\n"
+"POT-Creation-Date: 2019-10-30 15:24+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,6 @@ msgid "The two password fields didn’t match."
 msgstr ""
 
 #: accounts/forms.py:56 accounts/templates/accounts/profile.html:28
-#: accounts/templates/accounts/profile.html:105
 msgid "Password"
 msgstr ""
 
@@ -229,6 +228,8 @@ msgid "Log out"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:12
+#: accounts/templates/accounts/signup.html:6
+#: accounts/templates/accounts/signup.html:15
 #: bookplaylist/templates/drawer.html:13 bookplaylist/templates/header.html:20
 msgid "Sign up"
 msgstr "ユーザー登録"
@@ -239,7 +240,6 @@ msgstr ""
 
 #: accounts/templates/accounts/password_change.html:12
 #: accounts/templates/accounts/password_reset.html:12
-#: accounts/templates/accounts/profile.html:133
 #: main/templates/main/playlist/book.html:41
 #: main/templates/main/playlist/delete.html:21
 #: main/templates/main/playlist/delete.html:30
@@ -247,7 +247,9 @@ msgid "Back"
 msgstr "戻る"
 
 #: accounts/templates/accounts/password_reset_complete.html:4
-#: accounts/templates/accounts/signup.html:12
+#: accounts/templates/accounts/signup.html:18
+#: accounts/templates/accounts/signup.html:36
+#: accounts/templates/accounts/signup.html:53
 #: bookplaylist/templates/drawer.html:12 bookplaylist/templates/header.html:15
 msgid "Log in"
 msgstr ""
@@ -289,39 +291,26 @@ msgid "Change"
 msgstr ""
 
 #: accounts/templates/accounts/profile.html:39
-#: accounts/templates/accounts/profile.html:119
 msgid "Twitter"
 msgstr ""
 
 #: accounts/templates/accounts/profile.html:44
 #: accounts/templates/accounts/profile.html:63
-#: accounts/templates/accounts/profile.html:112
-#: accounts/templates/accounts/profile.html:121
 msgid "Associated"
 msgstr "連携済み"
 
 #: accounts/templates/accounts/profile.html:46
 #: accounts/templates/accounts/profile.html:65
-#: accounts/templates/accounts/profile.html:114
-#: accounts/templates/accounts/profile.html:123
 msgid "Not associated"
 msgstr "未連携"
 
 #: accounts/templates/accounts/profile.html:52
 #: accounts/templates/accounts/profile.html:71
-#: accounts/templates/accounts/profile.html:115
-#: accounts/templates/accounts/profile.html:124
 msgid "Associate"
 msgstr "連携する"
 
 #: accounts/templates/accounts/profile.html:58
-#: accounts/templates/accounts/profile.html:110
 msgid "Facebook"
-msgstr ""
-
-#: accounts/templates/accounts/profile.html:77
-#: accounts/templates/accounts/profile.html:82
-msgid "Save"
 msgstr ""
 
 #: accounts/templates/accounts/profile.html:78
@@ -330,6 +319,14 @@ msgstr ""
 #: main/templates/main/playlist/create_complete.html:40
 msgid "My page"
 msgstr "マイページ"
+
+#: accounts/templates/accounts/profile.html:82
+msgid "Save"
+msgstr ""
+
+#: accounts/templates/accounts/signup.html:31
+msgid "Register"
+msgstr "登録"
 
 #: accounts/templates/accounts/signup_email.html:2
 msgid "Your account is created successfully. Registered infomation is below:"
