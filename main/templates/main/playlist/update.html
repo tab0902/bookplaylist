@@ -20,11 +20,14 @@
                 </a>
             </div>
         </div>
-        {% include 'main/playlist/layouts/playlist-form.html' %}
+        {% include 'main/playlist/layouts/playlist-form.html' with mode='update' %}
         <a href="{% url 'main:playlist_delete' playlist.category.slug playlist.pk %}" class="btn btn-inline-sub w-100 d-sm-none mt-5 text-center">
             {% trans 'Delete playlist' %}
         </a>
     </section>
 </div>
+
+{% trans 'Are you sure?' as confirm_text %}
+{{ confirm_text|json_script:'confirm-text' }}
 
 {% endblock %}

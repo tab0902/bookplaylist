@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 20:47+0900\n"
+"POT-Creation-Date: 2019-10-30 22:41+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -267,7 +267,6 @@ msgstr ""
 
 #: accounts/templates/accounts/password_change.html:15
 #: accounts/templates/accounts/password_reset.html:16
-#: accounts/templates/accounts/password_reset_confirm.html:15
 #: main/templates/main/playlist/book.html:41
 #: main/templates/main/playlist/delete.html:24
 msgid "Back"
@@ -649,6 +648,11 @@ msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
+#: main/templates/main/playlist/create.html:18
+#: main/templates/main/playlist/update.html:30
+msgid "Are you sure?"
+msgstr ""
+
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
 msgid "Playlist created successfully!"
@@ -690,15 +694,15 @@ msgstr "削除する"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:26
+#: main/templates/main/playlist/layouts/playlist-form.html:32
 msgid "Delete book"
 msgstr "本を削除する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:49
+#: main/templates/main/playlist/layouts/playlist-form.html:55
 msgid "Add book"
 msgstr "本を追加する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:52
+#: main/templates/main/playlist/layouts/playlist-form.html:58
 msgid "Complete"
 msgstr "完成"
 
@@ -724,6 +728,6 @@ msgstr "プレイリストを更新しました。"
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:295
+#: main/views.py:331
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

@@ -280,6 +280,42 @@ class PlaylistUpdateBookStoreView(BasePlaylistBookStoreView):
 
 
 @login_required
+class BasePlaylistBookDeleteView(generic.RedirectView):
+    url = None
+
+    def dispatch(self, *args, **kwargs):
+        book_id = str(self.kwargs.get('book'))
+        self.request.session[SESSION_KEY_BOOK] = [x for x in self.request.session[SESSION_KEY_BOOK] if x['id'] != book_id]
+        return super().dispatch(*args, **kwargs)
+
+
+class PlaylistCreateBookDeleteView(BasePlaylistBookDeleteView):
+    mode = MODE_CREATE
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.url = reverse_lazy('main:playlist_create') + '?{}=True'.format(GET_KEY_CONTINUE)
+        return super().get_redirect_url(*args, **kwargs)
+
+
+class PlaylistUpdateBookDeleteView(BasePlaylistBookDeleteView):
+    mode = MODE_UPDATE
+
+    def dispatch(self, *args, **kwargs):
+        book_id = str(self.kwargs.get('book'))
+        playlist_id = str(self.kwargs.get('pk'))
+        playlist = Playlist.objects.get(pk=playlist_id)
+        playlist_book = playlist.playlistbook_set.filter(book__id=book_id)
+        if playlist_book:
+            playlist_book.delete()
+        return super().dispatch(*args, **kwargs)
+
+    def get_redirect_url(self, *args, **kwargs):
+        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
+        self.url = reverse_lazy('main:playlist_update', args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
+        return super().get_redirect_url(*args, **kwargs)
+
+
+@login_required
 class PlaylistCreateCompleteView(generic.DetailView):
     model = Playlist
     template_name = 'main/playlist/create_complete.html'

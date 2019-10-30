@@ -11,8 +11,11 @@
 <div class="container container-slim">
     <section id="playlist-form">
         <h2 class="mt-4 mt-md-5">{% trans 'Create playlist' %}</h2>
-        {% include 'main/playlist/layouts/playlist-form.html' %}
+        {% include 'main/playlist/layouts/playlist-form.html' with mode='create' %}
     </section>
 </div>
+
+{% trans 'Are you sure?' as confirm_text %}
+{{ confirm_text|json_script:'confirm-text' }}
 
 {% endblock %}

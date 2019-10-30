@@ -26,4 +26,13 @@ $(function() {
     }
     return false;
   });
+
+  // delete book button
+  $('.delete-book').on('click', function(e) {
+      confirmText = JSON.parse($('#confirm-text').text())
+      const result = window.confirm(confirmText)
+      if (!result) {
+        e.preventDefault()
+      }
+  })
 });

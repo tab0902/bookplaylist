@@ -22,9 +22,15 @@
                         <h5 class="mt-3">{{ book_data.author }}</h5>
                     </div>
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-inline-sub mt-3 mt-sm-0 mt-lg-2 float-left float-sm-right float-lg-left text-sm">
+                        <a class="delete-book btn btn-inline-sub mt-3 mt-sm-0 mt-lg-2 float-left float-sm-right float-lg-left text-sm"
+                            {% if mode == 'create' %}
+                            href="{% url 'main:playlist_create_book_delete' book_data.id %}"
+                            {% elif mode == 'update' %}
+                            href="{% url 'main:playlist_update_book_delete' playlist.category.slug playlist.pk book_data.id %}"
+                            {% endif %}
+                        >
                             {% trans 'Delete book' %}
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-12 d-none d-sm-block d-lg-none mt-4">
                         {{ book_form.description.errors }}
