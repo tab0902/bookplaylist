@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 17:29+0900\n"
+"POT-Creation-Date: 2019-10-30 17:59+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,7 +248,17 @@ msgstr ""
 msgid "Sign up"
 msgstr "ユーザー登録"
 
-#: accounts/templates/accounts/password_change.html:12
+#: accounts/templates/accounts/password_change.html:6
+#: accounts/templates/accounts/password_change.html:13 accounts/views.py:38
+msgid "Password change"
+msgstr ""
+
+#: accounts/templates/accounts/password_change.html:14
+#: accounts/templates/accounts/profile.html:34
+msgid "Change"
+msgstr ""
+
+#: accounts/templates/accounts/password_change.html:15
 #: accounts/templates/accounts/password_reset.html:12
 #: main/templates/main/playlist/book.html:41
 #: main/templates/main/playlist/delete.html:24
@@ -281,10 +291,6 @@ msgstr ""
 #: accounts/templates/accounts/verification_again_email.html:8
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
-
-#: accounts/templates/accounts/profile.html:34
-msgid "Change"
 msgstr ""
 
 #: accounts/templates/accounts/profile.html:39
@@ -330,7 +336,9 @@ msgstr "登録されたアドレスに認証メールを送信しました。"
 
 #: accounts/templates/accounts/signup_complete.html:16
 msgid "Click the link in the text to verify your email address."
-msgstr "メールアドレスを認証するため、受信したメッセージ内のリンクをクリックしてください。"
+msgstr ""
+"メールアドレスを認証するため、受信したメッセージ内のリンクをクリックしてくだ"
+"さい。"
 
 #: accounts/templates/accounts/signup_email.html:2
 msgid "Your account is created successfully. Registered infomation is below:"
@@ -363,10 +371,6 @@ msgid ""
 "Enter a valid username. This value may contain only letters, numbers, and _ "
 "characters."
 msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
-
-#: accounts/views.py:38
-msgid "Password change"
-msgstr ""
 
 #: accounts/views.py:45
 msgid "No password set."
