@@ -9,16 +9,17 @@
 {% block content %}
 
 <div class="container container-slim">
-    <section id="mypage-create-playlist">
+    <section id="login">
         <div class="row my-4 mt-md-5">
             <div class="col-md-8">
-                <h2 class="">{% trans 'Log in' %}</h2>
+                <h2>{% trans 'Log in' %}</h2>
             </div>
             <div class="col-md-4 d-none d-md-block">
                 <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub float-right">{% trans 'Sign up' %}</a>
             </div>
         </div>
-        {% include 'layouts/form.html' with submit_text='Log in' %}
+        {% trans 'Log in' as submit_text %}
+        {% include 'layouts/form.html' with submit_text=submit_text %}
         <div class="d-md-none">
             <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub w-100 mt-4">{% trans 'Sign up' %}</a>
         </div>
