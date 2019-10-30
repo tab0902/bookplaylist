@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 19:28+0900\n"
+"POT-Creation-Date: 2019-10-30 20:30+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,7 +141,7 @@ msgstr ""
 #: accounts/templates/accounts/index.html:6
 #: accounts/templates/accounts/password_reset_complete.html:23
 #: accounts/templates/accounts/profile.html:78
-#: accounts/templates/accounts/verification.html:4
+#: accounts/templates/accounts/verification.html:23
 #: bookplaylist/templates/drawer.html:15 bookplaylist/templates/header.html:26
 #: main/templates/main/playlist/create_complete.html:40
 msgid "My page"
@@ -163,6 +163,7 @@ msgstr "アカウント設定"
 #: accounts/templates/accounts/index.html:23
 #: accounts/templates/accounts/index.html:102
 #: accounts/templates/accounts/password_reset_complete.html:20
+#: accounts/templates/accounts/verification.html:20
 #: main/templates/main/index.html:14 main/templates/main/index.html:34
 #: main/templates/main/playlist/create.html:6
 #: main/templates/main/playlist/create.html:13
@@ -298,6 +299,7 @@ msgid "Your password has been reset successfully."
 msgstr "パスワードを再設定しました。"
 
 #: accounts/templates/accounts/password_reset_complete.html:16
+#: accounts/templates/accounts/verification.html:16
 msgid "Enjoy using BooxMix."
 msgstr "引き続きBooxMixをお楽しみください。"
 
@@ -409,6 +411,15 @@ msgstr "メールアドレス"
 #: accounts/templates/accounts/verification_again_email.html:2
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
+
+#: accounts/templates/accounts/verification.html:6
+#: accounts/templates/accounts/verification.html:13
+msgid "Verification complete"
+msgstr "メール認証完了"
+
+#: accounts/templates/accounts/verification.html:15
+msgid "Your email has been verified successfully."
+msgstr "メールアドレスの認証が完了しました。"
 
 #: accounts/templates/accounts/verification_again.html:3
 msgid "Submit the form below if you want to recieve email again."
