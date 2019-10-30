@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 19:08+0900\n"
+"POT-Creation-Date: 2019-10-30 19:28+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,6 +139,7 @@ msgid "users"
 msgstr ""
 
 #: accounts/templates/accounts/index.html:6
+#: accounts/templates/accounts/password_reset_complete.html:23
 #: accounts/templates/accounts/profile.html:78
 #: accounts/templates/accounts/verification.html:4
 #: bookplaylist/templates/drawer.html:15 bookplaylist/templates/header.html:26
@@ -160,8 +161,10 @@ msgid "Profile"
 msgstr "アカウント設定"
 
 #: accounts/templates/accounts/index.html:23
-#: accounts/templates/accounts/index.html:102 main/templates/main/index.html:14
-#: main/templates/main/index.html:34 main/templates/main/playlist/create.html:6
+#: accounts/templates/accounts/index.html:102
+#: accounts/templates/accounts/password_reset_complete.html:20
+#: main/templates/main/index.html:14 main/templates/main/index.html:34
+#: main/templates/main/playlist/create.html:6
 #: main/templates/main/playlist/create.html:13
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
@@ -233,7 +236,6 @@ msgstr ""
 #: accounts/templates/accounts/login.html:6
 #: accounts/templates/accounts/login.html:15
 #: accounts/templates/accounts/login.html:21
-#: accounts/templates/accounts/password_reset_complete.html:4
 #: accounts/templates/accounts/signup.html:18
 #: accounts/templates/accounts/signup.html:24
 #: bookplaylist/templates/drawer.html:12 bookplaylist/templates/header.html:15
@@ -285,6 +287,19 @@ msgstr "登録されたメールアドレスを入力して送信してくださ
 #: accounts/templates/accounts/password_reset.html:15
 msgid "Send email"
 msgstr "メール送信"
+
+#: accounts/templates/accounts/password_reset_complete.html:6
+#: accounts/templates/accounts/password_reset_complete.html:13
+msgid "Password reset complete"
+msgstr "パスワード再設定完了"
+
+#: accounts/templates/accounts/password_reset_complete.html:15
+msgid "Your password has been reset successfully."
+msgstr "パスワードを再設定しました。"
+
+#: accounts/templates/accounts/password_reset_complete.html:16
+msgid "Enjoy using BooxMix."
+msgstr "引き続きBooxMixをお楽しみください。"
 
 #: accounts/templates/accounts/password_reset_confirm.html:14
 msgid "Reset"
