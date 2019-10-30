@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 17:59+0900\n"
+"POT-Creation-Date: 2019-10-30 18:15+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -259,11 +259,24 @@ msgid "Change"
 msgstr ""
 
 #: accounts/templates/accounts/password_change.html:15
-#: accounts/templates/accounts/password_reset.html:12
+#: accounts/templates/accounts/password_reset.html:16
 #: main/templates/main/playlist/book.html:41
 #: main/templates/main/playlist/delete.html:24
 msgid "Back"
 msgstr "戻る"
+
+#: accounts/templates/accounts/password_reset.html:6
+#: accounts/templates/accounts/password_reset.html:13
+msgid "Password reset"
+msgstr "パスワード再設定"
+
+#: accounts/templates/accounts/password_reset.html:14
+msgid "You can recieve an email to reset password by submitting the form below."
+msgstr "登録されたメールアドレスを入力して送信してください。"
+
+#: accounts/templates/accounts/password_reset.html:15
+msgid "Send email"
+msgstr "メール送信"
 
 #: accounts/templates/accounts/password_reset_email.html:2
 #, python-format
