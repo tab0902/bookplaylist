@@ -10,7 +10,7 @@
 
 <div class="container">
     <section id="search-book">
-        <h2 class="mt-4">
+        <h2 class="mt-4 mt-md-5">
             {% if request.GET.q %}
             {% blocktrans %}Books related with "{{ query }}"{% endblocktrans %}
             {% else %}
@@ -18,12 +18,12 @@
             {% endif %}
         </h2>
         <form action="" method="post">{% csrf_token %}
-            <div class="row">
-                <div class="col-sm-9 col-lg-10 mt-2">
+            <div class="row mt-4">
+                <div class="col-sm-9 col-lg-10">
                     {{ form.q }}
                     {{ form.q.errors }}
                 </div>
-                <div class="col-sm-3 col-lg-2 d-none d-sm-block mt-2">
+                <div class="col-sm-3 col-lg-2 d-none d-sm-block">
                     <input type="submit" class="btn btn-outline-sub btn-fit" value="{% trans 'Search' %}">
                 </div>
             </div>

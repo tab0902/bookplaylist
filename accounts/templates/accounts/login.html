@@ -10,12 +10,12 @@
 
 <div class="container container-slim">
     <section id="mypage-create-playlist">
-        <div class="row">
+        <div class="row my-4 mt-md-5">
             <div class="col-md-8">
-                <h2 class="mt-4 mt-md-5">{% trans 'Log in' %}</h2>
+                <h2 class="">{% trans 'Log in' %}</h2>
             </div>
             <div class="col-md-4 d-none d-md-block">
-                <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub float-right mt-2 mt-md-5">{% trans 'Sign up' %}</a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub float-right">{% trans 'Sign up' %}</a>
             </div>
         </div>
         {% include 'layouts/form.html' with submit_text='Log in' %}
