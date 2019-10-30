@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 15:42+0900\n"
+"POT-Creation-Date: 2019-10-30 15:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,10 +139,12 @@ msgid "users"
 msgstr ""
 
 #: accounts/templates/accounts/index.html:6
-#: main/templates/main/playlist/create_complete.html:6
-#: main/templates/main/playlist/create_complete.html:13
-msgid "Playlist created successfully!"
-msgstr "プレイリストが完成しました！"
+#: accounts/templates/accounts/profile.html:78
+#: accounts/templates/accounts/verification.html:4
+#: bookplaylist/templates/drawer.html:15 bookplaylist/templates/header.html:26
+#: main/templates/main/playlist/create_complete.html:40
+msgid "My page"
+msgstr "マイページ"
 
 #: accounts/templates/accounts/index.html:15
 #, python-format
@@ -151,6 +153,7 @@ msgstr "%(user)s さんのマイページ"
 
 #: accounts/templates/accounts/index.html:18
 #: accounts/templates/accounts/index.html:103
+#: accounts/templates/accounts/profile.html:6
 #: accounts/templates/accounts/profile.html:13
 #: bookplaylist/templates/drawer.html:16
 msgid "Profile"
@@ -285,10 +288,6 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:6 main/templates/main/index.html:6
-msgid "Share Book Playlists on your SNS."
-msgstr "本のプレイリストをSNSでシェアしよう。"
-
 #: accounts/templates/accounts/profile.html:34
 msgid "Change"
 msgstr ""
@@ -315,13 +314,6 @@ msgstr "連携する"
 #: accounts/templates/accounts/profile.html:58
 msgid "Facebook"
 msgstr ""
-
-#: accounts/templates/accounts/profile.html:78
-#: accounts/templates/accounts/verification.html:4
-#: bookplaylist/templates/drawer.html:15 bookplaylist/templates/header.html:26
-#: main/templates/main/playlist/create_complete.html:40
-msgid "My page"
-msgstr "マイページ"
 
 #: accounts/templates/accounts/profile.html:82
 msgid "Save"
@@ -523,6 +515,10 @@ msgstr "リスト内の書籍"
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
+#: main/templates/main/index.html:6
+msgid "Share Book Playlists on your SNS."
+msgstr "本のプレイリストをSNSでシェアしよう。"
+
 #: main/templates/main/index.html:13
 msgid "Share Book Playlists<br>on your SNS."
 msgstr "本のプレイリストを<br>SNSでシェアしよう。"
@@ -559,6 +555,11 @@ msgstr "追加する"
 msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
+
+#: main/templates/main/playlist/create_complete.html:6
+#: main/templates/main/playlist/create_complete.html:13
+msgid "Playlist created successfully!"
+msgstr "プレイリストが完成しました！"
 
 #: main/templates/main/playlist/create_complete.html:28
 msgid "Share on Twitter"
