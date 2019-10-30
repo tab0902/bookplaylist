@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 18:15+0900\n"
+"POT-Creation-Date: 2019-10-30 18:42+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -241,12 +241,16 @@ msgid "Log in"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:18
-#: accounts/templates/accounts/login.html:24
+#: accounts/templates/accounts/login.html:29
 #: accounts/templates/accounts/signup.html:6
 #: accounts/templates/accounts/signup.html:15
 #: bookplaylist/templates/drawer.html:13 bookplaylist/templates/header.html:20
 msgid "Sign up"
 msgstr "ユーザー登録"
+
+#: accounts/templates/accounts/login.html:25
+msgid "Did you forget your password?"
+msgstr "パスワードをお忘れですか？"
 
 #: accounts/templates/accounts/password_change.html:6
 #: accounts/templates/accounts/password_change.html:13 accounts/views.py:38
@@ -271,7 +275,8 @@ msgid "Password reset"
 msgstr "パスワード再設定"
 
 #: accounts/templates/accounts/password_reset.html:14
-msgid "You can recieve an email to reset password by submitting the form below."
+msgid ""
+"You can recieve an email to reset password by submitting the form below."
 msgstr "登録されたメールアドレスを入力して送信してください。"
 
 #: accounts/templates/accounts/password_reset.html:15

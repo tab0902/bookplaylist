@@ -20,8 +20,13 @@
         </div>
         {% trans 'Log in' as submit_text %}
         {% include 'layouts/form.html' with submit_text=submit_text %}
-        <div class="d-md-none">
-            <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub w-100 mt-4">{% trans 'Sign up' %}</a>
+        <div class="row mt-4 mt-md-5">
+            <div class="col-md-6 offset-md-3">
+                <a href="{% url 'accounts:password_reset' %}" class="btn btn-inline-sub w-100">{% trans 'Did you forget your password?' %}</a>
+            </div>
+        </div>
+        <div class="d-md-none mt-5">
+            <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub w-100">{% trans 'Sign up' %}</a>
         </div>
     </section>
 </div>
