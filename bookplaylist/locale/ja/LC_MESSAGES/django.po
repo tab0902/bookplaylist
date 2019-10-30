@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 18:42+0900\n"
+"POT-Creation-Date: 2019-10-30 18:55+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -282,6 +282,19 @@ msgstr "登録されたメールアドレスを入力して送信してくださ
 #: accounts/templates/accounts/password_reset.html:15
 msgid "Send email"
 msgstr "メール送信"
+
+#: accounts/templates/accounts/password_reset_done.html:6
+#: accounts/templates/accounts/password_reset_done.html:13
+msgid "Email to reset password sent"
+msgstr "送信完了"
+
+#: accounts/templates/accounts/password_reset_done.html:15
+msgid "An email to reset password has been sent."
+msgstr "パスワード再設定用メールを送信しました。"
+
+#: accounts/templates/accounts/password_reset_done.html:16
+msgid "Click the link in the text to reset password."
+msgstr "添付されたURLからパスワードを再設定してください。"
 
 #: accounts/templates/accounts/password_reset_email.html:2
 #, python-format
