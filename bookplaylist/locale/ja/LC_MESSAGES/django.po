@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-29 20:15+0900\n"
+"POT-Creation-Date: 2019-10-30 14:59+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,8 @@ msgstr "アカウント"
 msgid "The two password fields didn’t match."
 msgstr ""
 
-#: accounts/forms.py:56 accounts/templates/accounts/profile.html:17
+#: accounts/forms.py:56 accounts/templates/accounts/profile.html:28
+#: accounts/templates/accounts/profile.html:105
 msgid "Password"
 msgstr ""
 
@@ -145,12 +146,13 @@ msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
 #: accounts/templates/accounts/index.html:15
-#: accounts/templates/accounts/index.html:73
+#, python-format
 msgid "%(user)s's my page"
 msgstr "%(user)s さんのマイページ"
 
 #: accounts/templates/accounts/index.html:18
 #: accounts/templates/accounts/index.html:103
+#: accounts/templates/accounts/profile.html:13
 #: bookplaylist/templates/drawer.html:16
 msgid "Profile"
 msgstr "アカウント設定"
@@ -173,6 +175,7 @@ msgid "Create"
 msgstr "作成する"
 
 #: accounts/templates/accounts/index.html:33
+#, python-format
 msgid "%(user)s's playlists"
 msgstr "%(user)s さんのプレイリスト"
 
@@ -188,6 +191,10 @@ msgstr "詳細を見る"
 msgid "No playlist found. Please search by other conditions."
 msgstr ""
 "お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
+
+#: accounts/templates/accounts/index.html:73
+msgid "Welcome,"
+msgstr ""
 
 #: accounts/templates/accounts/index.html:75
 msgid "Your playlists"
@@ -232,7 +239,7 @@ msgstr ""
 
 #: accounts/templates/accounts/password_change.html:12
 #: accounts/templates/accounts/password_reset.html:12
-#: accounts/templates/accounts/profile.html:45
+#: accounts/templates/accounts/profile.html:133
 #: main/templates/main/playlist/book.html:41
 #: main/templates/main/playlist/delete.html:21
 #: main/templates/main/playlist/delete.html:30
@@ -273,28 +280,56 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:22
-msgid "Facebook"
+#: accounts/templates/accounts/profile.html:6 main/templates/main/index.html:6
+msgid "Share Book Playlists on your SNS."
+msgstr "本のプレイリストをSNSでシェアしよう。"
+
+#: accounts/templates/accounts/profile.html:34
+msgid "Change"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:24
-#: accounts/templates/accounts/profile.html:33
+#: accounts/templates/accounts/profile.html:39
+#: accounts/templates/accounts/profile.html:119
+msgid "Twitter"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:44
+#: accounts/templates/accounts/profile.html:63
+#: accounts/templates/accounts/profile.html:112
+#: accounts/templates/accounts/profile.html:121
 msgid "Associated"
 msgstr "連携済み"
 
-#: accounts/templates/accounts/profile.html:26
-#: accounts/templates/accounts/profile.html:35
+#: accounts/templates/accounts/profile.html:46
+#: accounts/templates/accounts/profile.html:65
+#: accounts/templates/accounts/profile.html:114
+#: accounts/templates/accounts/profile.html:123
 msgid "Not associated"
 msgstr "未連携"
 
-#: accounts/templates/accounts/profile.html:27
-#: accounts/templates/accounts/profile.html:36
+#: accounts/templates/accounts/profile.html:52
+#: accounts/templates/accounts/profile.html:71
+#: accounts/templates/accounts/profile.html:115
+#: accounts/templates/accounts/profile.html:124
 msgid "Associate"
 msgstr "連携する"
 
-#: accounts/templates/accounts/profile.html:31
-msgid "Twitter"
+#: accounts/templates/accounts/profile.html:58
+#: accounts/templates/accounts/profile.html:110
+msgid "Facebook"
 msgstr ""
+
+#: accounts/templates/accounts/profile.html:77
+#: accounts/templates/accounts/profile.html:82
+msgid "Save"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:78
+#: accounts/templates/accounts/verification.html:4
+#: bookplaylist/templates/drawer.html:15 bookplaylist/templates/header.html:26
+#: main/templates/main/playlist/create_complete.html:40
+msgid "My page"
+msgstr "マイページ"
 
 #: accounts/templates/accounts/signup_email.html:2
 msgid "Your account is created successfully. Registered infomation is below:"
@@ -316,12 +351,6 @@ msgstr "下のURLから本登録を完了させてください。"
 #: accounts/templates/accounts/signup_subject.html:2
 msgid "Sign up complete"
 msgstr "仮登録完了"
-
-#: accounts/templates/accounts/verification.html:4
-#: bookplaylist/templates/drawer.html:15 bookplaylist/templates/header.html:26
-#: main/templates/main/playlist/create_complete.html:40
-msgid "My page"
-msgstr "マイページ"
 
 #: accounts/templates/accounts/verification_again.html:3
 msgid "Submit the form below if you want to recieve email again."
@@ -497,10 +526,6 @@ msgstr "リスト内の書籍"
 #: main/models.py:105
 msgid "books in playlists"
 msgstr "リスト内の書籍"
-
-#: main/templates/main/index.html:6
-msgid "Share Book Playlists on your SNS."
-msgstr "本のプレイリストをSNSでシェアしよう。"
 
 #: main/templates/main/index.html:13
 msgid "Share Book Playlists<br>on your SNS."
