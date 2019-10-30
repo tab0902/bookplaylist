@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 20:30+0900\n"
+"POT-Creation-Date: 2019-10-30 20:41+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,6 +286,7 @@ msgid ""
 msgstr "登録されたメールアドレスを入力して送信してください。"
 
 #: accounts/templates/accounts/password_reset.html:15
+#: accounts/templates/accounts/verification_again.html:18
 msgid "Send email"
 msgstr "メール送信"
 
@@ -421,7 +422,16 @@ msgstr "メール認証完了"
 msgid "Your email has been verified successfully."
 msgstr "メールアドレスの認証が完了しました。"
 
-#: accounts/templates/accounts/verification_again.html:3
+#: accounts/templates/accounts/verification_again.html:6
+#: accounts/templates/accounts/verification_again.html:13
+msgid "Verification failed"
+msgstr "メール認証エラー"
+
+#: accounts/templates/accounts/verification_again.html:15
+msgid "This URL is expired."
+msgstr "URLの有効期限が切れています。"
+
+#: accounts/templates/accounts/verification_again.html:16
 msgid "Submit the form below if you want to recieve email again."
 msgstr ""
 "もう一度認証メールを受け取りたい場合は、以下のフォームを送信してください。"
