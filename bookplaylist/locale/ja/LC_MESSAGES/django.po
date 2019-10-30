@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 17:18+0900\n"
+"POT-Creation-Date: 2019-10-30 17:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -318,6 +318,20 @@ msgstr ""
 msgid "Register"
 msgstr "登録"
 
+#: accounts/templates/accounts/signup_complete.html:6
+#: accounts/templates/accounts/signup_complete.html:13
+#: accounts/templates/accounts/signup_subject.html:2
+msgid "Sign up complete"
+msgstr "仮登録完了"
+
+#: accounts/templates/accounts/signup_complete.html:15
+msgid "A message has been sent to the email address you registered."
+msgstr "登録されたアドレスに認証メールを送信しました。"
+
+#: accounts/templates/accounts/signup_complete.html:16
+msgid "Click the link in the text to verify your email address."
+msgstr "メールアドレスを認証するため、受信したメッセージ内のリンクをクリックしてください。"
+
 #: accounts/templates/accounts/signup_email.html:2
 msgid "Your account is created successfully. Registered infomation is below:"
 msgstr "仮登録が完了しました。登録された情報は以下の通りです。"
@@ -334,10 +348,6 @@ msgstr "メールアドレス"
 #: accounts/templates/accounts/verification_again_email.html:2
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
-
-#: accounts/templates/accounts/signup_subject.html:2
-msgid "Sign up complete"
-msgstr "仮登録完了"
 
 #: accounts/templates/accounts/verification_again.html:3
 msgid "Submit the form below if you want to recieve email again."
