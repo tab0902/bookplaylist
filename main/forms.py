@@ -16,7 +16,7 @@ class BasePlaylistForm(forms.ModelForm):
             self.fields[fieldname].required = False
 
     def clean(self):
-        if  self.request.method == 'POST' and 'add_book' not in self.request.POST:
+        if self.request.method == 'POST' and 'add_book' not in self.request.POST:
             for fieldname in self.fields:
                 self.fields[fieldname].required = True
         return super().clean()
@@ -54,12 +54,31 @@ class PlaylistBookForm(BasePlaylistForm):
         self.fields['description'].widget.attrs['placeholder'] = _('Please explain why you recommend this book')
 
 
+DELETION_FIELD_NAME = 'DELETE'
+
+
+class HiddenDeleteBaseInlineFormSet(forms.BaseInlineFormSet):
+
+    def add_fields(self, form, index):
+        super().add_fields(form, index)
+        if self.can_delete:
+            form.fields[DELETION_FIELD_NAME] = forms.BooleanField(
+                label=_('Delete'),
+                required=False,
+                widget=forms.HiddenInput(
+                    attrs={
+                        'class': 'delete-input'
+                    }
+                )
+            )
+
+
 PlaylistBookFormSet = forms.inlineformset_factory(
     parent_model=Playlist,
     model=PlaylistBook,
     form=PlaylistBookForm,
+    formset=HiddenDeleteBaseInlineFormSet,
     extra=0,
-    can_delete=False,
 )
 
 

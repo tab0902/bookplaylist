@@ -525,7 +525,7 @@ textarea {
 .playlist-detail-title {
   line-height: 2rem;
 }
-.playlist-form-books textarea {
+.playlist-form-book-item textarea {
   height: 4rem;
 }
 

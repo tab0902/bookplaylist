@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 22:41+0900\n"
+"POT-Creation-Date: 2019-10-31 16:40+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -508,27 +508,31 @@ msgstr "このプレイリストを作成する背景を教えて下さい"
 msgid "Please explain why you recommend this book"
 msgstr "この本を追加する理由はなんですか？"
 
-#: main/forms.py:68
+#: main/forms.py:66 main/templates/main/playlist/delete.html:19
+msgid "Delete"
+msgstr "削除する"
+
+#: main/forms.py:87
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:74
+#: main/forms.py:93
 msgid "Input key words"
 msgstr "キーワードを入力"
 
-#: main/forms.py:82
+#: main/forms.py:101
 msgid "Category"
 msgstr "カテゴリ"
 
-#: main/forms.py:83
+#: main/forms.py:102
 msgid "All categories"
 msgstr "すべてのカテゴリ"
 
-#: main/forms.py:89
+#: main/forms.py:108
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:96
+#: main/forms.py:115
 msgid "Input title or author name"
 msgstr "書名、著者名を入力"
 
@@ -632,7 +636,7 @@ msgstr "追加する本を探す"
 #: main/templates/main/playlist/book.html:15
 #, python-format
 msgid "Books related with \"%(query)s\""
-msgstr "\"%(query)s\"が含まれるリスト一覧"
+msgstr "\"%(query)s\" が含まれる書籍一覧"
 
 #: main/templates/main/playlist/book.html:27
 #: main/templates/main/playlist/layouts/search-playlist-wide.html:15
@@ -680,54 +684,59 @@ msgstr "プレイリストを削除する"
 #: main/templates/main/playlist/delete.html:15
 #, python-format
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
-msgstr "\"%(playlist)s\"を削除しますか？"
+msgstr "\"%(playlist)s\" を削除しますか？"
 
 #: main/templates/main/playlist/delete.html:16
 msgid "Note: You can't cancel this action."
 msgstr "※この操作は取り消せません。"
 
-#: main/templates/main/playlist/delete.html:19
-msgid "Delete"
-msgstr "削除する"
-
 #: main/templates/main/playlist/detail.html:22
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:32
+#: main/templates/main/playlist/layouts/playlist-form.html:30
 msgid "Delete book"
 msgstr "本を削除する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:55
+#: main/templates/main/playlist/layouts/playlist-form.html:48
+#, python-format
+msgid "\"%(book_title)s\" will be delete."
+msgstr "\"%(book_title)s\" は削除されます"
+
+#: main/templates/main/playlist/layouts/playlist-form.html:56
+msgid "Restore to playlist"
+msgstr "リストに戻す"
+
+#: main/templates/main/playlist/layouts/playlist-form.html:65
 msgid "Add book"
 msgstr "本を追加する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:58
+#: main/templates/main/playlist/layouts/playlist-form.html:68
 msgid "Complete"
 msgstr "完成"
 
 #: main/templates/main/playlist/list.html:16
 #, python-format
 msgid "Playlists related with \"%(query)s\""
-msgstr "\"%(query)s\"が含まれるリスト一覧"
+msgstr "\"%(query)s\" が含まれるリスト一覧"
 
 #: main/templates/main/playlist/update.html:6
 #: main/templates/main/playlist/update.html:15
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
 
-#: main/views.py:134 main/views.py:186
+#: main/views.py:134 main/views.py:187
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:197
+#: main/views.py:199
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:252
+#: main/views.py:254
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:331
+#: main/views.py:333
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

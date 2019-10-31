@@ -8,45 +8,55 @@
     {{ field.errors }}
     {% endfor %}
 
+    <div class="line-gray my-4"></div>
     {% for book_form, book_data in book_formset %}
-    <div class="playlist-form-books">
-        <div class="line-gray my-4"></div>
+    <div class="playlist-form-book-item" data-book="{{ book_data.id }}">
         <div class="row">
-            <div class="col-4 col-sm-3 col-lg-2">
+            <div class="col-4 col-sm-2">
                 <img class="w-100" src="{{ book_data.cover }}">
             </div>
-            <div class="col-8 col-sm-9 col-lg-10 pl-0">
+            <div class="col-8 col-sm-10 pl-0">
                 <div class="row">
-                    <div class="col-sm-8 col-lg-12">
+                    <div class="col-sm-8">
                         <h3>{{ forloop.counter }}. {{ book_data.title }}</h3>
                         <h5 class="mt-3">{{ book_data.author }}</h5>
                     </div>
                     <div class="col-sm-4">
-                        <a class="delete-book btn btn-inline-sub mt-3 mt-sm-0 mt-lg-2 float-left float-sm-right float-lg-left text-sm"
-                            {% if mode == 'create' %}
-                            href="{% url 'main:playlist_create_book_delete' book_data.id %}"
-                            {% elif mode == 'update' %}
-                            href="{% url 'main:playlist_update_book_delete' playlist.category.slug playlist.pk book_data.id %}"
-                            {% endif %}
+                        <button
+                            type="button"
+                            data-book="{{ book_data.id }}"
+                            class="delete-book btn btn-inline-sub mt-3 mt-sm-0 float-left float-sm-right text-sm"
                         >
                             {% trans 'Delete book' %}
-                        </a>
-                    </div>
-                    <div class="col-lg-12 d-none d-sm-block d-lg-none mt-4">
-                        {{ book_form.description.errors }}
-                        {{ book_form.description }}
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="mt-3 d-sm-none d-lg-block">
-            {{ book_form.description.errors }}
+        <div class="mt-3">
             {{ book_form.description }}
+            {{ book_form.description.errors }}
         </div>
 
         {% for hidden_field in book_form.hidden_fields %}
         {{ hidden_field }}
         {% endfor %}
+    </div>
+
+    <div class="playlist-form-book-delete row" data-book="{{ book_data.id }}" style="display:none;">
+        <div class="col-sm-9">
+            <h4 class="font-weight-bold">{% blocktrans with book_data.title as book_title %}"{{ book_title }}" will be delete.{% endblocktrans %}</h4>
+        </div>
+        <div class="col-sm-3">
+            <button
+                type="button"
+                data-book="{{ book_data.id }}"
+                class="restore-book btn btn-inline-sub float-left float-sm-right text-sm"
+            >
+                {% trans 'Restore to playlist' %}
+            </button>
+        </div>
+    </div>
     {% endfor %}
 
     {{ formset.management_form }}

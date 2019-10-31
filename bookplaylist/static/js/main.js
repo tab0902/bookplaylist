@@ -27,12 +27,37 @@ $(function() {
     return false;
   });
 
-  // delete book button
+  // delete/restore book button
   $('.delete-book').on('click', function(e) {
-      confirmText = JSON.parse($('#confirm-text').text())
-      const result = window.confirm(confirmText)
-      if (!result) {
-        e.preventDefault()
-      }
+    const book_id = $(this).attr('data-book')
+    const $item = $('.playlist-form-book-item[data-book='+book_id+']')
+    const $itemDelete = $('.playlist-form-book-delete[data-book='+book_id+']')
+    const $deleteInput = $item.find('.delete-input')
+    $deleteInput.val('on')
+    $item.fadeOut(400, function() {
+      $itemDelete.fadeIn()
+    })
   })
+  $('.restore-book').on('click', function(e) {
+    const book_id = $(this).attr('data-book')
+    const $item = $('.playlist-form-book-item[data-book='+book_id+']')
+    const $itemDelete = $('.playlist-form-book-delete[data-book='+book_id+']')
+    const $deleteInput = $item.find('.delete-input')
+    $deleteInput.val('')
+    $itemDelete.fadeOut(400, function() {
+      $item.fadeIn()
+    })
+  })
+  $(document).ready(function() {
+    $('.playlist-form-book-item').each(function(i, o) {
+      const book_id = $(o).attr('data-book')
+      const $deleteInput = $(o).find('.delete-input')
+      const $itemDelete = $('.playlist-form-book-delete[data-book='+book_id+']')
+      if ($deleteInput.val()) {
+        $(o).hide()
+        $itemDelete.show()
+      }
+    });
+  })
+
 });
