@@ -17,3 +17,30 @@ class BaseModel(models.Model):
             models.Index(fields=['created_at'], name='created_at'),
             models.Index(fields=['updated_at'], name='updated_at'),
         ]
+
+
+class NullFieldMixin:
+
+    def get_prep_value(self, value):
+        value = super().get_prep_value(value) if value else None
+        return value
+
+
+class NullCharField(NullFieldMixin, models.CharField):
+    pass
+
+
+class NullEmailField(NullFieldMixin, models.EmailField):
+    pass
+
+
+class NullSlugField(NullFieldMixin, models.SlugField):
+    pass
+
+
+class NullTextField(NullFieldMixin, models.TextField):
+    pass
+
+
+class NullURLField(NullFieldMixin, models.URLField):
+    pass
