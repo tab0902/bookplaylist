@@ -2,16 +2,18 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from bookplaylist.models import BaseModel
+from bookplaylist.models import (
+    BaseModel, NullCharField, NullSlugField, NullTextField, NullURLField,
+)
 
 # Create your models here.
 
 
 class Category(BaseModel):
-    name = models.CharField(_('category name'), max_length=50, unique=True)
-    slug = models.SlugField(_('slug'), unique=True)
+    name = NullCharField(_('category name'), max_length=50, unique=True)
+    slug = NullSlugField(_('slug'), unique=True)
     sequence = models.SmallIntegerField(_('sequence'))
-    description = models.TextField(_('description'), blank=True, null=True)
+    description = NullTextField(_('description'), blank=True, null=True)
 
     class Meta(BaseModel.Meta):
         db_table = 'categories'
@@ -35,16 +37,16 @@ class Book(BaseModel):
         verbose_name=_('playlists'),
         blank=True,
     )
-    isbn = models.CharField(_('ISBN'), max_length=13, unique=True)
-    title = models.CharField(_('title'), max_length=255)
-    title_collation_key = models.CharField(_('collation key'), max_length=255, blank=True, null=True)
-    volume = models.CharField(_('volume'), max_length=50, blank=True, null=True)
-    series = models.CharField(_('series'), max_length=255, blank=True, null=True)
-    publisher = models.CharField(_('publisher'), max_length=255, blank=True, null=True)
-    pubdate = models.CharField(_('date published'), max_length=10, blank=True, null=True)
-    cover = models.URLField(_('cover'), blank=True, null=True)
-    author = models.CharField(_('author'), max_length=255, blank=True, null=True)
-    amazon_url = models.URLField(_('Amazon URL'), blank=True, null=True)
+    isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
+    title = NullCharField(_('title'), max_length=255)
+    title_collation_key = NullCharField(_('collation key'), max_length=255, blank=True, null=True)
+    volume = NullCharField(_('volume'), max_length=255, blank=True, null=True)
+    series = NullCharField(_('series'), max_length=255, blank=True, null=True)
+    publisher = NullCharField(_('publisher'), max_length=255, blank=True, null=True)
+    pubdate = NullCharField(_('date published'), max_length=255, blank=True, null=True)
+    cover = NullURLField(_('cover'), blank=True, null=True)
+    author = NullCharField(_('author'), max_length=255, blank=True, null=True)
+    amazon_url = NullURLField(_('Amazon URL'), blank=True, null=True)
 
     class Meta(BaseModel.Meta):
         db_table = 'books'
@@ -75,8 +77,8 @@ class Playlist(BaseModel):
     )
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name=_('category'))
-    title = models.CharField(_('title'), max_length=50)
-    description = models.TextField(_('description'))
+    title = NullCharField(_('title'), max_length=50)
+    description = NullTextField(_('description'))
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists'
@@ -95,8 +97,8 @@ class Playlist(BaseModel):
 
 class PlaylistBook(BaseModel):
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
-    book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'))
-    description = models.TextField(_('description'))
+    book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'), to_field='isbn', db_column='book_isbn')
+    description = NullTextField(_('description'))
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists_books'

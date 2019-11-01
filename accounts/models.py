@@ -10,7 +10,9 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from .validators import UnicodeUsernameValidator
-from bookplaylist.models import BaseModel
+from bookplaylist.models import (
+    BaseModel, NullCharField, NullEmailField,
+)
 
 
 # Create your models here.
@@ -53,7 +55,7 @@ class UserManager(BaseUserManager):
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
 
-    username = models.CharField(
+    username = NullCharField(
         _('username'),
         max_length=150,
         unique=True,
@@ -65,7 +67,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
             'unique': _("A user with that username already exists."),
         },
     )
-    email = models.EmailField(
+    email = NullEmailField(
         _('email address'),
         unique=True,
         blank=True,
@@ -75,8 +77,8 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
             'unique': _("A user with that email address already exists."),
         },
     )
-    first_name = models.CharField(_('first name'), max_length=30, blank=True, null=True)
-    last_name = models.CharField(_('last name'), max_length=150, blank=True, null=True)
+    first_name = NullCharField(_('first name'), max_length=30, blank=True, null=True)
+    last_name = NullCharField(_('last name'), max_length=150, blank=True, null=True)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -92,9 +94,9 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
-    comment = models.CharField(_('comment'), max_length=50, blank=True, null=True)
-    twitter_id = models.CharField(_('Twitter ID'), max_length=255, unique=True, blank=True, null=True)
-    facebook_id = models.CharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
+    comment = NullCharField(_('comment'), max_length=50, blank=True, null=True)
+    twitter_id = NullCharField(_('Twitter ID'), max_length=255, unique=True, blank=True, null=True)
+    facebook_id = NullCharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
 
     objects = UserManager()
