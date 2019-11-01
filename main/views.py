@@ -161,6 +161,7 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
             'book': [
                 {
                     'id': str(x.book.id),
+                    'isbn': str(x.book.isbn),
                     'title': x.book.title,
                     'author': x.book.author,
                     'cover': x.book.cover,
@@ -224,7 +225,7 @@ class BasePlaylistBookView(SearchFormView):
         else:
             books = None
         context['books'] = books
-        context['books_in_session'] = [x['id'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
+        context['books_in_session'] = [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
         context['query'] = query
         context['mode'] = self.mode
         return context
@@ -256,6 +257,7 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         book_obj = Book.objects.get(pk=str(self.kwargs.get('book')))
         book_json = {
             'id': str(book_obj.id),
+            'isbn': str(book_obj.isbn),
             'title': book_obj.title,
             'author': book_obj.author,
             'cover': book_obj.cover,
@@ -263,7 +265,7 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         if book_json not in self.request.session.get(SESSION_KEY_BOOK):
             self.request.session[SESSION_KEY_BOOK] += [book_json]
             book_num = len(self.request.session[SESSION_KEY_BOOK])
-            self.request.session[SESSION_KEY_FORM]['playlistbook_set-{}-book'.format(book_num-1)] = book_json['id']
+            self.request.session[SESSION_KEY_FORM]['playlistbook_set-{}-book'.format(book_num-1)] = book_json['isbn']
             self.request.session[SESSION_KEY_FORM]['playlistbook_set-TOTAL_FORMS'] = str(int(self.request.session[SESSION_KEY_FORM]['playlistbook_set-TOTAL_FORMS']) + 1)
         return super().dispatch(*args, **kwargs)
 
