@@ -2,7 +2,9 @@ from functools import reduce
 
 from django import forms
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import (
+    Count, Q,
+)
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy
@@ -221,7 +223,7 @@ class BasePlaylistBookView(SearchFormView):
                        + [Q(title_collation_key__icontains=q) for q in q_list]\
                        + [Q(author__icontains=q) for q in q_list]
             conditions = reduce(lambda x, y: x | y, conditions)
-            books = Book.objects.filter(conditions).order_by('pubdate')
+            books = Book.objects.filter(conditions).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate')
         else:
             books = None
         context['books'] = books
