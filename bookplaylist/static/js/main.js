@@ -1,9 +1,9 @@
 $(function() {
 
   // drawer menu
-  var height
-  var scrollpos
-  var header = $('#header').height()
+  let height
+  let scrollpos
+  let header = $('#header').height()
 
   $('#dummy').css('height', 99999)
   $('#drawer').css('padding-top', header)
