@@ -274,6 +274,24 @@ textarea {
   white-space: normal;
 }
 
+/* blank box */
+.blank-box-wrapper {
+    position: relative;
+    width: 100%;
+}
+.blank-box-wrapper:before {
+    content:"";
+    display: block;
+}
+.blank-box-content {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 /* horizontal scroll (cover) */
 .scroll-wrapper-cover {
   height: 155px;
@@ -527,6 +545,12 @@ textarea {
 }
 .playlist-form-book-item textarea {
   height: 4rem;
+}
+.no-image-wrapper:before {
+  padding-top: 140%;
+}
+.no-image-content {
+  background-color: #e5e5e5;
 }
 
 

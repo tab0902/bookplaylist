@@ -51,7 +51,17 @@
                 <div class="line-gray my-4"></div>
                 <div class="row">
                     <div class="col-4 col-sm-12">
+                        {% if book.cover %}
                         <img class="w-100" src="{{ book.cover | default_if_none:'' }}">
+                        {% else %}
+                        <div class="blank-box-wrapper no-image-wrapper">
+                            <div class="blank-box-content no-image-content">
+                                <div class="d-flex align-items-center h-100">
+                                    <h3 class="text-sm text-center w-100">{% trans 'No Image' %}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="col-8 col-sm-12">
                         <h5 class="mt-sm-2 font-bold">{{ book.title | default_if_none:'' }}</h5>
