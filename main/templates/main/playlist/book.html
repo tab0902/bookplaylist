@@ -64,7 +64,7 @@
                                 {% elif mode == 'update' %}
                                 onclick="location.href='{% url 'main:playlist_update_book_store' view.kwargs.category view.kwargs.pk book.pk %}'"
                                 {% endif %}
-                                {% if book.pk|stringformat:'s' in books_in_session %}
+                                {% if book.isbn in books_in_session %}
                                 disabled
                                 {% endif %}
                             >
