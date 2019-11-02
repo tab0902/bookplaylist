@@ -60,4 +60,14 @@ $(function() {
     })
   })
 
+  // prevent duplicate submit
+  $('form').submit(function() {
+    const self = this
+    const selector = ':submit:not(.allow-duplicate)'
+    $(selector, self).prop('disabled', true)
+    $(selector, self).css('opacity', 1)
+    setTimeout(function() {
+      $(selector, self).prop('disabled', false)
+    }, 10000)
+  })
 })
