@@ -62,7 +62,7 @@ class PlaylistView(PlaylistSearchFormView):
             condition_list.append(reduce(lambda x, y: x | y, conditions))
         if category:
             condition_dict['category__slug'] = category
-        context['playlists'] = Playlist.objects.filter(*condition_list, **condition_dict)
+        context['playlists'] = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
         context['query'] = query
         return context
 
