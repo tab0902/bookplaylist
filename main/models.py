@@ -38,7 +38,7 @@ class Book(BaseModel):
         blank=True,
     )
     isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
-    title = NullCharField(_('title'), max_length=255)
+    title = NullCharField(_('title'), max_length=255, blank=True, null=True)
     title_collation_key = NullCharField(_('collation key'), max_length=255, blank=True, null=True)
     volume = NullCharField(_('volume'), max_length=255, blank=True, null=True)
     series = NullCharField(_('series'), max_length=255, blank=True, null=True)
