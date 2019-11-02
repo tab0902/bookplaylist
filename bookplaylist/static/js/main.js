@@ -62,12 +62,17 @@ $(function() {
 
   // prevent duplicate submit
   $('form').submit(function() {
-    const self = this
     const selector = ':submit:not(.allow-duplicate)'
-    $(selector, self).prop('disabled', true)
-    $(selector, self).css('opacity', 1)
+    $(selector, this).prop('disabled', true)
+    $(selector, this).css('opacity', 1)
     setTimeout(function() {
-      $(selector, self).prop('disabled', false)
+      $(selector, this).prop('disabled', false)
     }, 10000)
+  })
+
+  // toggle loading spinner
+  $('.search-form').submit(function() {
+    $('.search-loading').show()
+    $('.search-results').hide()
   })
 })

@@ -17,7 +17,7 @@
             {% blocktrans %}Search book to add{% endblocktrans %}
             {% endif %}
         </h2>
-        <form action="" method="post">{% csrf_token %}
+        <form action="" method="post" class="search-form">{% csrf_token %}
             <div class="row mt-4">
                 <div class="col-sm-9 col-lg-10">
                     {{ form.q }}
@@ -44,7 +44,11 @@
         </div>
     </section>
 
-    <section id="book-list">
+    <section id="search-loading" class="search-loading">
+        {% include 'layouts/loading-spinner.html' %}
+    </section>
+
+    <section id="book-list" class="search-results">
         <div class="row mt-4">
             {% for book in books %}
             <div class="book-item col-sm-3 col-lg-2">

@@ -16,7 +16,11 @@
         <h2 class="mt-4 mt-md-5 d-none d-md-inline-block">{% blocktrans %}Playlists related with "{{ query }}"{% endblocktrans %}
     </section>
 
-    <section id="playlist-list">
+    <section id="search-loading" class="search-loading">
+        {% include 'layouts/loading-spinner.html' %}
+    </section>
+
+    <section id="playlist-list" class="search-results">
         <div class="line-gray mt-4 mb-5 d-none"></div>
         {% include 'main/playlist/layouts/list-widget.html' %}
     </section>
