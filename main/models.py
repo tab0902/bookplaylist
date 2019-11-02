@@ -102,7 +102,7 @@ class PlaylistBook(BaseModel):
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists_books'
-        ordering = ['playlist', 'book']
+        ordering = ['playlist', 'created_at']
         verbose_name = _('book in playlist')
         verbose_name_plural = _('books in playlists')
 

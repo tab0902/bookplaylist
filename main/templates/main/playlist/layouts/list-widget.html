@@ -8,9 +8,9 @@
             <div class="line-gray my-4 my-sm-5"></div>
             <div class="playlist-img scroll-wrapper scroll-wrapper-cover">
                 <div class="playlist-img scroll-inner scroll-inner-cover">
-                    {% for book in playlist.books.all %}
-                    {% if book.cover %}
-                    <img class="scroll-box scroll-box-cover" src="{{ book.cover | default_if_none:'' }}">
+                    {% for playlist_book in playlist.playlistbook_set.all %}
+                    {% if playlist_book.book.cover %}
+                    <img class="scroll-box scroll-box-cover" src="{{ playlist_book.book.cover | default_if_none:'' }}">
                     {% endif %}
                     {% endfor %}
                 </div>
