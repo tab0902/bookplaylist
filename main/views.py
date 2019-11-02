@@ -267,7 +267,9 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         book_data = self.request.session.get(SESSION_KEY_BOOK)
         if not form_data or not SESSION_KEY_BOOK in self.request.session:
             messages.warning(self.request, _('Session timeout. Please retry from the beginning.'))
-            return redirect(self.get_redirect_url())
+            args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
+            error_url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args)
+            return HttpResponseRedirect(error_url)
         book_obj = Book.objects.get(pk=str(self.kwargs.get('book')))
         book_json = {
             'id': str(book_obj.id),
