@@ -33,8 +33,9 @@ class PlaylistForm(BasePlaylistForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['title'].label = _('Playlist\'s title')
         self.fields['category'].empty_label = _('(Select a catagory)')
-        self.fields['title'].widget.attrs['placeholder'] = _('Describe us the overview of your playlist')
+        self.fields['title'].widget.attrs['placeholder'] = _('Describe us the overview')
         self.fields['description'].widget.attrs['placeholder'] = _('Tell us why you are create this playlist')
 
     def save(self, commit=True):
