@@ -108,6 +108,10 @@ class BasePlaylistView:
         context['book_formset'] = zip(formset or [], book_data or [])
         return context
 
+    def form_invalid(self, form, instance):
+        formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
+        return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
 
 @login_required
 class PlaylistCreateView(BasePlaylistView, generic.CreateView):
@@ -138,13 +142,17 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
             url = reverse_lazy('main:playlist_{}'.format(self.mode)) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
         if not formset.is_valid():
-            return self.render_to_response(self.get_context_data(formset=formset))
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
         instance.save()
         formset.save()
         for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
             if SESSION_KEY_FORM in self.request.session:
                 del self.request.session[key]
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        instance = None
+        return super().form_invalid(form, instance)
 
     def get_success_url(self):
         args = (str(self.object.pk),)
@@ -193,7 +201,7 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
             url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
         if not formset.is_valid():
-            return self.render_to_response(self.get_context_data(formset=formset))
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
         instance.save()
         formset.save()
         for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
@@ -201,6 +209,10 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
                 del self.request.session[key]
         messages.success(self.request, _('Playlist updated successfully.'))
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        instance = self.get_object()
+        return super().form_invalid(form, instance)
 
     def get_success_url(self):
         args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
