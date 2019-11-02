@@ -51,11 +51,11 @@
                 <div class="line-gray my-4"></div>
                 <div class="row">
                     <div class="col-4 col-sm-12">
-                        <img class="w-100" src="{{ book.cover }}">
+                        <img class="w-100" src="{{ book.cover | default_if_none:'' }}">
                     </div>
                     <div class="col-8 col-sm-12">
-                        <h5 class="mt-sm-2 font-bold">{{ book.title }}</h5>
-                        <h6 class="mt-1">{{ book.author }}</h6>
+                        <h5 class="mt-sm-2 font-bold">{{ book.title | default_if_none:'' }}</h5>
+                        <h6 class="mt-1">{{ book.author | default_if_none:'' }}</h6>
                         <div>
                             <button
                                 class="btn btn-outline-main btn-fit w-100 mt-2"
