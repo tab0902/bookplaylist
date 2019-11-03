@@ -19,7 +19,7 @@ from .models import (
     Book, Category, Playlist,
 )
 from bookplaylist.views import (
-    SearchFormView, login_required,
+    OwnerOnlyMixin, SearchFormView, login_required,
 )
 
 # Create your views here.
@@ -181,7 +181,7 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
 
 
 @login_required
-class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
+class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
     mode = MODE_UPDATE
     template_name = 'main/playlist/update.html'
 
@@ -288,7 +288,7 @@ class PlaylistCreateBookView(BasePlaylistBookView):
     mode = MODE_CREATE
 
 
-class PlaylistUpdateBookView(BasePlaylistBookView):
+class PlaylistUpdateBookView(OwnerOnlyMixin, BasePlaylistBookView):
     mode = MODE_UPDATE
 
 
@@ -329,18 +329,18 @@ class PlaylistCreateBookStoreView(BasePlaylistBookStoreView):
     mode = MODE_CREATE
 
 
-class PlaylistUpdateBookStoreView(BasePlaylistBookStoreView):
+class PlaylistUpdateBookStoreView(OwnerOnlyMixin, BasePlaylistBookStoreView):
     mode = MODE_UPDATE
 
 
 @login_required
-class PlaylistCreateCompleteView(generic.DetailView):
+class PlaylistCreateCompleteView(OwnerOnlyMixin, generic.DetailView):
     model = Playlist
     template_name = 'main/playlist/create_complete.html'
 
 
 @login_required
-class PlaylistDeleteView(generic.DeleteView):
+class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
     model = Playlist
     success_url = reverse_lazy('accounts:index')
     template_name = 'main/playlist/delete.html'
