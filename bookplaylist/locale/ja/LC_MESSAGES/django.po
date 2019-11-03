@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-03 15:03+0900\n"
+"POT-Creation-Date: 2019-11-03 19:59+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -445,6 +445,10 @@ msgstr "BookPlayList 管理サイト"
 msgid "Home"
 msgstr ""
 
+#: bookplaylist/views.py:26
+msgid "You don't have permission to access the page."
+msgstr "ページにアクセスする権限がありません"
+
 #: main/apps.py:7
 msgid "main"
 msgstr "メイン"
@@ -617,7 +621,7 @@ msgid "Search"
 msgstr "検索する"
 
 #: main/templates/main/playlist/book.html:64
-#: main/templates/main/playlist/detail.html:41
+#: main/templates/main/playlist/detail.html:54
 msgid "No Image"
 msgstr ""
 
@@ -668,12 +672,12 @@ msgstr "\"%(playlist)s\" を削除しますか？"
 msgid "Note: You can't cancel this action."
 msgstr "※この操作は取り消せません。"
 
-#: main/templates/main/playlist/detail.html:22
+#: main/templates/main/playlist/detail.html:24
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlist/detail.html:52
-#: main/templates/main/playlist/detail.html:57
+#: main/templates/main/playlist/detail.html:65
+#: main/templates/main/playlist/detail.html:70
 #: main/templates/main/playlist/layouts/list-widget.html:21
 msgid "Show more"
 msgstr "詳細を見る"
@@ -718,18 +722,18 @@ msgstr "プレイリスト一覧"
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
 
-#: main/views.py:160 main/views.py:218
+#: main/views.py:160 main/views.py:215
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:230
+#: main/views.py:226
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:303
+#: main/views.py:297
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:349
+#: main/views.py:341
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

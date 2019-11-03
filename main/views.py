@@ -175,8 +175,7 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
         return super().form_invalid(form, instance)
 
     def get_success_url(self):
-        args = (str(self.object.pk),)
-        self.success_url = reverse_lazy('main:playlist_create_complete', args=args)
+        self.success_url = reverse_lazy('main:playlist_create_complete', kwargs={'pk': str(self.object.pk)})
         return super().get_success_url()
 
 
@@ -209,16 +208,13 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
             self.request.POST = self.request.POST.copy()
             del self.request.POST[POST_KEY_ADD_BOOK]
             self.request.session[SESSION_KEY_FORM] = self.request.POST
-            category = str(self.kwargs.get('category'))
-            pk = str(self.kwargs.get('pk'))
-            return redirect('main:playlist_{}_book'.format(self.mode), category=category, pk=pk)
+            return redirect('main:playlist_{}_book'.format(self.mode), **self.kwargs)
         instance = form.save(commit=False)
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
             messages.error(self.request, _('You have to add at least one book to your playlist.'))
             self.request.session[SESSION_KEY_FORM] = self.request.POST
-            args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
-            url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
+            url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
         if not formset.is_valid():
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
@@ -235,8 +231,7 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
         return super().form_invalid(form, instance)
 
     def get_success_url(self):
-        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
-        self.success_url = reverse_lazy('main:playlist_detail', args=args)
+        self.success_url = reverse_lazy('main:playlist_detail', kwargs=self.kwargs)
         return super().get_success_url()
 
 
@@ -279,8 +274,7 @@ class BasePlaylistBookView(generic.list.BaseListView, SearchFormView):
         return context
 
     def get_success_url(self):
-        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
-        self.success_url = reverse_lazy('main:playlist_{}_book'.format(self.mode), args=args)
+        self.success_url = reverse_lazy('main:playlist_{}_book'.format(self.mode), kwargs=self.kwargs)
         return super().get_success_url()
 
 
@@ -301,9 +295,7 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         book_data = self.request.session.get(SESSION_KEY_BOOK)
         if not form_data or not SESSION_KEY_BOOK in self.request.session:
             messages.warning(self.request, _('Session timeout. Please retry from the beginning.'))
-            args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
-            error_url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args)
-            return HttpResponseRedirect(error_url)
+            return redirect('main:playlist_{}'.format(self.mode), **self.kwargs)
         book_obj = Book.objects.get(pk=str(self.kwargs.get('book')))
         book_json = {
             'id': str(book_obj.id),
@@ -320,8 +312,8 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         return super().dispatch(*args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
-        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
-        self.url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
+        del self.kwargs['book']
+        self.url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
         return super().get_redirect_url(*args, **kwargs)
 
 
