@@ -279,6 +279,14 @@ textarea {
   color: #3B5998;
 }
 
+/* font awesome */
+.fa-twitter-color {
+  color: #55acee;
+}
+.fa-facebook-color {
+  color: #3B5998;
+}
+
 /* pagenator */
 .page-link {
   color: #9C44A6;

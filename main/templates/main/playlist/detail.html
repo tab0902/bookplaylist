@@ -12,16 +12,29 @@
     <section id="playlist-detail-overview">
         <h1 class="mt-4 mt-md-5 playlist-detail-title">{{ playlist.title | default_if_none:'' }}</h1>
         <h4 class="mt-3">{{ playlist.user.username | default_if_none:'' }}</h4>
+        {% if request.user == playlist.user %}
         <div class="row">
-            <div class="col-md-9 mt-4">
-                <p>{{ playlist.description | default_if_none:'' | linebreaksbr }}</p>
+            <div class="col-md-9">
+        {% endif %}
+                <p class="mt-4">{{ playlist.description | default_if_none:'' | linebreaksbr }}</p>
+        {% if request.user == playlist.user %}
             </div>
-            <div class="col-md-3 mt-md-4">
-                {% if request.user == playlist.user %}
-                <a href="{% url 'main:playlist_update' playlist.category.slug playlist.pk %}" class="btn btn-outline-sub w-100">
+            <div class="col-md-3">
+                <a href="{% url 'main:playlist_update' playlist.category.slug playlist.pk %}" class="btn btn-outline-sub w-100 mt-md-4">
                     {% trans 'Edit' %}
                 </a>
-                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="row mt-4{% if request.user == playlist.user %} mt-md-0{% endif %}">
+            <div class="col-2 col-md-1 offset-3 offset-md-9 text-center">
+                <i class="fab fa-twitter fa-twitter-color fa-2x"></i>
+            </div>
+            <div class="col-2 col-md-1 text-center">
+                <i class="fab fa-facebook fa-facebook-color fa-2x"></i>
+            </div>
+            <div class="col-2 col-md-1 text-center">
+                <i class="fab fa-instagram fa-2x"></i>
             </div>
         </div>
     </section>
