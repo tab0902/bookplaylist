@@ -105,7 +105,7 @@ select {
   border: 1px solid #ebebeb;
   border-radius: 4px;
   padding: 8px 4px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
 }
 input:focus, select:focus, textarea:focus {
@@ -144,7 +144,6 @@ input::-webkit-input-placeholder,
 input::-moz-placeholder,
 input:-moz-placeholder,
 input:-ms-input-placeholder {
-  font-size:14px;
   padding-left: 4px;
 }
 textarea {
