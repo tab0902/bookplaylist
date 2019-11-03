@@ -101,6 +101,9 @@ input[type=week],
 input[type=time],
 textarea,
 select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 100%;
   border: 1px solid #ebebeb;
   border-radius: 4px;
@@ -111,10 +114,7 @@ select {
 input:focus, select:focus, textarea:focus {
   border-color: #9C44A6;
 }
-select{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+select {
     position: relative;
     z-index: 1;
     padding: 8px 24px 8px 4px;
@@ -123,10 +123,10 @@ select{
 select::-ms-expand {
     display: none;
 }
-.select-wrapper{
+.select-wrapper {
     position: relative;
 }
-.select-wrapper::after{
+.select-wrapper::after {
     content: '';
     position: absolute;
     top: 0;
