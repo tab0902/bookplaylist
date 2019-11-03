@@ -104,7 +104,6 @@ select {
   width: 100%;
   border: 1px solid #ebebeb;
   border-radius: 4px;
-  margin-bottom: 5px;
   padding: 8px 4px;
   font-size: 14px;
   outline: none;
@@ -118,7 +117,6 @@ select{
     appearance: none;
     position: relative;
     z-index: 1;
-    margin: 0;
     padding: 8px 24px 8px 4px;
     background: transparent;
 }
@@ -173,7 +171,7 @@ textarea {
 
 /* button (fit) */
 .btn-fit {
-  height: calc(100% - 5px);
+  height: 100%;
   width: 100%;
   padding: 0;
 }
