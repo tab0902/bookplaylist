@@ -29,6 +29,25 @@ $(function() {
     return false
   })
 
+  // wrap selectbox
+  $('select').wrap('<div class="select-wrapper">')
+
+  // prevent duplicate submit
+  $('form').submit(function() {
+    const selector = ':submit:not(.allow-duplicate)'
+    $(selector, this).prop('disabled', true)
+    $(selector, this).css('opacity', 1)
+    setTimeout(function() {
+      $(selector, this).prop('disabled', false)
+    }, 10000)
+  })
+
+  // toggle loading spinner
+  $('.search-form').submit(function() {
+    $('.search-loading').show()
+    $('.search-results').hide()
+  })
+
   // delete/restore book button
   $('.delete-book').on('click', function(e) {
     const book_id = $(this).attr('data-book')
@@ -60,21 +79,5 @@ $(function() {
         $itemDelete.show()
       }
     })
-  })
-
-  // prevent duplicate submit
-  $('form').submit(function() {
-    const selector = ':submit:not(.allow-duplicate)'
-    $(selector, this).prop('disabled', true)
-    $(selector, this).css('opacity', 1)
-    setTimeout(function() {
-      $(selector, this).prop('disabled', false)
-    }, 10000)
-  })
-
-  // toggle loading spinner
-  $('.search-form').submit(function() {
-    $('.search-loading').show()
-    $('.search-results').hide()
   })
 })

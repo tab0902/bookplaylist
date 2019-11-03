@@ -112,8 +112,35 @@ select {
 input:focus, select:focus, textarea:focus {
   border-color: #9C44A6;
 }
-select {
-  padding: 6px 4px 12px;
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 8px 24px 8px 4px;
+    background: transparent;
+}
+select::-ms-expand {
+    display: none;
+}
+.select-wrapper{
+    position: relative;
+}
+.select-wrapper::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    z-index: 0;
+    margin: auto 0;
+    right: 6px;
+    border-style: solid;
+    border-width: 6px 3px 0 3px;
+    border-color: #484848 transparent transparent transparent;
 }
 input::-webkit-input-placeholder,
 input::-moz-placeholder,
