@@ -10,19 +10,21 @@ $(function() {
   $('#content').css('padding-top', header)
 
   $('#hamburger').on('click', function() {
-    $(this).toggleClass('active')
-    if ($(this).hasClass('active')) {
-      scrollpos = $(window).scrollTop()
-      height = scrollpos - header
-      $('#dummy').fadeIn()
-      $('#drawer').animate({height: 'toggle'})
-      $('#content').addClass('fixed').css('top', -scrollpos)
-    } else {
-      $('#dummy').fadeOut()
-      $('#drawer').animate({height: 'toggle'}, function() {
-        $('#content').removeClass('fixed').css('top', height)
-        $('body,html').animate({scrollTop: scrollpos}, 0)
-      })
+    if (!$('#drawer').is(':animated')) {
+      $(this).toggleClass('active')
+      if ($(this).hasClass('active')) {
+        scrollpos = $(window).scrollTop()
+        height = scrollpos - header
+        $('#dummy').fadeIn()
+        $('#drawer').animate({height: 'toggle'})
+        $('#content').addClass('fixed').css('top', -scrollpos)
+      } else {
+        $('#dummy').fadeOut()
+        $('#drawer').animate({height: 'toggle'}, function() {
+          $('#content').removeClass('fixed').css('top', height)
+          $('body,html').animate({scrollTop: scrollpos}, 0)
+        })
+      }
     }
     return false
   })
