@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-03 13:36+0900\n"
+"POT-Creation-Date: 2019-11-03 15:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -718,18 +718,18 @@ msgstr "プレイリスト一覧"
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
 
-#: main/views.py:148 main/views.py:206
+#: main/views.py:160 main/views.py:218
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:218
+#: main/views.py:230
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:284
+#: main/views.py:303
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:330
+#: main/views.py:349
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

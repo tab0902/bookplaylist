@@ -1,4 +1,5 @@
 from functools import reduce
+from itertools import chain
 
 from django import forms
 from django.contrib import messages
@@ -53,17 +54,28 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
         category = self.request.GET.get('category')
         condition_list = []
         condition_dict = {}
-        if query:
-            q_list = self._format_query(query)
-            conditions = [Q(title__icontains=q) for q in q_list]\
-                       + [Q(description__icontains=q) for q in q_list]\
-                       + [Q(books__title__icontains=q) for q in q_list]\
-                       + [Q(books__title_collation_key__icontains=q) for q in q_list]\
-                       + [Q(books__author__icontains=q) for q in q_list]
-            condition_list.append(reduce(lambda x, y: x | y, conditions))
         if category:
             condition_dict['category__slug'] = category
-        queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+        if query:
+            q_list = self._format_query(query)
+            conditions = {}
+            conditions['iexact']    = [Q(title__iexact=q) for q in q_list]\
+                                    + [Q(description__iexact=q) for q in q_list]\
+                                    + [Q(books__title__iexact=q) for q in q_list]\
+                                    + [Q(books__title_collation_key__iexact=q) for q in q_list]\
+                                    + [Q(books__author__iexact=q) for q in q_list]
+            conditions['icontains'] = [Q(title__icontains=q) for q in q_list]\
+                                    + [Q(description__icontains=q) for q in q_list]\
+                                    + [Q(books__title__icontains=q) for q in q_list]\
+                                    + [Q(books__title_collation_key__icontains=q) for q in q_list]\
+                                    + [Q(books__author__icontains=q) for q in q_list]
+            queryset = Playlist.objects.none()
+            for condition in conditions.values():
+                condition_list = [reduce(lambda x, y: x | y, condition)]
+                queryset = chain(queryset, Playlist.objects.filter(*condition_list, **condition_dict))
+            queryset = list(dict.fromkeys(queryset))
+        else:
+            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -241,11 +253,18 @@ class BasePlaylistBookView(generic.list.BaseListView, SearchFormView):
         query = self.request.GET.get('q')
         if query:
             q_list = self._format_query(query)
-            conditions = [Q(title__icontains=q) for q in q_list]\
-                       + [Q(title_collation_key__icontains=q) for q in q_list]\
-                       + [Q(author__icontains=q) for q in q_list]
-            conditions = reduce(lambda x, y: x | y, conditions)
-            queryset = Book.objects.filter(conditions).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate')
+            conditions = {}
+            conditions['iexact']    = [Q(title__iexact=q) for q in q_list]\
+                                    + [Q(title_collation_key__iexact=q) for q in q_list]\
+                                    + [Q(author__iexact=q) for q in q_list]
+            conditions['icontains'] = [Q(title__icontains=q) for q in q_list]\
+                                    + [Q(title_collation_key__icontains=q) for q in q_list]\
+                                    + [Q(author__icontains=q) for q in q_list]
+            queryset = Playlist.objects.none()
+            for condition in conditions.values():
+                condition = reduce(lambda x, y: x | y, condition)
+                queryset = chain(queryset, Book.objects.filter(condition).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate').distinct())
+            queryset = list(dict.fromkeys(queryset))
         else:
             queryset = Book.objects.none()
         return queryset
