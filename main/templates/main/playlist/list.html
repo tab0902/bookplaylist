@@ -9,11 +9,22 @@
 {% block content %}
 
 <div class="container">
+    {% if params.q %}
     <section id="search-playlist-wide">
         <div class="mt-4">
             {% include 'main/playlist/layouts/search-playlist-wide.html' %}
         </div>
-        <h2 class="mt-4 mt-md-5 d-none d-md-inline-block">{% blocktrans with q=params.q %}Playlists related with "{{ q }}"{% endblocktrans %}
+    </section>
+    {% endif %}
+
+    <section id="playlist-page-title">
+        <div class="mt-4 mt-md-5">
+            {% if params.q %}
+            <h2 class="d-none d-md-inline-block">{% blocktrans with q=params.q %}Playlists related with "{{ q }}"{% endblocktrans %}</h2>
+            {% else %}
+            <h1>{% trans 'All Playlists' %}</h1>
+            {% endif %}
+        </div>
     </section>
 
     <section id="search-loading" class="search-loading">

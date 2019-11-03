@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-03 13:23+0900\n"
+"POT-Creation-Date: 2019-11-03 13:36+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -607,6 +607,7 @@ msgid "Search book to add"
 msgstr "追加する本を探す"
 
 #: main/templates/main/playlist/book.html:15
+#, python-format
 msgid "Books related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれる書籍一覧"
 
@@ -703,9 +704,14 @@ msgstr "本を追加する"
 msgid "Complete"
 msgstr "完成"
 
-#: main/templates/main/playlist/list.html:16
+#: main/templates/main/playlist/list.html:23
+#, python-format
 msgid "Playlists related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれるリスト一覧"
+
+#: main/templates/main/playlist/list.html:25
+msgid "All Playlists"
+msgstr "プレイリスト一覧"
 
 #: main/templates/main/playlist/update.html:6
 #: main/templates/main/playlist/update.html:15
