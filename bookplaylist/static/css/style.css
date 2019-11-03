@@ -255,6 +255,18 @@ textarea {
   color: #3B5998;
 }
 
+/* pagenator */
+.page-link {
+  color: #9C44A6;
+}
+.page-link:hover, .page-link:focus, .page-link:active {
+  color: #9C44A6;
+}
+.page-item.active .page-link {
+  background-color: #9C44A6;
+  border-color: #9C44A6;
+}
+
 /* horizontal scroll */
 .scroll-wrapper {
   overflow-y: hidden;

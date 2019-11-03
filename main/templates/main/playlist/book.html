@@ -12,7 +12,7 @@
     <section id="search-book">
         <h2 class="mt-4 mt-md-5">
             {% if request.GET.q %}
-            {% blocktrans %}Books related with "{{ query }}"{% endblocktrans %}
+            {% blocktrans with q=params.q %}Books related with "{{ q }}"{% endblocktrans %}
             {% else %}
             {% blocktrans %}Search book to add{% endblocktrans %}
             {% endif %}
@@ -96,6 +96,7 @@
             {% endif %}
             {% endfor %}
         </div>
+        {% include 'layouts/pagenator.html' with params=params queryset=books %}
     </section>
 </div>
 

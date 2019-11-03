@@ -43,11 +43,12 @@ class IndexView(PlaylistSearchFormView):
     template_name = 'main/index.html'
 
 
-class PlaylistView(PlaylistSearchFormView):
+class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
+    context_object_name = 'playlists'
+    model = Playlist
     template_name = 'main/playlist/list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
         query = self.request.GET.get('q')
         category = self.request.GET.get('category')
         condition_list = []
@@ -62,8 +63,15 @@ class PlaylistView(PlaylistSearchFormView):
             condition_list.append(reduce(lambda x, y: x | y, conditions))
         if category:
             condition_dict['category__slug'] = category
-        context['playlists'] = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
-        context['query'] = query
+        queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['params'] = {
+            'q': self.request.GET.get('q'),
+            'category': self.request.GET.get('category'),
+        }
         return context
 
 
@@ -221,13 +229,15 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
 
 
 @login_required
-class BasePlaylistBookView(SearchFormView):
+class BasePlaylistBookView(generic.list.BaseListView, SearchFormView):
+    context_object_name = 'books'
     form_class = BookSearchForm
+    model = Book
+    paginate_by = 24
     success_url = None
     template_name = 'main/playlist/book.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
         query = self.request.GET.get('q')
         if query:
             q_list = self._format_query(query)
@@ -235,13 +245,18 @@ class BasePlaylistBookView(SearchFormView):
                        + [Q(title_collation_key__icontains=q) for q in q_list]\
                        + [Q(author__icontains=q) for q in q_list]
             conditions = reduce(lambda x, y: x | y, conditions)
-            books = Book.objects.filter(conditions).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate')
+            queryset = Book.objects.filter(conditions).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate')
         else:
-            books = None
-        context['books'] = books
+            queryset = Book.objects.none()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['books_in_session'] = [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
-        context['query'] = query
         context['mode'] = self.mode
+        context['params'] = {
+            'q': self.request.GET.get('q'),
+        }
         return context
 
     def get_success_url(self):

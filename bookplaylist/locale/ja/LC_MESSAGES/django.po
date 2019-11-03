@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-02 17:11+0900\n"
+"POT-Creation-Date: 2019-11-03 13:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -607,20 +607,24 @@ msgid "Search book to add"
 msgstr "追加する本を探す"
 
 #: main/templates/main/playlist/book.html:15
-#, python-format
-msgid "Books related with \"%(query)s\""
-msgstr "\"%(query)s\" が含まれる書籍一覧"
+msgid "Books related with \"%(q)s\""
+msgstr "\"%(q)s\" が含まれる書籍一覧"
 
 #: main/templates/main/playlist/book.html:27
 #: main/templates/main/playlist/layouts/search-playlist-wide.html:15
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlist/book.html:71
+#: main/templates/main/playlist/book.html:64
+#: main/templates/main/playlist/detail.html:41
+msgid "No Image"
+msgstr ""
+
+#: main/templates/main/playlist/book.html:85
 msgid "Add"
 msgstr "追加する"
 
-#: main/templates/main/playlist/book.html:80
+#: main/templates/main/playlist/book.html:94
 msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
@@ -667,8 +671,8 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlist/detail.html:45
-#: main/templates/main/playlist/detail.html:55
+#: main/templates/main/playlist/detail.html:52
+#: main/templates/main/playlist/detail.html:57
 #: main/templates/main/playlist/layouts/list-widget.html:21
 msgid "Show more"
 msgstr "詳細を見る"
@@ -700,27 +704,26 @@ msgid "Complete"
 msgstr "完成"
 
 #: main/templates/main/playlist/list.html:16
-#, python-format
-msgid "Playlists related with \"%(query)s\""
-msgstr "\"%(query)s\" が含まれるリスト一覧"
+msgid "Playlists related with \"%(q)s\""
+msgstr "\"%(q)s\" が含まれるリスト一覧"
 
 #: main/templates/main/playlist/update.html:6
 #: main/templates/main/playlist/update.html:15
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
 
-#: main/views.py:140 main/views.py:198
+#: main/views.py:148 main/views.py:206
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:210
+#: main/views.py:218
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:269
+#: main/views.py:284
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:313
+#: main/views.py:330
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"

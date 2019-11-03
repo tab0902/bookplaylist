@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-{{ query }} | BooxMix
+{{ params.q }} | BooxMix
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
         <div class="mt-4">
             {% include 'main/playlist/layouts/search-playlist-wide.html' %}
         </div>
-        <h2 class="mt-4 mt-md-5 d-none d-md-inline-block">{% blocktrans %}Playlists related with "{{ query }}"{% endblocktrans %}
+        <h2 class="mt-4 mt-md-5 d-none d-md-inline-block">{% blocktrans with q=params.q %}Playlists related with "{{ q }}"{% endblocktrans %}
     </section>
 
     <section id="search-loading" class="search-loading">
@@ -23,6 +23,7 @@
     <section id="playlist-list" class="search-results">
         <div class="line-gray mt-4 mb-5 d-none"></div>
         {% include 'main/playlist/layouts/list-widget.html' %}
+        {% include 'layouts/pagenator.html' with params=params queryset=playlists %}
     </section>
 </div>
 
