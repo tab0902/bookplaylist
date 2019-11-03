@@ -98,7 +98,7 @@ class Playlist(BaseModel):
 class PlaylistBook(BaseModel):
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
     book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'), to_field='isbn', db_column='book_isbn')
-    description = NullTextField(_('description'))
+    description = NullTextField(_('description'), blank=True, null=True)
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists_books'
