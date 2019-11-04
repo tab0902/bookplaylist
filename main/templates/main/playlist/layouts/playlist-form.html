@@ -8,8 +8,8 @@
     {{ field.errors }}
     {% endfor %}
 
-    <div class="line-gray my-4"></div>
     {% for book_form, book_data in book_formset %}
+    <div class="line-gray my-4"></div>
     <div class="playlist-form-book-item" data-book="{{ book_data.id }}">
         <div class="row">
             <div class="col-4 col-sm-2">
