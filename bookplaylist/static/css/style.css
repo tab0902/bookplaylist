@@ -318,6 +318,21 @@ textarea {
   white-space: normal;
 }
 
+/* horizontal scroll (cover) */
+.scroll-wrapper-cover {
+  height: 155px;
+}
+.scroll-inner-cover {
+  height: 160px;
+}
+.scroll-box-cover {
+  height: 155px;
+  margin-left: 10px;
+}
+.scroll-box-cover:first-child {
+  margin-left: 0;
+}
+
 /* blank box */
 .blank-box-wrapper {
     position: relative;
@@ -334,21 +349,6 @@ textarea {
     left: 0;
     bottom: 0;
     right: 0;
-}
-
-/* horizontal scroll (cover) */
-.scroll-wrapper-cover {
-  height: 155px;
-}
-.scroll-inner-cover {
-  height: 160px;
-}
-.scroll-box-cover {
-  height: 100%;
-  margin-left: 10px;
-}
-.scroll-box-cover:first-child {
-  margin-left: 0;
 }
 
 /* utils */
