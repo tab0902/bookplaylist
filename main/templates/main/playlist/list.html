@@ -3,7 +3,12 @@
 {% load i18n %}
 
 {% block title %}
-{{ params.q }} | BooxMix
+{% if params.q %}
+{{ params.q }}
+{% else %}
+{% trans 'All Playlists' %}
+{% endif %}
+ | BooxMix
 {% endblock %}
 
 {% block content %}
