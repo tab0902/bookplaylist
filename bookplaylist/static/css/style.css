@@ -86,6 +86,20 @@ a.color-gray:hover, a.color-gray:active {
   }
 }
 
+/* position */
+.l-0 {
+  left: 0;
+}
+.r-0 {
+  right: 0;
+}
+.t-0 {
+  top: 0;
+}
+.b-0 {
+  bottom: 0;
+}
+
 /* form */
 input[type=text],
 input[type=number],
@@ -542,10 +556,16 @@ textarea {
 
 /*---------------------------------
 
-  playlist/
+  playlist/, accounts/
 
 ---------------------------------*/
 
+.playlist-item .position-relative {
+  height: calc(100% - 1.5rem);
+}
+.playlist-item:nth-child(1) .position-relative {
+  height: 100% !important;
+}
 .playlist-item:nth-child(1) .line-gray {
   display: none;
 }
@@ -558,6 +578,12 @@ textarea {
   .playlist-item:nth-child(even) {
     padding-left: 25px;
     padding-right: 15px;
+  }
+  .playlist-item .position-relative {
+    height: calc(100% - 3rem);
+  }
+  .playlist-item:nth-child(2) .position-relative {
+    height: 100% !important;
   }
   .playlist-item:nth-child(2) .line-gray {
     display: none;
@@ -576,6 +602,9 @@ textarea {
   .playlist-item:nth-child(3n) {
     padding-left: 25px !important;
     padding-right: 15px !important;
+  }
+  .playlist-item:nth-child(3) .position-relative {
+    height: 100% !important;
   }
   .playlist-item:nth-child(3) .line-gray {
     display: none;
@@ -609,8 +638,23 @@ textarea {
 
 ---------------------------------*/
 
+.book-item .position-absolute {
+  width: calc(66.666667% - 30px * 0.33333333);
+}
+.book-item .position-relative {
+  height: calc(100% - 1.5rem);
+}
+.book-item:nth-child(1) .position-relative {
+  height: 100% !important;
+}
 .book-item:nth-child(1) .line-gray {
   display: none;
+}
+
+@media screen and (max-width: 575.98px) {
+  .book-item .book-item-info {
+    padding-bottom: 2rem;
+  }
 }
 
 @media screen and (min-width: 576px) {
@@ -625,6 +669,15 @@ textarea {
   .book-item:nth-child(4n) {
     padding-left: 25px;
     padding-right: 15px;
+  }
+  .book-item .position-absolute {
+    width: 100% !important;
+  }
+  .book-item .position-relative {
+    padding-bottom: 2rem;
+  }
+  .book-item:nth-child(n+1):nth-child(-n+4) .position-relative {
+    height: 100% !important;
   }
   .book-item:nth-child(n+1):nth-child(-n+4) .line-gray {
     display: none;
@@ -643,6 +696,9 @@ textarea {
   .book-item:nth-child(6n) {
     padding-left: 25px !important;
     padding-right: 15px !important;
+  }
+  .book-item:nth-child(n+1):nth-child(-n+6) .position-relative {
+    height: 100% !important;
   }
   .book-item:nth-child(n+1):nth-child(-n+6) .line-gray {
     display: none;
