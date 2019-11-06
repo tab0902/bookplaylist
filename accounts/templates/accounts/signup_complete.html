@@ -1,2 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
+
+{% block title %}
+{% trans 'Sign up complete' %} | BooxMix
+{% endblock %}
+
+{% block content %}
+
+<div class="container container-slim">
+    <section id="signuo-complete">
+        <h2 class="mt-4 mt-md-5">{% trans 'Sign up complete' %}</h2>
+        <p class="mt-4 mt-md-5">
+            {% blocktrans %}A message has been sent to the email address you registered.{% endblocktrans %}<br>
+            {% blocktrans %}Click the link in the text to verify your email address.{% endblocktrans %}
+        </p>
+    </section>
+</div>
+
+{% endblock %}

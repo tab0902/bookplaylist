@@ -1,0 +1,18 @@
+{% load static %}
+{% load i18n %}
+
+<form action="" method="post" class="search-form">{% csrf_token %}
+    <div class="row">
+        <div class="col-md-6 mt-2">
+            {{ form.q }}
+            {{ form.q.errors }}
+        </div>
+        <div class="col-8 col-md-4 mt-2">
+            {{ form.category }}
+            {{ form.category.errors }}
+        </div>
+        <div class="col-4 col-md-2 mt-2">
+            <input type="submit" class="btn btn-main btn-fit" value="{% trans 'Search' %}">
+        </div>
+    </div>
+</form>

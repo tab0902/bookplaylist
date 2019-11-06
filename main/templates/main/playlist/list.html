@@ -1,38 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-    </table>
-    {% csrf_token %}
-    <input type="submit">
-</form>
+{% block title %}
+{% if params.q %}
+{{ params.q }}
+{% else %}
+{% trans 'All Playlists' %}
+{% endif %}
+ | BooxMix
+{% endblock %}
 
-<table>
-    <tbody>
-        {% for playlist in playlists %}
-        <tr>
-            <th>{{ forloop.counter }}.</th>
-        </tr>
-        <tr>
-            <th>{% trans 'title' %}:</th>
-            <td><a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}">{{ playlist.title }}</a></td>
-        </tr>
-        <tr>
-            <th>{% trans 'category' %}:</th>
-            <td>{{ playlist.category }}</td>
-        </tr>
-        <tr>
-            <th>{% trans 'description' %}:</th>
-            <td>{{ playlist.description }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td>{% trans 'No data' %}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% block content %}
 
-<a href="{% url 'main:index' %}">{% trans 'Back' %}</a>
+<div class="container">
+    {% if params.q %}
+    <section id="search-playlist-wide">
+        <div class="mt-4">
+            {% include 'main/playlist/layouts/search-playlist-wide.html' %}
+        </div>
+    </section>
+    {% endif %}
+
+    <section id="playlist-page-title">
+        <div class="mt-4 mt-md-5">
+            {% if params.q %}
+            <h2 class="d-none d-md-inline-block">{% blocktrans with q=params.q %}Playlists related with "{{ q }}"{% endblocktrans %}</h2>
+            {% else %}
+            <h1>{% trans 'All Playlists' %}</h1>
+            {% endif %}
+        </div>
+    </section>
+
+    <section id="search-loading" class="search-loading">
+        {% include 'layouts/loading-spinner.html' %}
+    </section>
+
+    <section id="playlist-list" class="search-results">
+        <div class="line-gray mt-4 mb-5 d-none"></div>
+        {% include 'main/playlist/layouts/list-widget.html' %}
+        {% include 'layouts/pagenator.html' with params=params queryset=playlists %}
+    </section>
+</div>
+
+{% endblock %}

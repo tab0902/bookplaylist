@@ -104,7 +104,8 @@ class Command(BaseCommand):
         coverage_start = options['start']
         chunk_size = options['size']
 
-        cnt = cnt_created = coverage_start * chunk_size
+        cnt = coverage_start * chunk_size
+        cnt_created = 0
         status = 'COMPLETE'
         start = time.time()
 
@@ -114,7 +115,7 @@ class Command(BaseCommand):
         print('Done')
         print('\n----------------------------------------------------------------\n')
 
-        for i, coverage_ in enumerate(chunked_coverage):
+        for i, coverage_ in enumerate(chunked_coverage[coverage_start:]):
             print('Fetching data...')
             result = self.get_bibs(coverage_)
             print('Done')

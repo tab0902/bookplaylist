@@ -1,9 +1,11 @@
-import re
 from functools import reduce
+from itertools import chain
 
 from django import forms
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import (
+    Count, Q,
+)
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy
@@ -11,13 +13,13 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm, SearchForm,
+    BookSearchForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
     Book, Category, Playlist,
 )
 from bookplaylist.views import (
-    ContextMixin, SearchFormView, login_required,
+    OwnerOnlyMixin, SearchFormView, login_required,
 )
 
 # Create your views here.
@@ -34,50 +36,65 @@ class PlaylistSearchFormView(SearchFormView):
 
     def form_valid(self, form):
         category = form.cleaned_data['category']
-        self.query['category'] = category.slug if category else ''
+        self.param['category'] = category.slug if category else ''
         return super().form_valid(form)
 
 
-class IndexView(ContextMixin, PlaylistSearchFormView):
+class IndexView(PlaylistSearchFormView):
     template_name = 'main/index.html'
-    title = _('TOP')
 
 
-class PlaylistView(ContextMixin, PlaylistSearchFormView):
+class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
+    context_object_name = 'playlists'
+    model = Playlist
     template_name = 'main/playlist/list.html'
-    title = _('Playlist list')
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        category = self.request.GET.get('category')
+        condition_lists = []
+        condition_dict = {}
+        if category:
+            condition_dict['category__slug'] = category
+        if query:
+            q_list = self._format_query(query)
+            condition_lists.append([
+                  Q(title__iexact=q)\
+                | Q(description__iexact=q)\
+                | Q(books__title__iexact=q)\
+                | Q(books__title_collation_key__iexact=q)\
+                | Q(books__author__iexact=q)
+                for q in q_list
+            ])
+            condition_lists.append([
+                  Q(title__icontains=q)\
+                | Q(description__icontains=q)\
+                | Q(books__title__icontains=q)\
+                | Q(books__title_collation_key__icontains=q)\
+                | Q(books__author__icontains=q)
+                for q in q_list
+            ])
+            queryset = Playlist.objects.none()
+            for condition_list_ in condition_lists:
+                queryset = chain(queryset, Playlist.objects.filter(*condition_list_, **condition_dict))
+            queryset = list(dict.fromkeys(queryset))
+        else:
+            condition_list = []
+            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('q')
-        category = self.request.GET.get('category')
-        if query:
-            q_list = re.split('\s', query)
-            conditions = [Q(title__icontains=q) for q in q_list]\
-                       + [Q(description__icontains=q) for q in q_list]\
-                       + [Q(books__title__icontains=q) for q in q_list]\
-                       + [Q(books__title_collation_key__icontains=q) for q in q_list]\
-                       + [Q(books__author__icontains=q) for q in q_list]
-            conditions = reduce(lambda x, y: x | y, conditions)
-            if category:
-                playlists = Playlist.objects.filter(conditions, category__slug=category)
-            else:
-                playlists = Playlist.objects.filter(conditions)
-        else:
-            playlists = Playlist.objects.all()
-        context['playlists'] = playlists
+        context['params'] = {
+            'q': self.request.GET.get('q'),
+            'category': self.request.GET.get('category'),
+        }
         return context
 
 
-class PlaylistDetailView(ContextMixin, generic.DetailView):
+class PlaylistDetailView(generic.DetailView):
     model = Playlist
     template_name = 'main/playlist/detail.html'
-    title = None
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=None)
-        self.title = obj.title
-        return obj
 
 
 MODE_CREATE = 'create'
@@ -86,11 +103,10 @@ GET_KEY_CONTINUE = 'continue'
 POST_KEY_SEARCH = 'search'
 POST_KEY_ADD_BOOK = 'add_book'
 SESSION_KEY_FORM = 'playlist_form_data'
-SESSION_KEY_FORMSET = 'playlist_formset_data'
 SESSION_KEY_BOOK = 'playlist_book_data'
 
 
-class BasePlaylistView(ContextMixin):
+class BasePlaylistView:
     form_class = PlaylistForm
     model = Playlist
 
@@ -117,13 +133,15 @@ class BasePlaylistView(ContextMixin):
         context['book_formset'] = zip(formset or [], book_data or [])
         return context
 
+    def form_invalid(self, form, instance):
+        formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
+        return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
 
 @login_required
 class PlaylistCreateView(BasePlaylistView, generic.CreateView):
     mode = MODE_CREATE
-    success_url = reverse_lazy('main:playlist_create_complete')
     template_name = 'main/playlist/create.html'
-    title = _('Create playlist')
 
     def get(self, request, *args, **kwargs):
         initial = {
@@ -144,24 +162,32 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
         instance = form.save(commit=False)
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
-            messages.error(self.request, _('You have to add at least one book to your playlist.'.format(self.mode)))
+            messages.error(self.request, _('You have to add at least one book to your playlist.'))
             self.request.session[SESSION_KEY_FORM] = self.request.POST
             url = reverse_lazy('main:playlist_{}'.format(self.mode)) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
         if not formset.is_valid():
-            return self.render_to_response(self.get_context_data(formset=formset))
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
         instance.save()
         formset.save()
-        del self.request.session[SESSION_KEY_FORM]
-        del self.request.session[SESSION_KEY_BOOK]
+        for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
+            if SESSION_KEY_FORM in self.request.session:
+                del self.request.session[key]
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        instance = None
+        return super().form_invalid(form, instance)
+
+    def get_success_url(self):
+        self.success_url = reverse_lazy('main:playlist_create_complete', kwargs={'pk': str(self.object.pk)})
+        return super().get_success_url()
 
 
 @login_required
-class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
+class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
     mode = MODE_UPDATE
     template_name = 'main/playlist/update.html'
-    title = _('Update playlist')
 
     def get(self, request, *args, **kwargs):
         initial = {
@@ -169,6 +195,7 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
             'book': [
                 {
                     'id': str(x.book.id),
+                    'isbn': str(x.book.isbn),
                     'title': x.book.title,
                     'author': x.book.author,
                     'cover': x.book.cover,
@@ -186,59 +213,71 @@ class PlaylistUpdateView(BasePlaylistView, generic.UpdateView):
             self.request.POST = self.request.POST.copy()
             del self.request.POST[POST_KEY_ADD_BOOK]
             self.request.session[SESSION_KEY_FORM] = self.request.POST
-            category = str(self.kwargs.get('category'))
-            pk = str(self.kwargs.get('pk'))
-            return redirect('main:playlist_{}_book'.format(self.mode), category=category, pk=pk)
+            return redirect('main:playlist_{}_book'.format(self.mode), **self.kwargs)
         instance = form.save(commit=False)
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
-            messages.error(self.request, _('You have to add at least one book to your playlist.'.format(self.mode)))
+            messages.error(self.request, _('You have to add at least one book to your playlist.'))
             self.request.session[SESSION_KEY_FORM] = self.request.POST
-            args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
-            url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
+            url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
             return HttpResponseRedirect(url)
         if not formset.is_valid():
-            return self.render_to_response(self.get_context_data(formset=formset))
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
         instance.save()
         formset.save()
-        del self.request.session[SESSION_KEY_FORM]
-        del self.request.session[SESSION_KEY_BOOK]
+        for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
+            if SESSION_KEY_FORM in self.request.session:
+                del self.request.session[key]
         messages.success(self.request, _('Playlist updated successfully.'))
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        instance = self.get_object()
+        return super().form_invalid(form, instance)
+
     def get_success_url(self):
-        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),)
-        self.success_url = reverse_lazy('main:playlist_detail', args=args)
+        self.success_url = reverse_lazy('main:playlist_detail', kwargs=self.kwargs)
         return super().get_success_url()
 
 
 @login_required
-class BasePlaylistBookView(ContextMixin, SearchFormView):
-    form_class = SearchForm
+class BasePlaylistBookView(generic.list.BaseListView, SearchFormView):
+    context_object_name = 'books'
+    form_class = BookSearchForm
+    model = Book
+    paginate_by = 24
     success_url = None
     template_name = 'main/playlist/book.html'
-    title = _('Search Book')
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            q_list = self._format_query(query)
+            condition_lists = []
+            condition_lists.append([Q(title__iexact=q) | Q(title_collation_key__iexact=q) | Q(author__iexact=q) for q in q_list])
+            condition_lists.append([Q(title__icontains=q) | Q(title_collation_key__icontains=q) | Q(author__icontains=q) for q in q_list])
+            queryset = Playlist.objects.none()
+            for condition_list in condition_lists:
+                queryset = chain(
+                    queryset,
+                    Book.objects.filter(*condition_list).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate').distinct()
+                )
+            queryset = list(dict.fromkeys(queryset))
+        else:
+            queryset = Book.objects.none()
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('q')
-        if query:
-            q_list = re.split('\s', query)
-            conditions = [Q(title__icontains=q) for q in q_list]\
-                       + [Q(title_collation_key__icontains=q) for q in q_list]\
-                       + [Q(author__icontains=q) for q in q_list]
-            conditions = reduce(lambda x, y: x | y, conditions)
-            books = Book.objects.filter(conditions).order_by('pubdate')
-        else:
-            books = None
-        context['books'] = books
-        context['books_in_session'] = [x['id'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
+        context['books_in_session'] = [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
         context['mode'] = self.mode
+        context['params'] = {
+            'q': self.request.GET.get('q'),
+        }
         return context
 
     def get_success_url(self):
-        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
-        self.success_url = reverse_lazy('main:playlist_{}_book'.format(self.mode), args=args)
+        self.success_url = reverse_lazy('main:playlist_{}_book'.format(self.mode), kwargs=self.kwargs)
         return super().get_success_url()
 
 
@@ -246,7 +285,7 @@ class PlaylistCreateBookView(BasePlaylistBookView):
     mode = MODE_CREATE
 
 
-class PlaylistUpdateBookView(BasePlaylistBookView):
+class PlaylistUpdateBookView(OwnerOnlyMixin, BasePlaylistBookView):
     mode = MODE_UPDATE
 
 
@@ -259,10 +298,11 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         book_data = self.request.session.get(SESSION_KEY_BOOK)
         if not form_data or not SESSION_KEY_BOOK in self.request.session:
             messages.warning(self.request, _('Session timeout. Please retry from the beginning.'))
-            return redirect(self.get_redirect_url())
+            return redirect('main:playlist_{}'.format(self.mode), **self.kwargs)
         book_obj = Book.objects.get(pk=str(self.kwargs.get('book')))
         book_json = {
             'id': str(book_obj.id),
+            'isbn': str(book_obj.isbn),
             'title': book_obj.title,
             'author': book_obj.author,
             'cover': book_obj.cover,
@@ -270,13 +310,13 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         if book_json not in self.request.session.get(SESSION_KEY_BOOK):
             self.request.session[SESSION_KEY_BOOK] += [book_json]
             book_num = len(self.request.session[SESSION_KEY_BOOK])
-            self.request.session[SESSION_KEY_FORM]['playlistbook_set-{}-book'.format(book_num-1)] = book_json['id']
+            self.request.session[SESSION_KEY_FORM]['playlistbook_set-{}-book'.format(book_num-1)] = book_json['isbn']
             self.request.session[SESSION_KEY_FORM]['playlistbook_set-TOTAL_FORMS'] = str(int(self.request.session[SESSION_KEY_FORM]['playlistbook_set-TOTAL_FORMS']) + 1)
         return super().dispatch(*args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
-        args = (str(self.kwargs.get('category')), str(self.kwargs.get('pk')),) if self.kwargs.get('category') and self.kwargs.get('pk') else tuple()
-        self.url = reverse_lazy('main:playlist_{}'.format(self.mode), args=args) + '?{}=True'.format(GET_KEY_CONTINUE)
+        del self.kwargs['book']
+        self.url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
         return super().get_redirect_url(*args, **kwargs)
 
 
@@ -284,22 +324,21 @@ class PlaylistCreateBookStoreView(BasePlaylistBookStoreView):
     mode = MODE_CREATE
 
 
-class PlaylistUpdateBookStoreView(BasePlaylistBookStoreView):
+class PlaylistUpdateBookStoreView(OwnerOnlyMixin, BasePlaylistBookStoreView):
     mode = MODE_UPDATE
 
 
 @login_required
-class PlaylistCreateCompleteView(ContextMixin, generic.TemplateView):
+class PlaylistCreateCompleteView(OwnerOnlyMixin, generic.DetailView):
+    model = Playlist
     template_name = 'main/playlist/create_complete.html'
-    title = _('Playlist created successfully.')
 
 
 @login_required
-class PlaylistDeleteView(ContextMixin, generic.DeleteView):
+class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
     model = Playlist
     success_url = reverse_lazy('accounts:index')
     template_name = 'main/playlist/delete.html'
-    title = _('Delete playlist')
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, _('Playlist deleted successfully.'))

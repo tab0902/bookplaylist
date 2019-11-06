@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+
+<form action="" method="post">{% csrf_token %}
+    {% if form.errors %}
+    <div class="mt-3">
+        {{ form.non_field_errors }}
+    </div>
+    {% endif %}
+    {% for field in form %}
+    <div class="mt-2">
+        <label>{{ field.label }}</label>
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-4 offset-md-8">
+            <input type="submit" class="btn btn-main w-100 mt-4" value="{% trans submit_text %}">
+        </div>
+    </div>
+</form>

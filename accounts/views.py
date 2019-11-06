@@ -17,7 +17,7 @@ from .forms import (
     PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
 )
 from bookplaylist.views import (
-    ContextMixin, login_required, sensitive_post_parameters,
+    login_required, sensitive_post_parameters,
 )
 
 # Create your views here.
@@ -27,19 +27,17 @@ UserModel = get_user_model()
 
 
 @login_required
-class IndexView(ContextMixin, generic.TemplateView):
+class IndexView(generic.TemplateView):
     template_name = 'accounts/index.html'
-    title = _('My page')
 
 
 @login_required
-class ProfileView(ContextMixin, generic.UpdateView):
+class ProfileView(generic.UpdateView):
     form_class = UserProfileUpdateForm
     password_text = '************'
     password_link_text = _('Password change')
     success_url = reverse_lazy('accounts:profile')
     template_name = 'accounts/profile.html'
-    title = _('Profile')
 
     def dispatch(self, *args, **kwargs):
         self.user = self.request.user
@@ -102,20 +100,18 @@ class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = 'accounts/password_reset_complete.html'
 
 
-class LoginView(ContextMixin, auth_views.LoginView):
+class LoginView(auth_views.LoginView):
     template_name = 'accounts/login.html'
-    title = _('Log in')
 
 
-class LogoutView(ContextMixin, auth_views.LogoutView):
+class LogoutView(auth_views.LogoutView):
     next_page = reverse_lazy('accounts:login')
 
 
-class SignupView(ContextMixin, generic.FormView):
+class SignupView(generic.FormView):
     form_class = SignupForm
     success_url = reverse_lazy('accounts:signup_complete')
     template_name = 'accounts/signup.html'
-    title = _('Sign up')
 
     def form_valid(self, form):
         opts = {
@@ -126,21 +122,19 @@ class SignupView(ContextMixin, generic.FormView):
         return super().form_valid(form)
 
 
-class SignupCompleteView(ContextMixin, generic.TemplateView):
+class SignupCompleteView(generic.TemplateView):
     template_name = 'accounts/signup_complete.html'
-    title = _('Sign up complete')
 
 
 INTERNAL_VERIFICATION_SESSION_TOKEN = '_verification_token'
 
 
-class VerificationView(ContextMixin, generic.TemplateView):
+class VerificationView(generic.TemplateView):
     complete_url_token = 'complete'
     error_url = reverse_lazy('accounts:verification_again')
     post_verification_login = True
     post_verification_login_backend = 'accounts.backends.ModelBackend'
     template_name = 'accounts/verification.html'
-    title = _('Verification complete')
     token_generator = default_token_generator
 
     def dispatch(self, *args, **kwargs):
@@ -182,11 +176,10 @@ class VerificationView(ContextMixin, generic.TemplateView):
         return super().get(request, *args, **kwargs)
 
 
-class VerificationAgainView(ContextMixin, generic.FormView):
+class VerificationAgainView(generic.FormView):
     form_class = VerificationAgainForm
     success_url = reverse_lazy('accounts:verification_sent')
     template_name = 'accounts/verification_again.html'
-    title = _('Verification failed')
 
     def form_valid(self, form):
         opts = {
@@ -197,6 +190,5 @@ class VerificationAgainView(ContextMixin, generic.FormView):
         return super().form_valid(form)
 
 
-class VerificationSentView(ContextMixin, generic.TemplateView):
+class VerificationSentView(generic.TemplateView):
     template_name = 'accounts/verification_sent.html'
-    title = _('Email for verification sent')

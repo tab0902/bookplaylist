@@ -38,7 +38,7 @@ class Book(BaseModel):
         blank=True,
     )
     isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
-    title = NullCharField(_('title'), max_length=255)
+    title = NullCharField(_('title'), max_length=255, blank=True, null=True)
     title_collation_key = NullCharField(_('collation key'), max_length=255, blank=True, null=True)
     volume = NullCharField(_('volume'), max_length=255, blank=True, null=True)
     series = NullCharField(_('series'), max_length=255, blank=True, null=True)
@@ -98,11 +98,11 @@ class Playlist(BaseModel):
 class PlaylistBook(BaseModel):
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
     book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'), to_field='isbn', db_column='book_isbn')
-    description = NullTextField(_('description'))
+    description = NullTextField(_('description'), blank=True, null=True)
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists_books'
-        ordering = ['playlist', 'book']
+        ordering = ['playlist', 'created_at']
         verbose_name = _('book in playlist')
         verbose_name_plural = _('books in playlists')
 

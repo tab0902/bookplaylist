@@ -1,44 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
 
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+{% block title %}
+{% trans 'My page' %} | BooxMix
+{% endblock %}
 
-<h3>{% trans 'Welcome,' %} {{ user }}</h3>
+{% block content %}
 
-<p>{% trans 'Your playlists' %}:</p>
-<table>
-    <tbody>
-        {% for playlist in user.playlist_set.all %}
-        <tr>
-            <th>{{ forloop.counter }}.</th>
-        </tr>
-        <tr>
-            <th>{% trans 'title' %}:</th>
-            <td><a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}">{{ playlist.title }}</a></td>
-        </tr>
-        <tr>
-            <th>{% trans 'category' %}:</th>
-            <td>{{ playlist.category }}</td>
-        </tr>
-        <tr>
-            <th>{% trans 'description' %}:</th>
-            <td>{{ playlist.description }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td>{% trans 'No data' %}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container">
+    <section id="mypage-create-playlist">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="mt-4 mt-md-5 heading-lg">{% blocktrans %}{{ user }}'s my page{% endblocktrans %}</h1>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+                <a href="{% url 'accounts:profile' %}" class="btn btn-inline-sub float-right mt-2 mt-md-5">{% trans 'Profile' %}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <h2 class="mt-4 mt-md-5">{% trans 'Create playlist' %}</h2>
+                <p class="text-sm">{% trans 'Create your playlist in 2 minutes, and share it easily.' %}</p>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'main:playlist_create' %}" class="btn btn-main w-100 align-bottom mt-2 mt-md-5">{% trans 'Create' %}</a>
+            </div>
+        </div>
+    </section>
 
-<a href="{% url 'main:playlist_create' %}">{% trans 'Create playlist' %}</a>
-<a href="{% url 'accounts:profile' %}">{% trans 'Profile' %}</a>
-<a href="{% url 'main:index' %}">{% trans 'TOP' %}</a>
-<a href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a>
+    <section id="playlist-list">
+        <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
+        {% include 'main/playlist/layouts/list-widget.html' with playlists=user.playlist_set.all %}
+    </section>
+</div>
+
+{% endblock %}

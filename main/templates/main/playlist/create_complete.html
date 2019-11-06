@@ -1,5 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
 
-<a href="{% url 'main:playlist_create' %}">{% trans 'Create one more playlist' %}</a>
-<a href="{% url 'accounts:index' %}">{% trans 'My page' %}</a>
+{% block title %}
+{% trans 'Playlist created successfully!' %} | BooxMix
+{% endblock %}
+
+{% block content %}
+
+<div class="container container-slim">
+    <section id="playlist-create-complete">
+        <h2 class="mt-4 mt-md-5">{% trans 'Playlist created successfully!' %}</h2>
+        <div class="playlist-card mt-5">
+            <a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}" class="color-gray">
+                <div class="playlist-img scroll-wrapper scroll-wrapper-cover">
+                    <div class="playlist-img scroll-inner scroll-inner-cover">
+                        {% for playlist_book in playlist.playlistbook_set.all %}
+                        {% if playlist_book.book.cover %}
+                        <img class="scroll-box scroll-box-cover" src="{{ playlist_book.book.cover | default_if_none:'' }}">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <h2 class="mt-4 mt-md-5 text-center">{{ playlist.title | default_if_none:'' }}</h2>
+            </a>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mx-sm-4">
+                        <button type="button" class="btn btn-twitter w-100 mt-4 mt-sm-5">{% trans 'Share on Twitter' %}</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mx-sm-4">
+                        <button type="button" class="btn btn-facebook w-100 mt-4 mt-sm-5">{% trans 'Share on Facrebook' %}</button>
+                    </div>
+                </div>
+                <div class="col-md-6 offset-md-3">
+                    <a href="{% url 'main:playlist_create' %}" class="btn btn-inline-main w-100 mt-5">{% trans 'Create one more playlist' %}</a>
+                </div>
+                <div class="col-md-6 offset-md-3">
+                    <a href="{% url 'accounts:index' %}" class="btn btn-inline-sub w-100 mt-4">{% trans 'My page' %}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

@@ -1,11 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
-<p>{% blocktrans %}Submit the form below if you want to recieve email again.{% endblocktrans %}</p>
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-    </table>
-    {% csrf_token %}
-    <input type="submit">
-</form>
+{% block title %}
+{% trans 'Verification failed' %} | BooxMix
+{% endblock %}
+
+{% block content %}
+
+<div class="container container-slim">
+    <section id="verification-again">
+        <h2 class="mt-4 mt-md-5">{% trans 'Verification failed' %}</h2>
+        <p class="my-4">
+            {% blocktrans %}This URL is expired.{% endblocktrans %}<br>
+            {% blocktrans %}Submit the form below if you want to recieve email again.{% endblocktrans %}
+        </p>
+        {% trans 'Send email' as submit_text %}
+        {% include 'layouts/form.html' with submit_text=submit_text %}
+    </section>
+</div>
+
+{% endblock %}

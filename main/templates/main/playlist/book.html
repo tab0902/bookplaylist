@@ -1,63 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-    </table>
-    {% csrf_token %}
-    <input type="submit">
-</form>
+{% block title %}
+{% trans 'Search book to add' %} | BooxMix
+{% endblock %}
 
-<table>
-    <tbody>
-        {% for book in books %}
-        <tr>
-            <td rowspan="5"><img src='{{ book.cover }}'></td>
-            <td>{{ book.title }}</td>
-        </tr>
-        <tr>
-            <td>{{ book.author }}</td>
-        </tr>
-        <tr>
-            <td>{{ book.publisher }}</td>
-        </tr>
-        <tr>
-            <td>{{ book.pubdate }}</td>
-        </tr>
-        <tr>
-            <td>
-                {% if mode == 'create' %}
-                {% if book.pk|stringformat:'s' in books_in_session %}
-                <button onclick="location.href='{% url 'main:playlist_create_book_store' book.pk %}'" disabled>{% trans 'Add book' %}</button>
-                {% trans 'This book is already in the playlist.' %}
-                {% else %}
-                <button onclick="location.href='{% url 'main:playlist_create_book_store' book.pk %}'">{% trans 'Add book' %}</button>
-                {% endif %}
-                {% elif mode == 'update' %}
-                {% if book.pk|stringformat:'s' in books_in_session %}
-                <button onclick="location.href='{% url 'main:playlist_update_book_store' kwargs.category kwargs.pk book.pk %}'" disabled>{% trans 'Add book' %}</button>
-                {% trans 'This book is already in the playlist.' %}
-                {% else %}
-                <button onclick="location.href='{% url 'main:playlist_update_book_store' kwargs.category kwargs.pk book.pk %}'">{% trans 'Add book' %}</button>
-                {% endif %}
-                {% endif %}
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td>{% trans 'No data' %}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% block content %}
 
-{% if mode|add:'/book' in request.META.HTTP_REFERER %}
-{% if mode == 'create' %}
-<a href="{% url 'main:playlist_create' %}?continue=True">{% trans 'Back' %}</a>
-{% elif mode == 'update' %}
-<a href="{% url 'main:playlist_update' kwargs.category kwargs.pk %}?continue=True">{% trans 'Back' %}</a>
-{% endif %}
-{% else %}
-<a href="{{ request.META.HTTP_REFERER }}{% if 'continue' not in request.META.HTTP_REFERER %}?continue=True{% endif %}">{% trans 'Back' %}</a>
-{% endif %}
+<div class="container">
+    <section id="search-book">
+        <h2 class="mt-4 mt-md-5">
+            {% if request.GET.q %}
+            {% blocktrans with q=params.q %}Books related with "{{ q }}"{% endblocktrans %}
+            {% else %}
+            {% blocktrans %}Search book to add{% endblocktrans %}
+            {% endif %}
+        </h2>
+        <form action="" method="post" class="search-form">{% csrf_token %}
+            <div class="row mt-4">
+                <div class="col-sm-9 col-lg-10">
+                    {{ form.q }}
+                    {{ form.q.errors }}
+                </div>
+                <div class="col-sm-3 col-lg-2 d-none d-sm-block">
+                    <input type="submit" class="btn btn-outline-sub btn-fit" value="{% trans 'Search' %}">
+                </div>
+            </div>
+        </form>
+        <div>
+            <div>
+                <a
+                    class="btn btn-inline-sub mt-3 text-sm"
+                    {% if mode == 'create' %}
+                    href="{% url 'main:playlist_create' %}?continue=True"
+                    {% elif mode == 'update' %}
+                    href="{% url 'main:playlist_update' view.kwargs.category view.kwargs.pk %}?continue=True"
+                    {% endif %}
+                >
+                    <i class="fas fa-angle-left"></i> {% trans 'Back' %}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="search-loading" class="search-loading">
+        {% include 'layouts/loading-spinner.html' %}
+    </section>
+
+    <section id="book-list" class="search-results">
+        <div class="row mt-4">
+            {% for book in books %}
+            <div class="book-item col-sm-3 col-lg-2">
+                <div class="position-relative">
+                    <div class="line-gray my-4"></div>
+                    <div class="row">
+                        <div class="col-4 col-sm-12">
+                            {% if book.cover %}
+                            <img class="w-100" src="{{ book.cover | default_if_none:'' }}">
+                            {% else %}
+                            <div class="blank-box-wrapper no-image-wrapper">
+                                <div class="blank-box-content no-image-content">
+                                    <div class="d-flex align-items-center h-100">
+                                        <h3 class="text-sm text-center w-100">{% trans 'No Image' %}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-8 col-sm-12 book-item-info">
+                            <h5 class="mt-sm-2 font-bold">{{ book.title | default_if_none:'' }}</h5>
+                            <h6 class="mt-1">{{ book.author | default_if_none:'' }}</h6>
+                        </div>
+                    </div>
+                    <div class="position-absolute r-0 b-0">
+                        <button
+                            class="btn btn-outline-main btn-fit w-100 mt-2"
+                            {% if mode == 'create' %}
+                            onclick="location.href='{% url 'main:playlist_create_book_store' book.pk %}'"
+                            {% elif mode == 'update' %}
+                            onclick="location.href='{% url 'main:playlist_update_book_store' view.kwargs.category view.kwargs.pk book.pk %}'"
+                            {% endif %}
+                            {% if book.isbn in books_in_session %}
+                            disabled
+                            {% endif %}
+                        >
+                            {% trans 'Add' %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            {% if request.GET.q %}
+            <div class="col-12">
+                <h4>{% trans 'No book found. Please search by other words.' %}</h4>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% include 'layouts/pagenator.html' with params=params queryset=books %}
+    </section>
+</div>
+
+{% endblock %}

@@ -1,13 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-<h2>{{ title }}</h2>
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-    </table>
-    {% csrf_token %}
-    <input type="submit">
-</form>
+{% block title %}
+{% trans 'Log in' %} | BooxMix
+{% endblock %}
 
-<a href="{% url 'accounts:signup' %}">{% trans 'Sign up' %}</a>
-<a href="{% url 'accounts:password_reset' %}">{% trans 'Password reset' %}</a>
+{% block content %}
+
+<div class="container container-slim">
+    <section id="login">
+        <div class="row my-4 mt-md-5">
+            <div class="col-md-8">
+                <h2>{% trans 'Log in' %}</h2>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+                <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub float-right">{% trans 'Sign up' %}</a>
+            </div>
+        </div>
+        {% trans 'Log in' as submit_text %}
+        {% include 'layouts/form.html' with submit_text=submit_text %}
+        <div class="row mt-4 mt-md-5">
+            <div class="col-md-6 offset-md-3">
+                <a href="{% url 'accounts:password_reset' %}" class="btn btn-inline-sub w-100">{% trans 'Did you forget your password?' %}</a>
+            </div>
+        </div>
+        <div class="d-md-none mt-5">
+            <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub w-100">{% trans 'Sign up' %}</a>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

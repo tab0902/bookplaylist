@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+from django.contrib.messages import constants as messages
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -66,7 +67,9 @@ ROOT_URLCONF = 'bookplaylist.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -145,6 +148,12 @@ CERT_URL = '/.well-known/'
 
 
 LOGIN_REDIRECT_URL = reverse_lazy('accounts:index')
+
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.DEBUG: 'secondary',
+}
 
 
 ADMIN_REORDER = (
