@@ -10,6 +10,7 @@
         </div>
         {# <div id="icon-area" class="row"> #}
         {% if not request.user.is_authenticated %}
+        {% if request.path != '/accounts/login/' and request.path != '/accounts/signup/' %}
         <div class="col-md-2 d-none d-md-block">
             <a href="{% url 'accounts:login' %}">
                 <p class="icon-text text-center">{% trans 'Log in' %}</p>
@@ -20,6 +21,7 @@
                 <p class="icon-text text-center">{% trans 'Sign up' %}</p>
             </a>
         </div>
+        {% endif %}
         {% else %}
         <div class="col-md-2 d-none d-md-block">
             <a href="{% url 'accounts:index' %}">
