@@ -22,8 +22,8 @@
 </head>
 
 <body>
-    {% include 'header.html' %}
-    {% include 'drawer.html' %}
+    {% include 'layouts/header.html' %}
+    {% include 'layouts/drawer.html' %}
     <main id="content">
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }} text-center" role="alert" data-closable>
