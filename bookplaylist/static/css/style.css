@@ -6,6 +6,23 @@
 
 ---------------------------------*/
 
+/* body */
+body {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', sans-serif;
+  font-size: 14px;
+  overflow-wrap: break-word;
+  position: relative;
+  box-sizing: border-box;
+  min-height: calc(100vh - 0px);
+  padding-bottom: 220px;
+  color: #484848;
+}
+@media screen and (min-width: 576px) {
+  body {
+    padding-bottom: 180px;
+  }
+}
+
 /* container */
 .container, .container-fluid {
   padding: 0 24px;
@@ -27,12 +44,6 @@
 }
 
 /* fonts */
-body {
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', sans-serif;
-  font-size: 14px;
-  overflow-wrap: break-word;
-  color: #484848;
-}
 h1, h2, h3 {
   font-weight: bold;
 }
@@ -502,6 +513,24 @@ textarea {
   width: 100%;
   z-index: 200;
   background-color: #fff;
+}
+
+
+/*---------------------------------
+
+  footer
+
+---------------------------------*/
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  height: 220px;
+}
+@media screen and (min-width: 576px) {
+  #footer {
+    height: 180px;
+  }
 }
 
 
