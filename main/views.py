@@ -343,3 +343,7 @@ class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(request, _('Playlist deleted successfully.'))
         return super().delete(request, *args, **kwargs)
+
+
+class TermsView(generic.TemplateView):
+    template_name = 'main/terms.html'

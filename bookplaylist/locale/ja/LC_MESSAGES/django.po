@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-08 11:22+0900\n"
+"POT-Creation-Date: 2019-11-09 11:45+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -446,6 +446,7 @@ msgid "Contact"
 msgstr "お問い合わせ"
 
 #: bookplaylist/templates/layouts/footer.html:13
+#: main/templates/main/terms.html:6
 msgid "Terms"
 msgstr "利用規約"
 
@@ -746,6 +747,10 @@ msgstr "\"%(q)s\" が含まれるリスト一覧"
 #: main/templates/main/playlist/update.html:15
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
+
+#: main/templates/main/terms.html:13
+msgid "Terms of BooxMix"
+msgstr "BooxMix利用規約"
 
 #: main/views.py:165 main/views.py:220
 msgid "You have to add at least one book to your playlist."
