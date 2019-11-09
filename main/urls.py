@@ -14,4 +14,6 @@ urlpatterns = [
     path('playlist/<slug:category>/<uuid:pk>/update/book/', views.PlaylistUpdateBookView.as_view(), name='playlist_update_book'),
     path('playlist/<slug:category>/<uuid:pk>/update/book/<uuid:book>/', views.PlaylistUpdateBookStoreView.as_view(), name='playlist_update_book_store'),
     path('playlist/<slug:category>/<uuid:pk>/delete/', views.PlaylistDeleteView.as_view(), name='playlist_delete'),
+    path('terms/', views.TermsView.as_view(), name='terms'),
+    path('privacy/', views.PrivacyView.as_view(), name='privacy'),
 ]

@@ -1,0 +1,23 @@
+{% load static %}
+{% load i18n %}
+
+<footer id="footer" class="w-100 text-center">
+    <div class="line-gray mt-5 mb-4"></div>
+    <div class="container">
+        <div class="row font-weight-bold">
+            <div class="col-6 col-md-3">
+                <p class="text-sm mb-1"><a href="{% url 'main:terms' %}">{% trans 'Terms' %}</a></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <p class="text-sm mb-1"><a href="{% url 'main:privacy' %}">{% trans 'Privacy' %}</a></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <p class="text-sm mb-1"><a href="">{% trans 'About' %}</a></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <p class="text-sm mb-1"><a href="">{% trans 'Contact' %}</a></p>
+            </div>
+        </div>
+    </div>
+    <p class="text-sm mt-4 mb-0">&copy; 2019 BooxMix All rights reserved.</p>
+</footer>
