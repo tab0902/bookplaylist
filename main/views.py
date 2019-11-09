@@ -347,3 +347,7 @@ class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
 
 class TermsView(generic.TemplateView):
     template_name = 'main/terms.html'
+
+
+class PrivacyView(generic.TemplateView):
+    template_name = 'main/privacy.html'

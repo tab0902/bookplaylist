@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-09 11:45+0900\n"
+"POT-Creation-Date: 2019-11-09 13:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -451,7 +451,7 @@ msgid "Terms"
 msgstr "利用規約"
 
 #: bookplaylist/templates/layouts/footer.html:14
-msgid "Privacy policy"
+msgid "Privacy"
 msgstr "プライバシー"
 
 #: bookplaylist/templates/layouts/footer.html:17
@@ -747,6 +747,10 @@ msgstr "\"%(q)s\" が含まれるリスト一覧"
 #: main/templates/main/playlist/update.html:15
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
+
+#: main/templates/main/privacy.html:6 main/templates/main/privacy.html:13
+msgid "Privacy policy"
+msgstr "プライバシーポリシー"
 
 #: main/templates/main/terms.html:13
 msgid "Terms of BooxMix"
