@@ -35,7 +35,7 @@
                     {% if mode == 'create' %}
                     href="{% url 'main:playlist_create' %}?continue=True"
                     {% elif mode == 'update' %}
-                    href="{% url 'main:playlist_update' view.kwargs.theme view.kwargs.pk %}?continue=True"
+                    href="{% url 'main:playlist_update' view.kwargs.pk %}?continue=True"
                     {% endif %}
                 >
                     <i class="fas fa-angle-left"></i> {% trans 'Back' %}
@@ -79,7 +79,7 @@
                             {% if mode == 'create' %}
                             onclick="location.href='{% url 'main:playlist_create_book_store' book.pk %}'"
                             {% elif mode == 'update' %}
-                            onclick="location.href='{% url 'main:playlist_update_book_store' view.kwargs.theme view.kwargs.pk book.pk %}'"
+                            onclick="location.href='{% url 'main:playlist_update_book_store' view.kwargs.pk book.pk %}'"
                             {% endif %}
                             {% if book.isbn in books_in_session %}
                             disabled

@@ -24,8 +24,6 @@ class OwnerOnlyMixin:
             obj = Playlist.objects.filter(pk=self.kwargs.get('pk')).first()
         if obj.user != request.user:
             messages.warning(request, _('You don\'t have permission to access the page.'))
-            if 'theme' not in self.kwargs:
-                self.kwargs['theme'] = obj.theme.slug
             return redirect('main:playlist_detail', **self.kwargs)
         return super().dispatch(request, *args, **kwargs)
 
