@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from .models import (
-    Category, Playlist, PlaylistBook,
+    Playlist, PlaylistBook, Theme,
 )
 
 
@@ -29,12 +29,12 @@ class PlaylistForm(BasePlaylistForm):
 
     class Meta:
         model = Playlist
-        fields = ('title', 'category', 'description',)
+        fields = ('title', 'theme', 'description',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['title'].label = _('Playlist\'s title')
-        self.fields['category'].empty_label = _('(Select a catagory)')
+        self.fields['theme'].empty_label = _('(Select a theme)')
         self.fields['title'].widget.attrs['placeholder'] = _('Describe us the overview')
         self.fields['description'].widget.attrs['placeholder'] = _('Tell us why you are create this playlist')
 
@@ -95,22 +95,22 @@ class SearchForm(forms.Form):
 
 
 class PlaylistSearchForm(SearchForm):
-    category = forms.ModelChoiceField(
-        Category.objects.all(),
+    theme = forms.ModelChoiceField(
+        Theme.objects.all(),
         to_field_name='slug',
         required=False,
-        label = _('Category'),
-        empty_label=_('All categories'),
+        label = _('Theme'),
+        empty_label=_('All themes'),
     )
 
-    def __init__(self, q='', category=None, *args, **kwargs):
+    def __init__(self, q='', theme=None, *args, **kwargs):
         super().__init__(q=q, *args, **kwargs)
-        self.fields['category'].initial = category
+        self.fields['theme'].initial = theme
         self.fields['q'].widget.attrs['placeholder'] = _('Input theme, title and so on')
 
 
 class BookSearchForm(SearchForm):
 
-    def __init__(self, q='', category=None, *args, **kwargs):
+    def __init__(self, q='', theme=None, *args, **kwargs):
         super().__init__(q=q, *args, **kwargs)
         self.fields['q'].widget.attrs['placeholder'] = _('Input title or author name')

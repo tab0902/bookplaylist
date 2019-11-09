@@ -159,7 +159,7 @@ MESSAGE_TAGS = {
 ADMIN_REORDER = (
     {
         'app': 'main',
-        'models': ('main.Category', 'main.Book', 'main.Playlist', )
+        'models': ('main.Book', 'main.Playlist', 'main.Theme', )
     },
     {
         'app': 'accounts',

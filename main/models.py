@@ -9,19 +9,18 @@ from bookplaylist.models import (
 # Create your models here.
 
 
-class Category(BaseModel):
-    name = NullCharField(_('category name'), max_length=50, unique=True)
-    slug = NullSlugField(_('slug'), unique=True)
-    sequence = models.SmallIntegerField(_('sequence'))
+class Theme(BaseModel):
+    name = NullCharField(_('theme name'), max_length=50, unique=True)
+    slug = NullSlugField(_('slug'), blank=True, null=True, unique=True)
+    sequence = models.SmallIntegerField(_('sequence'), blank=True, null=True)
     description = NullTextField(_('description'), blank=True, null=True)
 
     class Meta(BaseModel.Meta):
-        db_table = 'categories'
+        db_table = 'themes'
         ordering = ['sequence']
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
+        verbose_name = _('theme')
+        verbose_name_plural = _('themes')
         indexes = [
-            models.Index(fields=['name'], name='name'),
             models.Index(fields=['sequence'], name='sequence'),
         ] + BaseModel._meta.indexes
 
@@ -76,7 +75,7 @@ class Playlist(BaseModel):
         verbose_name=_('books'),
     )
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name=_('category'))
+    theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
 

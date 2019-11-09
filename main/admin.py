@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (
-    Book, Category, Playlist, PlaylistBook,
+    Book, Playlist, PlaylistBook, Theme,
 )
 
 # Register your models here.
@@ -31,8 +31,8 @@ class PlaylistBookInline(admin.TabularInline):
         return extra
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+@admin.register(Theme)
+class ThemeAdmin(admin.ModelAdmin):
     list_display = ('name', 'sequence', 'created_at', )
     list_filter = ('created_at', 'updated_at', )
     search_fields = ('name', 'description', )
@@ -47,7 +47,7 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(Playlist)
 class PlaylistAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'category', 'created_at', )
-    list_filter = ('category__name', 'created_at', 'updated_at', )
-    search_fields = ('title', 'description', 'user__username', 'category__name', 'books__title', 'books__author', )
-    inlines = [PlaylistBookInline]
+    list_display = ('title', 'user', 'theme', 'created_at', )
+    list_filter = ('theme__name', 'created_at', 'updated_at', )
+    search_fields = ('title', 'description', 'user__username', 'theme__name', 'books__title', 'books__author', )
+    # inlines = [PlaylistBookInline]

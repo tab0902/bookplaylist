@@ -644,7 +644,7 @@ textarea {
 
 /*---------------------------------
 
-  playlist/<category>/<pk>/
+  playlist/<theme>/<pk>/
 
 ---------------------------------*/
 
@@ -664,7 +664,7 @@ textarea {
 
 /*---------------------------------
 
-  (?:create|update/<category>/<pk>)/book/
+  (?:create|update/<theme>/<pk>)/book/
 
 ---------------------------------*/
 

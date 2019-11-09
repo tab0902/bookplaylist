@@ -20,7 +20,7 @@
         {% if request.user == playlist.user %}
             </div>
             <div class="col-md-3">
-                <a href="{% url 'main:playlist_update' playlist.category.slug playlist.pk %}" class="btn btn-outline-sub w-100 my-md-4">
+                <a href="{% url 'main:playlist_update' playlist.theme.slug playlist.pk %}" class="btn btn-outline-sub w-100 my-md-4">
                     {% trans 'Edit' %}
                 </a>
             </div>
