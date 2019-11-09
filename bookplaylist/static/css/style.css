@@ -525,11 +525,11 @@ textarea {
 #footer {
   position: absolute;
   bottom: 0;
-  height: 220px;
+  height: 200px;
 }
 @media screen and (min-width: 576px) {
   #footer {
-    height: 180px;
+    height: 160px;
   }
 }
 
