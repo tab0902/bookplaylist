@@ -92,6 +92,9 @@ a.color-gray:hover, a.color-gray:active {
 .text-sm {
    font-size: 14px;
 }
+.text-md {
+   font-size: 16px;
+}
 @media screen and (min-width: 768px) {
   .heading-lg {
     font-size: 28px;

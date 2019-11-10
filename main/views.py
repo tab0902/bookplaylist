@@ -351,3 +351,7 @@ class TermsView(generic.TemplateView):
 
 class PrivacyView(generic.TemplateView):
     template_name = 'main/privacy.html'
+
+
+class AboutView(generic.TemplateView):
+    template_name = 'main/about.html'

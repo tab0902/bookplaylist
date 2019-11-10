@@ -16,4 +16,5 @@ urlpatterns = [
     path('playlist/<uuid:pk>/delete/', views.PlaylistDeleteView.as_view(), name='playlist_delete'),
     path('terms/', views.TermsView.as_view(), name='terms'),
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
+    path('about/', views.AboutView.as_view(), name='about'),
 ]
