@@ -4,7 +4,7 @@
 <div class="row mt-4">
     {% for playlist in playlists %}
     <div class="playlist-item col-sm-6 col-lg-4">
-        <a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}" class="color-gray">
+        <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
             <div class="position-relative pb-5">
                 <div class="line-gray my-4 my-sm-5"></div>
                 <div class="playlist-img scroll-wrapper scroll-wrapper-cover">

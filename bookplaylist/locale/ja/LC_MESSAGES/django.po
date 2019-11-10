@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-09 13:23+0900\n"
+"POT-Creation-Date: 2019-11-09 17:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:111 main/models.py:78
+#: accounts/models.py:111 main/models.py:77
 msgid "user"
 msgstr ""
 
@@ -438,25 +438,21 @@ msgid "Log out"
 msgstr ""
 
 #: bookplaylist/templates/layouts/footer.html:9
-msgid "About"
-msgstr "運営者情報"
-
-#: bookplaylist/templates/layouts/footer.html:10
-msgid "Contact"
-msgstr "お問い合わせ"
-
-#: bookplaylist/templates/layouts/footer.html:13
 #: main/templates/main/terms.html:6
 msgid "Terms"
 msgstr "利用規約"
 
-#: bookplaylist/templates/layouts/footer.html:14
+#: bookplaylist/templates/layouts/footer.html:12
 msgid "Privacy"
 msgstr "プライバシー"
 
-#: bookplaylist/templates/layouts/footer.html:17
-msgid "Site map"
-msgstr "サイトマップ"
+#: bookplaylist/templates/layouts/footer.html:15
+msgid "About"
+msgstr "運営者情報"
+
+#: bookplaylist/templates/layouts/footer.html:18
+msgid "Contact"
+msgstr "お問い合わせ"
 
 #: bookplaylist/urls.py:22
 msgid "BookPlayList site admin"
@@ -483,8 +479,8 @@ msgid "Playlist's title"
 msgstr "プレイリストのタイトル"
 
 #: main/forms.py:37
-msgid "(Select a catagory)"
-msgstr "(カテゴリを選択)"
+msgid "(Select a theme)"
+msgstr "(テーマを選択)"
 
 #: main/forms.py:38
 msgid "Describe us the overview"
@@ -511,12 +507,12 @@ msgid "Input key words"
 msgstr "キーワードを入力"
 
 #: main/forms.py:102
-msgid "Category"
-msgstr "カテゴリ"
+msgid "Theme"
+msgstr "テーマ"
 
 #: main/forms.py:103
-msgid "All categories"
-msgstr "すべてのカテゴリ"
+msgid "All themes"
+msgstr "すべてのテーマ"
 
 #: main/forms.py:109
 msgid "Input theme, title and so on"
@@ -527,8 +523,8 @@ msgid "Input title or author name"
 msgstr "書名、著者名を入力"
 
 #: main/models.py:13
-msgid "category name"
-msgstr "カテゴリ名"
+msgid "theme name"
+msgstr "テーマ名"
 
 #: main/models.py:14
 msgid "slug"
@@ -538,79 +534,79 @@ msgstr "スラッグ"
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:16 main/models.py:81 main/models.py:101
+#: main/models.py:16 main/models.py:80 main/models.py:100
 msgid "description"
 msgstr "概要"
 
-#: main/models.py:21 main/models.py:79
-msgid "category"
-msgstr "カテゴリ"
+#: main/models.py:21 main/models.py:78
+msgid "theme"
+msgstr "テーマ"
 
 #: main/models.py:22
-msgid "categories"
-msgstr "カテゴリ"
+msgid "themes"
+msgstr "テーマ"
 
-#: main/models.py:37 main/models.py:87
+#: main/models.py:36 main/models.py:86
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models.py:40
+#: main/models.py:39
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:41 main/models.py:80
+#: main/models.py:40 main/models.py:79
 msgid "title"
 msgstr "タイトル"
 
-#: main/models.py:42
+#: main/models.py:41
 msgid "collation key"
 msgstr "照合キー"
 
-#: main/models.py:43
+#: main/models.py:42
 msgid "volume"
 msgstr "巻数"
 
-#: main/models.py:44
+#: main/models.py:43
 msgid "series"
 msgstr "シリーズ"
 
-#: main/models.py:45
+#: main/models.py:44
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models.py:46
+#: main/models.py:45
 msgid "date published"
 msgstr "出版日"
 
-#: main/models.py:47
+#: main/models.py:46
 msgid "cover"
 msgstr "書影"
 
-#: main/models.py:48
+#: main/models.py:47
 msgid "author"
 msgstr "著者"
 
-#: main/models.py:49
+#: main/models.py:48
 msgid "Amazon URL"
 msgstr "アマゾンURL"
 
-#: main/models.py:54 main/models.py:100
+#: main/models.py:53 main/models.py:99
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:55 main/models.py:76
+#: main/models.py:54 main/models.py:75
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:86 main/models.py:99
+#: main/models.py:85 main/models.py:98
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:106
+#: main/models.py:105
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:107
+#: main/models.py:106
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 

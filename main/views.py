@@ -16,7 +16,7 @@ from .forms import (
     BookSearchForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
-    Book, Category, Playlist,
+    Book, Playlist, Theme,
 )
 from bookplaylist.views import (
     OwnerOnlyMixin, SearchFormView, login_required,
@@ -31,12 +31,12 @@ class PlaylistSearchFormView(SearchFormView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['category'] = self.request.GET.get('category') or None
+        kwargs['theme'] = self.request.GET.get('theme') or None
         return kwargs
 
     def form_valid(self, form):
-        category = form.cleaned_data['category']
-        self.param['category'] = category.slug if category else ''
+        theme = form.cleaned_data['theme']
+        self.param['theme'] = theme.slug if theme else ''
         return super().form_valid(form)
 
 
@@ -51,11 +51,11 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        category = self.request.GET.get('category')
+        theme = self.request.GET.get('theme')
         condition_lists = []
         condition_dict = {}
-        if category:
-            condition_dict['category__slug'] = category
+        if theme:
+            condition_dict['theme__slug'] = theme
         if query:
             q_list = self._format_query(query)
             condition_lists.append([
@@ -87,7 +87,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
         context = super().get_context_data(**kwargs)
         context['params'] = {
             'q': self.request.GET.get('q'),
-            'category': self.request.GET.get('category'),
+            'theme': self.request.GET.get('theme'),
         }
         return context
 

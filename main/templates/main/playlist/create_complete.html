@@ -12,7 +12,7 @@
     <section id="playlist-create-complete">
         <h2 class="mt-4 mt-md-5">{% trans 'Playlist created successfully!' %}</h2>
         <div class="playlist-card mt-5">
-            <a href="{% url 'main:playlist_detail' playlist.category.slug playlist.pk %}" class="color-gray">
+            <a href="{% url 'main:playlist_detail'.slug playlist.pk %}" class="color-gray">
                 <div class="playlist-img scroll-wrapper scroll-wrapper-cover">
                     <div class="playlist-img scroll-inner scroll-inner-cover">
                         {% for playlist_book in playlist.playlistbook_set.all %}
