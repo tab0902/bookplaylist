@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-09 17:23+0900\n"
+"POT-Creation-Date: 2019-11-10 13:30+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -447,8 +447,9 @@ msgid "Privacy"
 msgstr "プライバシー"
 
 #: bookplaylist/templates/layouts/footer.html:15
-msgid "About"
-msgstr "運営者情報"
+#: main/templates/main/about.html:6 main/templates/main/about.html:13
+msgid "About BooxMix"
+msgstr "BooxMixについて"
 
 #: bookplaylist/templates/layouts/footer.html:18
 msgid "Contact"
@@ -609,6 +610,46 @@ msgstr "リスト内の書籍"
 #: main/models.py:106
 msgid "books in playlists"
 msgstr "リスト内の書籍"
+
+#: main/templates/main/about.html:15
+msgid "What is BooxMix?"
+msgstr "BooxMixとは？"
+
+#: main/templates/main/about.html:21
+msgid "Administrators"
+msgstr "運営者"
+
+#: main/templates/main/about.html:25
+msgid "Representative"
+msgstr "代表"
+
+#: main/templates/main/about.html:26
+msgid "Shogo Minami"
+msgstr "南　昇吾"
+
+#: main/templates/main/about.html:29
+msgid "Technology officer"
+msgstr "技術責任者"
+
+#: main/templates/main/about.html:30
+msgid "Sho Tabuchi"
+msgstr "田渕　翔"
+
+#: main/templates/main/about.html:33 main/templates/main/about.html:37
+msgid "Developer"
+msgstr "開発者"
+
+#: main/templates/main/about.html:34
+msgid "Mizuki Ono"
+msgstr "大野　水季"
+
+#: main/templates/main/about.html:38
+msgid "Takayuki Otomo"
+msgstr "大智　隆之"
+
+#: main/templates/main/about.html:43
+msgid "Contact address"
+msgstr "連絡先"
 
 #: main/templates/main/index.html:6
 msgid "Share Book Playlists on your SNS."

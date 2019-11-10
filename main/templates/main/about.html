@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'About BooxMix' %} | BooxMix
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <section id="about">
+        <h1 class="mt-4 mt-md-5">{% trans 'About BooxMix' %}</h1>
+
+        <h2 class="mt-5">{% trans 'What is BooxMix?' %}</h2>
+        <p class="mt-4">
+            BooxMixは、おすすめしたい本を複数冊ピックアップして本のプレイリストを作成し、気軽にSNSでシェアできるサービスです。<br>
+            「私が元気を出したいときに読む本5選」や、「渋沢栄一を理解するための本5冊の読み方」、「環境問題をより深く理解するために読む本5冊」などを例に、人の感情や主観から選んだ本を気軽にシェアできるようして、少しでも人の価値観や考え方をSNSで伝えやすくすることを目指しています。
+        </p>
+
+        <h2 class="mt-5">{% trans 'Administrators' %}</h2>
+        <table cellpadding="2" class="mt-4 text-md">
+            <tbody>
+                <tr>
+                    <th>{% trans 'Representative' %}</th>
+                    <td class="pl-3">{% trans 'Shogo Minami' %}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Technology officer' %}</th>
+                    <td class="pl-3">{% trans 'Sho Tabuchi' %}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Developer' %}</th>
+                    <td class="pl-3">{% trans 'Mizuki Ono' %}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Developer' %}</th>
+                    <td class="pl-3">{% trans 'Takayuki Otomo' %}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="mt-4">
+            {% trans 'Contact address' %}: info@booxmix.com
+        </p>
+    </section>
+</div>
+
+{% endblock %}
