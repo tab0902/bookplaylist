@@ -41,6 +41,10 @@
         {% include 'main/playlist/layouts/list-widget.html' %}
         {% include 'layouts/pagenator.html' with params=params queryset=playlists %}
     </section>
+
+    <section id="playlist-list-lets-create">
+        {% include 'main/playlist/layouts/lets-create-playlist.html' with theme=params.theme|default:params.q|default:'' %}
+    </section>
 </div>
 
 {% endblock %}

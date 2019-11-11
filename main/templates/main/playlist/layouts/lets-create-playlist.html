@@ -1,0 +1,24 @@
+{% load static %}
+{% load i18n %}
+
+<a href="{% url 'main:playlist_create' %}" class="lets-create-link color-gray">
+    <div class="lets-create-box d-block">
+        <div class="row">
+            <div class="col-sm-5 order-sm-1">
+                <div class="lets-create-box-img-wrapper">
+                    <img src="{% static 'img/book-people.png' %}" class="w-100">
+                </div>
+            </div>
+            <div class="col-sm-7 order-sm-0">
+                <h1 class="lets-create-box-heading mt-sm-3 mt-lg-5">
+                    {% if theme %}
+                    {% blocktrans %}Let's share #{{ theme }}!{% endblocktrans %}
+                    {% else %}
+                    {% blocktrans %}Let's share your book playlist!{% endblocktrans %}
+                    {% endif %}
+                </h1>
+                <button type="button" class="btn btn-main lets-create-box-btn mt-3 mt-lg-4">{% trans 'Create playlist' %}</button>
+            </div>
+        </div>
+    </div>
+</a>
