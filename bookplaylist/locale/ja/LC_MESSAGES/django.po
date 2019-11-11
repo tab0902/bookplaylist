@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 13:30+0900\n"
+"POT-Creation-Date: 2019-11-10 15:30+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -166,6 +166,7 @@ msgstr "アカウント設定"
 #: main/templates/main/index.html:14 main/templates/main/index.html:34
 #: main/templates/main/playlist/create.html:6
 #: main/templates/main/playlist/create.html:13
+#: main/templates/main/playlist/layouts/lets-create-playlist.html:15
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
@@ -743,6 +744,19 @@ msgstr "編集する"
 #: main/templates/main/playlist/layouts/list-widget.html:22
 msgid "Show more"
 msgstr "詳細を見る"
+
+#: main/templates/main/playlist/detail.html:80
+msgid "Who created this playlist?"
+msgstr "プレイリストの作者"
+
+#: main/templates/main/playlist/layouts/lets-create-playlist.html:8
+#, python-format
+msgid "Let's share #%(theme)s!"
+msgstr "あなたも #%(theme)s のプレイリストをシェアしましょう！"
+
+#: main/templates/main/playlist/layouts/lets-create-playlist.html:10
+msgid "Let's share your book playlist!"
+msgstr "あなたも本のプレイリストをシェアしましょう！"
 
 #: main/templates/main/playlist/layouts/list-widget.html:28
 msgid "No playlist found. Please search by other conditions."
