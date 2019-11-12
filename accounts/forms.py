@@ -3,7 +3,7 @@ from django.contrib.auth import (
     get_user_model, password_validation,
 )
 from django.contrib.auth.forms import (
-    ReadOnlyPasswordHashField, UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm, UsernameField,
+    AuthenticationForm as BaseAuthenticationForm, ReadOnlyPasswordHashField, UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm, UsernameField,
 )
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
@@ -95,6 +95,14 @@ class PasswordCreationForm(forms.Form):
             if name not in data:
                 return []
         return ['password']
+
+
+class AuthenticationForm(BaseAuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = _('Username or Email Address')
+        self.fields['username'].widget.attrs['autofocus'] = False
 
 
 class SignupForm(UserCreationForm, SendEmailMixin):
