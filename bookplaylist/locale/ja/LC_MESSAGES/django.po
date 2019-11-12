@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 17:35+0900\n"
+"POT-Creation-Date: 2019-11-12 18:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -500,8 +500,8 @@ msgid "Playlist's title"
 msgstr "プレイリストのタイトル"
 
 #: main/forms.py:37
-msgid "(Select a theme)"
-msgstr "(テーマを選択)"
+msgid "Free theme"
+msgstr "テーマ自由"
 
 #: main/forms.py:38
 msgid "Describe us the overview"
