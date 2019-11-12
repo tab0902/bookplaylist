@@ -4,7 +4,7 @@ from itertools import chain
 from django import forms
 from django.contrib import messages
 from django.db.models import (
-    Count, Q,
+    Case, Count, IntegerField, Prefetch, Q, When
 )
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, render_to_response
@@ -16,7 +16,7 @@ from .forms import (
     BookSearchForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
-    Book, Playlist, Theme,
+    Book, Playlist, PlaylistBook, Theme,
 )
 from bookplaylist.views import (
     OwnerOnlyMixin, SearchFormView, login_required,
@@ -42,6 +42,30 @@ class PlaylistSearchFormView(SearchFormView):
 
 class IndexView(PlaylistSearchFormView):
     template_name = 'main/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['themes'] = [
+            (
+                theme,
+                Playlist.objects \
+                    .annotate(
+                        count_cover=Count(
+                            Case(When(playlistbook__book__cover__isnull=False, then=1)),
+                            output_field=IntegerField())) \
+                    .filter(
+                        theme=theme,
+                        count_cover__gte=2)[:4] \
+                    .prefetch_related(
+                        Prefetch(
+                            'playlistbook_set',
+                            queryset=PlaylistBook.objects \
+                                .filter(book__cover__isnull=False) \
+                                .select_related('book')))
+            )
+            for theme in Theme.objects.filter(sequence__isnull=False)
+        ]
+        return context
 
 
 class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
