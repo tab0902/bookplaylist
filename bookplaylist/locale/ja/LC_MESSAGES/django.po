@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 15:30+0900\n"
+"POT-Creation-Date: 2019-11-12 13:08+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,20 +163,19 @@ msgstr "アカウント設定"
 #: accounts/templates/accounts/index.html:23
 #: accounts/templates/accounts/password_reset_complete.html:20
 #: accounts/templates/accounts/verification.html:20
-#: main/templates/main/index.html:14 main/templates/main/index.html:34
-#: main/templates/main/playlist/create.html:6
+#: main/templates/main/index.html:32 main/templates/main/playlist/create.html:6
 #: main/templates/main/playlist/create.html:13
-#: main/templates/main/playlist/layouts/lets-create-playlist.html:15
+#: main/templates/main/playlist/layouts/lets-create-playlist.html:20
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
-#: accounts/templates/accounts/index.html:24 main/templates/main/index.html:17
-#: main/templates/main/index.html:35
+#: accounts/templates/accounts/index.html:24 main/templates/main/index.html:15
+#: main/templates/main/index.html:33
 msgid "Create your playlist in 2 minutes, and share it easily."
 msgstr "2分で本のプレイリストを作成してSNSで簡単にシェアしよう。"
 
-#: accounts/templates/accounts/index.html:27 main/templates/main/index.html:20
-#: main/templates/main/index.html:36
+#: accounts/templates/accounts/index.html:27 main/templates/main/index.html:16
+#: main/templates/main/index.html:34
 msgid "Create"
 msgstr "作成する"
 
@@ -660,13 +659,17 @@ msgstr "本のプレイリストをSNSでシェアしよう。"
 msgid "Share Book Playlists<br>on your SNS."
 msgstr "本のプレイリストを<br>SNSでシェアしよう。"
 
-#: main/templates/main/index.html:23 main/templates/main/index.html:41
-msgid "Search playlist"
-msgstr "プレイリストを検索する"
-
-#: main/templates/main/index.html:29
+#: main/templates/main/index.html:27
 msgid "Share Book Playlists<br class=\"d-sm-none\">on your SNS."
 msgstr "本のプレイリストを<br class=\"d-sm-none\">SNSでシェアしよう。"
+
+#: main/templates/main/index.html:68
+msgid "Show all"
+msgstr "すべて見る"
+
+#: main/templates/main/index.html:71
+msgid "Show all %(theme)s"
+msgstr "全ての #%(theme)s を見る"
 
 #: main/templates/main/playlist/book.html:6
 #: main/templates/main/playlist/book.html:17
@@ -749,12 +752,12 @@ msgstr "詳細を見る"
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlist/layouts/lets-create-playlist.html:8
+#: main/templates/main/playlist/layouts/lets-create-playlist.html:15
 #, python-format
 msgid "Let's share #%(theme)s!"
 msgstr "あなたも #%(theme)s のプレイリストをシェアしましょう！"
 
-#: main/templates/main/playlist/layouts/lets-create-playlist.html:10
+#: main/templates/main/playlist/layouts/lets-create-playlist.html:17
 msgid "Let's share your book playlist!"
 msgstr "あなたも本のプレイリストをシェアしましょう！"
 
@@ -807,18 +810,21 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:165 main/views.py:220
+#: main/views.py:191 main/views.py:246
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:231
+#: main/views.py:257
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:300
+#: main/views.py:326
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:344
+#: main/views.py:370
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
+
+#~ msgid "Search playlist"
+#~ msgstr "プレイリストを検索する"

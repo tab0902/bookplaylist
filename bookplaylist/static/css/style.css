@@ -368,7 +368,7 @@ textarea {
     width: 100%;
 }
 .blank-box-wrapper:before {
-    content:"";
+    content:'';
     display: block;
 }
 .blank-box-content {
@@ -399,6 +399,12 @@ textarea {
 }
 .border-radius {
   border-radius: 4px;
+}
+.border-radius-left {
+  border-radius: 4px 0 0 4px;
+}
+.border-radius-right {
+  border-radius: 0 4px 4px 0;
 }
 .errorlist {
   list-style-type: none;
@@ -549,7 +555,7 @@ textarea {
 
 ---------------------------------*/
 
-.top-bg {
+.hero {
   position: relative;
   width: 100%;
   height: 25vh;
@@ -558,35 +564,39 @@ textarea {
   background-position: center bottom;
 }
 @media screen and (min-width: 576px) {
-  .top-bg {
+  .hero {
     height: 40vh;
   }
 }
 @media screen and (min-width: 768px) {
-  .top-bg {
+  .hero {
     height: calc(100vh - 50px);
     min-height: 550px;
     max-height: 1500px;
     background-position: 25% 25%;
   }
 }
-.top-title-sp {
+.hero-title-sp {
   position: absolute;
   left: 24px;
   bottom: 4px;
   line-height: 32px;
   color: #fff;
 }
-.top-title-pc {
+.hero-title-pc {
   font-size: 30px;
   line-height: 40px;
 }
-.top-form-pc {
+.hero-content-pc {
   position: absolute;
-  left: 80px;
+  /* left: 80px;
   top: 30px;
   width: 440px;
-  padding: 24px;
+  padding: 24px; */
+  left: 100px;
+  top: 100px;
+  width: 440px;
+  padding: 32px 32px 32px;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 16px gray;
