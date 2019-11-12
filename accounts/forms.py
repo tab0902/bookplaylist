@@ -54,13 +54,13 @@ class PasswordCreationForm(forms.Form):
     }
     password1 = forms.CharField(
         label=_("Password"),
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'autofocus': True}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'autofocus': True, 'placeholder': _('At least 8 characters')}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
         label=_("Password (again)"),
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'placeholder': _('Enter the same password')}),
         strip=False,
         help_text=_("Enter the same password as before, for verification."),
     )
