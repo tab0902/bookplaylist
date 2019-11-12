@@ -3,7 +3,7 @@ from django.contrib.auth import (
     get_user_model, password_validation,
 )
 from django.contrib.auth.forms import (
-    ReadOnlyPasswordHashField, UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm, UsernameField,
+    AuthenticationForm as BaseAuthenticationForm, ReadOnlyPasswordHashField, UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm, UsernameField,
 )
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
@@ -54,13 +54,13 @@ class PasswordCreationForm(forms.Form):
     }
     password1 = forms.CharField(
         label=_("Password"),
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'autofocus': True}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'autofocus': True, 'placeholder': _('At least 8 characters')}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
         label=_("Password (again)"),
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'placeholder': _('Enter the same password')}),
         strip=False,
         help_text=_("Enter the same password as before, for verification."),
     )
@@ -97,7 +97,23 @@ class PasswordCreationForm(forms.Form):
         return ['password']
 
 
+class AuthenticationForm(BaseAuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = _('Username or Email Address')
+        self.fields['username'].widget.attrs['autofocus'] = False
+
+
 class SignupForm(UserCreationForm, SendEmailMixin):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = _('Letters, numbers, and _ characters')
+        self.fields['email'].widget.attrs['placeholder'] = _('Enter a valid email address')
+        self.fields['email'].widget.attrs['autocomplete'] = 'email'
+        self.fields['password1'].widget.attrs['placeholder'] = _('At least 8 characters')
+        self.fields['password2'].widget.attrs['placeholder'] = _('Enter the same password')
 
     def save(self, commit=True, domain_override=None,
              subject_template_name='accounts/signup_subject.html',

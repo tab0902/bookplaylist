@@ -3,19 +3,16 @@
 {% load i18n %}
 
 {% block title %}
-{% trans 'Create playlist' %} | BooxMix
+{% trans 'Create book playlist' %} | BooxMix
 {% endblock %}
 
 {% block content %}
 
 <div class="container container-slim">
     <section id="playlist-form">
-        <h2 class="mt-4 mt-md-5">{% trans 'Create playlist' %}</h2>
+        <h2 class="mt-4 mt-md-5">{% trans 'Create book playlist' %}</h2>
         {% include 'main/playlist/layouts/playlist-form.html' with mode='create' %}
     </section>
 </div>
-
-{% trans 'Are you sure?' as confirm_text %}
-{{ confirm_text|json_script:'confirm-text' }}
 
 {% endblock %}

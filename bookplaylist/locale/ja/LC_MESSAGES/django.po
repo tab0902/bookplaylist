@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 15:17+0900\n"
+"POT-Creation-Date: 2019-11-12 19:43+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,15 +42,35 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: accounts/forms.py:57 accounts/forms.py:115
+msgid "At least 8 characters"
+msgstr "最低8文字以上"
+
 #: accounts/forms.py:62
 msgid "Password (again)"
 msgstr ""
+
+#: accounts/forms.py:63 accounts/forms.py:116
+msgid "Enter the same password"
+msgstr "同じパスワードを入力してください"
 
 #: accounts/forms.py:65
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: accounts/forms.py:141
+#: accounts/forms.py:104
+msgid "Username or Email Address"
+msgstr "ユーザー名またはメールアドレス"
+
+#: accounts/forms.py:112
+msgid "Letters, numbers, and _ characters"
+msgstr "半角英数またはアンダーバー"
+
+#: accounts/forms.py:113
+msgid "Enter a valid email address"
+msgstr "正しいメールアドレスを入力してください"
+
+#: accounts/forms.py:157
 msgid "Email"
 msgstr ""
 
@@ -163,8 +183,7 @@ msgstr "アカウント設定"
 #: accounts/templates/accounts/index.html:23
 #: accounts/templates/accounts/password_reset_complete.html:20
 #: accounts/templates/accounts/verification.html:20
-#: main/templates/main/index.html:32 main/templates/main/playlist/create.html:6
-#: main/templates/main/playlist/create.html:13
+#: main/templates/main/index.html:32
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:20
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
@@ -480,46 +499,34 @@ msgid "Playlist's title"
 msgstr "プレイリストのタイトル"
 
 #: main/forms.py:37
-msgid "(Select a theme)"
-msgstr "(テーマを選択)"
+msgid "Free theme"
+msgstr "テーマ自由"
 
-#: main/forms.py:38
-msgid "Describe us the overview"
-msgstr "タイトルを入力"
-
-#: main/forms.py:39
-msgid "Tell us why you are create this playlist"
-msgstr "作成する背景を教えて下さい"
-
-#: main/forms.py:55
-msgid "Please explain why you recommend this book"
-msgstr "この本を追加する理由はなんですか？"
-
-#: main/forms.py:67 main/templates/main/playlist/delete.html:19
+#: main/forms.py:70 main/templates/main/playlist/delete.html:19
 msgid "Delete"
 msgstr "削除する"
 
-#: main/forms.py:88
+#: main/forms.py:91
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:94
+#: main/forms.py:97
 msgid "Input key words"
 msgstr "キーワードを入力"
 
-#: main/forms.py:102
+#: main/forms.py:105
 msgid "Theme"
 msgstr "テーマ"
 
-#: main/forms.py:103
+#: main/forms.py:106
 msgid "All themes"
 msgstr "すべてのテーマ"
 
-#: main/forms.py:109
+#: main/forms.py:112
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:116
+#: main/forms.py:120
 msgid "Input title or author name"
 msgstr "書名、著者名を入力"
 
@@ -705,10 +712,10 @@ msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
-#: main/templates/main/playlist/create.html:18
-#: main/templates/main/playlist/update.html:30
-msgid "Are you sure?"
-msgstr ""
+#: main/templates/main/playlist/create.html:6
+#: main/templates/main/playlist/create.html:13
+msgid "Create book playlist"
+msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
@@ -759,8 +766,8 @@ msgstr "プレイリストの作者"
 
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:15
 #, python-format
-msgid "Let's share #%(theme)s!"
-msgstr "あなたも #%(theme)s のプレイリストをシェアしましょう！"
+msgid "Let's share #%(tag)s!"
+msgstr "あなたも #%(tag)s のプレイリストをシェアしましょう！"
 
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:17
 msgid "Let's share your book playlist!"
@@ -793,7 +800,7 @@ msgid "Complete"
 msgstr "完成"
 
 #: main/templates/main/playlist/list.html:9
-#: main/templates/main/playlist/list.html:30
+#: main/templates/main/playlist/list.html:32
 msgid "All Playlists"
 msgstr "プレイリスト一覧"
 
@@ -801,6 +808,11 @@ msgstr "プレイリスト一覧"
 #, python-format
 msgid "Playlists related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれるリスト一覧"
+
+#: main/templates/main/playlist/list.html:30
+#, python-format
+msgid "Playlists with #%(theme)s"
+msgstr "#%(theme)s のプレイリスト"
 
 #: main/templates/main/playlist/update.html:6
 #: main/templates/main/playlist/update.html:15
@@ -815,19 +827,19 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:189 main/views.py:244
+#: main/views.py:199 main/views.py:259
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:255
+#: main/views.py:270
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:324
+#: main/views.py:336
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:368
+#: main/views.py:380
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 

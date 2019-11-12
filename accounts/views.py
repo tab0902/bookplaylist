@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
+    AuthenticationForm, PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
 )
 from bookplaylist.views import (
     login_required, sensitive_post_parameters,
@@ -101,6 +101,7 @@ class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
 
 
 class LoginView(auth_views.LoginView):
+    authentication_form = AuthenticationForm
     template_name = 'accounts/login.html'
 
 

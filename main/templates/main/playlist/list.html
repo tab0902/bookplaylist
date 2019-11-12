@@ -3,8 +3,8 @@
 {% load i18n %}
 
 {% block title %}
-{% if params.q %}
-{{ params.q }}
+{% if theme %}
+{{ theme.name }}
 {% else %}
 {% trans 'All Playlists' %}
 {% endif %}
@@ -14,7 +14,7 @@
 {% block content %}
 
 <div class="container">
-    {% if params.q %}
+    {% if request.GET.q %}
     <section id="search-playlist-wide">
         <div class="mt-4">
             {% include 'main/playlist/layouts/search-playlist-wide.html' %}
@@ -24,10 +24,12 @@
 
     <section id="playlist-page-title">
         <div class="mt-4 mt-md-5">
-            {% if params.q %}
-            <h2 class="d-none d-md-inline-block">{% blocktrans with q=params.q %}Playlists related with "{{ q }}"{% endblocktrans %}</h2>
+            {% if request.GET.q %}
+            <h2 class="d-none d-md-inline-block">{% blocktrans with q=request.GET.q %}Playlists related with "{{ q }}"{% endblocktrans %}</h2>
+            {% elif theme %}
+            <h1 class="mb-5">{% blocktrans with theme=theme.name %}Playlists with #{{ theme }}{% endblocktrans %}</h1>
             {% else %}
-            <h1>{% trans 'All Playlists' %}</h1>
+            <h1 class="mb-5">{% trans 'All Playlists' %}</h1>
             {% endif %}
         </div>
     </section>
@@ -43,7 +45,7 @@
     </section>
 
     <section id="playlist-list-lets-create">
-        {% include 'main/playlist/layouts/lets-create-playlist.html' with theme=params.q|default:'' %}
+        {% include 'main/playlist/layouts/lets-create-playlist.html' with theme=theme %}
     </section>
 </div>
 

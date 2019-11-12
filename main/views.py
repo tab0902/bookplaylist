@@ -114,10 +114,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['params'] = {
-            'q': self.request.GET.get('q'),
-            'theme': self.request.GET.get('theme'),
-        }
+        context['theme'] = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
         return context
 
 
@@ -313,9 +310,6 @@ class BasePlaylistBookView(generic.list.BaseListView, SearchFormView):
         context = super().get_context_data(**kwargs)
         context['books_in_session'] = [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
         context['mode'] = self.mode
-        context['params'] = {
-            'q': self.request.GET.get('q'),
-        }
         return context
 
     def get_success_url(self):
