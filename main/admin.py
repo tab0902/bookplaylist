@@ -47,7 +47,11 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(Playlist)
 class PlaylistAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'theme', 'created_at', )
-    list_filter = ('theme__name', 'created_at', 'updated_at', )
+    list_display = ('title', 'user', 'theme', 'created_at', 'is_published', )
+    list_filter = ('theme__name', 'is_published', 'created_at', 'updated_at', )
     search_fields = ('title', 'description', 'user__username', 'theme__name', 'books__title', 'books__author', )
     # inlines = [PlaylistBookInline]
+
+    def get_queryset(self, request):
+        qs = Playlist.all_objects.get_queryset()
+        return qs

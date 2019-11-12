@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from bookplaylist.models import (
     BaseModel, NullCharField, NullSlugField, NullTextField, NullURLField,
 )
+from .managers import PublishedOnlyManager
 
 # Create your models here.
 
@@ -78,6 +79,9 @@ class Playlist(BaseModel):
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
+    is_published = models.BooleanField(_('published'), default=True)
+    objects = PublishedOnlyManager()
+    all_objects = models.Manager()
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists'
