@@ -78,6 +78,7 @@ class Playlist(BaseModel):
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
+    is_published = models.BooleanField(_('published'), default=True)
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists'

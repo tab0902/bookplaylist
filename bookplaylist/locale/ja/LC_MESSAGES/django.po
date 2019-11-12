@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 13:08+0900\n"
+"POT-Creation-Date: 2019-11-12 14:41+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -535,7 +535,7 @@ msgstr "スラッグ"
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:16 main/models.py:80 main/models.py:100
+#: main/models.py:16 main/models.py:80 main/models.py:101
 msgid "description"
 msgstr "概要"
 
@@ -547,7 +547,7 @@ msgstr "テーマ"
 msgid "themes"
 msgstr "テーマ"
 
-#: main/models.py:36 main/models.py:86
+#: main/models.py:36 main/models.py:87
 msgid "playlists"
 msgstr "プレイリスト"
 
@@ -591,7 +591,7 @@ msgstr "著者"
 msgid "Amazon URL"
 msgstr "アマゾンURL"
 
-#: main/models.py:53 main/models.py:99
+#: main/models.py:53 main/models.py:100
 msgid "book"
 msgstr "書籍"
 
@@ -599,15 +599,19 @@ msgstr "書籍"
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:85 main/models.py:98
+#: main/models.py:81
+msgid "published"
+msgstr "公開"
+
+#: main/models.py:86 main/models.py:99
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:105
+#: main/models.py:106
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:106
+#: main/models.py:107
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
@@ -668,6 +672,7 @@ msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:71
+#, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
 
@@ -810,19 +815,19 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:191 main/views.py:246
+#: main/views.py:189 main/views.py:244
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:257
+#: main/views.py:255
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:326
+#: main/views.py:324
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:370
+#: main/views.py:368
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
