@@ -115,4 +115,5 @@ class BookSearchForm(SearchForm):
 
     def __init__(self, q='', theme=None, *args, **kwargs):
         super().__init__(q=q, *args, **kwargs)
+        self.fields['q'].widget.attrs['autofocus'] = True
         self.fields['q'].widget.attrs['placeholder'] = _('Input title or author name')

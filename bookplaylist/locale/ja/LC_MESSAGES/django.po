@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:19+0900\n"
+"POT-Creation-Date: 2019-11-12 19:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -539,7 +539,7 @@ msgstr "すべてのテーマ"
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:118
+#: main/forms.py:119
 msgid "Input title or author name"
 msgstr "書名、著者名を入力"
 
