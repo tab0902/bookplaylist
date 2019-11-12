@@ -104,7 +104,12 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
             queryset = list(dict.fromkeys(queryset))
         else:
             condition_list = []
-            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct().prefetch_related(
+                Prefetch(
+                    'playlistbook_set',
+                    queryset=PlaylistBook.objects.filter(book__cover__isnull=False).select_related('book')
+                )
+            )
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -119,6 +124,14 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
 class PlaylistDetailView(generic.DetailView):
     model = Playlist
     template_name = 'main/playlist/detail.html'
+
+    def get_queryset(self):
+        return super().get_queryset().select_related('theme', 'user').prefetch_related(
+            Prefetch(
+                'playlistbook_set',
+                queryset=PlaylistBook.objects.all().select_related('book')
+            )
+        )
 
 
 MODE_CREATE = 'create'
@@ -211,7 +224,12 @@ class PlaylistCreateView(BasePlaylistView, generic.CreateView):
 @login_required
 class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
     mode = MODE_UPDATE
+    object = None
     template_name = 'main/playlist/update.html'
+
+    def dispatch(self, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         initial = {
@@ -224,13 +242,13 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
                     'author': x.book.author,
                     'cover': x.book.cover,
                 }
-                for x in self.get_object().playlistbook_set.all()
+                for x in self.object.playlistbook_set.all().prefetch_related('book')
             ]
         }
         return super().get(request, initial, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        return super().get_context_data(instance=self.get_object(), **kwargs)
+        return super().get_context_data(instance=self.object, **kwargs)
 
     def form_valid(self, form):
         if POST_KEY_ADD_BOOK in self.request.POST:
@@ -256,7 +274,7 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        instance = self.get_object()
+        instance = self.object
         return super().form_invalid(form, instance)
 
     def get_success_url(self):
