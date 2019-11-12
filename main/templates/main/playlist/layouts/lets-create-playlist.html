@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 
-<a href="{% url 'main:playlist_create' %}" class="lets-create-link color-gray">
+<a href="{% url 'main:playlist_create' %}{% if theme %}?theme={{ theme.slug }}{% endif %}" class="lets-create-link color-gray">
     <div class="lets-create-box d-block">
         <div class="row">
             <div class="col-sm-5 order-sm-1">
@@ -12,7 +12,7 @@
             <div class="col-sm-7 order-sm-0">
                 <h1 class="lets-create-box-heading mt-sm-3 mt-lg-5">
                     {% if theme %}
-                    {% blocktrans %}Let's share #{{ theme }}!{% endblocktrans %}
+                    {% blocktrans with theme.name as tag %}Let's share #{{ tag }}!{% endblocktrans %}
                     {% else %}
                     {% blocktrans %}Let's share your book playlist!{% endblocktrans %}
                     {% endif %}

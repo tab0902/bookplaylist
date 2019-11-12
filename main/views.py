@@ -114,10 +114,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['params'] = {
-            'q': self.request.GET.get('q'),
-            'theme': self.request.GET.get('theme'),
-        }
+        context['theme'] = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
         return context
 
 

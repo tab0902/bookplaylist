@@ -37,6 +37,8 @@ class PlaylistForm(BasePlaylistForm):
         self.fields['theme'].empty_label = _('Free theme')
         self.fields['title'].widget.attrs['placeholder'] = _('Describe us the overview')
         self.fields['description'].widget.attrs['placeholder'] = _('Tell us why you are create this playlist')
+        if 'theme' in self.request.GET:
+            self.fields['theme'].initial = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
 
     def save(self, commit=True):
         self.instance.user = self.request.user
