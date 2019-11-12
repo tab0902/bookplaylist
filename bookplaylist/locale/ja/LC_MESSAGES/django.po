@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 15:17+0900\n"
+"POT-Creation-Date: 2019-11-12 17:11+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,23 @@ msgstr ""
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: accounts/forms.py:141
+#: accounts/forms.py:104
+msgid "Letters, numbers, and _ characters"
+msgstr "半角英数またはアンダーバー"
+
+#: accounts/forms.py:105
+msgid "Enter a valid email address"
+msgstr "正しいメールアドレスを入力してください"
+
+#: accounts/forms.py:106
+msgid "At least 8 characters"
+msgstr "最低8文字以上"
+
+#: accounts/forms.py:107
+msgid "Enter the same password"
+msgstr "同じパスワードを入力してください"
+
+#: accounts/forms.py:148
 msgid "Email"
 msgstr ""
 
@@ -815,19 +831,19 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:189 main/views.py:244
+#: main/views.py:202 main/views.py:262
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:255
+#: main/views.py:273
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:324
+#: main/views.py:342
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:368
+#: main/views.py:386
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 

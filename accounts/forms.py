@@ -99,6 +99,13 @@ class PasswordCreationForm(forms.Form):
 
 class SignupForm(UserCreationForm, SendEmailMixin):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = _('Letters, numbers, and _ characters')
+        self.fields['email'].widget.attrs['placeholder'] = _('Enter a valid email address')
+        self.fields['password1'].widget.attrs['placeholder'] = _('At least 8 characters')
+        self.fields['password2'].widget.attrs['placeholder'] = _('Enter the same password')
+
     def save(self, commit=True, domain_override=None,
              subject_template_name='accounts/signup_subject.html',
              email_template_name='accounts/signup_email.html',
