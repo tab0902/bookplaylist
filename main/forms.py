@@ -35,8 +35,9 @@ class PlaylistForm(BasePlaylistForm):
         super().__init__(*args, **kwargs)
         self.fields['title'].label = _('Playlist\'s title')
         self.fields['theme'].empty_label = _('Free theme')
-        self.fields['title'].widget.attrs['placeholder'] = _('Describe us the overview')
-        self.fields['description'].widget.attrs['placeholder'] = _('Tell us why you are create this playlist')
+        self.fields['title'].widget.attrs['placeholder'] = '例）不思議な恋愛'
+        self.fields['description'].widget.attrs['placeholder'] \
+            = '例）わたしが読んできたさまざまな恋愛に関係した本の中から、特に強く印象に残っているものをピックアップして紹介します。'
         if 'theme' in self.request.GET:
             self.fields['theme'].initial = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
 
@@ -54,7 +55,7 @@ class PlaylistBookForm(BasePlaylistForm):
     def __init__(self, request, *args, **kwargs):
         super().__init__(request, *args, **kwargs)
         self.fields['book'].widget = forms.HiddenInput()
-        self.fields['description'].widget.attrs['placeholder'] = _('Please explain why you recommend this book')
+        self.fields['description'].widget.attrs['placeholder'] = '例）幻想的で不思議な雰囲気を味わいたいひとにおすすめの一冊です。'
 
 
 DELETION_FIELD_NAME = 'DELETE'

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:23+0900\n"
+"POT-Creation-Date: 2019-11-12 19:43+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,8 +183,7 @@ msgstr "アカウント設定"
 #: accounts/templates/accounts/index.html:23
 #: accounts/templates/accounts/password_reset_complete.html:20
 #: accounts/templates/accounts/verification.html:20
-#: main/templates/main/index.html:32 main/templates/main/playlist/create.html:6
-#: main/templates/main/playlist/create.html:13
+#: main/templates/main/index.html:32
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:20
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
@@ -503,43 +502,31 @@ msgstr "プレイリストのタイトル"
 msgid "Free theme"
 msgstr "テーマ自由"
 
-#: main/forms.py:38
-msgid "Describe us the overview"
-msgstr "タイトルを入力"
-
-#: main/forms.py:39
-msgid "Tell us why you are create this playlist"
-msgstr "作成する背景を教えて下さい"
-
-#: main/forms.py:57
-msgid "Please explain why you recommend this book"
-msgstr "この本を追加する理由はなんですか？"
-
-#: main/forms.py:69 main/templates/main/playlist/delete.html:19
+#: main/forms.py:70 main/templates/main/playlist/delete.html:19
 msgid "Delete"
 msgstr "削除する"
 
-#: main/forms.py:90
+#: main/forms.py:91
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:96
+#: main/forms.py:97
 msgid "Input key words"
 msgstr "キーワードを入力"
 
-#: main/forms.py:104
+#: main/forms.py:105
 msgid "Theme"
 msgstr "テーマ"
 
-#: main/forms.py:105
+#: main/forms.py:106
 msgid "All themes"
 msgstr "すべてのテーマ"
 
-#: main/forms.py:111
+#: main/forms.py:112
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:119
+#: main/forms.py:120
 msgid "Input title or author name"
 msgstr "書名、著者名を入力"
 
@@ -725,10 +712,10 @@ msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
-#: main/templates/main/playlist/create.html:18
-#: main/templates/main/playlist/update.html:30
-msgid "Are you sure?"
-msgstr ""
+#: main/templates/main/playlist/create.html:6
+#: main/templates/main/playlist/create.html:13
+msgid "Create book playlist"
+msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
