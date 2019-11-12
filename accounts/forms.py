@@ -111,6 +111,7 @@ class SignupForm(UserCreationForm, SendEmailMixin):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['placeholder'] = _('Letters, numbers, and _ characters')
         self.fields['email'].widget.attrs['placeholder'] = _('Enter a valid email address')
+        self.fields['email'].widget.attrs['autocomplete'] = 'email'
         self.fields['password1'].widget.attrs['placeholder'] = _('At least 8 characters')
         self.fields['password2'].widget.attrs['placeholder'] = _('Enter the same password')
 

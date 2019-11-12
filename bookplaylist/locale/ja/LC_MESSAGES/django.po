@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 17:30+0900\n"
+"POT-Creation-Date: 2019-11-12 17:35+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:57 accounts/forms.py:114
+#: accounts/forms.py:57 accounts/forms.py:115
 msgid "At least 8 characters"
 msgstr "最低8文字以上"
 
@@ -50,7 +50,7 @@ msgstr "最低8文字以上"
 msgid "Password (again)"
 msgstr ""
 
-#: accounts/forms.py:63 accounts/forms.py:115
+#: accounts/forms.py:63 accounts/forms.py:116
 msgid "Enter the same password"
 msgstr "同じパスワードを入力してください"
 
@@ -70,7 +70,7 @@ msgstr "半角英数またはアンダーバー"
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:156
+#: accounts/forms.py:157
 msgid "Email"
 msgstr ""
 
