@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:43+0900\n"
+"POT-Creation-Date: 2019-11-13 10:25+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,14 +207,12 @@ msgstr "%(user)s さんのプレイリスト"
 #: accounts/templates/accounts/login.html:15
 #: accounts/templates/accounts/login.html:21
 #: accounts/templates/accounts/signup.html:18
-#: accounts/templates/accounts/signup.html:24
 #: bookplaylist/templates/layouts/drawer.html:12
 #: bookplaylist/templates/layouts/header.html:16
 msgid "Log in"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:18
-#: accounts/templates/accounts/login.html:29
 #: accounts/templates/accounts/signup.html:6
 #: accounts/templates/accounts/signup.html:15
 #: bookplaylist/templates/layouts/drawer.html:13
