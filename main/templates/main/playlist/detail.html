@@ -84,6 +84,28 @@
         </div>
     </section>
 
+    <section id="playlist-defailt-others">
+        <div class="line-gray my-5"></div>
+        <h2>
+            {% if playlist.theme %}
+            {% trans 'Playlists with same theme' %}
+            {% else %}
+            {% trans 'These are also recommended' %}
+            {% endif %}
+        </h2>
+        {% include 'main/playlist/layouts/list-widget-small.html' with playlists=other_playlists %}
+        <a href="{% url 'main:playlist' %}{% if playlist.theme %}?theme={{ playlist.theme.slug }}{% endif %}" class="btn btn-outline-sub w-100 d-md-none my-3">
+            {% blocktrans %}Show all{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="{% url 'main:playlist' %}{% if playlist.theme %}?theme={{ playlist.theme.slug }}{% endif %}" class="btn btn-inline-sub d-none d-md-inline-block mt-3">
+            {% if playlist.theme %}
+            {% blocktrans with playlist.theme.name as theme %}Show all {{ theme }}{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
+            {% else %}
+            {% blocktrans with playlist.theme.name as theme %}Show more playlists{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
+            {% endif %}
+        </a>
+    </section>
+
     <section id="playlist-detail-lets-create">
         <div class="mt-5">
             {% include 'main/playlist/layouts/lets-create-playlist.html' with theme=playlist.theme %}

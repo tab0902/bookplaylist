@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 11:01+0900\n"
+"POT-Creation-Date: 2019-11-13 13:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -680,11 +680,13 @@ msgstr "話題のプレイリスト"
 msgid "We picked up hot topics and playlists."
 msgstr "最近話題になっているトピックとプレイリストをピックアップ"
 
-#: main/templates/main/index.html:69
+#: main/templates/main/index.html:49
+#: main/templates/main/playlist/detail.html:98
 msgid "Show all"
 msgstr "すべて見る"
 
-#: main/templates/main/index.html:72
+#: main/templates/main/index.html:52
+#: main/templates/main/playlist/detail.html:102
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
@@ -770,6 +772,18 @@ msgstr "詳細を見る"
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
+#: main/templates/main/playlist/detail.html:91
+msgid "Playlists with same theme"
+msgstr "同じテーマのおすすめ"
+
+#: main/templates/main/playlist/detail.html:93
+msgid "These are also recommended"
+msgstr "あなたへのおすすめ"
+
+#: main/templates/main/playlist/detail.html:104
+msgid "Show more playlists"
+msgstr "プレイリストをもっと見る"
+
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:15
 #, python-format
 msgid "Let's share #%(tag)s!"
@@ -833,19 +847,19 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:199 main/views.py:259
+#: main/views.py:219 main/views.py:279
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:270
+#: main/views.py:290
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:336
+#: main/views.py:356
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:380
+#: main/views.py:400
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 

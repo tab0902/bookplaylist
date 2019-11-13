@@ -130,6 +130,26 @@ class PlaylistDetailView(generic.DetailView):
             )
         )
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        conditions = {'count_cover__gte': 2}
+        if self.object.theme:
+            conditions['theme'] = self.object.theme
+        context['other_playlists'] = Playlist.objects \
+            .annotate(
+                count_cover=Count(
+                    Case(When(playlistbook__book__cover__isnull=False, then=1)),
+                    output_field=IntegerField())) \
+            .exclude(pk=self.object.pk) \
+            .filter(**conditions)[:4] \
+            .prefetch_related(
+                Prefetch(
+                    'playlistbook_set',
+                    queryset=PlaylistBook.objects \
+                        .filter(book__cover__isnull=False) \
+                        .select_related('book')))
+        return context
+
 
 MODE_CREATE = 'create'
 MODE_UPDATE = 'update'
