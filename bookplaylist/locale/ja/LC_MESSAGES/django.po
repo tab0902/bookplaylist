@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 13:52+0900\n"
+"POT-Creation-Date: 2019-11-13 14:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -684,12 +684,12 @@ msgid "We picked up hot topics and playlists."
 msgstr "最近話題になっているトピックとプレイリストをピックアップ"
 
 #: main/templates/main/index.html:53
-#: main/templates/main/playlist/detail.html:98
+#: main/templates/main/playlist/detail.html:102
 msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:56
-#: main/templates/main/playlist/detail.html:102
+#: main/templates/main/playlist/detail.html:106
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
@@ -760,25 +760,25 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlist/detail.html:65
-#: main/templates/main/playlist/detail.html:70
+#: main/templates/main/playlist/detail.html:66
+#: main/templates/main/playlist/detail.html:73
 #: main/templates/main/playlist/layouts/list-widget.html:22
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlist/detail.html:80
+#: main/templates/main/playlist/detail.html:84
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlist/detail.html:91
+#: main/templates/main/playlist/detail.html:95
 msgid "Playlists with same theme"
 msgstr "同じテーマのおすすめ"
 
-#: main/templates/main/playlist/detail.html:93
+#: main/templates/main/playlist/detail.html:97
 msgid "These are also recommended"
 msgstr "あなたへのおすすめ"
 
-#: main/templates/main/playlist/detail.html:104
+#: main/templates/main/playlist/detail.html:108
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
 

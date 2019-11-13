@@ -61,15 +61,19 @@
                     <h2 class="text-xl">{{ forloop.counter }}. {{ playlist_book.book.title | default_if_none:'' }}</h2>
                     <span>{{ playlist_book.book.author | default_if_none:'' }}</span>
                     <p class="d-none d-sm-block mt-4">{{ playlist_book.description | default_if_none:'' | linebreaksbr }}</p>
+                    {% if playlist_book.book.amazon_url %}
                     <a href="{{ playlist_book.book.amazon_url | default_if_none:'' }}" target=”_blank” class="btn btn-main d-sm-none w-100 mt-4 mt-sm-0">
                         {% trans 'Show more' %}
                     </a>
+                    {% endif %}
                 </div>
+                {% if playlist_book.book.amazon_url %}
                 <div class="col-sm-3 d-none d-sm-block">
                     <a href="{{ playlist_book.book.amazon_url | default_if_none:'' }}" target=”_blank” class="btn btn-main w-100">
                         {% trans 'Show more' %}
                     </a>
                 </div>
+                {% endif %}
             </div>
             <p class="mt-3 d-sm-none">{{ playlist_book.description | default_if_none:'' | linebreaksbr }}</p>
         </div>
