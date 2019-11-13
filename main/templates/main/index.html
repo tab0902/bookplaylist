@@ -10,10 +10,12 @@
 
 <section id="hero-pc" class="hero d-none d-md-block" style="background-image:url('{% static 'img/hero-pc.jpg' %}');">
     <div class="hero-content-pc container">
-        <h1 class="hero-title-pc mt-2">{% trans 'Share Book Playlists<br>on your SNS.' %}</h1>
+        <h1 class="hero-title-pc mt-2">{% trans 'Share your book recommendation <br>and let others motivative.' %}</h1>
         {# <h2 class="mt-4">{% trans 'Create playlist' %}</h2> #}
-        <h4 class="mt-4">{% trans 'Create your playlist in 2 minutes, and share it easily.' %}</h4>
-        <a href="{% url 'main:playlist_create' %}" class="btn btn-main float-right mt-4">{% trans 'Create' %}</a>
+        <p class="mt-4">
+            {% trans 'Let’s create your own book playlist on your phone. You can easily share it on your social network.' %}
+        </p>
+        <a href="{% url 'main:playlist_create' %}" class="btn btn-main float-right mt-4">{% trans 'Create playlist' %}</a>
 
         {% comment %}
         <h2 class="mt-4">{% trans 'Search playlist' %}</h2>
@@ -23,20 +25,22 @@
 </section>
 
 <section id="hero-sp" class="hero d-md-none" style="background-image:url('{% static 'img/hero-sp.jpg' %}');">
-    <h1 class="hero-title-sp">{% trans 'Share Book Playlists<br class="d-sm-none">on your SNS.' %}</h1>
+    <h1 class="hero-title-sp">{% trans 'Share your book recommendation <br>and let others motivative.' %}</h1>
 </section>
 
 <div class="container">
     <section id="index-create-playlist-sp" class="d-md-none">
-        <h2 class="mt-4">{% trans 'Create playlist' %}</h2>
-        <p>{% trans 'Create your playlist in 2 minutes, and share it easily.' %}</p>
+        <h2 class="mt-4">{% trans 'Create book playlist' %}</h2>
+        <p>
+            {% trans 'Let’s create your own book playlist on your phone. You can easily share it on your social network.' %}
+        </p>
         <a href="{% url 'main:playlist_create' %}" class="btn btn-main w-100">{% trans 'Create' %}</a>
         <div class="line-gray my-4"></div>
     </section>
 
     <section id="index-theme-list">
-        <h2 class="mt-4 mt-md-5">{% trans 'Hot playlists' %}</h2>
-        <div class="text-md">{% trans 'We picked up hot topics and playlists.' %}</div>
+        <h2 class="mt-5">{% trans 'Hot playlists' %}</h2>
+        <div class="text-md d-none d-md-block">{% trans 'We picked up hot topics and playlists.' %}</div>
         {% for theme, playlists in themes %}
         <h3 class="mt-4 mt-md-5">
             <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="color-gray">
