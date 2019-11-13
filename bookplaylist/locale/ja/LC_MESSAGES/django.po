@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 10:25+0900\n"
+"POT-Creation-Date: 2019-11-13 11:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -672,11 +672,19 @@ msgstr "本のプレイリストを<br>SNSでシェアしよう。"
 msgid "Share Book Playlists<br class=\"d-sm-none\">on your SNS."
 msgstr "本のプレイリストを<br class=\"d-sm-none\">SNSでシェアしよう。"
 
-#: main/templates/main/index.html:68
+#: main/templates/main/index.html:39
+msgid "Hot playlists"
+msgstr "話題のプレイリスト"
+
+#: main/templates/main/index.html:40
+msgid "We picked up hot topics and playlists."
+msgstr "最近話題になっているトピックとプレイリストをピックアップ"
+
+#: main/templates/main/index.html:69
 msgid "Show all"
 msgstr "すべて見る"
 
-#: main/templates/main/index.html:71
+#: main/templates/main/index.html:72
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"

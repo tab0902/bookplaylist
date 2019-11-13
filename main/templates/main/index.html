@@ -31,20 +31,21 @@
         <h2 class="mt-4">{% trans 'Create playlist' %}</h2>
         <p>{% trans 'Create your playlist in 2 minutes, and share it easily.' %}</p>
         <a href="{% url 'main:playlist_create' %}" class="btn btn-main w-100">{% trans 'Create' %}</a>
-        {# <div class="line-gray my-4"></div> #}
+        <div class="line-gray my-4"></div>
     </section>
 
     <section id="index-theme-list">
+        <h2 class="mt-4 mt-md-5">{% trans 'Hot playlists' %}</h2>
+        <span class="text-md">{% trans 'We picked up hot topics and playlists.' %}</span>
         {% for theme, playlists in themes %}
-        <div class="line-gray d-md-none my-4"></div>
-        <h2 class="mt-4 mt-md-5">
+        <h3 class="mt-4 mt-md-5">
             <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="color-gray">
                 #{{ theme.name }}
             </a>
-        </h2>
+        </h3>
         <div class="row">
             {% for playlist in playlists|dictsortreversed:"created_at" %}
-                <div class="col-6 col-sm-3 mt-3">
+                <div class="col-6 col-sm-3 mt-3 mt-md-4">
                     <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
                     {% if playlist.playlistbook_set.all.0.book.cover %}
                     <div class="" style="border-radius:16px;">
@@ -63,10 +64,10 @@
             </div>
             {% endfor %}
         </div>
-        <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="btn btn-outline-sub w-100 d-md-none mt-3">
+        <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="btn btn-outline-sub w-100 d-md-none my-3">
             {% blocktrans %}Show all{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
         </a>
-        <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="btn btn-inline-sub d-none d-md-inline-block mt-4">
+        <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="btn btn-inline-sub d-none d-md-inline-block mt-3">
             {% blocktrans with theme.name as theme %}Show all {{ theme }}{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
         </a>
         {% endfor %}
