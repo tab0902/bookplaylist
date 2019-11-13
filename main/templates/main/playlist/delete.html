@@ -12,8 +12,8 @@
     <section id="playlist-delete">
         <h2 class="mt-4 mt-md-5">{% trans 'Delete playlist' %}</h2>
         <form method="post">{% csrf_token %}
-            <h4 class="mt-5 font-weight-bold">{% blocktrans %}Are you sure you want to delete "{{ playlist }}"?{% endblocktrans %}</h4>
-            <h5 class="mt-4">{% blocktrans %}Note: You can't cancel this action.{% endblocktrans %}</h5>
+            <div class="text-md font-weight-bold mt-5">{% blocktrans %}Are you sure you want to delete "{{ playlist }}"?{% endblocktrans %}</div>
+            <div class="text-sm mt-4">{% blocktrans %}Note: You can't cancel this action.{% endblocktrans %}</div>
             <div class="row mt-5">
                 <div class="col-sm-3 offset-sm-6 order-sm-1">
                     <input type="submit" class="btn btn-sub w-100" value="{% trans 'Delete' %}">

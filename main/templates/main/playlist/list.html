@@ -27,9 +27,9 @@
             {% if request.GET.q %}
             <h2 class="d-none d-md-inline-block">{% blocktrans with q=request.GET.q %}Playlists related with "{{ q }}"{% endblocktrans %}</h2>
             {% elif theme %}
-            <h1 class="mb-5">{% blocktrans with theme=theme.name %}Playlists with #{{ theme }}{% endblocktrans %}</h1>
+            <h1 class="mb-4 mb-md-5">{% blocktrans with theme=theme.name %}Playlists with #{{ theme }}{% endblocktrans %}</h1>
             {% else %}
-            <h1 class="mb-5">{% trans 'All Playlists' %}</h1>
+            <h1 class="mb-4 mb-md-5">{% trans 'All Playlists' %}</h1>
             {% endif %}
         </div>
     </section>

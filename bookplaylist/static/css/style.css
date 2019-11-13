@@ -51,10 +51,10 @@ h1{
   font-size: 24px;
 }
 h2 {
-  font-size: 20px;
+  font-size: 22px;
 }
 h3 {
-  font-size: 18px;
+  font-size: 20px;
 }
 h4 {
   font-size: 16px;
@@ -89,11 +89,20 @@ a:hover {
 a.color-gray:hover, a.color-gray:active {
   color: #484848;
 }
+.text-xs {
+   font-size: 12px;
+}
 .text-sm {
    font-size: 14px;
 }
 .text-md {
    font-size: 16px;
+}
+.text-lg {
+   font-size: 18px;
+}
+.text-xl {
+  font-size: 20px;
 }
 @media screen and (min-width: 768px) {
   .heading-lg {

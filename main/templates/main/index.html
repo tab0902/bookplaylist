@@ -36,7 +36,7 @@
 
     <section id="index-theme-list">
         <h2 class="mt-4 mt-md-5">{% trans 'Hot playlists' %}</h2>
-        <span class="text-md">{% trans 'We picked up hot topics and playlists.' %}</span>
+        <div class="text-md">{% trans 'We picked up hot topics and playlists.' %}</div>
         {% for theme, playlists in themes %}
         <h3 class="mt-4 mt-md-5">
             <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="color-gray">
