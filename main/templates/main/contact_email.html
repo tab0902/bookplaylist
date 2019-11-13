@@ -1,0 +1,17 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}Your inquiry is sent successfully. The detail is below:{% endblocktrans %}
+
+
+{% trans 'Content of inquiry' %}: {{ inquiry }}
+{% if url %}{% trans 'URL of the target page' %}: {{ url }}{% endif %}
+
+{% trans 'Body' %}:
+{{ body }}
+
+
+{% trans 'Please wait a while for the reply.' %}
+{% trans 'Thanks for your inquiry!' %}
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endautoescape %}

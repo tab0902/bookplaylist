@@ -1,9 +1,12 @@
 from django import forms
+from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
 from django.utils.translation import gettext_lazy as _
 
 from .models import (
     Playlist, PlaylistBook, Theme,
 )
+from bookplaylist.utils import SendEmailMixin
 
 
 class BasePlaylistForm(forms.ModelForm):
@@ -118,3 +121,79 @@ class BookSearchForm(SearchForm):
         super().__init__(q=q, *args, **kwargs)
         self.fields['q'].widget.attrs['autofocus'] = True
         self.fields['q'].widget.attrs['placeholder'] = _('Input title or author name')
+
+
+class ContactForm(forms.Form, SendEmailMixin):
+    inquiry = forms.ChoiceField(
+        label=_('Content of inquiry'),
+        choices=settings.CONTACT_INQUIRY,
+    )
+    email = forms.EmailField(
+        label=_('Email'),
+        max_length=254,
+        widget=forms.EmailInput(attrs={'autocomplete': 'email'})
+    )
+    url = forms.URLField(
+        label=_('URL of the target page (option)'),
+        required=False
+    )
+    body = forms.CharField(
+        label=_('Body'),
+        widget=forms.Textarea
+    )
+
+    def __init__(self, request, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if request.user.is_authenticated:
+            self.fields['email'].initial = request.user.email
+
+    def save(self, commit=True, domain_override=None,
+             subject_template_name='main/contact_subject.html',
+             email_template_name='main/contact_email.html',
+             subject_template_name_admin='main/contact_subject_admin.html',
+             email_template_name_admin='main/contact_email_admin.html',
+             email_admin=settings.ADMIN_EMAIL,
+             use_https=False,
+             from_email=None, request=None,
+             html_email_template_name=None, html_email_template_name_admin=None,
+             extra_email_context=None):
+        inquiry = dict(self.fields['inquiry'].choices)[self.cleaned_data['inquiry']]
+        email = self.cleaned_data['email']
+        url = self.cleaned_data['url']
+        body = self.cleaned_data['body']
+        user = request.user if request.user.is_authenticated else _('Guest user')
+
+        if not domain_override:
+            current_site = get_current_site(request)
+            site_name = current_site.name
+            domain = current_site.domain
+        else:
+            site_name = domain = domain_override
+        context = {
+            'inquiry': inquiry,
+            'url': url,
+            'body': body,
+            'domain': domain,
+            'site_name': site_name,
+            'protocol': 'https' if use_https else 'http',
+            **(extra_email_context or {}),
+        }
+        context_admin = {
+            'user': user,
+            'email': email,
+            'inquiry': inquiry,
+            'url': url,
+            'body': body,
+            'domain': domain,
+            'site_name': site_name,
+            'protocol': 'https' if use_https else 'http',
+            **(extra_email_context or {}),
+        }
+        self.send_mail(
+            subject_template_name, email_template_name, context, from_email,
+            email, html_email_template_name=html_email_template_name,
+        )
+        self.send_mail(
+            subject_template_name_admin, email_template_name_admin, context_admin, from_email,
+            email_admin, html_email_template_name=html_email_template_name_admin,
+        )

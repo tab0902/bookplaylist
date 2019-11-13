@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    BookSearchForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
+    BookSearchForm, ContactForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
     Book, Playlist, PlaylistBook, Theme,
@@ -411,3 +411,26 @@ class PrivacyView(generic.TemplateView):
 
 class AboutView(generic.TemplateView):
     template_name = 'main/about.html'
+
+
+class ContactView(generic.FormView):
+    form_class = ContactForm
+    success_url = reverse_lazy('main:contact_complete')
+    template_name = 'main/contact.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def form_valid(self, form):
+        opts = {
+            'use_https': self.request.is_secure(),
+            'request': self.request,
+        }
+        form.save(**opts)
+        return super().form_valid(form)
+
+
+class ContactCompleteView(generic.TemplateView):
+    template_name = 'main/contact_complete.html'

@@ -1,0 +1,16 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}An inquiry is sent. The detail is below:{% endblocktrans %}
+
+
+{% trans 'User' %}: {{ user }}
+{% trans 'Email' %}: {{ email }}
+{% trans 'Content of inquiry' %}: {{ inquiry }}
+{% if url %}{% trans 'URL of the target page' %}: {{ url }}{% endif %}
+
+{% trans 'Body' %}:
+{{ body }}
+
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endautoescape %}

@@ -14,6 +14,7 @@ import os
 
 from django.contrib.messages import constants as messages
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -169,6 +170,14 @@ ADMIN_REORDER = (
         'app': 'auth',
         'models': ('auth.Group', )
     },
+)
+
+
+CONTACT_INQUIRY = (
+    ('', _('(Please select)')),
+    ('1', _('Question')),
+    ('2', _('Defect report')),
+    ('3', _('Other inquiry')),
 )
 
 

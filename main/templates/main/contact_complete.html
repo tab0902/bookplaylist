@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'We recieve your inquiry' %} | BooxMix
+{% endblock %}
+
+{% block content %}
+
+<div class="container container-slim">
+    <section id="contact-complete">
+        <h2 class="mt-4 mt-md-5">{% trans 'We recieve your inquiry' %}</h2>
+        <p class="mt-4 mt-md-5">
+            {% blocktrans %}Your inquiry is sent successfully.{% endblocktrans %}<br>
+            {% blocktrans %}Please wait a while for the reply.{% endblocktrans %}
+        </p>
+        <div class="row">
+            <div class="col-md-4 offset-md-4 mt-4 mt-md-5">
+                <a href="{% url 'main:index' %}" class="btn btn-outline-sub w-100">{% trans 'Top page' %}</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
