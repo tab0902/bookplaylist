@@ -17,4 +17,6 @@ urlpatterns = [
     path('terms/', views.TermsView.as_view(), name='terms'),
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
     path('about/', views.AboutView.as_view(), name='about'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
+    path('contact/complete/', views.ContactCompleteView.as_view(), name='contact_complete'),
 ]

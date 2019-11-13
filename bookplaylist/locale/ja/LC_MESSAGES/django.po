@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 14:32+0900\n"
+"POT-Creation-Date: 2019-11-13 17:07+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
-"Language-Team: Sho Tabuchi <tabuchi@booxmix.com>"
-"Language: ja_JP\n"
+"Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -70,7 +70,8 @@ msgstr "半角英数またはアンダーバー"
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:157
+#: accounts/forms.py:157 main/forms.py:132
+#: main/templates/main/contact_email_admin.html:6
 msgid "Email"
 msgstr ""
 
@@ -320,6 +321,8 @@ msgstr ""
 #: accounts/templates/accounts/password_reset_email.html:12
 #: accounts/templates/accounts/signup_email.html:13
 #: accounts/templates/accounts/verification_again_email.html:8
+#: main/templates/main/contact_email.html:15
+#: main/templates/main/contact_email_admin.html:14
 #, python-format
 msgid "The %(site_name)s team"
 msgstr ""
@@ -452,6 +455,22 @@ msgstr "作成日時"
 msgid "date updated"
 msgstr "更新日時"
 
+#: bookplaylist/settings.py:177
+msgid "(Please select)"
+msgstr "(選択してください)"
+
+#: bookplaylist/settings.py:178
+msgid "Question"
+msgstr "ご質問"
+
+#: bookplaylist/settings.py:179
+msgid "Defect report"
+msgstr "不具合報告"
+
+#: bookplaylist/settings.py:180
+msgid "Other inquiry"
+msgstr "上記以外のお問い合わせ"
+
 #: bookplaylist/templates/layouts/drawer.html:8
 msgid "TOP"
 msgstr ""
@@ -476,6 +495,7 @@ msgid "About BooxMix"
 msgstr "BooxMixについて"
 
 #: bookplaylist/templates/layouts/footer.html:18
+#: main/templates/main/contact.html:6 main/templates/main/contact.html:13
 msgid "Contact"
 msgstr "お問い合わせ"
 
@@ -499,41 +519,59 @@ msgstr "ページにアクセスする権限がありません"
 msgid "main"
 msgstr "メイン"
 
-#: main/forms.py:36
+#: main/forms.py:39
 msgid "Playlist's title"
 msgstr "プレイリストのタイトル"
 
-#: main/forms.py:37
+#: main/forms.py:40
 msgid "Free theme"
 msgstr "テーマ自由"
 
-#: main/forms.py:70 main/templates/main/playlist/delete.html:19
+#: main/forms.py:73 main/templates/main/playlist/delete.html:19
 msgid "Delete"
 msgstr "削除する"
 
-#: main/forms.py:91
+#: main/forms.py:94
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:97
+#: main/forms.py:100
 msgid "Input key words"
 msgstr "キーワードを入力"
 
-#: main/forms.py:105
+#: main/forms.py:108
 msgid "Theme"
 msgstr "テーマ"
 
-#: main/forms.py:106
+#: main/forms.py:109
 msgid "All themes"
 msgstr "すべてのテーマ"
 
-#: main/forms.py:112
+#: main/forms.py:115
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:120
+#: main/forms.py:123
 msgid "Input title or author name"
 msgstr "書名、著者名を入力"
+
+#: main/forms.py:128 main/templates/main/contact_email.html:5
+#: main/templates/main/contact_email_admin.html:7
+msgid "Content of inquiry"
+msgstr "お問い合わせ内容"
+
+#: main/forms.py:137
+msgid "URL of the target page (option)"
+msgstr "対象ページのURL（任意）"
+
+#: main/forms.py:141 main/templates/main/contact_email.html:8
+#: main/templates/main/contact_email_admin.html:10
+msgid "Body"
+msgstr "本文"
+
+#: main/forms.py:164
+msgid "Guest user"
+msgstr "ゲストユーザー"
 
 #: main/models.py:14
 msgid "theme name"
@@ -666,6 +704,54 @@ msgstr "大友　隆之"
 #: main/templates/main/about.html:43
 msgid "Contact address"
 msgstr "連絡先"
+
+#: main/templates/main/contact.html:14
+msgid "Send"
+msgstr "送信"
+
+#: main/templates/main/contact_complete.html:6
+#: main/templates/main/contact_complete.html:13
+#: main/templates/main/contact_subject.html:2
+msgid "We recieve your inquiry"
+msgstr "お問い合わせ完了"
+
+#: main/templates/main/contact_complete.html:15
+msgid "Your inquiry is sent successfully."
+msgstr "お問い合わせは正常に送信されました。"
+
+#: main/templates/main/contact_complete.html:16
+#: main/templates/main/contact_email.html:12
+msgid "Please wait a while for the reply."
+msgstr "内容を確認次第、返答させていただきますので、今しばらくお待ちください。"
+
+#: main/templates/main/contact_complete.html:20
+msgid "Top page"
+msgstr "トップページ"
+
+#: main/templates/main/contact_email.html:2
+msgid "Your inquiry is sent successfully. The detail is below:"
+msgstr "お問い合わせは正常に送信されました。内容は以下の通りです。"
+
+#: main/templates/main/contact_email.html:6
+#: main/templates/main/contact_email_admin.html:8
+msgid "URL of the target page"
+msgstr "対象ページのURL"
+
+#: main/templates/main/contact_email.html:13
+msgid "Thanks for your inquiry!"
+msgstr "お問い合わせありがとうございました。"
+
+#: main/templates/main/contact_email_admin.html:2
+msgid "An inquiry is sent. The detail is below:"
+msgstr "お問い合わせを受信しました。内容は以下の通りです。"
+
+#: main/templates/main/contact_email_admin.html:5
+msgid "User"
+msgstr "ユーザー"
+
+#: main/templates/main/contact_subject_admin.html:2
+msgid "Inquiry sent"
+msgstr "お問い合わせ受信"
 
 #: main/templates/main/index.html:6
 msgid "Share Book Playlists on your SNS."
