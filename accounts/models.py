@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .validators import UnicodeUsernameValidator
 from bookplaylist.models import (
-    BaseModel, NullCharField, NullEmailField,
+    BaseModel, NullCharField, NullEmailField, NullTextField,
 )
 
 
@@ -94,7 +94,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
-    comment = NullCharField(_('comment'), max_length=50, blank=True, null=True)
+    comment = NullTextField(_('comment'), blank=True, null=True)
     twitter_id = NullCharField(_('Twitter ID'), max_length=255, unique=True, blank=True, null=True)
     facebook_id = NullCharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
