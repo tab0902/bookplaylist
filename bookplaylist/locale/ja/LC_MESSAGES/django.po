@@ -1,18 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# BooxMix translation (ja_JP).
+# Copyright (C) 2019 BooxMix
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Sho Tabuchi <tabuchi@booxmix.com>, 2019.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 10:25+0900\n"
+"POT-Creation-Date: 2019-11-13 14:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
+"Language-Team: Sho Tabuchi <tabuchi@booxmix.com>"
+"Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -180,21 +180,21 @@ msgstr "%(user)s さんのマイページ"
 msgid "Profile"
 msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:23
-#: accounts/templates/accounts/password_reset_complete.html:20
-#: accounts/templates/accounts/verification.html:20
-#: main/templates/main/index.html:32
-#: main/templates/main/playlist/layouts/lets-create-playlist.html:20
-msgid "Create playlist"
-msgstr "プレイリストを作成する"
+#: accounts/templates/accounts/index.html:23 main/templates/main/index.html:34
+#: main/templates/main/playlist/create.html:6
+#: main/templates/main/playlist/create.html:13
+msgid "Create book playlist"
+msgstr "本のプレイリストを作成する"
 
-#: accounts/templates/accounts/index.html:24 main/templates/main/index.html:15
-#: main/templates/main/index.html:33
-msgid "Create your playlist in 2 minutes, and share it easily."
-msgstr "2分で本のプレイリストを作成してSNSで簡単にシェアしよう。"
+#: accounts/templates/accounts/index.html:24 main/templates/main/index.html:16
+#: main/templates/main/index.html:36
+msgid ""
+"Let’s create your own book playlist on your phone. You can easily share it "
+"on your social network."
+msgstr ""
+"スマホで簡単に本をまとめてプレイリストを作成し、気軽にSNSでシェアしましょう。"
 
-#: accounts/templates/accounts/index.html:27 main/templates/main/index.html:16
-#: main/templates/main/index.html:34
+#: accounts/templates/accounts/index.html:27 main/templates/main/index.html:38
 msgid "Create"
 msgstr "作成する"
 
@@ -271,6 +271,13 @@ msgstr "パスワードを再設定しました。"
 #: accounts/templates/accounts/verification.html:16
 msgid "Enjoy using BooxMix."
 msgstr "引き続きBooxMixをお楽しみください。"
+
+#: accounts/templates/accounts/password_reset_complete.html:20
+#: accounts/templates/accounts/verification.html:20
+#: main/templates/main/index.html:18
+#: main/templates/main/playlist/layouts/lets-create-playlist.html:20
+msgid "Create playlist"
+msgstr "プレイリストを作成する"
 
 #: accounts/templates/accounts/password_reset_confirm.html:14
 msgid "Reset"
@@ -654,7 +661,7 @@ msgstr "大野　水季"
 
 #: main/templates/main/about.html:38
 msgid "Takayuki Otomo"
-msgstr "大智　隆之"
+msgstr "大友　隆之"
 
 #: main/templates/main/about.html:43
 msgid "Contact address"
@@ -664,19 +671,25 @@ msgstr "連絡先"
 msgid "Share Book Playlists on your SNS."
 msgstr "本のプレイリストをSNSでシェアしよう。"
 
-#: main/templates/main/index.html:13
-msgid "Share Book Playlists<br>on your SNS."
-msgstr "本のプレイリストを<br>SNSでシェアしよう。"
+#: main/templates/main/index.html:13 main/templates/main/index.html:29
+msgid "Share your book recommendation <br>and let others motivative."
+msgstr "あなたが選んだ本で、<br>誰かの生き方が<br>変わるかもしれない。"
 
-#: main/templates/main/index.html:27
-msgid "Share Book Playlists<br class=\"d-sm-none\">on your SNS."
-msgstr "本のプレイリストを<br class=\"d-sm-none\">SNSでシェアしよう。"
+#: main/templates/main/index.html:43
+msgid "Hot playlists"
+msgstr "話題のプレイリスト"
 
-#: main/templates/main/index.html:68
+#: main/templates/main/index.html:44
+msgid "We picked up hot topics and playlists."
+msgstr "最近話題になっているトピックとプレイリストをピックアップ"
+
+#: main/templates/main/index.html:53
+#: main/templates/main/playlist/detail.html:102
 msgid "Show all"
 msgstr "すべて見る"
 
-#: main/templates/main/index.html:71
+#: main/templates/main/index.html:56
+#: main/templates/main/playlist/detail.html:106
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
@@ -709,11 +722,6 @@ msgstr "追加する"
 msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
-
-#: main/templates/main/playlist/create.html:6
-#: main/templates/main/playlist/create.html:13
-msgid "Create book playlist"
-msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
@@ -752,15 +760,27 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlist/detail.html:65
-#: main/templates/main/playlist/detail.html:70
+#: main/templates/main/playlist/detail.html:66
+#: main/templates/main/playlist/detail.html:73
 #: main/templates/main/playlist/layouts/list-widget.html:22
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlist/detail.html:80
+#: main/templates/main/playlist/detail.html:84
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
+
+#: main/templates/main/playlist/detail.html:95
+msgid "Playlists with same theme"
+msgstr "同じテーマのおすすめ"
+
+#: main/templates/main/playlist/detail.html:97
+msgid "These are also recommended"
+msgstr "あなたへのおすすめ"
+
+#: main/templates/main/playlist/detail.html:108
+msgid "Show more playlists"
+msgstr "プレイリストをもっと見る"
 
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:15
 #, python-format
@@ -825,19 +845,19 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:199 main/views.py:259
+#: main/views.py:219 main/views.py:279
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:270
+#: main/views.py:290
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:336
+#: main/views.py:356
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:380
+#: main/views.py:400
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
