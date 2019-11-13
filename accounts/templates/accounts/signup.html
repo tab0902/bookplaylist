@@ -11,18 +11,15 @@
 <div class="container container-slim">
     <section id="signup">
         <div class="row my-4 mt-md-5">
-            <div class="col-md-8">
+            <div class="col-7">
                 <h2>{% trans 'Sign up' %}</h2>
             </div>
-            <div class="col-md-4 d-none d-md-block">
+            <div class="col-5">
                 <a href="{% url 'accounts:login' %}" class="btn btn-inline-sub float-right">{% trans 'Log in' %}</a>
             </div>
         </div>
         {% trans 'Register' as submit_text %}
         {% include 'layouts/form.html' with submit_text=submit_text %}
-        <div class="d-md-none mt-5">
-            <a href="{% url 'accounts:login' %}" class="btn btn-inline-sub w-100">{% trans 'Log in' %}</a>
-        </div>
     </section>
 </div>
 
