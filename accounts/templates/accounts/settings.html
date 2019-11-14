@@ -3,14 +3,14 @@
 {% load i18n %}
 
 {% block title %}
-{% trans 'Profile' %} | BooxMix
+{% trans 'Settings' %} | BooxMix
 {% endblock %}
 
 {% block content %}
 
 <div class="container container-slim">
-    <section id="profile">
-        <h2 class="my-4 my-md-5">{% trans 'Profile' %}</h2>
+    <section id="settings">
+        <h2 class="my-4 my-md-5">{% trans 'Settings' %}</h2>
         <form action="" method="post">{% csrf_token %}
             {% for field in form %}
             <div class="row mt-2 mt-md-3">

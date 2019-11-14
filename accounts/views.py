@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    AuthenticationForm, PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
+    AuthenticationForm, PasswordCreationForm, SignupForm, UserSettingsForm, VerificationAgainForm,
 )
 from bookplaylist.views import (
     login_required, sensitive_post_parameters,
@@ -32,12 +32,12 @@ class IndexView(generic.TemplateView):
 
 
 @login_required
-class ProfileView(generic.UpdateView):
-    form_class = UserProfileUpdateForm
+class SettingsView(generic.UpdateView):
+    form_class = UserSettingsForm
     password_text = '************'
     password_link_text = _('Password change')
-    success_url = reverse_lazy('accounts:profile')
-    template_name = 'accounts/profile.html'
+    success_url = reverse_lazy('accounts:settings')
+    template_name = 'accounts/settings.html'
 
     def dispatch(self, *args, **kwargs):
         self.user = self.request.user
@@ -50,7 +50,7 @@ class ProfileView(generic.UpdateView):
         return self.user
 
     def form_valid(self, form):
-        messages.success(self.request, _('Profile updated successfully.'))
+        messages.success(self.request, _('Settings updated successfully.'))
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -63,7 +63,7 @@ class ProfileView(generic.UpdateView):
 @login_required
 @sensitive_post_parameters
 class PasswordChangeView(auth_views.PasswordChangeView):
-    success_url = reverse_lazy('accounts:profile')
+    success_url = reverse_lazy('accounts:settings')
     template_name = 'accounts/password_change.html'
 
     def dispatch(self, *args, **kwargs):

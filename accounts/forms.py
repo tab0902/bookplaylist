@@ -36,7 +36,7 @@ class UserChangeForm(BaseUserChangeForm):
         fields = '__all__'
 
 
-class UserProfileUpdateForm(forms.ModelForm):
+class UserSettingsForm(forms.ModelForm):
 
     class Meta(UserChangeForm.Meta):
         model = User

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 17:07+0900\n"
+"POT-Creation-Date: 2019-11-14 10:27+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -38,7 +38,7 @@ msgstr "アカウント"
 msgid "The two password fields didn’t match."
 msgstr ""
 
-#: accounts/forms.py:56 accounts/templates/accounts/profile.html:28
+#: accounts/forms.py:56 accounts/templates/accounts/settings.html:28
 msgid "Password"
 msgstr ""
 
@@ -161,7 +161,7 @@ msgstr ""
 
 #: accounts/templates/accounts/index.html:6
 #: accounts/templates/accounts/password_reset_complete.html:23
-#: accounts/templates/accounts/profile.html:78
+#: accounts/templates/accounts/settings.html:78
 #: accounts/templates/accounts/verification.html:23
 #: bookplaylist/templates/layouts/drawer.html:15
 #: bookplaylist/templates/layouts/header.html:28
@@ -175,10 +175,10 @@ msgid "%(user)s's my page"
 msgstr "%(user)s さんのマイページ"
 
 #: accounts/templates/accounts/index.html:18
-#: accounts/templates/accounts/profile.html:6
-#: accounts/templates/accounts/profile.html:13
+#: accounts/templates/accounts/settings.html:6
+#: accounts/templates/accounts/settings.html:13
 #: bookplaylist/templates/layouts/drawer.html:16
-msgid "Profile"
+msgid "Settings"
 msgstr "アカウント設定"
 
 #: accounts/templates/accounts/index.html:23 main/templates/main/index.html:34
@@ -231,7 +231,7 @@ msgid "Password change"
 msgstr ""
 
 #: accounts/templates/accounts/password_change.html:14
-#: accounts/templates/accounts/profile.html:34
+#: accounts/templates/accounts/settings.html:34
 msgid "Change"
 msgstr ""
 
@@ -327,30 +327,30 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:39
+#: accounts/templates/accounts/settings.html:39
 msgid "Twitter"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:44
-#: accounts/templates/accounts/profile.html:63
+#: accounts/templates/accounts/settings.html:44
+#: accounts/templates/accounts/settings.html:63
 msgid "Associated"
 msgstr "連携済み"
 
-#: accounts/templates/accounts/profile.html:46
-#: accounts/templates/accounts/profile.html:65
+#: accounts/templates/accounts/settings.html:46
+#: accounts/templates/accounts/settings.html:65
 msgid "Not associated"
 msgstr "未連携"
 
-#: accounts/templates/accounts/profile.html:52
-#: accounts/templates/accounts/profile.html:71
+#: accounts/templates/accounts/settings.html:52
+#: accounts/templates/accounts/settings.html:71
 msgid "Associate"
 msgstr "連携する"
 
-#: accounts/templates/accounts/profile.html:58
+#: accounts/templates/accounts/settings.html:58
 msgid "Facebook"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:82
+#: accounts/templates/accounts/settings.html:82
 msgid "Save"
 msgstr ""
 
@@ -440,8 +440,8 @@ msgid "Password set"
 msgstr "パスワード設定"
 
 #: accounts/views.py:53
-msgid "Profile updated successfully."
-msgstr "アカウント情報を更新しました。"
+msgid "Settings updated successfully."
+msgstr "アカウント設定を更新しました。"
 
 #: accounts/views.py:77
 msgid "Password changed successfully."
