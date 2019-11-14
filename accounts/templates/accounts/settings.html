@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'Settings' %} | BooxMix
+{% endblock %}
+
+{% block content %}
+
+<div class="container container-slim">
+    <section id="settings">
+        <h2 class="my-4 my-md-5">{% trans 'Settings' %}</h2>
+        <form action="" method="post">{% csrf_token %}
+            {% for field in form %}
+            <div class="row mt-2 mt-md-3">
+                <div class="col-4">
+                    <label class="mt-2">{{ field.label }}</label>
+                </div>
+                <div class="col-8">
+                    {{ field }}
+                    {{ field.errors }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row mt-2 mt-md-3">
+                <div class="col-4">
+                    <label class="mt-2">{% trans 'Password' %}</label>
+                </div>
+                <div class="col-4">
+                    <p class="mt-2">{{ password_text }}</p>
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'accounts:password_change' %}" class="btn btn-inline-main mt-1">{% trans 'Change' %}</a>
+                </div>
+            </div>
+            <div class="row mt-2 mt-md-3">
+                <div class="col-4">
+                    <label class="mt-2">{% trans 'Twitter' %}</label>
+                </div>
+                <div class="col-4">
+                    <p class="mt-2">
+                        {% if user.twitter_id %}
+                        {% trans 'Associated' %}
+                        {% else %}
+                        {% trans 'Not associated' %}
+                        {% endif %}
+                    </p>
+                </div>
+                {% if not user.twitter_id %}
+                <div class="col-4">
+                    <a href="" class="btn btn-inline-twitter mt-1">{% trans 'Associate' %}</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="row mt-2 mt-md-3">
+                <div class="col-4">
+                    <label class="mt-2">{% trans 'Facebook' %}</label>
+                </div>
+                <div class="col-4">
+                    <p class="mt-2">
+                        {% if user.facebook_id %}
+                        {% trans 'Associated' %}
+                        {% else %}
+                        {% trans 'Not associated' %}
+                        {% endif %}
+                    </p>
+                </div>
+                {% if not user.facebook_id %}
+                <div class="col-4">
+                    <a href="" class="btn btn-inline-facebook mt-1">{% trans 'Associate' %}</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="row mt-2 mt-md-5">
+                <div class="col-sm-4 d-none d-sm-block">
+                    <a href="{% url 'accounts:index' %}" class="btn btn-outline-sub w-100">
+                        <i class="fas fa-angle-left"></i> {% trans 'My page' %}
+                    </a>
+                </div>
+                <div class="col-sm-4 offset-sm-4">
+                    <input type="submit" class="btn btn-main w-100" value="{% trans 'Save' %}">
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+
+{% endblock %}

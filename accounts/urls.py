@@ -5,7 +5,8 @@ from . import views
 app_name = 'accounts'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('settings/', views.SettingsView.as_view(), name='settings'),
+    path('user/<slug:username>/', views.ProfileView.as_view(), name='profile'),
     path('password/change/', views.PasswordChangeView.as_view(), name='password_change'),
     path('password/reset/', views.PasswordResetView.as_view(), name='password_reset'),
     path('password/reset/done/', views.PasswordResetDoneView.as_view(), name='password_reset_done'),

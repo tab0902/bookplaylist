@@ -25,7 +25,8 @@
     </div>
     {% empty %}
     <div class="col-12">
-        <h4>{% trans 'No playlist found. Please search by other conditions.' %}</h4>
+        {% trans 'No playlist found. Please search by other conditions.' as text_not_found_default %}
+        <h4>{{ text_not_found|default:text_not_found_default }}</h4>
     </div>
     {% endfor %}
 </div>

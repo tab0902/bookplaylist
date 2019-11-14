@@ -80,4 +80,16 @@ $(function() {
       }
     })
   })
+
+  $('.profile-edit-btn').on('click', function() {
+    $(this).addClass('d-none')
+    $('#profile-info').addClass('d-none')
+    $('#profile-form').removeClass('d-none')
+  })
+
+  $('.profile-edit-cancel').on('click', function() {
+    $('#profile-form').addClass('d-none')
+    $('#profile-info').removeClass('d-none')
+    $('.profile-edit-btn').removeClass('d-none')
+  })
 })

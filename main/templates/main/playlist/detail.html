@@ -11,7 +11,9 @@
 <div class="container">
     <section id="playlist-detail-overview">
         <h1 class="mt-4 mt-md-5 playlist-detail-title">{{ playlist.title | default_if_none:'' }}</h1>
-        <span class="text-lg mt-3">{{ playlist.user.username | default_if_none:'' }}</span>
+        <a href="{% url 'accounts:profile' playlist.user.username %}" class="color-gray text-xl mt-3">
+            {{ playlist.user.username | default_if_none:'' }}
+        </a>
         {% if request.user == playlist.user %}
         <div class="row">
             <div class="col-md-9">
@@ -83,7 +85,12 @@
     <section id="playlist-detail-user">
         <h2 class="mt-5">{% trans 'Who created this playlist?' %}</h2>
         <div class="bg-gray border-radius px-2 py-3 mt-4">
-            <h3>{{ playlist.user.username | default_if_none:'' }}</h3>
+
+            <h3>
+                <a href="{% url 'accounts:profile' playlist.user.username %}" class="color-gray text-lg mt-3">
+                    {{ playlist.user.username | default_if_none:'' }}
+                </a>
+            </h3>
             <p class="mb-0">{{ playlist.user.comment | default_if_none:'' }}</p>
         </div>
     </section>

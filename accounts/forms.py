@@ -36,7 +36,7 @@ class UserChangeForm(BaseUserChangeForm):
         fields = '__all__'
 
 
-class UserProfileUpdateForm(forms.ModelForm):
+class UserSettingsForm(forms.ModelForm):
 
     class Meta(UserChangeForm.Meta):
         model = User
@@ -46,6 +46,13 @@ class UserProfileUpdateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for fieldname in self.fields:
             self.fields[fieldname].help_text = None
+
+
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ('comment',)
 
 
 class PasswordCreationForm(forms.Form):

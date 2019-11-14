@@ -6,7 +6,9 @@ from django.contrib.auth.hashers import is_password_usable
 from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import (
+    get_object_or_404, render,
+)
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.http import urlsafe_base64_decode
@@ -14,7 +16,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    AuthenticationForm, PasswordCreationForm, SignupForm, UserProfileUpdateForm, VerificationAgainForm,
+    AuthenticationForm, PasswordCreationForm, SignupForm, UserProfileForm, UserSettingsForm, VerificationAgainForm,
 )
 from bookplaylist.views import (
     login_required, sensitive_post_parameters,
@@ -32,12 +34,12 @@ class IndexView(generic.TemplateView):
 
 
 @login_required
-class ProfileView(generic.UpdateView):
-    form_class = UserProfileUpdateForm
+class SettingsView(generic.UpdateView):
+    form_class = UserSettingsForm
     password_text = '************'
     password_link_text = _('Password change')
-    success_url = reverse_lazy('accounts:profile')
-    template_name = 'accounts/profile.html'
+    success_url = reverse_lazy('accounts:settings')
+    template_name = 'accounts/settings.html'
 
     def dispatch(self, *args, **kwargs):
         self.user = self.request.user
@@ -50,7 +52,7 @@ class ProfileView(generic.UpdateView):
         return self.user
 
     def form_valid(self, form):
-        messages.success(self.request, _('Profile updated successfully.'))
+        messages.success(self.request, _('Settings updated successfully.'))
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -63,7 +65,7 @@ class ProfileView(generic.UpdateView):
 @login_required
 @sensitive_post_parameters
 class PasswordChangeView(auth_views.PasswordChangeView):
-    success_url = reverse_lazy('accounts:profile')
+    success_url = reverse_lazy('accounts:settings')
     template_name = 'accounts/password_change.html'
 
     def dispatch(self, *args, **kwargs):
@@ -76,6 +78,26 @@ class PasswordChangeView(auth_views.PasswordChangeView):
     def form_valid(self, form):
         messages.success(self.request, _('Password changed successfully.'))
         return super().form_valid(form)
+
+
+class ProfileView(generic.UpdateView):
+    form_class = UserProfileForm
+    model = UserModel
+    template_name = 'accounts/profile.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(UserModel, username=self.kwargs.get('username'))
+
+    def form_valid(self, form):
+        if self.request.user != self.get_object():
+            messages.warning(request, _('You don\'t have permission to update other user\'s profile.'))
+            return redirect('accounts/profile.html', **self.kwargs)
+        messages.success(self.request, _('Comment updated successfully.'))
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        self.success_url = self.request.path
+        return super().get_success_url()
 
 
 class PasswordResetView(auth_views.PasswordResetView):
