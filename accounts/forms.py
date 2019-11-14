@@ -48,6 +48,13 @@ class UserSettingsForm(forms.ModelForm):
             self.fields[fieldname].help_text = None
 
 
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ('comment',)
+
+
 class PasswordCreationForm(forms.Form):
     error_messages = {
         'password_mismatch': _('The two password fields didn’t match.'),

@@ -32,7 +32,7 @@
                 {% endif %}
             </div>
             <div class="col-md-3">
-                <a href="" class="btn btn-main w-100 align-bottom mt-2 mt-md-3">{% trans 'Edit' %}</a>
+                <a href="{% url 'accounts:profile' request.user.username %}" class="btn btn-main w-100 align-bottom mt-2 mt-md-3">{% trans 'Edit' %}</a>
             </div>
         </div>
     </section>
