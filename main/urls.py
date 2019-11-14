@@ -14,6 +14,7 @@ urlpatterns = [
     path('playlists/<uuid:pk>/update/book/', views.PlaylistUpdateBookView.as_view(), name='playlist_update_book'),
     path('playlists/<uuid:pk>/update/book/<uuid:book>/', views.PlaylistUpdateBookStoreView.as_view(), name='playlist_update_book_store'),
     path('playlists/<uuid:pk>/delete/', views.PlaylistDeleteView.as_view(), name='playlist_delete'),
+    path('playlists/create-or-signup/', views.CreateOrSignupView.as_view(), name='create_or_signup'),
     path('terms/', views.TermsView.as_view(), name='terms'),
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
     path('about/', views.AboutView.as_view(), name='about'),
