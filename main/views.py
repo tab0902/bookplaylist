@@ -401,6 +401,15 @@ class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
         return super().delete(request, *args, **kwargs)
 
 
+class CreateOrSignupView(generic.RedirectView):
+    url = reverse_lazy('main:playlist_create')
+
+    def dispatch(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('accounts:signup')
+        return super().dispatch(*args, **kwargs)
+
+
 class TermsView(generic.TemplateView):
     template_name = 'main/terms.html'
 

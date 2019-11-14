@@ -15,7 +15,7 @@
         <p class="mt-4">
             {% trans 'Let’s create your own book playlist on your phone. You can easily share it on your social network.' %}
         </p>
-        <a href="{% url 'main:playlist_create' %}" class="btn btn-main float-right mt-4">{% trans 'Create playlist' %}</a>
+        <a href="{% url 'main:create_or_signup' %}" class="btn btn-main float-right mt-4">{% trans 'Create playlist' %}</a>
 
         {% comment %}
         <h2 class="mt-4">{% trans 'Search playlist' %}</h2>
@@ -34,7 +34,7 @@
         <p>
             {% trans 'Let’s create your own book playlist on your phone. You can easily share it on your social network.' %}
         </p>
-        <a href="{% url 'main:playlist_create' %}" class="btn btn-main w-100">{% trans 'Create' %}</a>
+        <a href="{% url 'main:create_or_signup' %}" class="btn btn-main w-100">{% trans 'Create' %}</a>
         <div class="line-gray my-4"></div>
     </section>
 
