@@ -20,34 +20,44 @@
         </div>
         <div class="row mt-4 mt-md-5">
             <div class="col-md-9">
-                <h2>
-                    {% if request.user.comment %}
-                    {% trans 'Update profile' %}
-                    {% else %}
-                    {% trans 'Add profile' %}
-                    {% endif %}
-                </h2>
-                {% if not request.user.comment %}
-                <p class="text-sm">{% trans 'Good profile enables other users to understand your playlists deeply.' %}</p>
-                {% endif %}
+                <div class="d-flex align-items-center h-100">
+                    <div>
+                        <h2>
+                            {% if request.user.comment %}
+                            {% trans 'Update profile' %}
+                            {% else %}
+                            {% trans 'Add profile' %}
+                            {% endif %}
+                        </h2>
+                        <p class="text-sm mb-0">{% trans 'Good profile enables other users to understand your playlists deeply.' %}</p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-3">
-                <a href="{% url 'accounts:profile' request.user.username %}" class="btn btn-main w-100 align-bottom mt-2 mt-md-3">{% trans 'Edit' %}</a>
+                <div class="d-flex align-items-center h-100">
+                    <a href="{% url 'accounts:profile' request.user.username %}" class="btn btn-outline-main w-100 mt-2 mt-md-0">{% trans 'To profile' %}</a>
+                </div>
             </div>
         </div>
     </section>
 
+    {% if request.user.playlist_set.count != 0 %}
     <section id="playlist-list">
         <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
-        {% include 'main/playlist/layouts/list-widget.html' with playlists=user.playlist_set.all %}
+        {% trans "You haven't created any playlists. Enter the link below to create your first one!" as text %}
+        {% include 'main/playlist/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
     </section>
+    {% endif %}
 
     <section id="mypage-lets-create">
-        <div class="mt-5">
-            {% trans "Let's create a new playlist!" as text %}
-            {% include 'main/playlist/layouts/lets-create-playlist.html' with lets_create_text=text %}
-        </div>
+        {% if request.user.playlist_set.count != 0 %}
+        {% trans "Let's create a new playlist!" as text %}
+        {% else %}
+        {% trans "Let's create your first playlist!" as text %}
+        {% endif %}
+        {% include 'main/playlist/layouts/lets-create-playlist.html' with lets_create_text=text %}
     </section>
+
 </div>
 
 {% endblock %}

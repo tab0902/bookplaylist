@@ -18,7 +18,7 @@
             <div class="col-md-3 d-none d-md-block">
                 <div class="d-flex align-items-center h-100">
                     <div class="w-100">
-                        <button type=button class="profile-edit-btn btn btn-inline-sub float-right">{% trans 'Edit comment' %}</button>
+                        <button type=button class="profile-edit-btn btn btn-inline-main float-right">{% trans 'Edit comment' %}</button>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         </div>
 
         <div id="profile-info">
-            <p class="mt-2 mt-md-4">{{ user.comment|default_if_none:'' }}</p>
+            <p class="mt-2 mt-md-4">{{ user.comment|default_if_none:''|linebreaksbr }}</p>
         </div>
 
         {% if user == request.user %}
@@ -60,7 +60,8 @@
 
     <section id="profile-playlist-list">
         <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
-        {% include 'main/playlist/layouts/list-widget.html' with playlists=user.playlist_set.all %}
+        {% trans "This user have no playlist." as text %}
+        {% include 'main/playlist/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
     </section>
 </div>
 

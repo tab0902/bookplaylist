@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-14 14:41+0900\n"
+"POT-Creation-Date: 2019-11-14 18:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -181,34 +181,45 @@ msgstr "%(user)s さんのマイページ"
 msgid "Settings"
 msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:25
+#: accounts/templates/accounts/index.html:27
 msgid "Update profile"
 msgstr "プロフィールを編集する"
 
-#: accounts/templates/accounts/index.html:27
+#: accounts/templates/accounts/index.html:29
 msgid "Add profile"
 msgstr "自己紹介を入力しましょう"
 
-#: accounts/templates/accounts/index.html:31
+#: accounts/templates/accounts/index.html:32
 msgid "Good profile enables other users to understand your playlists deeply."
 msgstr ""
 "自己紹介を充実させることで、あなたのプレイリストを他のユーザーより深く理解し"
 "てもらいましょう。"
 
-#: accounts/templates/accounts/index.html:35
-#: main/templates/main/playlist/detail.html:26
-msgid "Edit"
-msgstr "編集する"
+#: accounts/templates/accounts/index.html:38
+msgid "To profile"
+msgstr "プロフィールへ"
 
-#: accounts/templates/accounts/index.html:41
+#: accounts/templates/accounts/index.html:46
 #: accounts/templates/accounts/profile.html:62
 #, python-format
 msgid "%(user)s's playlists"
 msgstr "%(user)s さんのプレイリスト"
 
 #: accounts/templates/accounts/index.html:47
+msgid ""
+"You haven't created any playlists. Enter the link below to create your first "
+"one!"
+msgstr ""
+"まだプレイリストが作成されていません。下のリンクから初めてのプレイリストを作"
+"成しましょう！"
+
+#: accounts/templates/accounts/index.html:54
 msgid "Let's create a new playlist!"
 msgstr "新しいプレイリストを作成しましょう！"
+
+#: accounts/templates/accounts/index.html:56
+msgid "Let's create your first playlist!"
+msgstr "初めてのプレイリストを作成しましょう！"
 
 #: accounts/templates/accounts/login.html:6
 #: accounts/templates/accounts/login.html:15
@@ -351,6 +362,10 @@ msgstr ""
 #: accounts/templates/accounts/profile.html:53
 msgid "Cancel"
 msgstr "キャンセル"
+
+#: accounts/templates/accounts/profile.html:63
+msgid "This user have no playlist."
+msgstr "プレイリストが作成されていません。"
 
 #: accounts/templates/accounts/settings.html:39
 msgid "Twitter"
@@ -886,6 +901,10 @@ msgstr "\"%(playlist)s\" を削除しますか？"
 #: main/templates/main/playlist/delete.html:16
 msgid "Note: You can't cancel this action."
 msgstr "※この操作は取り消せません。"
+
+#: main/templates/main/playlist/detail.html:26
+msgid "Edit"
+msgstr "編集する"
 
 #: main/templates/main/playlist/detail.html:68
 #: main/templates/main/playlist/detail.html:75

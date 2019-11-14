@@ -41,7 +41,9 @@
     <section id="playlist-list" class="search-results">
         <div class="line-gray mt-4 mb-5 d-none"></div>
         {% include 'main/playlist/layouts/list-widget.html' %}
+        {% if page_obj %}
         {% include 'layouts/pagenator.html' with params=params queryset=playlists %}
+        {% endif %}
     </section>
 
     <section id="playlist-list-lets-create">
