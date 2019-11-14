@@ -18,9 +18,11 @@ $(function() {
         $('#dummy').fadeIn()
         $('#drawer').animate({height: 'toggle'})
         $('#content').addClass('fixed').css('top', -scrollpos)
+        $('#footer').hide()
       } else {
         $('#dummy').fadeOut()
         $('#drawer').animate({height: 'toggle'}, function() {
+          $('#footer').show()
           $('#content').removeClass('fixed').css('top', height)
           $('body,html').animate({scrollTop: scrollpos}, 0)
         })
