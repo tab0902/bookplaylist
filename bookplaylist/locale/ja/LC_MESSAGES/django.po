@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-14 18:23+0900\n"
+"POT-Creation-Date: 2019-11-15 19:40+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -70,7 +70,7 @@ msgstr "半角英数またはアンダーバー"
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:164 main/forms.py:132
+#: accounts/forms.py:164 main/forms.py:136
 #: main/templates/main/contact_email_admin.html:6
 msgid "Email"
 msgstr ""
@@ -254,7 +254,7 @@ msgstr ""
 
 #: accounts/templates/accounts/password_change.html:15
 #: accounts/templates/accounts/password_reset.html:16
-#: main/templates/main/playlist/book.html:41
+#: main/templates/main/playlist/book.html:43
 #: main/templates/main/playlist/delete.html:24
 msgid "Back"
 msgstr "戻る"
@@ -555,7 +555,7 @@ msgstr "BookPlayList 管理サイト"
 msgid "Home"
 msgstr ""
 
-#: bookplaylist/views.py:26
+#: bookplaylist/views.py:34
 msgid "You don't have permission to access the page."
 msgstr "ページにアクセスする権限がありません"
 
@@ -595,25 +595,25 @@ msgstr "すべてのテーマ"
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:123
-msgid "Input title or author name"
-msgstr "書名、著者名を入力"
+#: main/forms.py:127
+msgid "Input title name"
+msgstr "書名を入力"
 
-#: main/forms.py:128 main/templates/main/contact_email.html:5
+#: main/forms.py:132 main/templates/main/contact_email.html:5
 #: main/templates/main/contact_email_admin.html:7
 msgid "Content of inquiry"
 msgstr "お問い合わせ内容"
 
-#: main/forms.py:137
+#: main/forms.py:141
 msgid "URL of the target page (option)"
 msgstr "対象ページのURL（任意）"
 
-#: main/forms.py:141 main/templates/main/contact_email.html:8
+#: main/forms.py:145 main/templates/main/contact_email.html:8
 #: main/templates/main/contact_email_admin.html:10
 msgid "Body"
 msgstr "本文"
 
-#: main/forms.py:164
+#: main/forms.py:168
 msgid "Guest user"
 msgstr "ゲストユーザー"
 
@@ -855,20 +855,6 @@ msgstr "\"%(q)s\" が含まれる書籍一覧"
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlist/book.html:65
-#: main/templates/main/playlist/detail.html:56
-msgid "No Image"
-msgstr ""
-
-#: main/templates/main/playlist/book.html:88
-msgid "Add"
-msgstr "追加する"
-
-#: main/templates/main/playlist/book.html:96
-msgid "No book found. Please search by other words."
-msgstr ""
-"お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
-
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
 msgid "Playlist created successfully!"
@@ -906,6 +892,11 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
+#: main/templates/main/playlist/detail.html:56
+#: main/templates/main/playlist/layouts/book-list.html:21
+msgid "No Image"
+msgstr ""
+
 #: main/templates/main/playlist/detail.html:68
 #: main/templates/main/playlist/detail.html:75
 #: main/templates/main/playlist/layouts/list-widget.html:22
@@ -927,6 +918,20 @@ msgstr "あなたへのおすすめ"
 #: main/templates/main/playlist/detail.html:115
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
+
+#: main/templates/main/playlist/layouts/book-list.html:5
+#, python-format
+msgid "%(first)s-%(last)s of %(count)s results"
+msgstr "%(count)s 件中 %(first)s - %(last)s 件"
+
+#: main/templates/main/playlist/layouts/book-list.html:44
+msgid "Add"
+msgstr "追加する"
+
+#: main/templates/main/playlist/layouts/book-list.html:51
+msgid "No book found. Please search by other words."
+msgstr ""
+"お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:17
 #, python-format
@@ -991,19 +996,33 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:219 main/views.py:279
+#: main/views.py:226 main/views.py:286
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:290
+#: main/views.py:297
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:356
+#: main/views.py:361
+msgid ""
+"<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
+"p>"
+msgstr ""
+"<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
+"い。</p>"
+
+#: main/views.py:368
+msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
+msgstr ""
+"<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
+"い。</p>"
+
+#: main/views.py:416
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:400
+#: main/views.py:460
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 

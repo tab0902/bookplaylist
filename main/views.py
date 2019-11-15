@@ -1,12 +1,17 @@
-from functools import reduce
+import requests
+import time
 from itertools import chain
 
 from django import forms
+from django.conf import settings
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.db.models import (
     Case, Count, IntegerField, Prefetch, Q, When
 )
-from django.http import HttpResponseRedirect
+from django.http import (
+    HttpResponse, HttpResponseBadRequest, HttpResponseRedirect,
+)
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -19,7 +24,7 @@ from .models import (
     Book, Playlist, PlaylistBook, Theme,
 )
 from bookplaylist.views import (
-    OwnerOnlyMixin, SearchFormView, login_required,
+    OwnerOnlyMixin, SearchFormView, csrf_protect, login_required,
 )
 
 # Create your views here.
@@ -300,41 +305,21 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
 
 
 @login_required
-class BasePlaylistBookView(generic.list.BaseListView, SearchFormView):
-    context_object_name = 'books'
+class BasePlaylistBookView(SearchFormView):
     form_class = BookSearchForm
-    model = Book
-    paginate_by = 24
     success_url = None
     template_name = 'main/playlist/book.html'
 
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        if query:
-            q_list = self._format_query(query)
-            condition_lists = []
-            condition_lists.append([Q(title__iexact=q) | Q(title_collation_key__iexact=q) | Q(author__iexact=q) for q in q_list])
-            condition_lists.append([Q(title__icontains=q) | Q(title_collation_key__icontains=q) | Q(author__icontains=q) for q in q_list])
-            queryset = Playlist.objects.none()
-            for condition_list in condition_lists:
-                queryset = chain(
-                    queryset,
-                    Book.objects.filter(*condition_list).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate').distinct()
-                )
-            queryset = list(dict.fromkeys(queryset))
-        else:
-            queryset = Book.objects.none()
-        return queryset
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['mode'] = self.mode
+        kwargs['pk'] = self.kwargs.get('pk')
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['books_in_session'] = [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
         context['mode'] = self.mode
         return context
-
-    def get_success_url(self):
-        self.success_url = reverse_lazy('main:playlist_{}_book'.format(self.mode), kwargs=self.kwargs)
-        return super().get_success_url()
 
 
 class PlaylistCreateBookView(BasePlaylistBookView):
@@ -343,6 +328,80 @@ class PlaylistCreateBookView(BasePlaylistBookView):
 
 class PlaylistUpdateBookView(OwnerOnlyMixin, BasePlaylistBookView):
     mode = MODE_UPDATE
+
+
+RAKUTEN_ENDPOINT = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404'
+
+
+@csrf_protect
+@login_required
+class BookSearchView(generic.View):
+
+    def _search_book(self, data):
+        q = data.get('q')
+        if not self.request.is_ajax() or not q:
+            return HttpResponseBadRequest()
+        params = {
+            'applicationId': settings.RAKUTEN_APPLICATION_ID,
+            'hits': '24',
+            'title': q,
+            'sort': 'reviewCount',
+        }
+        page = data.get('page')
+        if page:
+            params['page'] = page
+
+        i = 0
+        while i < 10:
+            response = requests.get(RAKUTEN_ENDPOINT, params=params)
+            if response.status_code == requests.codes.ok:
+                break
+            elif response.status_code == requests.codes.bad_request:
+                return HttpResponse(_('<p class="mt-4">The keyword is too short. Please search by longer words.</p>'))
+            else:
+                i += 1
+                time.sleep(1)
+                continue
+
+        if 'error' in response:
+            return HttpResponse(_('<p class="mt-4">An error has occurred. Please retry later.</p>'))
+
+        response = response.json()
+        context = {}
+        context['mode'] = data.get('mode')
+        context['pk'] = data.get('pk')
+        context['books_in_session'] = [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
+        context['count'] = response['count']
+        context['first'] = response['first']
+        context['last'] = response['last']
+        context['books'] = [
+            {
+                'isbn': book['Item']['isbn'],
+                'title': book['Item']['title'] + ' ' + book['Item']['subTitle'],
+                'author': book['Item']['author'],
+                'cover': book['Item']['largeImageUrl'],
+            }
+            for book in response['Items']
+        ]
+
+        data_remove = ('csrfmiddlewaretoken', 'page',)
+        for datum in data_remove:
+            if datum in data:
+                del data[datum]
+        if int(response['count']):
+            context['page_obj'] = Paginator(range(int(response['count'])), 24).page(int(response['page']))
+            context['params'] = data
+        return render(
+            self.request,
+            'main/playlist/layouts/book-list.html',
+            context
+        )
+
+    def get(self, request, *args, **kwargs):
+        return self._search_book(request.GET.copy())
+
+    def post(self, request, *args, **kwargs):
+        return self._search_book(request.POST.copy())
 
 
 @login_required

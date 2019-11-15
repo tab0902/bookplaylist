@@ -1,3 +1,20 @@
+// function for ajax form
+function csrfSafeMethod(method) {
+  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
+}
+
+// identify user agent
+function get_user_agent() {
+  const ua = navigator.userAgent
+  if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0) {
+    return 'sp'
+  } else if (ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0) {
+    return 'tab'
+  } else {
+    return 'pc'
+  }
+}
+
 $(function() {
 
   // drawer menu
@@ -37,17 +54,13 @@ $(function() {
   // prevent duplicate submit
   $('form').submit(function() {
     const selector = ':submit:not(.allow-duplicate)'
-    $(selector, this).prop('disabled', true)
-    $(selector, this).css('opacity', 1)
-    setTimeout(function() {
-      $(selector, this).prop('disabled', false)
-    }, 10000)
-  })
-
-  // toggle loading spinner
-  $('.search-form').submit(function() {
-    $('.search-loading').show()
-    $('.search-results').hide()
+    if (!$(this).hasClass('allow-duplicate') && !$(this).has('#ajax-form')) {
+      $(selector, this).prop('disabled', true)
+      $(selector, this).css('opacity', 1)
+      setTimeout(function() {
+        $(selector, this).prop('disabled', false)
+      }, 10000)
+    }
   })
 
   // delete/restore book button

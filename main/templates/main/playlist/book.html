@@ -17,7 +17,7 @@
             {% blocktrans %}Search book to add{% endblocktrans %}
             {% endif %}
         </h2>
-        <form action="" method="post" class="search-form">{% csrf_token %}
+        <form action="{% url 'main:book_search' %}" method="post" id="ajax-form">{% csrf_token %}
             <div class="row mt-4">
                 <div class="col-sm-9 col-lg-10">
                     {{ form.q }}
@@ -27,6 +27,8 @@
                     <input type="submit" class="btn btn-outline-sub btn-fit" value="{% trans 'Search' %}">
                 </div>
             </div>
+            {{ form.mode }}
+            {{ form.pk }}
         </form>
         <div>
             <div>
@@ -48,58 +50,64 @@
         {% include 'layouts/loading-spinner.html' %}
     </section>
 
-    <section id="book-list" class="search-results">
-        <div class="row mt-4">
-            {% for book in books %}
-            <div class="book-item col-sm-3 col-lg-2">
-                <div class="position-relative">
-                    <div class="line-gray my-4"></div>
-                    <div class="row">
-                        <div class="col-4 col-sm-12">
-                            {% if book.cover %}
-                            <img class="w-100" src="{{ book.cover | default_if_none:'' }}">
-                            {% else %}
-                            <div class="blank-box-wrapper no-image-wrapper">
-                                <div class="blank-box-content no-image-content">
-                                    <div class="d-flex align-items-center h-100">
-                                        <span class="text-sm text-center font-weight-bold w-100">{% trans 'No Image' %}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                        <div class="col-8 col-sm-12 book-item-info">
-                            <h3 class="text-md font-weight-normal mt-sm-3">{{ book.title | default_if_none:'' }}</h3>
-                            <div class="text-xs mt-1 mb-2">{{ book.author | default_if_none:'' }}</div>
-                        </div>
-                    </div>
-                    <div class="position-absolute r-0 b-0">
-                        <button
-                            class="btn btn-outline-main btn-fit w-100 mt-2"
-                            {% if mode == 'create' %}
-                            onclick="location.href='{% url 'main:playlist_create_book_store' book.pk %}'"
-                            {% elif mode == 'update' %}
-                            onclick="location.href='{% url 'main:playlist_update_book_store' view.kwargs.pk book.pk %}'"
-                            {% endif %}
-                            {% if book.isbn in books_in_session %}
-                            disabled
-                            {% endif %}
-                        >
-                            {% trans 'Add' %}
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            {% if request.GET.q %}
-            <div class="col-12">
-                <p>{% trans 'No book found. Please search by other words.' %}</p>
-            </div>
-            {% endif %}
-            {% endfor %}
+    <section id="book-list">
+        <div id="ajax-result">
         </div>
-        {% include 'layouts/pagenator.html' with params=params queryset=books %}
     </section>
 </div>
 
+{% endblock %}
+
+
+{% block script %}
+<script>
+const csrftoken = Cookies.get('csrftoken')
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken)
+        }
+    }
+})
+
+// ajax (POST)
+$('#ajax-form').on('submit', function(e) {
+    const form = $(this)
+    e.preventDefault()
+    $('#search-loading').show()
+    $('#ajax-result').empty()
+
+    $.ajax({
+        url: form.attr('action'),
+        method: form.attr('method'),
+        data: form.serialize(),
+        timeout: 10000,
+        dataType: 'text',
+    }).done(response => {
+        const ua = get_user_agent()
+        const uas = ['sp', 'tab']
+        if (uas.includes(ua)) $('input').blur()
+        $('#search-loading').hide()
+        $('#ajax-result').html(response)
+    })
+})
+
+// ajax (GET)
+$(document).on('click', 'a.page-link', function(e) {
+    e.preventDefault()
+    const link = $(this)
+    $('#search-loading').show()
+    $('#ajax-result').empty()
+
+    $.ajax({
+        url: link.attr('href'),
+        timeout: 10000,
+        dataType: 'text',
+    }).done(response => {
+        $('#search-loading').hide()
+        $('#ajax-result').html(response)
+    })
+})
+</script>
 {% endblock %}

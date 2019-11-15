@@ -116,11 +116,15 @@ class PlaylistSearchForm(SearchForm):
 
 
 class BookSearchForm(SearchForm):
+    mode = forms.CharField(widget=forms.HiddenInput)
+    pk = forms.CharField(widget=forms.HiddenInput)
 
-    def __init__(self, q='', theme=None, *args, **kwargs):
-        super().__init__(q=q, *args, **kwargs)
+    def __init__(self, mode=None, pk=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['mode'].initial = mode
+        self.fields['pk'].initial = pk
         self.fields['q'].widget.attrs['autofocus'] = True
-        self.fields['q'].widget.attrs['placeholder'] = _('Input title or author name')
+        self.fields['q'].widget.attrs['placeholder'] = _('Input title name')
 
 
 class ContactForm(forms.Form, SendEmailMixin):
