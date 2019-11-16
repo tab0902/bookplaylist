@@ -21,7 +21,7 @@ from .forms import (
     BookSearchForm, ContactForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
-    Book, Playlist, PlaylistBook, Theme,
+    Book, Playlist, PlaylistBook, Provider, Theme,
 )
 from bookplaylist.views import (
     OwnerOnlyMixin, SearchFormView, csrf_protect, login_required,
@@ -330,14 +330,12 @@ class PlaylistUpdateBookView(OwnerOnlyMixin, BasePlaylistBookView):
     mode = MODE_UPDATE
 
 
-RAKUTEN_ENDPOINT = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404'
-
-
 @csrf_protect
 @login_required
 class BookSearchView(generic.View):
 
     def _search_book(self, data):
+        provider = Provider.objects.first()
         q = data.get('q')
         if not self.request.is_ajax() or not q:
             return HttpResponseBadRequest()
@@ -353,7 +351,7 @@ class BookSearchView(generic.View):
 
         i = 0
         while i < 10:
-            response = requests.get(RAKUTEN_ENDPOINT, params=params)
+            response = requests.get(provider.endpoint, params=params)
             if response.status_code == requests.codes.ok:
                 break
             elif response.status_code == requests.codes.bad_request:

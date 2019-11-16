@@ -5,7 +5,9 @@ from django.utils.translation import gettext_lazy as _
 from bookplaylist.models import (
     BaseModel, NullCharField, NullSlugField, NullTextField, NullURLField,
 )
-from .managers import PublishedOnlyManager
+from .managers import (
+    AvailableOnlyManager, PublishedOnlyManager,
+)
 
 # Create your models here.
 
@@ -29,6 +31,26 @@ class Theme(BaseModel):
         return '%s' % self.name
 
 
+class Provider(BaseModel):
+    name = NullCharField(_('provider name'), max_length=50)
+    slug = NullSlugField(_('slug'), unique=True)
+    endpoint = NullURLField(_('endpoint'))
+    priority = models.SmallIntegerField(_('priority'), unique=True)
+    description = NullTextField(_('description'), blank=True, null=True)
+    is_available = models.BooleanField(_('available'), default=True)
+    objects = AvailableOnlyManager()
+    all_objects = models.Manager()
+
+    class Meta(BaseModel.Meta):
+        db_table = 'providers'
+        ordering = ['priority']
+        verbose_name = _('provider')
+        verbose_name_plural = _('providers')
+
+    def __str__(self):
+        return '%s' % self.name
+
+
 class Book(BaseModel):
     playlists = models.ManyToManyField(
         'Playlist',
@@ -38,31 +60,37 @@ class Book(BaseModel):
         blank=True,
     )
     isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
-    title = NullCharField(_('title'), max_length=255, blank=True, null=True)
-    title_collation_key = NullCharField(_('collation key'), max_length=255, blank=True, null=True)
-    volume = NullCharField(_('volume'), max_length=255, blank=True, null=True)
-    series = NullCharField(_('series'), max_length=255, blank=True, null=True)
-    publisher = NullCharField(_('publisher'), max_length=255, blank=True, null=True)
-    pubdate = NullCharField(_('date published'), max_length=255, blank=True, null=True)
-    cover = NullURLField(_('cover'), blank=True, null=True)
-    author = NullCharField(_('author'), max_length=255, blank=True, null=True)
-    amazon_url = NullURLField(_('Amazon URL'), blank=True, null=True)
 
     class Meta(BaseModel.Meta):
         db_table = 'books'
         ordering = ['isbn']
         verbose_name = _('book')
         verbose_name_plural = _('books')
+
+    def __str__(self):
+        return '%s' % (self.book_data_set.first() or self.isbn)
+
+
+class BookData(BaseModel):
+    book = models.ForeignKey('Book', on_delete=models.CASCADE, to_field='isbn', db_column='book_isbn', related_name='book_data_set', verbose_name=_('book'))
+    provider = models.ForeignKey('Provider', on_delete=models.CASCADE, related_name='book_data_set', verbose_name=_('provider'))
+    title = NullCharField(_('title'), max_length=255)
+    author = NullCharField(_('author'), max_length=255, blank=True, null=True)
+    publisher = NullCharField(_('publisher'), max_length=255, blank=True, null=True)
+    cover = NullURLField(_('cover'), blank=True, null=True)
+    affiliate_url = NullURLField(_('Affiliate URL'), blank=True, null=True)
+
+    class Meta(BaseModel.Meta):
+        db_table = 'book_data'
+        ordering = ['book', 'provider']
+        verbose_name = _('book data')
+        verbose_name_plural = _('book data')
         indexes = [
             models.Index(fields=['title'], name='title'),
-            models.Index(fields=['publisher'], name='publisher'),
-            models.Index(fields=['pubdate'], name='pubdate'),
             models.Index(fields=['author'], name='author'),
-        ] + BaseModel._meta.indexes + [
-            models.Index(fields=['title', 'volume', 'series'], name='idx01'),
-            models.Index(fields=['pubdate', 'title'], name='idx02'),
-            models.Index(fields=['title', 'title_collation_key', 'author'], name='idx03'),
-        ]
+            models.Index(fields=['publisher'], name='publisher'),
+        ] + BaseModel._meta.indexes
+        unique_together = [['book', 'provider']]
 
     def __str__(self):
         return '%s' % self.title
