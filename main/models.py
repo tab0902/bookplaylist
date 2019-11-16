@@ -51,6 +51,12 @@ class Provider(BaseModel):
         return '%s' % self.name
 
 
+class BookManager(models.Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('book_data_set')
+
+
 class Book(BaseModel):
     playlists = models.ManyToManyField(
         'Playlist',
@@ -60,6 +66,11 @@ class Book(BaseModel):
         blank=True,
     )
     isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
+    objects = BookManager()
+
+    @property
+    def data(self):
+        return self.book_data_set.first()
 
     class Meta(BaseModel.Meta):
         db_table = 'books'
@@ -126,10 +137,17 @@ class Playlist(BaseModel):
         return '%s' % self.title
 
 
+class PlaylistBookManager(models.Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().select_related('book').prefetch_related('book__book_data_set')
+
+
 class PlaylistBook(BaseModel):
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
     book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'), to_field='isbn', db_column='book_isbn')
     description = NullTextField(_('description'), blank=True, null=True)
+    objects = PlaylistBookManager()
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists_books'

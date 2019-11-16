@@ -6,16 +6,17 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils.translation import gettext as _
 
+from bookplaylist.utils import APIMixin
 from main.models import (
     Book, Playlist, Provider,
 )
 
 
-class Command(BaseCommand):
+class Command(APIMixin, BaseCommand):
     help = 'Get book data from API and update the records in DB.'
 
     def add_arguments(self, parser):
-        default_provider = Provider.objects.first()
+        default_provider = self.provider
         parser.add_argument(
             '--provider', '-p',
             type=str,
@@ -34,19 +35,11 @@ class Command(BaseCommand):
                 'applicationId': settings.RAKUTEN_APPLICATION_ID,
                 'isbn': isbn,
             }
-            i = 0
-            while i < 10:
-                response = requests.get(endpoint, params=params)
-                if response.status_code == requests.codes.ok:
-                    break
-                elif response.status_code == requests.codes.bad_request:
-                    print('No data found.')
-                else:
-                    i += 1
-                    time.sleep(1)
-                    continue
 
-            if 'error' in response:
+            response = self.get_book_data(params)
+            if response.status_code == requests.codes.bad_request:
+                print('No data found.')
+            elif 'error' in response:
                 return HttpResponse('An error has occurred.')
 
             response = response.json()

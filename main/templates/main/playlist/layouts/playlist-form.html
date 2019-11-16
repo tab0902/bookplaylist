@@ -10,7 +10,7 @@
 
     {% for book_form, book_data in book_formset %}
     <div class="line-gray my-4"></div>
-    <div class="playlist-form-book-item" data-book="{{ book_data.id }}">
+    <div class="playlist-form-book-item" data-isbn="{{ book_data.isbn }}">
         <div class="row">
             <div class="col-4 col-sm-2">
                 <img class="w-100" src="{{ book_data.cover | default_if_none:'' }}">
@@ -24,7 +24,7 @@
                     <div class="col-sm-4">
                         <button
                             type="button"
-                            data-book="{{ book_data.id }}"
+                            data-isbn="{{ book_data.isbn }}"
                             class="delete-book btn btn-inline-sub mt-3 mt-sm-0 float-left float-sm-right text-sm"
                         >
                             {% trans 'Delete book' %}
@@ -43,14 +43,16 @@
         {% endfor %}
     </div>
 
-    <div class="playlist-form-book-delete row" data-book="{{ book_data.id }}" style="display:none;">
+    <div class="playlist-form-book-delete row" data-isbn="{{ book_data.isbn }}" style="display:none;">
         <div class="col-sm-9">
-            <h3 class="text-md font-weight-bold">{% blocktrans with book_data.title|default_if_none:'' as book_title %}"{{ book_title }}" will be delete.{% endblocktrans %}</h3>
+            <h3 class="text-md font-weight-bold">
+                {{ forloop.counter }}. {% blocktrans with book_data.title|default_if_none:'' as book_title %}"{{ book_title }}" will be delete.{% endblocktrans %}
+            </h3>
         </div>
         <div class="col-sm-3">
             <button
                 type="button"
-                data-book="{{ book_data.id }}"
+                data-isbn="{{ book_data.isbn }}"
                 class="restore-book btn btn-inline-sub float-left float-sm-right text-sm"
             >
                 {% trans 'Restore to playlist' %}

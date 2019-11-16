@@ -1,5 +1,35 @@
+import re
+import requests
+import time
+
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
+
+from main.models import (
+    Provider
+)
+
+
+class APIMixin:
+    provider = Provider.objects.first()
+
+    def get_book_data(self, params):
+        i = 0
+        while i < 5:
+            response = requests.get(self.provider.endpoint, params=params)
+            if response.status_code in (requests.codes.ok, requests.codes.bad_request,):
+                break
+            else:
+                i += 1
+                time.sleep(1)
+                continue
+        return response
+
+    def format_isbn(self, isbn):
+        return re.sub('\D', '', isbn)
+
+    def format_title(self, *args):
+        return ' '.join(args)
 
 
 class SendEmailMixin:

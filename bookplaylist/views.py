@@ -10,7 +10,9 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_protect as csrf_protect_
 from django.views.decorators.debug import sensitive_post_parameters as sensitive_post_parameters_
 
-from main.models import Playlist
+from main.models import (
+    Playlist, Provider,
+)
 
 csrf_protect = method_decorator(csrf_protect_, name='dispatch')
 login_required = method_decorator(login_required_, name='dispatch')
