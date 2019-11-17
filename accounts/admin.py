@@ -8,12 +8,13 @@ from .forms import (
 )
 from .models import User
 from main.admin import PlaylistInline
+from bookplaylist.admin import AllObjectsMixin
 
 # Register your models here.
 
 
 @admin.register(User)
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(AllObjectsMixin, BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'twitter_id', 'facebook_id', 'password', )}),
         (_('Personal info'), {'fields': ('comment', 'last_name', 'first_name', 'hopes_newsletter', )}),
@@ -30,7 +31,7 @@ class UserAdmin(BaseUserAdmin):
     )
     form = UserChangeForm
     add_form = UserCreationForm
-    list_display = ('username', 'email', 'last_login', 'date_joined', 'is_staff', )
+    list_display = ('username', 'email', 'last_login', 'date_joined', 'is_staff', 'is_active', )
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'hopes_newsletter', 'groups', 'last_login', 'date_joined', 'date_verified', )
     search_fields = ('username', 'email', 'twitter_id', 'facebook_id', 'first_name', 'last_name', 'comment', )
     ordering = ('-last_login', )

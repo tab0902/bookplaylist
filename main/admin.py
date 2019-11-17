@@ -4,13 +4,13 @@ from .models import (
     Book, BookData, Playlist, PlaylistBook, Provider, Theme,
 )
 from bookplaylist.admin import (
-    Admin, AllObjectsModelAdmin, SlimTabularInline, StackedInline, TabularInline,
+    Admin, AllObjectsForeignKeyMixin, AllObjectsMixin, SlimTabularInline, StackedInline, TabularInline,
 )
 
 # Register your models here.
 
 
-class BookDataInline(StackedInline):
+class BookDataInline(AllObjectsForeignKeyMixin, StackedInline):
     model = BookData
     can_delete = False
     show_change_link = True
@@ -22,7 +22,7 @@ class BookDataInline(StackedInline):
         return max_num
 
 
-class PlaylistInline(SlimTabularInline):
+class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInline):
     model = Playlist
     can_delete = True
     show_change_link = True
@@ -34,7 +34,7 @@ class PlaylistInline(SlimTabularInline):
         return max_num
 
 
-class PlaylistBookTabularInline(TabularInline):
+class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
     model = Book.playlists.through
     can_delete = True
     show_change_link = False
@@ -68,7 +68,7 @@ class ThemeAdmin(Admin):
 
 
 @admin.register(Provider)
-class ProviderAdmin(AllObjectsModelAdmin):
+class ProviderAdmin(AllObjectsMixin, Admin):
     list_display = ('name', 'slug', 'priority', 'is_available', 'created_at', )
     list_filter = ('is_available', 'created_at', 'updated_at', )
     search_fields = ('name', 'slug', 'description', )
@@ -83,7 +83,7 @@ class BookAdmin(Admin):
 
 
 @admin.register(Playlist)
-class PlaylistAdmin(AllObjectsModelAdmin):
+class PlaylistAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, Admin):
     list_display = ('title', 'user', 'theme', 'created_at', 'is_published', )
     list_filter = ('theme__name', 'is_published', 'created_at', 'updated_at', )
     search_fields = ('title', 'description', 'user__username', 'theme__name', 'books__isbn', 'books__book_data__title', 'books__book_data__author', 'books__book_data__publisher', )

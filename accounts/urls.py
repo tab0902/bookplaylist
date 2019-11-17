@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -6,7 +6,7 @@ app_name = 'accounts'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('settings/', views.SettingsView.as_view(), name='settings'),
-    path('users/<slug:username>/', views.ProfileView.as_view(), name='profile'),
+    re_path('users/(?P<username>[0-9a-zA-Z_]+)/', views.ProfileView.as_view(), name='profile'),
     path('password/change/', views.PasswordChangeView.as_view(), name='password_change'),
     path('password/reset/', views.PasswordResetView.as_view(), name='password_reset'),
     path('password/reset/done/', views.PasswordResetDoneView.as_view(), name='password_reset_done'),

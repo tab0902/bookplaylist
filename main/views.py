@@ -357,10 +357,10 @@ class BookSearchView(APIMixin, generic.View):
             ]
         }
 
-        data = [d for d in data if d not in ('csrfmiddlewaretoken', 'page',)]
+        url_params = {k: data[k] for k in data.keys() if k not in ('csrfmiddlewaretoken', 'page',)}
         if int(response['count']):
             context['page_obj'] = Paginator(range(int(response['count'])), 24).page(int(response['page']))
-            context['params'] = data
+            context['params'] = url_params
         return render(
             self.request,
             'main/playlist/layouts/book-list.html',
