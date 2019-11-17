@@ -4,13 +4,13 @@ from .models import (
     Book, BookData, Playlist, PlaylistBook, Provider, Theme,
 )
 from bookplaylist.admin import (
-    AllObjectsModelAdmin, SlimTabularInline,
+    Admin, AllObjectsModelAdmin, SlimTabularInline, StackedInline, TabularInline,
 )
 
 # Register your models here.
 
 
-class BookDataInline(admin.StackedInline):
+class BookDataInline(StackedInline):
     model = BookData
     can_delete = False
     show_change_link = True
@@ -34,11 +34,11 @@ class PlaylistInline(SlimTabularInline):
         return max_num
 
 
-class PlaylistBookTabularInline(admin.TabularInline):
+class PlaylistBookTabularInline(TabularInline):
     model = Book.playlists.through
     can_delete = True
     show_change_link = False
-    exclude = ('description',)
+    exclude = ('deleted_at', 'description',)
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -47,7 +47,7 @@ class PlaylistBookTabularInline(admin.TabularInline):
         return max_num
 
 
-class PlaylistBookStackedInline(admin.StackedInline):
+class PlaylistBookStackedInline(StackedInline):
     model = Playlist.books.through
     can_delete = True
     show_change_link = False
@@ -60,7 +60,7 @@ class PlaylistBookStackedInline(admin.StackedInline):
 
 
 @admin.register(Theme)
-class ThemeAdmin(admin.ModelAdmin):
+class ThemeAdmin(Admin):
     list_display = ('name', 'slug', 'sequence', 'created_at', )
     list_filter = ('created_at', 'updated_at', )
     search_fields = ('name', 'slug', 'description', )
@@ -75,7 +75,7 @@ class ProviderAdmin(AllObjectsModelAdmin):
 
 
 @admin.register(Book)
-class BookAdmin(admin.ModelAdmin):
+class BookAdmin(Admin):
     list_display = ('__str__', 'isbn', 'created_at', )
     list_filter = ('created_at', 'updated_at', )
     search_fields = ('isbn', 'book_data_set__title', 'book_data_set__author', 'book_data_set__publisher', 'book_data_set__cover', 'book_data_set__affiliate_url', )

@@ -1,13 +1,13 @@
-from django.db import models
+from bookplaylist.models import Manager
 
 
-class PublishedOnlyManager(models.Manager):
+class PublishedOnlyManager(Manager):
 
     def get_queryset(self):
         return super().get_queryset().filter(is_published=True)
 
 
-class AvailableOnlyManager(models.Manager):
+class AvailableOnlyManager(Manager):
 
     def get_queryset(self):
         return super().get_queryset().filter(is_available=True)

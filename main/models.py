@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
-    BaseModel, NullCharField, NullSlugField, NullTextField, NullURLField,
+    BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
 )
 from .managers import (
     AvailableOnlyManager, PublishedOnlyManager,
@@ -39,7 +39,7 @@ class Provider(BaseModel):
     description = NullTextField(_('description'), blank=True, null=True)
     is_available = models.BooleanField(_('available'), default=True)
     objects = AvailableOnlyManager()
-    all_objects = models.Manager()
+    all_objects_without_deleted = Manager()
 
     class Meta(BaseModel.Meta):
         db_table = 'providers'
@@ -51,7 +51,7 @@ class Provider(BaseModel):
         return '%s' % self.name
 
 
-class BookManager(models.Manager):
+class BookManager(Manager):
 
     def get_queryset(self):
         return super().get_queryset().prefetch_related('book_data_set')
@@ -107,6 +107,18 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
+class PlaylistManager(PublishedOnlyManager):
+
+    def get_queryset(self):
+        return super().get_queryset().exclude(user__deleted_at__isnull=False)
+
+
+class AllPlaylistManager(Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().exclude(user__deleted_at__isnull=False)
+
+
 class Playlist(BaseModel):
     books = models.ManyToManyField(
         'Book',
@@ -119,8 +131,8 @@ class Playlist(BaseModel):
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
     is_published = models.BooleanField(_('published'), default=True)
-    objects = PublishedOnlyManager()
-    all_objects = models.Manager()
+    objects = PlaylistManager()
+    all_objects_without_deleted = AllPlaylistManager()
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists'
@@ -137,7 +149,7 @@ class Playlist(BaseModel):
         return '%s' % self.title
 
 
-class PlaylistBookManager(models.Manager):
+class PlaylistBookManager(Manager):
 
     def get_queryset(self):
         return super().get_queryset().select_related('book').prefetch_related('book__book_data_set')
