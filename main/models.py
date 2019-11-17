@@ -194,6 +194,7 @@ class PlaylistBook(BaseModel):
         ordering = ['playlist', 'created_at']
         verbose_name = _('book in playlist')
         verbose_name_plural = _('books in playlists')
+        unique_together = [['playlist', 'book']]
 
     def __str__(self):
         return '%s' % self.book
