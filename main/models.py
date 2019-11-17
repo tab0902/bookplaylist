@@ -5,9 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
 )
-from .managers import (
-    AvailableOnlyManager, PublishedOnlyManager,
-)
 
 # Create your models here.
 
@@ -31,6 +28,12 @@ class Theme(BaseModel):
         return '%s' % self.name
 
 
+class ProviderManager(Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_available=True)
+
+
 class Provider(BaseModel):
     name = NullCharField(_('provider name'), max_length=50)
     slug = NullSlugField(_('slug'), unique=True)
@@ -38,7 +41,7 @@ class Provider(BaseModel):
     priority = models.SmallIntegerField(_('priority'), unique=True)
     description = NullTextField(_('description'), blank=True, null=True)
     is_available = models.BooleanField(_('available'), default=True)
-    objects = AvailableOnlyManager()
+    objects = ProviderManager()
     all_objects_without_deleted = Manager()
 
     class Meta(BaseModel.Meta):
@@ -121,13 +124,13 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
-class PlaylistManager(PublishedOnlyManager):
+class PlaylistManager(Manager):
 
     def get_queryset(self):
-        return super().get_queryset().exclude(user__deleted_at__isnull=False).filter(user__is_active=True)
+        return super().get_queryset().filter(is_published=True, user__is_active=True, user__deleted_at__isnull=False)
 
 
-class AllPlaylistManager(Manager):
+class PlaylistWithUnpublishedManager(Manager):
 
     def get_queryset(self):
         return super().get_queryset().exclude(user__deleted_at__isnull=False)
@@ -146,7 +149,7 @@ class Playlist(BaseModel):
     description = NullTextField(_('description'))
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
-    all_objects_without_deleted = AllPlaylistManager()
+    all_objects_without_deleted = PlaylistWithUnpublishedManager()
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists'
