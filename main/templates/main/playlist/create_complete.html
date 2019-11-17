@@ -15,7 +15,7 @@
             <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
                 <div class="playlist-img scroll-wrapper scroll-wrapper-cover">
                     <div class="playlist-img scroll-inner scroll-inner-cover">
-                        {% for playlist_book in playlist.playlistbook_set.all %}
+                        {% for playlist_book in playlist.playlist_book_set.all %}
                         {% if playlist_book.book.data.cover %}
                         <img class="scroll-box scroll-box-cover" src="{{ playlist_book.book.data.cover | default_if_none:'' }}">
                         {% endif %}

@@ -11,7 +11,10 @@ from main.models import (
 
 
 class APIMixin:
-    provider = Provider.objects.first()
+
+    def __init__(self, *args, **kwargs):
+        self.provider = Provider.objects.first()
+        return super().__init__(*args, **kwargs)
 
     def get_book_data(self, params):
         i = 0
