@@ -83,8 +83,22 @@ class Book(BaseModel):
 
 
 class BookData(BaseModel):
-    book = models.ForeignKey('Book', on_delete=models.CASCADE, to_field='isbn', db_column='book_isbn', related_name='book_data_set', verbose_name=_('book'))
-    provider = models.ForeignKey('Provider', on_delete=models.CASCADE, related_name='book_data_set', verbose_name=_('provider'))
+    book = models.ForeignKey(
+        'Book',
+        on_delete=models.CASCADE,
+        to_field='isbn',
+        db_column='book_isbn',
+        related_name='book_data_set',
+        related_query_name='book_data',
+        verbose_name=_('book')
+    )
+    provider = models.ForeignKey(
+        'Provider',
+        on_delete=models.CASCADE,
+        related_name='book_data_set',
+        related_query_name='book_data',
+        verbose_name=_('provider')
+    )
     title = NullCharField(_('title'), max_length=255)
     author = NullCharField(_('author'), max_length=255, blank=True, null=True)
     publisher = NullCharField(_('publisher'), max_length=255, blank=True, null=True)
@@ -156,8 +170,22 @@ class PlaylistBookManager(Manager):
 
 
 class PlaylistBook(BaseModel):
-    playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, verbose_name=_('playlist'))
-    book = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name=_('book'), to_field='isbn', db_column='book_isbn')
+    playlist = models.ForeignKey(
+        'Playlist',
+        on_delete=models.CASCADE,
+        related_name='playlist_book_set',
+        related_query_name='playlist_book',
+        verbose_name=_('playlist')
+    )
+    book = models.ForeignKey(
+        'Book',
+        on_delete=models.PROTECT,
+        to_field='isbn',
+        db_column='book_isbn',
+        related_name='playlist_book_set',
+        related_query_name='playlist_book',
+        verbose_name=_('book')
+    )
     description = NullTextField(_('description'), blank=True, null=True)
     objects = PlaylistBookManager()
 

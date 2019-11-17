@@ -56,11 +56,11 @@ class IndexView(PlaylistSearchFormView):
             (
                 theme,
                 Playlist.objects \
-                    .annotate(Count('playlistbook')) \
+                    .annotate(Count('playlist_book')) \
                     .filter(
                         theme=theme,
-                        playlistbook__count__gte=2)[:4] \
-                    .prefetch_related('playlistbook_set')
+                        playlist_book__count__gte=2)[:4] \
+                    .prefetch_related('playlist_book_set')
             )
             for theme in Theme.objects.filter(sequence__isnull=False)
         ]
@@ -103,7 +103,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
             queryset = list(dict.fromkeys(queryset))
         else:
             condition_list = []
-            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct().prefetch_related('playlistbook_set')
+            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct().prefetch_related('playlist_book_set')
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -117,18 +117,18 @@ class PlaylistDetailView(generic.DetailView):
     template_name = 'main/playlist/detail.html'
 
     def get_queryset(self):
-        return super().get_queryset().select_related('theme', 'user').prefetch_related('playlistbook_set')
+        return super().get_queryset().select_related('theme', 'user').prefetch_related('playlist_book_set')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        conditions = {'playlistbook__count__gte': 2}
+        conditions = {'playlist_book__count__gte': 2}
         if self.object.theme:
             conditions['theme'] = self.object.theme
         context['other_playlists'] = Playlist.objects \
-            .annotate(Count('playlistbook')) \
+            .annotate(Count('playlist_book')) \
             .exclude(pk=self.object.pk) \
             .filter(**conditions)[:4] \
-            .prefetch_related('playlistbook_set')
+            .prefetch_related('playlist_book_set')
         return context
 
 
@@ -146,7 +146,7 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
     model = Playlist
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related('playlistbook_set')
+        return super().get_queryset().prefetch_related('playlist_book_set')
 
     def get(self, request, *args, **kwargs):
         if not request.GET.get(GET_KEY_CONTINUE):
@@ -271,7 +271,7 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
                 'publisher': x.book.data.publisher,
                 'cover': x.book.data.cover,
             }
-            for x in self.object.playlistbook_set.all()
+            for x in self.object.playlist_book_set.all()
         ]
         return super().get(request, *args, **kwargs)
 
@@ -421,8 +421,8 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
         if book_json not in self.request.session.get(SESSION_KEY_BOOK):
             self.request.session[SESSION_KEY_BOOK] += [book_json]
             book_num = len(self.request.session[SESSION_KEY_BOOK])
-            self.request.session[SESSION_KEY_FORM]['playlistbook_set-{}-book'.format(book_num-1)] = book_json['isbn']
-            self.request.session[SESSION_KEY_FORM]['playlistbook_set-TOTAL_FORMS'] = str(int(self.request.session[SESSION_KEY_FORM]['playlistbook_set-TOTAL_FORMS']) + 1)
+            self.request.session[SESSION_KEY_FORM]['playlist_book_set-{}-book'.format(book_num-1)] = book_json['isbn']
+            self.request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS'] = str(int(self.request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS']) + 1)
         return super().dispatch(*args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
