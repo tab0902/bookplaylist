@@ -8,13 +8,13 @@ from .forms import (
 )
 from .models import User
 from main.admin import PlaylistInline
-from bookplaylist.admin import AllObjectsModelAdmin
+from bookplaylist.admin import AllObjectsMixin
 
 # Register your models here.
 
 
 @admin.register(User)
-class UserAdmin(AllObjectsModelAdmin, BaseUserAdmin):
+class UserAdmin(AllObjectsMixin, BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'twitter_id', 'facebook_id', 'password', )}),
         (_('Personal info'), {'fields': ('comment', 'last_name', 'first_name', 'hopes_newsletter', )}),
