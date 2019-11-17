@@ -11,14 +11,14 @@ from django.utils.translation import gettext_lazy as _
 
 from .validators import UnicodeUsernameValidator
 from bookplaylist.models import (
-    BaseModel, NullCharField, NullEmailField, NullTextField,
+    AllObjectsManager, BaseModel, Manager, NullCharField, NullEmailField, NullTextField,
 )
 
 
 # Create your models here.
 
 
-class UserManager(BaseUserManager):
+class CreateUserManager(Manager, BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, username, email, password, **extra_fields):
@@ -50,6 +50,20 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self._create_user(username, email, password, **extra_fields)
+
+
+class AllUserManager(CreateUserManager, AllObjectsManager):
+    pass
+
+
+class UserWithInactiveManager(CreateUserManager, Manager):
+    pass
+
+
+class UserManager(UserWithInactiveManager):
+
+    def get_queryset(self):
+        return super().get_queryset().exclude(is_active=False)
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
@@ -100,6 +114,8 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
 
     objects = UserManager()
+    all_objects_without_deleted = UserWithInactiveManager()
+    all_objects = AllUserManager()
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'

@@ -124,7 +124,7 @@ class BookData(BaseModel):
 class PlaylistManager(PublishedOnlyManager):
 
     def get_queryset(self):
-        return super().get_queryset().exclude(user__deleted_at__isnull=False)
+        return super().get_queryset().exclude(user__deleted_at__isnull=False).filter(user__is_active=True)
 
 
 class AllPlaylistManager(Manager):

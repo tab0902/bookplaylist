@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-17 19:47+0900\n"
+"POT-Creation-Date: 2019-11-17 22:57+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: accounts/admin.py:19
+#: accounts/admin.py:20
 msgid "Personal info"
 msgstr ""
 
-#: accounts/admin.py:20
+#: accounts/admin.py:21
 msgid "Permissions"
 msgstr ""
 
-#: accounts/admin.py:23
+#: accounts/admin.py:24
 msgid "Important dates"
 msgstr ""
 
@@ -75,87 +75,87 @@ msgstr "正しいメールアドレスを入力してください"
 msgid "Email"
 msgstr ""
 
-#: accounts/models.py:59
+#: accounts/models.py:73
 msgid "username"
 msgstr ""
 
-#: accounts/models.py:64
+#: accounts/models.py:78
 msgid "Required. 150 characters or fewer. Letters, digits and _ only."
 msgstr ""
 "この項目は必須です。半角アルファベット、半角数字、_ で150文字以下にしてくださ"
 "い。"
 
-#: accounts/models.py:67
+#: accounts/models.py:81
 msgid "A user with that username already exists."
 msgstr ""
 
-#: accounts/models.py:71
+#: accounts/models.py:85
 msgid "email address"
 msgstr ""
 
-#: accounts/models.py:75
+#: accounts/models.py:89
 msgid "Required. Enter a valid email address."
 msgstr "この項目は必須です。有効なメールアドレスを入力してください。"
 
-#: accounts/models.py:77
+#: accounts/models.py:91
 msgid "A user with that email address already exists."
 msgstr "同じメールアドレスが既に登録済みです。"
 
-#: accounts/models.py:80
+#: accounts/models.py:94
 msgid "first name"
 msgstr ""
 
-#: accounts/models.py:81
+#: accounts/models.py:95
 msgid "last name"
 msgstr ""
 
-#: accounts/models.py:83
+#: accounts/models.py:97
 msgid "staff status"
 msgstr ""
 
-#: accounts/models.py:85
+#: accounts/models.py:99
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: accounts/models.py:88
+#: accounts/models.py:102
 msgid "active"
 msgstr ""
 
-#: accounts/models.py:91
+#: accounts/models.py:105
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: accounts/models.py:95
+#: accounts/models.py:109
 msgid "date joined"
 msgstr "登録日時"
 
-#: accounts/models.py:96
+#: accounts/models.py:110
 msgid "date verified"
 msgstr "認証日時"
 
-#: accounts/models.py:97
+#: accounts/models.py:111
 msgid "comment"
 msgstr "自己紹介"
 
-#: accounts/models.py:98
+#: accounts/models.py:112
 msgid "Twitter ID"
 msgstr "ツイッターID"
 
-#: accounts/models.py:99
+#: accounts/models.py:113
 msgid "Facebook ID"
 msgstr "フェイスブックID"
 
-#: accounts/models.py:100
+#: accounts/models.py:114
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:111 main/models.py:143
+#: accounts/models.py:127 main/models.py:143
 msgid "user"
 msgstr ""
 
-#: accounts/models.py:112
+#: accounts/models.py:128
 msgid "users"
 msgstr ""
 
