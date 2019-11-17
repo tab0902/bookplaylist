@@ -13,7 +13,11 @@ urlpatterns = [
     path('playlists/<uuid:pk>/', views.PlaylistDetailView.as_view(), name='playlist_detail'),
     path('playlists/<uuid:pk>/update/', views.PlaylistUpdateView.as_view(), name='playlist_update'),
     path('playlists/<uuid:pk>/update/book/', views.PlaylistUpdateBookView.as_view(), name='playlist_update_book'),
-    re_path(r'playlists/<uuid:pk>/update/book/(?P<isbn>\d{13})/', views.PlaylistUpdateBookStoreView.as_view(), name='playlist_update_book_store'),
+    re_path(
+        r'playlists/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/update/book/(?P<isbn>\d{13})/',
+        views.PlaylistUpdateBookStoreView.as_view(),
+        name='playlist_update_book_store'
+    ),
     path('playlists/<uuid:pk>/delete/', views.PlaylistDeleteView.as_view(), name='playlist_delete'),
     path('playlists/create-or-signup/', views.CreateOrSignupView.as_view(), name='create_or_signup'),
     path('book/search/', views.BookSearchView.as_view(), name='book_search'),
