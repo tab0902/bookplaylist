@@ -4,7 +4,7 @@
         {% if page_obj.has_previous %}
         <li class="page-item">
             <a
-                href="?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ page_obj.previous_page_number }}"
+                href="{{ page_link|default:'' }}?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ page_obj.previous_page_number }}"
                 class="page-link"
                 aria-label="Previous"
             >
@@ -16,7 +16,7 @@
         {% if page_obj.number > 3 %}
         <li class="page-item">
             <a
-                href="?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page=1"
+                href="{{ page_link|default:'' }}?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page=1"
                 class="page-link"
                 aria-label="First"
             >
@@ -35,7 +35,7 @@
         {% if link_page == page_obj.number %}
         <li class="page-item active">
             <a
-                href="?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ link_page }}"
+                href="{{ page_link|default:'' }}?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ link_page }}"
                 class="page-link"
             >
                 {{ link_page }}
@@ -44,7 +44,7 @@
         {% elif link_page < page_obj.number|add:3 and link_page > page_obj.number|add:-3 %}
         <li class="page-item">
             <a
-                href="?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ link_page }}"
+                href="{{ page_link|default:'' }}?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ link_page }}"
                 class="page-link"
             >
                 {{ link_page }}
@@ -62,7 +62,7 @@
         {% if page_obj.number < page_obj.paginator.num_pages|add:-2 %}
         <li class="page-item">
             <a
-                href="?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ page_obj.paginator.num_pages }}"
+                href="{{ page_link|default:'' }}?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{ page_obj.paginator.num_pages }}"
                 class="page-link"
                 aria-label="Last"
             >
@@ -74,7 +74,7 @@
         {% if page_obj.has_next %}
         <li class="page-item">
             <a
-                href="?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{page_obj.next_page_number }}"
+                href="{{ page_link|default:'' }}?{% for k, v in params.items %}{{ k }}={{ v }}&amp;{% endfor %}page={{page_obj.next_page_number }}"
                 class="page-link"
                 aria-label="Next"
             >

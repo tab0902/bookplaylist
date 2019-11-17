@@ -1,14 +1,20 @@
-from functools import reduce
+import re
+import requests
 from itertools import chain
 
 from django import forms
+from django.conf import settings
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.db.models import (
-    Case, Count, IntegerField, Prefetch, Q, When
+    Count, Q,
 )
-from django.http import HttpResponseRedirect
+from django.http import (
+    HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, HttpResponseServerError,
+)
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
@@ -16,10 +22,11 @@ from .forms import (
     BookSearchForm, ContactForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
-    Book, Playlist, PlaylistBook, Theme,
+    Book, BookData, Playlist, Theme,
 )
+from bookplaylist.utils import APIMixin
 from bookplaylist.views import (
-    OwnerOnlyMixin, SearchFormView, login_required,
+    OwnerOnlyMixin, SearchFormView, csrf_protect, login_required,
 )
 
 # Create your views here.
@@ -49,19 +56,11 @@ class IndexView(PlaylistSearchFormView):
             (
                 theme,
                 Playlist.objects \
-                    .annotate(
-                        count_cover=Count(
-                            Case(When(playlistbook__book__cover__isnull=False, then=1)),
-                            output_field=IntegerField())) \
+                    .annotate(Count('playlistbook')) \
                     .filter(
                         theme=theme,
-                        count_cover__gte=2)[:4] \
-                    .prefetch_related(
-                        Prefetch(
-                            'playlistbook_set',
-                            queryset=PlaylistBook.objects \
-                                .filter(book__cover__isnull=False) \
-                                .select_related('book')))
+                        playlistbook__count__gte=2)[:4] \
+                    .prefetch_related('playlistbook_set')
             )
             for theme in Theme.objects.filter(sequence__isnull=False)
         ]
@@ -104,12 +103,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
             queryset = list(dict.fromkeys(queryset))
         else:
             condition_list = []
-            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct().prefetch_related(
-                Prefetch(
-                    'playlistbook_set',
-                    queryset=PlaylistBook.objects.filter(book__cover__isnull=False).select_related('book')
-                )
-            )
+            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct().prefetch_related('playlistbook_set')
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -123,31 +117,18 @@ class PlaylistDetailView(generic.DetailView):
     template_name = 'main/playlist/detail.html'
 
     def get_queryset(self):
-        return super().get_queryset().select_related('theme', 'user').prefetch_related(
-            Prefetch(
-                'playlistbook_set',
-                queryset=PlaylistBook.objects.all().select_related('book')
-            )
-        )
+        return super().get_queryset().select_related('theme', 'user').prefetch_related('playlistbook_set')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        conditions = {'count_cover__gte': 2}
+        conditions = {'playlistbook__count__gte': 2}
         if self.object.theme:
             conditions['theme'] = self.object.theme
         context['other_playlists'] = Playlist.objects \
-            .annotate(
-                count_cover=Count(
-                    Case(When(playlistbook__book__cover__isnull=False, then=1)),
-                    output_field=IntegerField())) \
+            .annotate(Count('playlistbook')) \
             .exclude(pk=self.object.pk) \
             .filter(**conditions)[:4] \
-            .prefetch_related(
-                Prefetch(
-                    'playlistbook_set',
-                    queryset=PlaylistBook.objects \
-                        .filter(book__cover__isnull=False) \
-                        .select_related('book')))
+            .prefetch_related('playlistbook_set')
         return context
 
 
@@ -160,14 +141,17 @@ SESSION_KEY_FORM = 'playlist_form_data'
 SESSION_KEY_BOOK = 'playlist_book_data'
 
 
-class BasePlaylistView:
+class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, generic.edit.ModelFormMixin, generic.edit.ProcessFormView):
     form_class = PlaylistForm
     model = Playlist
 
-    def get(self, request, initial, *args, **kwargs):
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('playlistbook_set')
+
+    def get(self, request, *args, **kwargs):
         if not request.GET.get(GET_KEY_CONTINUE):
-            request.session[SESSION_KEY_FORM] = initial['form']
-            request.session[SESSION_KEY_BOOK] = initial['book']
+            request.session[SESSION_KEY_FORM] = self.initial_form_data
+            request.session[SESSION_KEY_BOOK] = self.initial_book_data
         return super().get(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -178,101 +162,53 @@ class BasePlaylistView:
             kwargs['initial'] = form_data
         return kwargs
 
-    def get_context_data(self, instance, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         form_data = self.request.session.get(SESSION_KEY_FORM)
         book_data = self.request.session.get(SESSION_KEY_BOOK)
-        formset = kwargs.get('formset') or PlaylistBookFormSet(form_data, instance=instance, form_kwargs={'request': self.request})
+        formset = kwargs.get('formset') or PlaylistBookFormSet(form_data, instance=self.object, form_kwargs={'request': self.request})
         context['formset'] = formset
         context['book_formset'] = zip(formset or [], book_data or [])
         return context
 
-    def form_invalid(self, form, instance):
-        formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
-        return self.render_to_response(self.get_context_data(form=form, formset=formset))
-
-
-@login_required
-class PlaylistCreateView(BasePlaylistView, generic.CreateView):
-    mode = MODE_CREATE
-    template_name = 'main/playlist/create.html'
-
-    def get(self, request, *args, **kwargs):
-        initial = {
-            'form': None,
-            'book': [],
-        }
-        return super().get(request, initial, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(instance=None, **kwargs)
-
     def form_valid(self, form):
         if POST_KEY_ADD_BOOK in self.request.POST:
-            self.request.POST = self.request.POST.copy()
-            del self.request.POST[POST_KEY_ADD_BOOK]
-            self.request.session[SESSION_KEY_FORM] = self.request.POST
-            return redirect('main:playlist_{}_book'.format(self.mode))
-        instance = form.save(commit=False)
-        formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
-        if not len(formset.forms) - len(formset.deleted_forms):
-            messages.error(self.request, _('You have to add at least one book to your playlist.'))
-            self.request.session[SESSION_KEY_FORM] = self.request.POST
-            url = reverse_lazy('main:playlist_{}'.format(self.mode)) + '?{}=True'.format(GET_KEY_CONTINUE)
-            return HttpResponseRedirect(url)
-        if not formset.is_valid():
-            return self.render_to_response(self.get_context_data(form=form, formset=formset))
-        instance.save()
-        formset.save()
-        for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
-            if SESSION_KEY_FORM in self.request.session:
-                del self.request.session[key]
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        instance = None
-        return super().form_invalid(form, instance)
-
-    def get_success_url(self):
-        self.success_url = reverse_lazy('main:playlist_create_complete', kwargs={'pk': str(self.object.pk)})
-        return super().get_success_url()
-
-
-@login_required
-class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
-    mode = MODE_UPDATE
-    object = None
-    template_name = 'main/playlist/update.html'
-
-    def dispatch(self, *args, **kwargs):
-        self.object = self.get_object()
-        return super().dispatch(*args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        initial = {
-            'form': None,
-            'book': [
-                {
-                    'id': str(x.book.id),
-                    'isbn': str(x.book.isbn),
-                    'title': x.book.title,
-                    'author': x.book.author,
-                    'cover': x.book.cover,
-                }
-                for x in self.object.playlistbook_set.all().prefetch_related('book')
-            ]
-        }
-        return super().get(request, initial, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(instance=self.object, **kwargs)
-
-    def form_valid(self, form):
-        if POST_KEY_ADD_BOOK in self.request.POST:
-            self.request.POST = self.request.POST.copy()
-            del self.request.POST[POST_KEY_ADD_BOOK]
-            self.request.session[SESSION_KEY_FORM] = self.request.POST
+            post_data = self.request.POST.copy()
+            del post_data[POST_KEY_ADD_BOOK]
+            self.request.session[SESSION_KEY_FORM] = post_data
             return redirect('main:playlist_{}_book'.format(self.mode), **self.kwargs)
+        book_session_list = self.request.session.get(SESSION_KEY_BOOK)
+
+        # create Books if not exists
+        book_dict_list = [
+            {
+                'isbn': book_session['isbn'],
+                'created_at': timezone.now(),
+                'updated_at': timezone.now(),
+            }
+            for book_session in book_session_list
+        ]
+        book_obj_list = [Book(**book_dict) for book_dict in book_dict_list]
+        Book.objects.bulk_create(book_obj_list, ignore_conflicts=True)
+
+        # create BookData if not exists
+        book_data_dict_list = [
+            {
+                'book_id': book_session['isbn'],
+                'provider_id': book_session['provider_id'],
+                'title': book_session['title'],
+                'author': book_session['author'],
+                'publisher': book_session['publisher'],
+                'cover': book_session['cover'],
+                'created_at': timezone.now(),
+                'updated_at': timezone.now(),
+            }
+            for book_session in book_session_list
+        ]
+        book_data_obj_list = [BookData(**book_data_dict) for book_data_dict in book_data_dict_list]
+        BookData.objects.bulk_create(book_data_obj_list, ignore_conflicts=True)
+
+        # save Playlists and PlaylistBooks
         instance = form.save(commit=False)
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
@@ -287,12 +223,61 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
         for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
             if SESSION_KEY_FORM in self.request.session:
                 del self.request.session[key]
-        messages.success(self.request, _('Playlist updated successfully.'))
+        if self.success_message:
+            messages.success(self.request, self.success_message)
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        instance = self.object
-        return super().form_invalid(form, instance)
+        formset = PlaylistBookFormSet(self.request.POST, instance=self.object, form_kwargs={'request': self.request})
+        return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+
+@login_required
+class PlaylistCreateView(BasePlaylistFormView):
+    mode = MODE_CREATE
+    success_message = None
+    template_name = 'main/playlist/create.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        self.initial_form_data =  None
+        self.initial_book_data = []
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        self.success_url = reverse_lazy('main:playlist_create_complete', kwargs={'pk': str(self.object.pk)})
+        return super().get_success_url()
+
+
+@login_required
+class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
+    mode = MODE_UPDATE
+    success_message = _('Playlist updated successfully.')
+    template_name = 'main/playlist/update.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.initial_form_data =  None
+        self.initial_book_data = [
+            {
+                'isbn': x.book.isbn,
+                'provider_id': str(x.book.data.provider.pk),
+                'title': x.book.data.title,
+                'author': x.book.data.author,
+                'publisher': x.book.data.publisher,
+                'cover': x.book.data.cover,
+            }
+            for x in self.object.playlistbook_set.all()
+        ]
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
         self.success_url = reverse_lazy('main:playlist_detail', kwargs=self.kwargs)
@@ -300,41 +285,21 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistView, generic.UpdateView):
 
 
 @login_required
-class BasePlaylistBookView(generic.list.BaseListView, SearchFormView):
-    context_object_name = 'books'
+class BasePlaylistBookView(SearchFormView):
     form_class = BookSearchForm
-    model = Book
-    paginate_by = 24
     success_url = None
     template_name = 'main/playlist/book.html'
 
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        if query:
-            q_list = self._format_query(query)
-            condition_lists = []
-            condition_lists.append([Q(title__iexact=q) | Q(title_collation_key__iexact=q) | Q(author__iexact=q) for q in q_list])
-            condition_lists.append([Q(title__icontains=q) | Q(title_collation_key__icontains=q) | Q(author__icontains=q) for q in q_list])
-            queryset = Playlist.objects.none()
-            for condition_list in condition_lists:
-                queryset = chain(
-                    queryset,
-                    Book.objects.filter(*condition_list).annotate(Count('playlists')).order_by('-playlists__count', '-pubdate').distinct()
-                )
-            queryset = list(dict.fromkeys(queryset))
-        else:
-            queryset = Book.objects.none()
-        return queryset
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['mode'] = self.mode
+        kwargs['pk'] = self.kwargs.get('pk')
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['books_in_session'] = [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else []
         context['mode'] = self.mode
         return context
-
-    def get_success_url(self):
-        self.success_url = reverse_lazy('main:playlist_{}_book'.format(self.mode), kwargs=self.kwargs)
-        return super().get_success_url()
 
 
 class PlaylistCreateBookView(BasePlaylistBookView):
@@ -345,8 +310,72 @@ class PlaylistUpdateBookView(OwnerOnlyMixin, BasePlaylistBookView):
     mode = MODE_UPDATE
 
 
+@csrf_protect
 @login_required
-class BasePlaylistBookStoreView(generic.RedirectView):
+class BookSearchView(APIMixin, generic.View):
+
+    def search_book(self, data):
+        q = data.get('q')
+        if not self.request.is_ajax() or not q:
+            return HttpResponseBadRequest()
+
+        if self.provider.slug == 'rakuten':
+            params = {
+                'applicationId': settings.RAKUTEN_APPLICATION_ID,
+                'hits': '24',
+                'title': q,
+                'sort': 'reviewCount',
+            }
+            page = data.get('page')
+            if page:
+                params['page'] = page
+        else:
+            params = {}
+
+        response = self.get_book_data(params)
+        if response.status_code == requests.codes.bad_request:
+            return HttpResponse(_('<p class="mt-4">The keyword is too short. Please search by longer words.</p>'))
+        elif 'error' in response:
+            return HttpResponse(_('<p class="mt-4">An error has occurred. Please retry later.</p>'))
+
+        response = response.json()
+        context = {
+            'mode': data.get('mode'),
+            'pk': data.get('pk'),
+            'books_in_session': [x['isbn'] for x in self.request.session.get(SESSION_KEY_BOOK)] if SESSION_KEY_BOOK in self.request.session else [],
+            'count': response['count'],
+            'first': response['first'],
+            'last': response['last'],
+            'books': [
+                {
+                    'isbn': self.format_isbn(book['Item']['isbn']),
+                    'title': self.format_title(book['Item']['title'], book['Item']['subTitle'], book['Item']['contents']),
+                    'author': book['Item']['author'],
+                    'cover': book['Item']['largeImageUrl'],
+                }
+                for book in response['Items']
+            ]
+        }
+
+        data = [d for d in data if d not in ('csrfmiddlewaretoken', 'page',)]
+        if int(response['count']):
+            context['page_obj'] = Paginator(range(int(response['count'])), 24).page(int(response['page']))
+            context['params'] = data
+        return render(
+            self.request,
+            'main/playlist/layouts/book-list.html',
+            context
+        )
+
+    def get(self, request, *args, **kwargs):
+        return self.search_book(request.GET.copy())
+
+    def post(self, request, *args, **kwargs):
+        return self.search_book(request.POST.copy())
+
+
+@login_required
+class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
     url = None
 
     def dispatch(self, *args, **kwargs):
@@ -355,14 +384,40 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         if not form_data or not SESSION_KEY_BOOK in self.request.session:
             messages.warning(self.request, _('Session timeout. Please retry from the beginning.'))
             return redirect('main:playlist_{}'.format(self.mode), **self.kwargs)
-        book_obj = Book.objects.get(pk=str(self.kwargs.get('book')))
-        book_json = {
-            'id': str(book_obj.id),
-            'isbn': str(book_obj.isbn),
-            'title': book_obj.title,
-            'author': book_obj.author,
-            'cover': book_obj.cover,
-        }
+
+        book_obj = Book.objects.filter(isbn=self.kwargs.get('isbn')).first()
+        if book_obj and book_obj.data:
+            book_json = {
+                'isbn': self.kwargs.get('isbn'),
+                'provider_id': str(book_obj.data.provider.pk),
+                'title': book_obj.data.title,
+                'author': book_obj.data.author,
+                'publisher': book_obj.data.publisher,
+                'cover': book_obj.data.cover,
+            }
+        else:
+            if self.provider.slug == 'rakuten':
+                params = {
+                    'applicationId': settings.RAKUTEN_APPLICATION_ID,
+                    'isbn': self.kwargs.get('isbn'),
+                }
+            else:
+                params = {}
+            response = self.get_book_data(params)
+            if 'error' in response:
+                return HttpResponseServerError()
+            response = response.json()
+            if int(response['count']) == 0:
+                return HttpResponseServerError()
+            book = response['Items'][0]
+            book_json = {
+                'isbn': self.kwargs.get('isbn'),
+                'provider_id': str(self.provider.pk),
+                'title': self.format_title(book['Item']['title'], book['Item']['subTitle'], book['Item']['contents']),
+                'author': book['Item']['author'],
+                'publisher': book['Item']['publisherName'],
+                'cover': book['Item']['largeImageUrl'],
+            }
         if book_json not in self.request.session.get(SESSION_KEY_BOOK):
             self.request.session[SESSION_KEY_BOOK] += [book_json]
             book_num = len(self.request.session[SESSION_KEY_BOOK])
@@ -371,7 +426,7 @@ class BasePlaylistBookStoreView(generic.RedirectView):
         return super().dispatch(*args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
-        del self.kwargs['book']
+        del self.kwargs['isbn']
         self.url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
         return super().get_redirect_url(*args, **kwargs)
 

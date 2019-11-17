@@ -47,7 +47,7 @@
                 #{{ theme.name }}
             </a>
         </h3>
-        {% include 'main/playlist/layouts/list-widget-small.html' with playlists=playlists|dictsortreversed:"created_at" %}
+        {% include 'main/playlist/layouts/list-widget-small.html' with playlists=playlists %}
         <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="btn btn-outline-sub w-100 d-md-none my-3">
             {% blocktrans %}Show all{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
         </a>

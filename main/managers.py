@@ -5,3 +5,9 @@ class PublishedOnlyManager(models.Manager):
 
     def get_queryset(self):
         return super().get_queryset().filter(is_published=True)
+
+
+class AvailableOnlyManager(models.Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_available=True)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-14 18:23+0900\n"
+"POT-Creation-Date: 2019-11-17 14:49+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -70,7 +70,7 @@ msgstr "半角英数またはアンダーバー"
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:164 main/forms.py:132
+#: accounts/forms.py:164 main/forms.py:136
 #: main/templates/main/contact_email_admin.html:6
 msgid "Email"
 msgstr ""
@@ -151,7 +151,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:111 main/models.py:78
+#: accounts/models.py:111 main/models.py:117
 msgid "user"
 msgstr ""
 
@@ -254,7 +254,7 @@ msgstr ""
 
 #: accounts/templates/accounts/password_change.html:15
 #: accounts/templates/accounts/password_reset.html:16
-#: main/templates/main/playlist/book.html:41
+#: main/templates/main/playlist/book.html:43
 #: main/templates/main/playlist/delete.html:24
 msgid "Back"
 msgstr "戻る"
@@ -555,7 +555,7 @@ msgstr "BookPlayList 管理サイト"
 msgid "Home"
 msgstr ""
 
-#: bookplaylist/views.py:26
+#: bookplaylist/views.py:30
 msgid "You don't have permission to access the page."
 msgstr "ページにアクセスする権限がありません"
 
@@ -595,117 +595,129 @@ msgstr "すべてのテーマ"
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:123
-msgid "Input title or author name"
-msgstr "書名、著者名を入力"
+#: main/forms.py:127
+msgid "Input title name"
+msgstr "書名を入力"
 
-#: main/forms.py:128 main/templates/main/contact_email.html:5
+#: main/forms.py:132 main/templates/main/contact_email.html:5
 #: main/templates/main/contact_email_admin.html:7
 msgid "Content of inquiry"
 msgstr "お問い合わせ内容"
 
-#: main/forms.py:137
+#: main/forms.py:141
 msgid "URL of the target page (option)"
 msgstr "対象ページのURL（任意）"
 
-#: main/forms.py:141 main/templates/main/contact_email.html:8
+#: main/forms.py:145 main/templates/main/contact_email.html:8
 #: main/templates/main/contact_email_admin.html:10
 msgid "Body"
 msgstr "本文"
 
-#: main/forms.py:164
+#: main/forms.py:168
 msgid "Guest user"
 msgstr "ゲストユーザー"
 
-#: main/models.py:14
+#: main/models.py:16
 msgid "theme name"
 msgstr "テーマ名"
 
-#: main/models.py:15
+#: main/models.py:17 main/models.py:36
 msgid "slug"
 msgstr "スラッグ"
 
-#: main/models.py:16
+#: main/models.py:18
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:17 main/models.py:81 main/models.py:104
+#: main/models.py:19 main/models.py:39 main/models.py:120 main/models.py:149
 msgid "description"
 msgstr "概要"
 
-#: main/models.py:22 main/models.py:79
+#: main/models.py:24 main/models.py:118
 msgid "theme"
 msgstr "テーマ"
 
-#: main/models.py:23
+#: main/models.py:25
 msgid "themes"
 msgstr "テーマ"
 
-#: main/models.py:37 main/models.py:90
+#: main/models.py:35
+msgid "provider name"
+msgstr "プロバイダー名"
+
+#: main/models.py:37
+msgid "endpoint"
+msgstr "エンドポイント"
+
+#: main/models.py:38
+msgid "priority"
+msgstr "優先順位"
+
+#: main/models.py:40
+msgid "available"
+msgstr "利用可能"
+
+#: main/models.py:47 main/models.py:87
+msgid "provider"
+msgstr "書籍データ提供元"
+
+#: main/models.py:48
+msgid "providers"
+msgstr "書籍データ提供元"
+
+#: main/models.py:65 main/models.py:129
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models.py:40
+#: main/models.py:68
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:41 main/models.py:80
-msgid "title"
-msgstr "タイトル"
-
-#: main/models.py:42
-msgid "collation key"
-msgstr "照合キー"
-
-#: main/models.py:43
-msgid "volume"
-msgstr "巻数"
-
-#: main/models.py:44
-msgid "series"
-msgstr "シリーズ"
-
-#: main/models.py:45
-msgid "publisher"
-msgstr "出版社"
-
-#: main/models.py:46
-msgid "date published"
-msgstr "出版日"
-
-#: main/models.py:47
-msgid "cover"
-msgstr "書影"
-
-#: main/models.py:48
-msgid "author"
-msgstr "著者"
-
-#: main/models.py:49
-msgid "Amazon URL"
-msgstr "アマゾンURL"
-
-#: main/models.py:54 main/models.py:103
+#: main/models.py:78 main/models.py:86 main/models.py:148
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:55 main/models.py:76
+#: main/models.py:79 main/models.py:115
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:82
+#: main/models.py:88 main/models.py:119
+msgid "title"
+msgstr "タイトル"
+
+#: main/models.py:89
+msgid "author"
+msgstr "著者"
+
+#: main/models.py:90
+msgid "publisher"
+msgstr "出版社"
+
+#: main/models.py:91
+msgid "cover"
+msgstr "書影"
+
+#: main/models.py:92
+msgid "Affiliate URL"
+msgstr "アフィリエイトURL"
+
+#: main/models.py:97 main/models.py:98
+msgid "book data"
+msgstr "書籍データ"
+
+#: main/models.py:121
 msgid "published"
 msgstr "公開"
 
-#: main/models.py:89 main/models.py:102
+#: main/models.py:128 main/models.py:147
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:109
+#: main/models.py:155
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:110
+#: main/models.py:156
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
@@ -855,20 +867,6 @@ msgstr "\"%(q)s\" が含まれる書籍一覧"
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlist/book.html:65
-#: main/templates/main/playlist/detail.html:56
-msgid "No Image"
-msgstr ""
-
-#: main/templates/main/playlist/book.html:88
-msgid "Add"
-msgstr "追加する"
-
-#: main/templates/main/playlist/book.html:96
-msgid "No book found. Please search by other words."
-msgstr ""
-"お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
-
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
 msgid "Playlist created successfully!"
@@ -906,6 +904,11 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
+#: main/templates/main/playlist/detail.html:56
+#: main/templates/main/playlist/layouts/book-list.html:21
+msgid "No Image"
+msgstr ""
+
 #: main/templates/main/playlist/detail.html:68
 #: main/templates/main/playlist/detail.html:75
 #: main/templates/main/playlist/layouts/list-widget.html:22
@@ -928,6 +931,20 @@ msgstr "あなたへのおすすめ"
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
 
+#: main/templates/main/playlist/layouts/book-list.html:5
+#, python-format
+msgid "%(first)s-%(last)s of %(count)s results"
+msgstr "%(count)s 件中 %(first)s - %(last)s 件"
+
+#: main/templates/main/playlist/layouts/book-list.html:44
+msgid "Add"
+msgstr "追加する"
+
+#: main/templates/main/playlist/layouts/book-list.html:51
+msgid "No book found. Please search by other words."
+msgstr ""
+"お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
+
 #: main/templates/main/playlist/layouts/lets-create-playlist.html:17
 #, python-format
 msgid "Let's share #%(tag)s!"
@@ -946,20 +963,20 @@ msgstr ""
 msgid "Delete book"
 msgstr "本を削除する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:48
+#: main/templates/main/playlist/layouts/playlist-form.html:49
 #, python-format
 msgid "\"%(book_title)s\" will be delete."
 msgstr "\"%(book_title)s\" は削除されます"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:56
+#: main/templates/main/playlist/layouts/playlist-form.html:58
 msgid "Restore to playlist"
 msgstr "リストに戻す"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:65
+#: main/templates/main/playlist/layouts/playlist-form.html:67
 msgid "Add book"
 msgstr "本を追加する"
 
-#: main/templates/main/playlist/layouts/playlist-form.html:68
+#: main/templates/main/playlist/layouts/playlist-form.html:70
 msgid "Complete"
 msgstr "完成"
 
@@ -991,19 +1008,33 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:219 main/views.py:279
+#: main/views.py:215
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:290
+#: main/views.py:259
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:356
+#: main/views.py:337
+msgid ""
+"<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
+"p>"
+msgstr ""
+"<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
+"い。</p>"
+
+#: main/views.py:339
+msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
+msgstr ""
+"<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
+"い。</p>"
+
+#: main/views.py:388
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:400
+#: main/views.py:458
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
