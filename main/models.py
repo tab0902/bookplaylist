@@ -127,13 +127,13 @@ class BookData(BaseModel):
 class PlaylistManager(Manager):
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_published=True, user__is_active=True, user__deleted_at__isnull=False)
+        return super().get_queryset().filter(is_published=True, user__is_active=True, user__deleted_at__isnull=True)
 
 
 class PlaylistWithUnpublishedManager(Manager):
 
     def get_queryset(self):
-        return super().get_queryset().exclude(user__deleted_at__isnull=False)
+        return super().get_queryset().filter(user__deleted_at__isnull=True)
 
 
 class Playlist(BaseModel):

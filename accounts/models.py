@@ -63,7 +63,7 @@ class UserWithInactiveManager(CreateUserManager, Manager):
 class UserManager(UserWithInactiveManager):
 
     def get_queryset(self):
-        return super().get_queryset().exclude(is_active=False)
+        return super().get_queryset().filter(is_active=True)
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):

@@ -28,7 +28,7 @@ class AllObjectsQuerySet(QuerySet):
 class Manager(models.Manager.from_queryset(QuerySet)):
 
     def get_queryset(self):
-        return super().get_queryset().exclude(deleted_at__isnull=False)
+        return super().get_queryset().filter(deleted_at__isnull=True)
 
 
 AllObjectsManager = models.Manager.from_queryset(AllObjectsQuerySet)
