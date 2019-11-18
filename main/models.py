@@ -85,6 +85,12 @@ class Book(BaseModel):
         return '%s' % (self.book_data_set.first() or self.isbn)
 
 
+class BookDataManager(Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().select_related('provider')
+
+
 class BookData(BaseModel):
     book = models.ForeignKey(
         'Book',
@@ -107,6 +113,7 @@ class BookData(BaseModel):
     publisher = NullCharField(_('publisher'), max_length=255, blank=True, null=True)
     cover = NullURLField(_('cover'), blank=True, null=True)
     affiliate_url = NullURLField(_('Affiliate URL'), blank=True, null=True)
+    objects = BookDataManager()
 
     class Meta(BaseModel.Meta):
         db_table = 'book_data'
@@ -124,13 +131,19 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
-class PlaylistManager(Manager):
+class BasePlaylistManager(Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('playlist_book_set')
+
+
+class PlaylistManager(BasePlaylistManager):
 
     def get_queryset(self):
         return super().get_queryset().filter(is_published=True, user__is_active=True, user__deleted_at__isnull=True)
 
 
-class PlaylistWithUnpublishedManager(Manager):
+class PlaylistWithUnpublishedManager(BasePlaylistManager):
 
     def get_queryset(self):
         return super().get_queryset().filter(user__deleted_at__isnull=True)

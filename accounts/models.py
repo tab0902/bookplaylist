@@ -18,7 +18,7 @@ from bookplaylist.models import (
 # Create your models here.
 
 
-class CreateUserManager(Manager, BaseUserManager):
+class CreateUserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, username, email, password, **extra_fields):
