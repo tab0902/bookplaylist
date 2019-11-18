@@ -22,11 +22,13 @@ sensitive_post_parameters = method_decorator(sensitive_post_parameters_(), name=
 class OwnerOnlyMixin:
 
     def dispatch(self, request, *args, **kwargs):
-        if hasattr(self, 'get_object'):
-            obj = self.get_object()
+        if hasattr(self, 'object'):
+            pass
+        elif hasattr(self, 'get_object'):
+            self.object = self.get_object()
         else:
-            obj = Playlist.objects.filter(pk=self.kwargs.get('pk')).first()
-        if obj.user != request.user:
+            self.object = Playlist.objects.filter(pk=self.kwargs.get('pk')).first()
+        if self.object.user != request.user:
             messages.warning(request, _('You don\'t have permission to access the page.'))
             return redirect('main:playlist_detail', **self.kwargs)
         return super().dispatch(request, *args, **kwargs)

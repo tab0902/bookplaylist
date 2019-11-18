@@ -59,8 +59,7 @@ class IndexView(PlaylistSearchFormView):
                     .annotate(Count('playlist_book')) \
                     .filter(
                         theme=theme,
-                        playlist_book__count__gte=2)[:4] \
-                    .prefetch_related('playlist_book_set')
+                        playlist_book__count__gte=2)[:4]
             )
             for theme in Theme.objects.filter(sequence__isnull=False)
         ]
@@ -103,7 +102,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
             queryset = list(dict.fromkeys(queryset))
         else:
             condition_list = []
-            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct().prefetch_related('playlist_book_set')
+            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -117,7 +116,7 @@ class PlaylistDetailView(generic.DetailView):
     template_name = 'main/playlist/detail.html'
 
     def get_queryset(self):
-        return super().get_queryset().select_related('theme', 'user').prefetch_related('playlist_book_set')
+        return super().get_queryset().select_related('theme', 'user')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -127,8 +126,7 @@ class PlaylistDetailView(generic.DetailView):
         context['other_playlists'] = Playlist.objects \
             .annotate(Count('playlist_book')) \
             .exclude(pk=self.object.pk) \
-            .filter(**conditions)[:4] \
-            .prefetch_related('playlist_book_set')
+            .filter(**conditions)[:4]
         return context
 
 
@@ -144,9 +142,6 @@ SESSION_KEY_BOOK = 'playlist_book_data'
 class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, generic.edit.ModelFormMixin, generic.edit.ProcessFormView):
     form_class = PlaylistForm
     model = Playlist
-
-    def get_queryset(self):
-        return super().get_queryset().prefetch_related('playlist_book_set')
 
     def get(self, request, *args, **kwargs):
         if not request.GET.get(GET_KEY_CONTINUE):
@@ -260,7 +255,8 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
     template_name = 'main/playlist/update.html'
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        if not hasattr(self, 'object'):
+            self.object = self.get_object()
         self.initial_form_data =  None
         self.initial_book_data = [
             {
@@ -276,7 +272,8 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        if not hasattr(self, 'object'):
+            self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
