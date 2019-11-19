@@ -371,6 +371,24 @@ textarea {
   margin-left: 0;
 }
 
+/* covers */
+.cover-wrapper {
+    position: relative;
+    width: 100%;
+}
+.cover-wrapper:before {
+    content:'';
+    display: block;
+    padding-top: 150%;
+}
+.cover-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 /* blank box */
 .blank-box-wrapper {
     position: relative;
@@ -614,7 +632,7 @@ textarea {
 
 /*---------------------------------
 
-  playlist/, accounts/
+  list-widget.html
 
 ---------------------------------*/
 
@@ -732,7 +750,7 @@ textarea {
   height: 4rem;
 }
 .no-image-wrapper:before {
-  padding-top: 140%;
+  padding-top: 150%;
 }
 .no-image-content {
   background-color: #e5e5e5;

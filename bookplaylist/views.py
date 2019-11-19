@@ -38,7 +38,7 @@ class SearchFormView(generic.FormView):
     param = {'q': ''}
 
     def _format_query(self, raw_query):
-        return [x for x in list(dict.fromkeys(re.split('[\s　]', raw_query))) if x != '']
+        return [x for x in list(dict.fromkeys(re.split(r'[\s　]', raw_query))) if x != '']
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

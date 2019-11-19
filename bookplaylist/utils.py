@@ -29,7 +29,7 @@ class APIMixin:
         return response
 
     def format_isbn(self, isbn):
-        return re.sub('\D', '', isbn)
+        return re.sub(r'\D', '', isbn)
 
     def format_title(self, *args):
         return ' '.join(args)
