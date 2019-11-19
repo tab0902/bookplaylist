@@ -7,7 +7,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import (
-    get_object_or_404, render,
+    get_object_or_404, redirect, render,
 )
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -90,7 +90,7 @@ class ProfileView(generic.UpdateView):
 
     def form_valid(self, form):
         if self.request.user != self.get_object():
-            messages.warning(request, _('You don\'t have permission to update other user\'s profile.'))
+            messages.warning(self.request, _('You don\'t have permission to update other user\'s profile.'))
             return redirect('accounts/profile.html', **self.kwargs)
         messages.success(self.request, _('Comment updated successfully.'))
         return super().form_valid(form)
