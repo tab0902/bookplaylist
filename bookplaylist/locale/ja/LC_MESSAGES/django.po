@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 15:29+0900\n"
+"POT-Creation-Date: 2019-11-19 16:21+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -909,7 +909,7 @@ msgid "Edit"
 msgstr "編集する"
 
 #: main/templates/main/playlist/detail.html:56
-#: main/templates/main/playlist/layouts/book-list.html:21
+#: main/templates/main/playlist/layouts/book-list.html:25
 msgid "No Image"
 msgstr ""
 
@@ -940,11 +940,11 @@ msgstr "プレイリストをもっと見る"
 msgid "%(first)s-%(last)s of %(count)s results"
 msgstr "%(count)s 件中 %(first)s - %(last)s 件"
 
-#: main/templates/main/playlist/layouts/book-list.html:44
+#: main/templates/main/playlist/layouts/book-list.html:48
 msgid "Add"
 msgstr "追加する"
 
-#: main/templates/main/playlist/layouts/book-list.html:51
+#: main/templates/main/playlist/layouts/book-list.html:55
 msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
