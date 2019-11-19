@@ -8,13 +8,15 @@ from .forms import (
 )
 from .models import User
 from main.admin import PlaylistInline
-from bookplaylist.admin import AllObjectsMixin
+from bookplaylist.admin import (
+    AllObjectsForeignKeyMixin, AllObjectsMixin,
+)
 
 # Register your models here.
 
 
 @admin.register(User)
-class UserAdmin(AllObjectsMixin, BaseUserAdmin):
+class UserAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'twitter_id', 'facebook_id', 'password', )}),
         (_('Personal info'), {'fields': ('comment', 'last_name', 'first_name', 'hopes_newsletter', )}),
@@ -37,3 +39,8 @@ class UserAdmin(AllObjectsMixin, BaseUserAdmin):
     ordering = ('-last_login', )
     filter_horizontal = ('groups', 'user_permissions', )
     inlines = [PlaylistInline]
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        if not self.get_object(request, object_id).is_active:
+            self.inlines = []
+        return super().change_view(request, object_id, form_url, extra_context=extra_context)
