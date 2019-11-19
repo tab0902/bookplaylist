@@ -1,3 +1,14 @@
+// function to get url params
+function getUrlParams() {
+  let params = new Object
+  const elms = location.search.substring(1).split('&')
+  for(let i = 0; elms[i]; i++) {
+      const k = elms[i].split('=')
+      params[k[0]] = k[1]
+  }
+  return params
+}
+
 // function for ajax form
 function csrfSafeMethod(method) {
   return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
@@ -96,15 +107,15 @@ $(function() {
     })
   })
 
+  // profile edit button
   $('.profile-edit-btn').on('click', function() {
-    $(this).addClass('d-none')
-    $('#profile-info').addClass('d-none')
-    $('#profile-form').removeClass('d-none')
+    $(this).hide()
+    $('#profile-info').hide()
+    $('#profile-form').show()
   })
-
   $('.profile-edit-cancel').on('click', function() {
-    $('#profile-form').addClass('d-none')
-    $('#profile-info').removeClass('d-none')
-    $('.profile-edit-btn').removeClass('d-none')
+    $('#profile-form').hide()
+    $('#profile-info').show()
+    $('.profile-edit-btn').show()
   })
 })
