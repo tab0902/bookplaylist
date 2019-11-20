@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 16:21+0900\n"
+"POT-Creation-Date: 2019-11-20 16:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -82,8 +82,8 @@ msgstr ""
 #: accounts/models.py:78
 msgid "Required. 150 characters or fewer. Letters, digits and _ only."
 msgstr ""
-"この項目は必須です。半角アルファベット、半角数字、_ で150文字以下にしてくださ"
-"い。"
+"この項目は必須です。半角アルファベット、半角数字、アンダーバーで150文字以下に"
+"してください。"
 
 #: accounts/models.py:81
 msgid "A user with that username already exists."
@@ -159,9 +159,19 @@ msgstr ""
 msgid "users"
 msgstr ""
 
+#: accounts/pipeline.py:15
+msgid "This account is already in use."
+msgstr ""
+"このアカウントは既に他のユーザーに使用されているため、連携できませんでした。"
+
+#: accounts/pipeline.py:32 accounts/pipeline.py:45
+msgid ""
+"You can't register email address which is the same as a withdrawn user's one."
+msgstr "退会済みのアカウントと同じメールアドレスを登録することは出来ません。"
+
 #: accounts/templates/accounts/index.html:6
 #: accounts/templates/accounts/password_reset_complete.html:23
-#: accounts/templates/accounts/settings.html:78
+#: accounts/templates/accounts/settings.html:59
 #: accounts/templates/accounts/verification.html:23
 #: bookplaylist/templates/layouts/drawer.html:15
 #: bookplaylist/templates/layouts/header.html:28
@@ -221,9 +231,17 @@ msgstr "新しいプレイリストを作成しましょう！"
 msgid "Let's create your first playlist!"
 msgstr "初めてのプレイリストを作成しましょう！"
 
+#: accounts/templates/accounts/layouts/social-login.html:11
+msgid "Log in with Twitter"
+msgstr "Twitterでログイン"
+
+#: accounts/templates/accounts/layouts/social-login.html:13
+msgid "Sign up with Twitter"
+msgstr "Twitterで登録"
+
 #: accounts/templates/accounts/login.html:6
 #: accounts/templates/accounts/login.html:15
-#: accounts/templates/accounts/login.html:21
+#: accounts/templates/accounts/login.html:23
 #: accounts/templates/accounts/signup.html:18
 #: bookplaylist/templates/layouts/drawer.html:12
 #: bookplaylist/templates/layouts/header.html:16
@@ -238,7 +256,12 @@ msgstr ""
 msgid "Sign up"
 msgstr "ユーザー登録"
 
-#: accounts/templates/accounts/login.html:25
+#: accounts/templates/accounts/login.html:22
+#: accounts/templates/accounts/signup.html:22
+msgid "or"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:27
 msgid "Did you forget your password?"
 msgstr "パスワードをお忘れですか？"
 
@@ -355,7 +378,7 @@ msgid "Edit comment"
 msgstr "自己紹介を編集する"
 
 #: accounts/templates/accounts/profile.html:49
-#: accounts/templates/accounts/settings.html:82
+#: accounts/templates/accounts/settings.html:63
 msgid "Save"
 msgstr ""
 
@@ -372,25 +395,18 @@ msgid "Twitter"
 msgstr ""
 
 #: accounts/templates/accounts/settings.html:44
-#: accounts/templates/accounts/settings.html:63
-msgid "Associated"
-msgstr "連携済み"
-
-#: accounts/templates/accounts/settings.html:46
-#: accounts/templates/accounts/settings.html:65
 msgid "Not associated"
 msgstr "未連携"
 
+#: accounts/templates/accounts/settings.html:46
+msgid "Associated"
+msgstr "連携済み"
+
 #: accounts/templates/accounts/settings.html:52
-#: accounts/templates/accounts/settings.html:71
 msgid "Associate"
 msgstr "連携する"
 
-#: accounts/templates/accounts/settings.html:58
-msgid "Facebook"
-msgstr ""
-
-#: accounts/templates/accounts/signup.html:21
+#: accounts/templates/accounts/signup.html:23
 msgid "Register"
 msgstr "登録"
 
@@ -465,7 +481,8 @@ msgstr "送信完了"
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers, and _ "
 "characters."
-msgstr "有効なユーザー名を入力してください。半角英数、_ を使用できます。"
+msgstr ""
+"有効なユーザー名を入力してください。半角英数、アンダーバーを使用できます。"
 
 #: accounts/views.py:47
 msgid "No password set."
@@ -503,19 +520,35 @@ msgstr "更新日時"
 msgid "date deleted"
 msgstr "削除日時"
 
-#: bookplaylist/settings.py:177
+#: bookplaylist/settings.py:193
+msgid "python social auth"
+msgstr "ソーシャルログイン"
+
+#: bookplaylist/settings.py:195
+msgid "User social auths"
+msgstr "SNSアカウント"
+
+#: bookplaylist/settings.py:196
+msgid "Associations"
+msgstr "アソシエーション"
+
+#: bookplaylist/settings.py:197
+msgid "Nonces"
+msgstr "ノンス"
+
+#: bookplaylist/settings.py:204
 msgid "(Please select)"
 msgstr "(選択してください)"
 
-#: bookplaylist/settings.py:178
+#: bookplaylist/settings.py:205
 msgid "Question"
 msgstr "ご質問"
 
-#: bookplaylist/settings.py:179
+#: bookplaylist/settings.py:206
 msgid "Defect report"
 msgstr "不具合報告"
 
-#: bookplaylist/settings.py:180
+#: bookplaylist/settings.py:207
 msgid "Other inquiry"
 msgstr "上記以外のお問い合わせ"
 

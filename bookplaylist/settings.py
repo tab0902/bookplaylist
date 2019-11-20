@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'admin_reorder',
     'accounts.apps.AccountsConfig',
     'main.apps.MainConfig',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.twitter.TwitterOAuth',
     'accounts.backends.ModelBackend',
 ]
 
@@ -78,6 +80,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -157,6 +161,20 @@ MESSAGE_TAGS = {
 }
 
 
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'accounts.pipeline.social_user',
+    'social_core.pipeline.user.get_username',
+    'accounts.pipeline.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'accounts.pipeline.login_error',
+)
+
+
 ADMIN_REORDER = (
     {
         'app': 'main',
@@ -169,6 +187,15 @@ ADMIN_REORDER = (
     {
         'app': 'auth',
         'models': ('auth.Group', )
+    },
+    {
+        'app': 'social_django',
+        'label': _('python social auth'),
+        'models': (
+            {'model': 'social_django.UserSocialAuth', 'label': _('User social auths')},
+            {'model': 'social_django.Association', 'label': _('Associations')},
+            {'model': 'social_django.Nonce', 'label': _('Nonces')},
+        )
     },
 )
 
