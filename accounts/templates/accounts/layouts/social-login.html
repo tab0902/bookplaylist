@@ -1,0 +1,18 @@
+{% load static %}
+{% load i18n %}
+
+<div class="row mt-4 mb-5">
+    <div class="col-12 mt-3">
+        <div class="w-100">
+            <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-twitter w-100">
+                <i class="fab fa-twitter"></i>
+                &nbsp;
+                {% if mode == 'login' %}
+                {% trans 'Log in with Twitter' %}
+                {% elif mode == 'signup' %}
+                {% trans 'Sign up with Twitter' %}
+                {% endif %}
+            </a>
+        </div>
+    </div>
+</div>

@@ -18,6 +18,8 @@
                 <a href="{% url 'accounts:login' %}" class="btn btn-inline-sub float-right">{% trans 'Log in' %}</a>
             </div>
         </div>
+        {% include 'accounts/layouts/social-login.html' with mode='signup' %}
+        <p class="text-center">{% trans 'or' %}</p>
         {% trans 'Register' as submit_text %}
         {% include 'layouts/form.html' with submit_text=submit_text %}
     </section>

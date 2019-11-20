@@ -40,35 +40,16 @@
                 </div>
                 <div class="col-4">
                     <p class="mt-2">
-                        {% if user.twitter_id %}
-                        {% trans 'Associated' %}
-                        {% else %}
+                        {% if 'twitter' in backends.not_associated %}
                         {% trans 'Not associated' %}
+                        {% else %}
+                        {% trans 'Associated' %}
                         {% endif %}
                     </p>
                 </div>
-                {% if not user.twitter_id %}
+                {% if 'twitter' in backends.not_associated %}
                 <div class="col-4">
-                    <a href="" class="btn btn-inline-twitter mt-1">{% trans 'Associate' %}</a>
-                </div>
-                {% endif %}
-            </div>
-            <div class="row mt-2 mt-md-3">
-                <div class="col-4">
-                    <label class="mt-2">{% trans 'Facebook' %}</label>
-                </div>
-                <div class="col-4">
-                    <p class="mt-2">
-                        {% if user.facebook_id %}
-                        {% trans 'Associated' %}
-                        {% else %}
-                        {% trans 'Not associated' %}
-                        {% endif %}
-                    </p>
-                </div>
-                {% if not user.facebook_id %}
-                <div class="col-4">
-                    <a href="" class="btn btn-inline-facebook mt-1">{% trans 'Associate' %}</a>
+                    <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-inline-twitter mt-1">{% trans 'Associate' %}</a>
                 </div>
                 {% endif %}
             </div>
