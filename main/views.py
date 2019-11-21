@@ -284,7 +284,6 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
 @login_required
 class BasePlaylistBookView(SearchFormView):
     form_class = BookSearchForm
-    success_url = None
     template_name = 'main/playlist/book.html'
 
     def get_form_kwargs(self):
@@ -373,7 +372,6 @@ class BookSearchView(APIMixin, generic.View):
 
 @login_required
 class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
-    url = None
 
     def get(self, request, *args, **kwargs):
         form_data = request.session.get(SESSION_KEY_FORM)
