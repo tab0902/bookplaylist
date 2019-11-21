@@ -375,11 +375,11 @@ class BookSearchView(APIMixin, generic.View):
 class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
     url = None
 
-    def dispatch(self, *args, **kwargs):
-        form_data = self.request.session.get(SESSION_KEY_FORM)
-        book_data = self.request.session.get(SESSION_KEY_BOOK)
-        if not form_data or not SESSION_KEY_BOOK in self.request.session:
-            messages.warning(self.request, _('Session timeout. Please retry from the beginning.'))
+    def get(self, request, *args, **kwargs):
+        form_data = request.session.get(SESSION_KEY_FORM)
+        book_data = request.session.get(SESSION_KEY_BOOK)
+        if not form_data or not SESSION_KEY_BOOK in request.session:
+            messages.warning(request, _('Session timeout. Please retry from the beginning.'))
             return redirect('main:playlist_{}'.format(self.mode), **self.kwargs)
 
         book_obj = Book.objects.filter(isbn=self.kwargs.get('isbn')).first()
@@ -415,12 +415,12 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
                 'publisher': book['Item']['publisherName'],
                 'cover': book['Item']['largeImageUrl'],
             }
-        if book_json not in self.request.session.get(SESSION_KEY_BOOK):
-            self.request.session[SESSION_KEY_BOOK] += [book_json]
-            book_num = len(self.request.session[SESSION_KEY_BOOK])
-            self.request.session[SESSION_KEY_FORM]['playlist_book_set-{}-book'.format(book_num-1)] = book_json['isbn']
-            self.request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS'] = str(int(self.request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS']) + 1)
-        return super().dispatch(*args, **kwargs)
+        if book_json not in request.session.get(SESSION_KEY_BOOK):
+            request.session[SESSION_KEY_BOOK] += [book_json]
+            book_num = len(request.session[SESSION_KEY_BOOK])
+            request.session[SESSION_KEY_FORM]['playlist_book_set-{}-book'.format(book_num-1)] = book_json['isbn']
+            request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS'] = str(int(request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS']) + 1)
+        return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
         del self.kwargs['isbn']
@@ -456,10 +456,10 @@ class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
 class CreateOrSignupView(generic.RedirectView):
     url = reverse_lazy('main:playlist_create')
 
-    def dispatch(self, *args, **kwargs):
-        if not self.request.user.is_authenticated:
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
             return redirect('accounts:signup')
-        return super().dispatch(*args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
 class TermsView(generic.TemplateView):
