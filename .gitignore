@@ -10,3 +10,4 @@ db.sqlite3
 !/bookplaylist/static/fonts/
 !/bookplaylist/static/img/
 !/bookplaylist/static/js/
+/bookplaylist/secrets/*
