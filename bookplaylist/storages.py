@@ -5,12 +5,14 @@ from storages.utils import setting
 class GoogleCloudMediaStorage(GoogleCloudStorage):
 
     def __init__(self, *args, **kwargs):
-        kwargs['location'] = setting('GS_MEDIA_LOCATION', 'media')
+        kwargs['custom_endpoint'] = setting('GS_MEDIA_CUSTOM_ENDPOINT', None)
+        kwargs['bucket_name'] = setting('GS_MEDIA_BUCKET_NAME')
         super().__init__(*args, **kwargs)
 
 
 class GoogleCloudStaticStorage(GoogleCloudStorage):
 
     def __init__(self, *args, **kwargs):
-        kwargs['location'] = setting('GS_STATIC_LOCATION', 'static')
+        kwargs['custom_endpoint'] = setting('GS_STATIC_CUSTOM_ENDPOINT', None)
+        kwargs['bucket_name'] = setting('GS_STATIC_BUCKET_NAME')
         super().__init__(*args, **kwargs)
