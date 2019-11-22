@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
-    BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
+    BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
 )
 
 # Create your models here.
@@ -149,7 +149,11 @@ class PlaylistWithUnpublishedManager(BasePlaylistManager):
         return super().get_queryset().filter(user__deleted_at__isnull=True)
 
 
-class Playlist(BaseModel):
+class Playlist(FileModel):
+
+    def get_card_path(self, filename):
+        return self._get_file_path(filename=filename, field='card')
+
     books = models.ManyToManyField(
         'Book',
         through='PlaylistBook',
@@ -160,6 +164,7 @@ class Playlist(BaseModel):
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
+    card = models.ImageField(upload_to=get_card_path, blank=True, null=True, verbose_name=_('card'))
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
