@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+
+    /* common */
+    html {
+        width: 800px;
+        height: 420px;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', sans-serif;
+        overflow-wrap: break-word;
+        width: 800px;
+        height: 420px;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    /* utils */
+    .d-flex {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+    }
+    .align-items-center {
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .justify-content-center {
+        -webkit-justify-content: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+
+    /* card */
+    .playlist-card {
+        width: 800px;
+        height: 420px;
+        background-color: #fff;
+    }
+    .playlist-card-inner {
+        width: 100%;
+        height: 100%;
+        padding: 16px;
+    }
+
+    /* hero */
+    .playlist-card-hero {
+        position: relative;
+        height: 100%;
+        padding: 4px;
+        color: #fff;
+        font-weight: bold;
+    }
+    .playlist-card-hero.small {
+        width: 504px;
+    }
+    .playlist-card-hero.large {
+        width: 592px;
+    }
+    .playlist-card-hero-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        background: -webkit-linear-gradient(#9C44A6, #ff4812);
+        background: linear-gradient(#9C44A6, #ff4812);
+    }
+    .playlist-card-content-title {
+        padding: 0 8px;
+        font-size: 48px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .playlist-card-hero-site-title {
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        font-family: 'Prompt', sans-serif;
+        font-size: 32px;
+    }
+    .playlist-card-hero-sub-title {
+        position: absolute;
+        bottom: 12px;
+        right: 4px;
+        width: 100%;
+        font-size: 18px;
+        text-align: right;
+    }
+
+    /* sizing (cover/chevron) */
+    .one-half {
+        width: 132px;
+        height: 194px;
+    }
+    .one-third {
+        width: 88px;
+        height: 128px;
+    }
+    .one-third-alt {
+        width: 88px;
+        height: 130px;
+    }
+    .two-third {
+        width: 176px;
+        height: 260px;
+    }
+
+    /* cover */
+    .playlist-card-cover {
+        padding: 4px;
+    }
+    .playlist-card-cover-content {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #eee;
+        border-radius: 8px;
+    }
+    .playlist-card-cover-bg {
+        width: 256px;
+        height: 100%;
+        border-radius: 8px;
+        background-color: #eee;
+    }
+
+    /* chevron */
+    .playlist-card-chevron {
+        color: #9C44A6;
+    }
+    .playlist-card-chevron.one-third {
+        font-size: 48px;
+    }
+    .playlist-card-chevron.one-half {
+        font-size: 64px;
+    }
+    </style>
+</head>
+
+<body style="background-color: #484848;">
+    <div class="playlist-card">
+        <div class="playlist-card-inner d-flex">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

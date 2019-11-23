@@ -1,3 +1,4 @@
+import imgkit
 import re
 import requests
 from itertools import chain
@@ -5,6 +6,7 @@ from itertools import chain
 from django import forms
 from django.conf import settings
 from django.contrib import messages
+from django.core.files.base import ContentFile
 from django.core.paginator import Paginator
 from django.db.models import (
     Count, Q,
@@ -13,6 +15,7 @@ from django.http import (
     HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, HttpResponseServerError,
 )
 from django.shortcuts import redirect, render, render_to_response
+from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -203,7 +206,7 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
         book_data_obj_list = [BookData(**book_data_dict) for book_data_dict in book_data_dict_list]
         BookData.objects.bulk_create(book_data_obj_list, ignore_conflicts=True)
 
-        # save Playlists and PlaylistBooks
+        # handle PlaylistBookFormSet
         instance = form.save(commit=False)
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
@@ -213,8 +216,27 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
             return HttpResponseRedirect(url)
         if not formset.is_valid():
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+        # save Playlist and PlaylistBooks
         instance.save()
         formset.save()
+
+        # create/update Playlist.card
+        book_count = instance.playlist_book_set.count()
+        if book_count < 6:
+            template = get_template('main/playlist/card/{}.html'.format(book_count))
+        else:
+            template = get_template('main/playlist/card/6.html')
+        context = {'playlist': instance}
+        options = {
+            'encoding': 'UTF-8',
+            'width': '800',
+            'height': '420',
+        }
+        img = imgkit.from_string(template.render(context), False, options=options)
+        instance.card.save('{}.jpg'.format(str(instance.pk)), ContentFile(img))
+
+        # clear session and redirect
         for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
             if SESSION_KEY_FORM in self.request.session:
                 del self.request.session[key]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-22 16:56+0900\n"
+"POT-Creation-Date: 2019-11-24 00:30+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -175,7 +175,7 @@ msgstr "退会済みのアカウントと同じメールアドレスを登録す
 #: accounts/templates/accounts/verification.html:23
 #: bookplaylist/templates/layouts/drawer.html:15
 #: bookplaylist/templates/layouts/header.html:28
-#: main/templates/main/playlist/create_complete.html:42
+#: main/templates/main/playlist/create_complete.html:29
 msgid "My page"
 msgstr "マイページ"
 
@@ -908,20 +908,20 @@ msgstr "\"%(q)s\" が含まれる書籍一覧"
 msgid "Search"
 msgstr "検索する"
 
+#: main/templates/main/playlist/card/layouts/title.html:9
+msgid "Let's create book playlist and share it."
+msgstr "本のプレイリストを作ってシェアしよう。"
+
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
 msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
-#: main/templates/main/playlist/create_complete.html:30
+#: main/templates/main/playlist/create_complete.html:22
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlist/create_complete.html:35
-msgid "Share on Facrebook"
-msgstr "Facebookでシェアする"
-
-#: main/templates/main/playlist/create_complete.html:39
+#: main/templates/main/playlist/create_complete.html:26
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
@@ -1049,15 +1049,15 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:210
+#: main/views.py:213
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:254
+#: main/views.py:276
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:333
+#: main/views.py:355
 msgid ""
 "<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
 "p>"
@@ -1065,17 +1065,17 @@ msgstr ""
 "<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
 "い。</p>"
 
-#: main/views.py:335
+#: main/views.py:357
 msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
 msgstr ""
 "<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
 "い。</p>"
 
-#: main/views.py:380
+#: main/views.py:402
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:450
+#: main/views.py:472
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 

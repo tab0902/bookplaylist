@@ -1,0 +1,14 @@
+{% extends './base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+{% include 'main/playlist/card/layouts/title.html' with size='small' %}
+<div class="playlist-card-cover">
+    <div class="playlist-card-cover-bg d-flex align-items-center justify-content-center">
+        {% include 'main/playlist/card/layouts/cover.html' with size='two-third' cover=playlist.playlist_book_set.all.0.book.data.cover %}
+    </div>
+</div>
+
+{% endblock %}
