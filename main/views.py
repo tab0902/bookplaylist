@@ -230,8 +230,8 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
         context = {'playlist': instance}
         options = {
             'encoding': 'UTF-8',
-            'width': '800',
-            'height': '420',
+            'width': '1200',
+            'height': '630',
         }
         img = imgkit.from_string(template.render(context), False, options=options)
         instance.card.save('{}.jpg'.format(str(instance.pk)), ContentFile(img))
