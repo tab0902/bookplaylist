@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
-    BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
+    AllObjectsManager, AllObjectsQuerySet, BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, QuerySet,
 )
 
 # Create your models here.
@@ -131,7 +131,23 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
-class BasePlaylistManager(Manager):
+class PlaylistQuerySetMixin:
+
+    def hard_delete(self):
+        for playlist in self.all():
+            playlist.card.delete(save=False)
+        return super().hard_delete()
+
+
+class PlaylistQuerySet(PlaylistQuerySetMixin, QuerySet):
+    pass
+
+
+class AllPlaylistQuerySet(PlaylistQuerySetMixin, AllObjectsQuerySet):
+    pass
+
+
+class BasePlaylistManager(Manager.from_queryset(PlaylistQuerySet)):
 
     def get_queryset(self):
         return super().get_queryset().prefetch_related('playlist_book_set')
@@ -147,6 +163,10 @@ class PlaylistWithUnpublishedManager(BasePlaylistManager):
 
     def get_queryset(self):
         return super().get_queryset().filter(user__deleted_at__isnull=True)
+
+
+class AllPlaylistManager(AllObjectsManager.from_queryset(AllPlaylistQuerySet)):
+    pass
 
 
 class Playlist(FileModel):
@@ -168,6 +188,7 @@ class Playlist(FileModel):
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
+    all_objects = AllPlaylistManager()
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists'
@@ -182,6 +203,10 @@ class Playlist(FileModel):
 
     def __str__(self):
         return '%s' % self.title
+
+    def hard_delete(self):
+        self.card.delete(save=False)
+        super().hard_delete()
 
 
 class PlaylistBookManager(Manager):

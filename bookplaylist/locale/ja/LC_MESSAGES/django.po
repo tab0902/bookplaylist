@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-24 00:30+0900\n"
+"POT-Creation-Date: 2019-11-24 15:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -151,7 +151,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:127 main/models.py:163
+#: accounts/models.py:127 main/models.py:183
 msgid "user"
 msgstr ""
 
@@ -666,11 +666,11 @@ msgstr "スラッグ"
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:16 main/models.py:42 main/models.py:166 main/models.py:210
+#: main/models.py:16 main/models.py:42 main/models.py:186 main/models.py:235
 msgid "description"
 msgstr "概要"
 
-#: main/models.py:21 main/models.py:164
+#: main/models.py:21 main/models.py:184
 msgid "theme"
 msgstr "テーマ"
 
@@ -702,7 +702,7 @@ msgstr "書籍データ提供元"
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models.py:68 main/models.py:176
+#: main/models.py:68 main/models.py:197
 msgid "playlists"
 msgstr "プレイリスト"
 
@@ -710,15 +710,15 @@ msgstr "プレイリスト"
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:81 main/models.py:102 main/models.py:208
+#: main/models.py:81 main/models.py:102 main/models.py:233
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:82 main/models.py:161
+#: main/models.py:82 main/models.py:181
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:111 main/models.py:165
+#: main/models.py:111 main/models.py:185
 msgid "title"
 msgstr "タイトル"
 
@@ -742,23 +742,23 @@ msgstr "アフィリエイトURL"
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models.py:167
+#: main/models.py:187
 msgid "card"
 msgstr "カード"
 
-#: main/models.py:168
+#: main/models.py:188
 msgid "published"
 msgstr "公開"
 
-#: main/models.py:175 main/models.py:199
+#: main/models.py:196 main/models.py:224
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:216
+#: main/models.py:241
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:217
+#: main/models.py:242
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
