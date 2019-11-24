@@ -1,3 +1,5 @@
+import re
+
 from django.conf import settings
 from django.db import models
 from django.urls import reverse_lazy
@@ -115,6 +117,10 @@ class BookData(BaseModel):
     cover = NullURLField(_('cover'), blank=True, null=True)
     affiliate_url = NullURLField(_('Affiliate URL'), blank=True, null=True)
     objects = BookDataManager()
+
+    @property
+    def large_cover(self):
+        return re.sub(r'\?_ex=\d+x\d+', '', self.cover)
 
     class Meta(BaseModel.Meta):
         db_table = 'book_data'

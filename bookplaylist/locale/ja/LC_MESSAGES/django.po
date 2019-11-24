@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-24 20:02+0900\n"
+"POT-Creation-Date: 2019-11-24 20:41+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -151,7 +151,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:128 main/models.py:184
+#: accounts/models.py:128 main/models.py:190
 msgid "user"
 msgstr ""
 
@@ -654,111 +654,111 @@ msgstr "本文"
 msgid "Guest user"
 msgstr "ゲストユーザー"
 
-#: main/models.py:14
+#: main/models.py:16
 msgid "theme name"
 msgstr "テーマ名"
 
-#: main/models.py:15 main/models.py:40
+#: main/models.py:17 main/models.py:42
 msgid "slug"
 msgstr "スラッグ"
 
-#: main/models.py:16
+#: main/models.py:18
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:17 main/models.py:43 main/models.py:187 main/models.py:239
+#: main/models.py:19 main/models.py:45 main/models.py:193 main/models.py:245
 msgid "description"
 msgstr "概要"
 
-#: main/models.py:22 main/models.py:185
+#: main/models.py:24 main/models.py:191
 msgid "theme"
 msgstr "テーマ"
 
-#: main/models.py:23
+#: main/models.py:25
 msgid "themes"
 msgstr "テーマ"
 
-#: main/models.py:39
+#: main/models.py:41
 msgid "provider name"
 msgstr "プロバイダー名"
 
-#: main/models.py:41
+#: main/models.py:43
 msgid "endpoint"
 msgstr "エンドポイント"
 
-#: main/models.py:42
+#: main/models.py:44
 msgid "priority"
 msgstr "優先順位"
 
-#: main/models.py:44
+#: main/models.py:46
 msgid "available"
 msgstr "利用可能"
 
-#: main/models.py:51 main/models.py:110
+#: main/models.py:53 main/models.py:112
 msgid "provider"
 msgstr "書籍データ提供元"
 
-#: main/models.py:52
+#: main/models.py:54
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models.py:69 main/models.py:198
+#: main/models.py:71 main/models.py:204
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models.py:72
+#: main/models.py:74
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:82 main/models.py:103 main/models.py:237
+#: main/models.py:84 main/models.py:105 main/models.py:243
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:83 main/models.py:182
+#: main/models.py:85 main/models.py:188
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:112 main/models.py:186
+#: main/models.py:114 main/models.py:192
 msgid "title"
 msgstr "タイトル"
 
-#: main/models.py:113
+#: main/models.py:115
 msgid "author"
 msgstr "著者"
 
-#: main/models.py:114
+#: main/models.py:116
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models.py:115
+#: main/models.py:117
 msgid "cover"
 msgstr "書影"
 
-#: main/models.py:116
+#: main/models.py:118
 msgid "Affiliate URL"
 msgstr "アフィリエイトURL"
 
-#: main/models.py:122 main/models.py:123
+#: main/models.py:128 main/models.py:129
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models.py:188
+#: main/models.py:194
 msgid "card"
 msgstr "カード"
 
-#: main/models.py:189
+#: main/models.py:195
 msgid "published"
 msgstr "公開"
 
-#: main/models.py:197 main/models.py:228
+#: main/models.py:203 main/models.py:234
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:245
+#: main/models.py:251
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:246
+#: main/models.py:252
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
