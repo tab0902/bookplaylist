@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
@@ -203,6 +204,9 @@ class Playlist(FileModel):
 
     def __str__(self):
         return '%s' % self.title
+
+    def get_absolute_url(self):
+        return reverse_lazy('main:playlist_detail', args=[str(self.pk)])
 
     def hard_delete(self):
         self.card.delete(save=False)
