@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-24 20:41+0900\n"
+"POT-Creation-Date: 2019-11-24 23:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -151,7 +151,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:128 main/models.py:190
+#: accounts/models.py:128 main/models.py:193
 msgid "user"
 msgstr ""
 
@@ -654,111 +654,111 @@ msgstr "本文"
 msgid "Guest user"
 msgstr "ゲストユーザー"
 
-#: main/models.py:16
+#: main/models.py:19
 msgid "theme name"
 msgstr "テーマ名"
 
-#: main/models.py:17 main/models.py:42
+#: main/models.py:20 main/models.py:45
 msgid "slug"
 msgstr "スラッグ"
 
-#: main/models.py:18
+#: main/models.py:21
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:19 main/models.py:45 main/models.py:193 main/models.py:245
+#: main/models.py:22 main/models.py:48 main/models.py:196 main/models.py:265
 msgid "description"
 msgstr "概要"
 
-#: main/models.py:24 main/models.py:191
+#: main/models.py:27 main/models.py:194
 msgid "theme"
 msgstr "テーマ"
 
-#: main/models.py:25
+#: main/models.py:28
 msgid "themes"
 msgstr "テーマ"
 
-#: main/models.py:41
+#: main/models.py:44
 msgid "provider name"
 msgstr "プロバイダー名"
 
-#: main/models.py:43
+#: main/models.py:46
 msgid "endpoint"
 msgstr "エンドポイント"
 
-#: main/models.py:44
+#: main/models.py:47
 msgid "priority"
 msgstr "優先順位"
 
-#: main/models.py:46
+#: main/models.py:49
 msgid "available"
 msgstr "利用可能"
 
-#: main/models.py:53 main/models.py:112
+#: main/models.py:56 main/models.py:115
 msgid "provider"
 msgstr "書籍データ提供元"
 
-#: main/models.py:54
+#: main/models.py:57
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models.py:71 main/models.py:204
+#: main/models.py:74 main/models.py:207
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models.py:74
+#: main/models.py:77
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:84 main/models.py:105 main/models.py:243
+#: main/models.py:87 main/models.py:108 main/models.py:263
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:85 main/models.py:188
+#: main/models.py:88 main/models.py:191
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:114 main/models.py:192
+#: main/models.py:117 main/models.py:195
 msgid "title"
 msgstr "タイトル"
 
-#: main/models.py:115
+#: main/models.py:118
 msgid "author"
 msgstr "著者"
 
-#: main/models.py:116
+#: main/models.py:119
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models.py:117
+#: main/models.py:120
 msgid "cover"
 msgstr "書影"
 
-#: main/models.py:118
+#: main/models.py:121
 msgid "Affiliate URL"
 msgstr "アフィリエイトURL"
 
-#: main/models.py:128 main/models.py:129
+#: main/models.py:131 main/models.py:132
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models.py:194
+#: main/models.py:197
 msgid "card"
 msgstr "カード"
 
-#: main/models.py:195
+#: main/models.py:198
 msgid "published"
 msgstr "公開"
 
-#: main/models.py:203 main/models.py:234
+#: main/models.py:206 main/models.py:254
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:251
+#: main/models.py:271
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:252
+#: main/models.py:272
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
@@ -1049,15 +1049,15 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:213
+#: main/views.py:209
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:276
+#: main/views.py:260
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:355
+#: main/views.py:339
 msgid ""
 "<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
 "p>"
@@ -1065,17 +1065,17 @@ msgstr ""
 "<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
 "い。</p>"
 
-#: main/views.py:357
+#: main/views.py:341
 msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
 msgstr ""
 "<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
 "い。</p>"
 
-#: main/views.py:402
+#: main/views.py:386
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:472
+#: main/views.py:456
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 

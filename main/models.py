@@ -1,7 +1,10 @@
+import imgkit
 import re
 
 from django.conf import settings
+from django.core.files.base import ContentFile
 from django.db import models
+from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
@@ -217,6 +220,23 @@ class Playlist(FileModel):
     def hard_delete(self):
         self.card.delete(save=False)
         super().hard_delete()
+
+    def save_card(self, save=True):
+        # craete self.card
+        book_count = self.playlist_book_set.count()
+        if book_count < 6:
+            template = get_template('main/playlist/card/{}.html'.format(book_count))
+        else:
+            template = get_template('main/playlist/card/6.html')
+        context = {'playlist': self}
+        options = {
+            'encoding': 'UTF-8',
+            'width': '1200',
+            'height': '630',
+            'quiet': '',
+        }
+        img = imgkit.from_string(template.render(context), False, options=options)
+        self.card.save('{}.jpg'.format(str(self.pk)), ContentFile(img), save=save)
 
 
 class PlaylistBookManager(Manager):
