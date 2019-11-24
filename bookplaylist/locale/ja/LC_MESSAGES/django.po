@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-24 17:50+0900\n"
+"POT-Creation-Date: 2019-11-24 20:02+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -175,7 +175,7 @@ msgstr "退会済みのアカウントと同じメールアドレスを登録す
 #: accounts/templates/accounts/verification.html:23
 #: bookplaylist/templates/layouts/drawer.html:15
 #: bookplaylist/templates/layouts/header.html:28
-#: main/templates/main/playlist/create_complete.html:29
+#: main/templates/main/playlist/create_complete.html:37
 msgid "My page"
 msgstr "マイページ"
 
@@ -917,11 +917,11 @@ msgstr "本のプレイリストを作ってシェアしよう。"
 msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
-#: main/templates/main/playlist/create_complete.html:22
+#: main/templates/main/playlist/create_complete.html:28
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlist/create_complete.html:26
+#: main/templates/main/playlist/create_complete.html:34
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
