@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 16:32+0900\n"
+"POT-Creation-Date: 2019-11-24 15:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -151,7 +151,7 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:127 main/models.py:159
+#: accounts/models.py:127 main/models.py:183
 msgid "user"
 msgstr ""
 
@@ -175,7 +175,7 @@ msgstr "退会済みのアカウントと同じメールアドレスを登録す
 #: accounts/templates/accounts/verification.html:23
 #: bookplaylist/templates/layouts/drawer.html:15
 #: bookplaylist/templates/layouts/header.html:28
-#: main/templates/main/playlist/create_complete.html:42
+#: main/templates/main/playlist/create_complete.html:29
 msgid "My page"
 msgstr "マイページ"
 
@@ -508,15 +508,15 @@ msgstr "他のユーザーのプロフィールを編集することはできま
 msgid "Comment updated successfully."
 msgstr "プロフィールを更新しました。"
 
-#: bookplaylist/models.py:39
+#: bookplaylist/models.py:45
 msgid "date created"
 msgstr "作成日時"
 
-#: bookplaylist/models.py:40
+#: bookplaylist/models.py:46
 msgid "date updated"
 msgstr "更新日時"
 
-#: bookplaylist/models.py:41
+#: bookplaylist/models.py:47
 msgid "date deleted"
 msgstr "削除日時"
 
@@ -666,11 +666,11 @@ msgstr "スラッグ"
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:16 main/models.py:42 main/models.py:162 main/models.py:205
+#: main/models.py:16 main/models.py:42 main/models.py:186 main/models.py:235
 msgid "description"
 msgstr "概要"
 
-#: main/models.py:21 main/models.py:160
+#: main/models.py:21 main/models.py:184
 msgid "theme"
 msgstr "テーマ"
 
@@ -702,7 +702,7 @@ msgstr "書籍データ提供元"
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models.py:68 main/models.py:171
+#: main/models.py:68 main/models.py:197
 msgid "playlists"
 msgstr "プレイリスト"
 
@@ -710,15 +710,15 @@ msgstr "プレイリスト"
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:81 main/models.py:102 main/models.py:203
+#: main/models.py:81 main/models.py:102 main/models.py:233
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:82 main/models.py:157
+#: main/models.py:82 main/models.py:181
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:111 main/models.py:161
+#: main/models.py:111 main/models.py:185
 msgid "title"
 msgstr "タイトル"
 
@@ -742,19 +742,23 @@ msgstr "アフィリエイトURL"
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models.py:163
+#: main/models.py:187
+msgid "card"
+msgstr "カード"
+
+#: main/models.py:188
 msgid "published"
 msgstr "公開"
 
-#: main/models.py:170 main/models.py:194
+#: main/models.py:196 main/models.py:224
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:211
+#: main/models.py:241
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:212
+#: main/models.py:242
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
@@ -904,20 +908,20 @@ msgstr "\"%(q)s\" が含まれる書籍一覧"
 msgid "Search"
 msgstr "検索する"
 
+#: main/templates/main/playlist/card/layouts/title.html:9
+msgid "Let's create book playlist and share it."
+msgstr "本のプレイリストを作ってシェアしよう。"
+
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
 msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
-#: main/templates/main/playlist/create_complete.html:30
+#: main/templates/main/playlist/create_complete.html:22
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlist/create_complete.html:35
-msgid "Share on Facrebook"
-msgstr "Facebookでシェアする"
-
-#: main/templates/main/playlist/create_complete.html:39
+#: main/templates/main/playlist/create_complete.html:26
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
@@ -1045,15 +1049,15 @@ msgstr "プライバシーポリシー"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:210
+#: main/views.py:213
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:254
+#: main/views.py:276
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:334
+#: main/views.py:355
 msgid ""
 "<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
 "p>"
@@ -1061,17 +1065,17 @@ msgstr ""
 "<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
 "い。</p>"
 
-#: main/views.py:336
+#: main/views.py:357
 msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
 msgstr ""
 "<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
 "い。</p>"
 
-#: main/views.py:382
+#: main/views.py:402
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:452
+#: main/views.py:472
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 

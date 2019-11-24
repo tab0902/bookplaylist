@@ -1,3 +1,4 @@
+import imgkit
 import re
 import requests
 from itertools import chain
@@ -5,6 +6,7 @@ from itertools import chain
 from django import forms
 from django.conf import settings
 from django.contrib import messages
+from django.core.files.base import ContentFile
 from django.core.paginator import Paginator
 from django.db.models import (
     Count, Q,
@@ -13,6 +15,7 @@ from django.http import (
     HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, HttpResponseServerError,
 )
 from django.shortcuts import redirect, render, render_to_response
+from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -203,7 +206,7 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
         book_data_obj_list = [BookData(**book_data_dict) for book_data_dict in book_data_dict_list]
         BookData.objects.bulk_create(book_data_obj_list, ignore_conflicts=True)
 
-        # save Playlists and PlaylistBooks
+        # handle PlaylistBookFormSet
         instance = form.save(commit=False)
         formset = PlaylistBookFormSet(self.request.POST, instance=instance, form_kwargs={'request': self.request})
         if not len(formset.forms) - len(formset.deleted_forms):
@@ -213,8 +216,27 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
             return HttpResponseRedirect(url)
         if not formset.is_valid():
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+        # save Playlist and PlaylistBooks
         instance.save()
         formset.save()
+
+        # create/update Playlist.card
+        book_count = instance.playlist_book_set.count()
+        if book_count < 6:
+            template = get_template('main/playlist/card/{}.html'.format(book_count))
+        else:
+            template = get_template('main/playlist/card/6.html')
+        context = {'playlist': instance}
+        options = {
+            'encoding': 'UTF-8',
+            'width': '800',
+            'height': '420',
+        }
+        img = imgkit.from_string(template.render(context), False, options=options)
+        instance.card.save('{}.jpg'.format(str(instance.pk)), ContentFile(img))
+
+        # clear session and redirect
         for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
             if SESSION_KEY_FORM in self.request.session:
                 del self.request.session[key]
@@ -284,7 +306,6 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
 @login_required
 class BasePlaylistBookView(SearchFormView):
     form_class = BookSearchForm
-    success_url = None
     template_name = 'main/playlist/book.html'
 
     def get_form_kwargs(self):
@@ -373,13 +394,12 @@ class BookSearchView(APIMixin, generic.View):
 
 @login_required
 class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
-    url = None
 
-    def dispatch(self, *args, **kwargs):
-        form_data = self.request.session.get(SESSION_KEY_FORM)
-        book_data = self.request.session.get(SESSION_KEY_BOOK)
-        if not form_data or not SESSION_KEY_BOOK in self.request.session:
-            messages.warning(self.request, _('Session timeout. Please retry from the beginning.'))
+    def get(self, request, *args, **kwargs):
+        form_data = request.session.get(SESSION_KEY_FORM)
+        book_data = request.session.get(SESSION_KEY_BOOK)
+        if not form_data or not SESSION_KEY_BOOK in request.session:
+            messages.warning(request, _('Session timeout. Please retry from the beginning.'))
             return redirect('main:playlist_{}'.format(self.mode), **self.kwargs)
 
         book_obj = Book.objects.filter(isbn=self.kwargs.get('isbn')).first()
@@ -415,12 +435,12 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
                 'publisher': book['Item']['publisherName'],
                 'cover': book['Item']['largeImageUrl'],
             }
-        if book_json not in self.request.session.get(SESSION_KEY_BOOK):
-            self.request.session[SESSION_KEY_BOOK] += [book_json]
-            book_num = len(self.request.session[SESSION_KEY_BOOK])
-            self.request.session[SESSION_KEY_FORM]['playlist_book_set-{}-book'.format(book_num-1)] = book_json['isbn']
-            self.request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS'] = str(int(self.request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS']) + 1)
-        return super().dispatch(*args, **kwargs)
+        if book_json not in request.session.get(SESSION_KEY_BOOK):
+            request.session[SESSION_KEY_BOOK] += [book_json]
+            book_num = len(request.session[SESSION_KEY_BOOK])
+            request.session[SESSION_KEY_FORM]['playlist_book_set-{}-book'.format(book_num-1)] = book_json['isbn']
+            request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS'] = str(int(request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS']) + 1)
+        return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
         del self.kwargs['isbn']
@@ -456,10 +476,10 @@ class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
 class CreateOrSignupView(generic.RedirectView):
     url = reverse_lazy('main:playlist_create')
 
-    def dispatch(self, *args, **kwargs):
-        if not self.request.user.is_authenticated:
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
             return redirect('accounts:signup')
-        return super().dispatch(*args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
 class TermsView(generic.TemplateView):

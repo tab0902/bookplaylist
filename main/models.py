@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
-    BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
+    AllObjectsManager, AllObjectsQuerySet, BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, QuerySet,
 )
 
 # Create your models here.
@@ -131,7 +131,23 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
-class BasePlaylistManager(Manager):
+class PlaylistQuerySetMixin:
+
+    def hard_delete(self):
+        for playlist in self.all():
+            playlist.card.delete(save=False)
+        return super().hard_delete()
+
+
+class PlaylistQuerySet(PlaylistQuerySetMixin, QuerySet):
+    pass
+
+
+class AllPlaylistQuerySet(PlaylistQuerySetMixin, AllObjectsQuerySet):
+    pass
+
+
+class BasePlaylistManager(Manager.from_queryset(PlaylistQuerySet)):
 
     def get_queryset(self):
         return super().get_queryset().prefetch_related('playlist_book_set')
@@ -149,7 +165,15 @@ class PlaylistWithUnpublishedManager(BasePlaylistManager):
         return super().get_queryset().filter(user__deleted_at__isnull=True)
 
 
-class Playlist(BaseModel):
+class AllPlaylistManager(AllObjectsManager.from_queryset(AllPlaylistQuerySet)):
+    pass
+
+
+class Playlist(FileModel):
+
+    def get_card_path(self, filename):
+        return self._get_file_path(filename=filename, field='card')
+
     books = models.ManyToManyField(
         'Book',
         through='PlaylistBook',
@@ -160,9 +184,11 @@ class Playlist(BaseModel):
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
+    card = models.ImageField(upload_to=get_card_path, blank=True, null=True, verbose_name=_('card'))
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
+    all_objects = AllPlaylistManager()
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists'
@@ -177,6 +203,10 @@ class Playlist(BaseModel):
 
     def __str__(self):
         return '%s' % self.title
+
+    def hard_delete(self):
+        self.card.delete(save=False)
+        super().hard_delete()
 
 
 class PlaylistBookManager(Manager):

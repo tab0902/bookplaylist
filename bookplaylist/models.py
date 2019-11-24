@@ -1,3 +1,5 @@
+import os
+import re
 import uuid
 
 from django.db import models
@@ -5,6 +7,10 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
+
+
+def camel_to_snake(string):
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', re.sub('(.)([A-Z][a-z]+)', r'\1_\2', string)).lower()
 
 
 class QuerySet(models.QuerySet):
@@ -61,6 +67,18 @@ class BaseModel(models.Model):
 
     def hard_delete(self):
         super().delete()
+
+
+class FileModel(BaseModel):
+
+    class Meta:
+        abstract = True
+
+    def _get_file_path(self, filename, field, filetype='img'):
+        directory = os.path.join(filetype, camel_to_snake(self.__class__.__name__), field)
+        filename = str(self.pk) + os.path.splitext(filename)[-1]
+        path = os.path.join(directory, filename)
+        return path
 
 
 class NullFieldMixin:
