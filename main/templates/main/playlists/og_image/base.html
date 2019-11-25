@@ -12,16 +12,16 @@
 
     /* common */
     html {
-        width: 800px;
-        height: 420px;
+        width: 1200px;
+        height: 630px;
         margin: 0;
         padding: 0;
     }
     body {
         font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', sans-serif;
         overflow-wrap: break-word;
-        width: 800px;
-        height: 420px;
+        width: 1200px;
+        height: 630px;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -51,113 +51,109 @@
 
     /* wrapper and inner */
     .wrapper {
-        padding: 4px;
+        padding: 6px;
     }
     .inner {
         width: 100%;
         height: 100%;
-        border-radius: 8px;
+        border-radius: 12px;
     }
 
     /* sizing */
     .one-third {
-        width: 88px;
-        height: 128px;
-    }
-    .one-third-alt {
-        width: 88px;
-        height: 130px;
-    }
-    .one-half {
         width: 132px;
         height: 194px;
     }
-    .two-third {
-        width: 176px;
-        height: 260px;
+    .one-half {
+        width: 198px;
+        height: 291px;
     }
-    .full {
+    .two-third {
         width: 264px;
         height: 388px;
     }
+    .full {
+        width: 396px;
+        height: 582px;
+    }
 
-    /* card */
-    .playlist-card {
-        width: 800px;
-        height: 420px;
+    /* OG image */
+    .og-image {
+        width: 1200px;
+        height: 630px;
         background-color: #fff;
     }
-    .playlist-card-inner {
+    .og-image-inner {
         width: 100%;
         height: 100%;
-        padding: 16px;
+        padding: 24px;
     }
 
     /* hero */
-    .playlist-card-hero {
+    .og-image-hero {
         position: relative;
         height: 100%;
         color: #fff;
         font-weight: bold;
     }
-    .playlist-card-hero.small {
-        width: 504px;
+    .og-image-hero.small {
+        width: 756px;
     }
-    .playlist-card-hero.large {
-        width: 592px;
+    .og-image-hero.large {
+        width: 888px;
     }
-    .playlist-card-hero-content {
+    .og-image-hero-content {
         background: -webkit-linear-gradient(#9C44A6, #ff4812);
         background: linear-gradient(#9C44A6, #ff4812);
     }
-    .playlist-card-content-title {
-        padding: 0 8px;
-        font-size: 48px;
+    .og-image-content-title {
+        padding: 0 12px;
+        font-size: 64px;
         font-weight: bold;
         text-align: center;
     }
-    .playlist-card-hero-site-title {
+    .og-image-hero-site-title {
         position: absolute;
-        top: 12px;
-        left: 16px;
+        top: 18px;
+        left: 24px;
         font-family: 'Prompt', sans-serif;
-        font-size: 32px;
+        font-size: 48px;
     }
-    .playlist-card-hero-sub-title {
+    .og-image-hero-sub-title {
         position: absolute;
-        bottom: 12px;
-        right: 4px;
+        bottom: 18px;
+        right: 6px;
         width: 100%;
-        font-size: 18px;
+        font-size: 28px;
         text-align: right;
     }
 
     /* cover */
-    .playlist-card-cover {
+    .og-image-cover {
     }
-    .playlist-card-cover-content {
+    .og-image-cover-content {
         border: 1px solid #eee;
     }
-    .playlist-card-cover-bg {
+    .og-image-cover-bg {
         background-color: #eee;
     }
 
     /* chevron */
-    .playlist-card-chevron {
+    .og-image-chevron {
         color: #9C44A6;
     }
-    .playlist-card-chevron.one-third {
-        font-size: 48px;
+    .og-image-chevron.one-third {
+        font-size: 72px;
     }
-    .playlist-card-chevron.one-half {
-        font-size: 64px;
+    .og-image-chevron.one-half {
+        font-size: 96px;
     }
     </style>
 </head>
 
 <body style="background-color: #484848;">
-    <div class="playlist-card">
-        <div class="playlist-card-inner d-flex">
+    <div class="og-image">
+        <div class="og-image-inner d-flex">
             {% block content %}
             {% endblock %}
         </div>

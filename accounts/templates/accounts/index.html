@@ -45,7 +45,7 @@
     <section id="playlist-list">
         <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
         {% trans "You haven't created any playlists. Enter the link below to create your first one!" as text %}
-        {% include 'main/playlist/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
+        {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
     </section>
     {% endif %}
 
@@ -55,7 +55,7 @@
         {% else %}
         {% trans "Let's create your first playlist!" as text %}
         {% endif %}
-        {% include 'main/playlist/layouts/lets-create-playlist.html' with lets_create_text=text %}
+        {% include 'main/playlists/layouts/lets-create-playlist.html' with lets_create_text=text %}
     </section>
 
 </div>

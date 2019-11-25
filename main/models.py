@@ -1,5 +1,11 @@
+import imgkit
+import re
+
 from django.conf import settings
+from django.core.files.base import ContentFile
 from django.db import models
+from django.template.loader import get_template
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
@@ -115,6 +121,10 @@ class BookData(BaseModel):
     affiliate_url = NullURLField(_('Affiliate URL'), blank=True, null=True)
     objects = BookDataManager()
 
+    @property
+    def large_cover(self):
+        return re.sub(r'\?_ex=\d+x\d+', '', self.cover)
+
     class Meta(BaseModel.Meta):
         db_table = 'book_data'
         ordering = ['book', 'provider']
@@ -135,7 +145,7 @@ class PlaylistQuerySetMixin:
 
     def hard_delete(self):
         for playlist in self.all():
-            playlist.card.delete(save=False)
+            playlist.og_image.delete(save=False)
         return super().hard_delete()
 
 
@@ -171,8 +181,8 @@ class AllPlaylistManager(AllObjectsManager.from_queryset(AllPlaylistQuerySet)):
 
 class Playlist(FileModel):
 
-    def get_card_path(self, filename):
-        return self._get_file_path(filename=filename, field='card')
+    def get_og_image_path(self, filename):
+        return self._get_file_path(filename=filename, field='og_image')
 
     books = models.ManyToManyField(
         'Book',
@@ -184,7 +194,7 @@ class Playlist(FileModel):
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
-    card = models.ImageField(upload_to=get_card_path, blank=True, null=True, verbose_name=_('card'))
+    og_image = models.ImageField(upload_to=get_og_image_path, blank=True, null=True, verbose_name=_('Open Graph image'))
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
@@ -204,9 +214,29 @@ class Playlist(FileModel):
     def __str__(self):
         return '%s' % self.title
 
+    def get_absolute_url(self):
+        return reverse_lazy('main:playlist_detail', args=[str(self.pk)])
+
     def hard_delete(self):
-        self.card.delete(save=False)
+        self.og_image.delete(save=False)
         super().hard_delete()
+
+    def save_og_image(self, save=True):
+        # save self.og_image
+        book_count = self.playlist_book_set.count()
+        if book_count < 6:
+            template = get_template('main/playlists/og_image/{}.html'.format(book_count))
+        else:
+            template = get_template('main/playlists/og_image/6.html')
+        context = {'playlist': self}
+        options = {
+            'encoding': 'UTF-8',
+            'width': '1200',
+            'height': '630',
+            'quiet': '',
+        }
+        img = imgkit.from_string(template.render(context), False, options=options)
+        self.og_image.save('{}.jpg'.format(str(self.pk)), ContentFile(img), save=save)
 
 
 class PlaylistBookManager(Manager):

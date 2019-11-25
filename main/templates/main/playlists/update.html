@@ -20,7 +20,7 @@
                 </a>
             </div>
         </div>
-        {% include 'main/playlist/layouts/playlist-form.html' with mode='update' %}
+        {% include 'main/playlists/layouts/playlist-form.html' with mode='update' %}
         <a href="{% url 'main:playlist_delete' playlist.pk %}" class="btn btn-inline-sub w-100 d-sm-none mt-5 text-center">
             {% trans 'Delete playlist' %}
         </a>

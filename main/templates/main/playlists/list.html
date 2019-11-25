@@ -17,7 +17,7 @@
     {% if request.GET.q %}
     <section id="search-playlist-wide">
         <div class="mt-4">
-            {% include 'main/playlist/layouts/search-playlist-wide.html' %}
+            {% include 'main/playlists/layouts/search-playlist-wide.html' %}
         </div>
     </section>
     {% endif %}
@@ -40,14 +40,14 @@
 
     <section id="playlist-list" class="search-results">
         <div class="line-gray mt-4 mb-5 d-none"></div>
-        {% include 'main/playlist/layouts/list-widget.html' %}
+        {% include 'main/playlists/layouts/list-widget.html' %}
         {% if page_obj %}
         {% include 'layouts/pagenator.html' with params=params queryset=playlists %}
         {% endif %}
     </section>
 
     <section id="playlist-list-lets-create">
-        {% include 'main/playlist/layouts/lets-create-playlist.html' with theme=theme %}
+        {% include 'main/playlists/layouts/lets-create-playlist.html' with theme=theme %}
     </section>
 </div>
 

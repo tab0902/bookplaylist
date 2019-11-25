@@ -1,12 +1,9 @@
-import imgkit
-import re
 import requests
 from itertools import chain
 
 from django import forms
 from django.conf import settings
 from django.contrib import messages
-from django.core.files.base import ContentFile
 from django.core.paginator import Paginator
 from django.db.models import (
     Count, Q,
@@ -15,7 +12,6 @@ from django.http import (
     HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, HttpResponseServerError,
 )
 from django.shortcuts import redirect, render, render_to_response
-from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -72,7 +68,7 @@ class IndexView(PlaylistSearchFormView):
 class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
     context_object_name = 'playlists'
     model = Playlist
-    template_name = 'main/playlist/list.html'
+    template_name = 'main/playlists/list.html'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
@@ -116,7 +112,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
 
 class PlaylistDetailView(generic.DetailView):
     model = Playlist
-    template_name = 'main/playlist/detail.html'
+    template_name = 'main/playlists/detail.html'
 
     def get_queryset(self):
         return super().get_queryset().select_related('theme', 'user')
@@ -221,20 +217,8 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
         instance.save()
         formset.save()
 
-        # create/update Playlist.card
-        book_count = instance.playlist_book_set.count()
-        if book_count < 6:
-            template = get_template('main/playlist/card/{}.html'.format(book_count))
-        else:
-            template = get_template('main/playlist/card/6.html')
-        context = {'playlist': instance}
-        options = {
-            'encoding': 'UTF-8',
-            'width': '800',
-            'height': '420',
-        }
-        img = imgkit.from_string(template.render(context), False, options=options)
-        instance.card.save('{}.jpg'.format(str(instance.pk)), ContentFile(img))
+        # save Playlist.og_image
+        instance.save_og_image()
 
         # clear session and redirect
         for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):
@@ -253,7 +237,7 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
 class PlaylistCreateView(BasePlaylistFormView):
     mode = MODE_CREATE
     success_message = None
-    template_name = 'main/playlist/create.html'
+    template_name = 'main/playlists/create.html'
 
     def get(self, request, *args, **kwargs):
         self.object = None
@@ -274,7 +258,7 @@ class PlaylistCreateView(BasePlaylistFormView):
 class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
     mode = MODE_UPDATE
     success_message = _('Playlist updated successfully.')
-    template_name = 'main/playlist/update.html'
+    template_name = 'main/playlists/update.html'
 
     def get(self, request, *args, **kwargs):
         if not hasattr(self, 'object'):
@@ -306,7 +290,7 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
 @login_required
 class BasePlaylistBookView(SearchFormView):
     form_class = BookSearchForm
-    template_name = 'main/playlist/book.html'
+    template_name = 'main/playlists/book.html'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -381,7 +365,7 @@ class BookSearchView(APIMixin, generic.View):
             context['params'] = url_params
         return render(
             self.request,
-            'main/playlist/layouts/book-list.html',
+            'main/playlists/layouts/book-list.html',
             context
         )
 
@@ -459,14 +443,14 @@ class PlaylistUpdateBookStoreView(OwnerOnlyMixin, BasePlaylistBookStoreView):
 @login_required
 class PlaylistCreateCompleteView(OwnerOnlyMixin, generic.DetailView):
     model = Playlist
-    template_name = 'main/playlist/create_complete.html'
+    template_name = 'main/playlists/create_complete.html'
 
 
 @login_required
 class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
     model = Playlist
     success_url = reverse_lazy('accounts:index')
-    template_name = 'main/playlist/delete.html'
+    template_name = 'main/playlists/delete.html'
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, _('Playlist deleted successfully.'))
