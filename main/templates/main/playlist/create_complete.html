@@ -18,17 +18,15 @@
         </div>
             <div class="row">
                 <div class="col-sm-8 offset-sm-2">
-                    <div class="mx-sm-4">
-                        {% with host=request.scheme|add:'://'|add:request.get_host path=playlist.get_absolute_url %}
-                        <a
-                            href="https://twitter.com/intent/tweet?text={{ playlist.title|urlencode }}&url={{ host|urlencode }}{{ path|urlencode }}"
-                            target="_blank"
-                            class="btn btn-twitter w-100 mt-4 mt-sm-5"
-                        >
-                            <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
-                        </a>
-                        {% endwith %}
-                    </div>
+                    {% with host=request.scheme|add:'://'|add:request.get_host path=playlist.get_absolute_url %}
+                    <a
+                        href="https://twitter.com/intent/tweet?text={{ playlist.title|urlencode }}&url={{ host|urlencode }}{{ path|urlencode }}"
+                        target="_blank"
+                        class="btn btn-twitter w-100 mt-5"
+                    >
+                        <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
+                    </a>
+                    {% endwith %}
                 </div>
                 <div class="col-md-6 offset-md-3">
                     <a href="{% url 'main:playlist_create' %}" class="btn btn-inline-main w-100 mt-5">{% trans 'Create one more playlist' %}</a>
