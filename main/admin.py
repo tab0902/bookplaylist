@@ -14,6 +14,7 @@ class BookDataInline(AllObjectsForeignKeyMixin, StackedInline):
     model = BookData
     can_delete = False
     show_change_link = True
+    readonly_fields = ('pk', 'created_at', 'updated_at', )
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -41,9 +42,10 @@ class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInli
 
 class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
     model = Book.playlists.through
-    can_delete = True
+    can_delete = False
     show_change_link = False
-    exclude = ('deleted_at', 'description',)
+    fields = ('playlist', 'created_at', )
+    readonly_fields = ('created_at', )
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -56,6 +58,7 @@ class PlaylistBookStackedInline(StackedInline):
     model = Playlist.books.through
     can_delete = True
     show_change_link = False
+    readonly_fields = ('pk', 'created_at', 'updated_at', )
 
     def get_extra(self, request, obj=None, **kwargs):
         extra = 1

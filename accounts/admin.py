@@ -18,7 +18,7 @@ from bookplaylist.admin import (
 @admin.register(User)
 class UserAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, BaseUserAdmin):
     fieldsets = (
-        (None, {'fields': ('username', 'email', 'twitter_id', 'facebook_id', 'password', )}),
+        (None, {'fields': ('pk', 'username', 'email', 'twitter_id', 'facebook_id', 'password', )}),
         (_('Personal info'), {'fields': ('comment', 'last_name', 'first_name', 'hopes_newsletter', )}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', ),
@@ -31,6 +31,7 @@ class UserAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, BaseUserAdmin):
             'fields': ('username', 'email', 'password1', 'password2', ),
         }),
     )
+    readonly_fields = ('pk', )
     form = UserChangeForm
     add_form = UserCreationForm
     list_display = ('username', 'email', 'last_login', 'date_joined', 'is_staff', 'is_active', )
