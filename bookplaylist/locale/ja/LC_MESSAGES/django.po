@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-25 13:45+0900\n"
+"POT-Creation-Date: 2019-11-25 15:43+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -75,87 +75,87 @@ msgstr "正しいメールアドレスを入力してください"
 msgid "Email"
 msgstr ""
 
-#: accounts/models.py:74
+#: accounts/models/base.py:24
 msgid "username"
 msgstr ""
 
-#: accounts/models.py:79
+#: accounts/models/base.py:29
 msgid "Required. 150 characters or fewer. Letters, digits and _ only."
 msgstr ""
 "この項目は必須です。半角アルファベット、半角数字、アンダーバーで150文字以下に"
 "してください。"
 
-#: accounts/models.py:82
+#: accounts/models/base.py:32
 msgid "A user with that username already exists."
 msgstr ""
 
-#: accounts/models.py:86
+#: accounts/models/base.py:36
 msgid "email address"
 msgstr ""
 
-#: accounts/models.py:90
+#: accounts/models/base.py:40
 msgid "Required. Enter a valid email address."
 msgstr "この項目は必須です。有効なメールアドレスを入力してください。"
 
-#: accounts/models.py:92
+#: accounts/models/base.py:42
 msgid "A user with that email address already exists."
 msgstr "同じメールアドレスが既に登録済みです。"
 
-#: accounts/models.py:95
+#: accounts/models/base.py:45
 msgid "first name"
 msgstr ""
 
-#: accounts/models.py:96
+#: accounts/models/base.py:46
 msgid "last name"
 msgstr ""
 
-#: accounts/models.py:98
+#: accounts/models/base.py:48
 msgid "staff status"
 msgstr ""
 
-#: accounts/models.py:100
+#: accounts/models/base.py:50
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: accounts/models.py:103
+#: accounts/models/base.py:53
 msgid "active"
 msgstr ""
 
-#: accounts/models.py:106
+#: accounts/models/base.py:56
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: accounts/models.py:110
+#: accounts/models/base.py:60
 msgid "date joined"
 msgstr "登録日時"
 
-#: accounts/models.py:111
+#: accounts/models/base.py:61
 msgid "date verified"
 msgstr "認証日時"
 
-#: accounts/models.py:112
+#: accounts/models/base.py:62
 msgid "comment"
 msgstr "自己紹介"
 
-#: accounts/models.py:113
+#: accounts/models/base.py:63
 msgid "Twitter ID"
 msgstr "ツイッターID"
 
-#: accounts/models.py:114
+#: accounts/models/base.py:64
 msgid "Facebook ID"
 msgstr "フェイスブックID"
 
-#: accounts/models.py:115
+#: accounts/models/base.py:65
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models.py:128 main/models.py:193
+#: accounts/models/base.py:78 main/models/base.py:140
 msgid "user"
 msgstr ""
 
-#: accounts/models.py:129
+#: accounts/models/base.py:79
 msgid "users"
 msgstr ""
 
@@ -508,15 +508,15 @@ msgstr "他のユーザーのプロフィールを編集することはできま
 msgid "Comment updated successfully."
 msgstr "プロフィールを更新しました。"
 
-#: bookplaylist/models.py:45
+#: bookplaylist/models/base.py:17
 msgid "date created"
 msgstr "作成日時"
 
-#: bookplaylist/models.py:46
+#: bookplaylist/models/base.py:18
 msgid "date updated"
 msgstr "更新日時"
 
-#: bookplaylist/models.py:47
+#: bookplaylist/models/base.py:19
 msgid "date deleted"
 msgstr "削除日時"
 
@@ -654,111 +654,112 @@ msgstr "本文"
 msgid "Guest user"
 msgstr "ゲストユーザー"
 
-#: main/models.py:19
+#: main/models/base.py:22
 msgid "theme name"
 msgstr "テーマ名"
 
-#: main/models.py:20 main/models.py:45
+#: main/models/base.py:23 main/models/base.py:42
 msgid "slug"
 msgstr "スラッグ"
 
-#: main/models.py:21
+#: main/models/base.py:24
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models.py:22 main/models.py:48 main/models.py:196 main/models.py:265
+#: main/models/base.py:25 main/models/base.py:45 main/models/base.py:143
+#: main/models/base.py:206
 msgid "description"
 msgstr "概要"
 
-#: main/models.py:27 main/models.py:194
+#: main/models/base.py:30 main/models/base.py:141
 msgid "theme"
 msgstr "テーマ"
 
-#: main/models.py:28
+#: main/models/base.py:31
 msgid "themes"
 msgstr "テーマ"
 
-#: main/models.py:44
+#: main/models/base.py:41
 msgid "provider name"
 msgstr "プロバイダー名"
 
-#: main/models.py:46
+#: main/models/base.py:43
 msgid "endpoint"
 msgstr "エンドポイント"
 
-#: main/models.py:47
+#: main/models/base.py:44
 msgid "priority"
 msgstr "優先順位"
 
-#: main/models.py:49
+#: main/models/base.py:46
 msgid "available"
 msgstr "利用可能"
 
-#: main/models.py:56 main/models.py:115
+#: main/models/base.py:53 main/models/base.py:100
 msgid "provider"
 msgstr "書籍データ提供元"
 
-#: main/models.py:57
+#: main/models/base.py:54
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models.py:74 main/models.py:207
+#: main/models/base.py:65 main/models/base.py:154
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models.py:77
+#: main/models/base.py:68
 msgid "ISBN"
 msgstr ""
 
-#: main/models.py:87 main/models.py:108 main/models.py:263
+#: main/models/base.py:78 main/models/base.py:93 main/models/base.py:204
 msgid "book"
 msgstr "書籍"
 
-#: main/models.py:88 main/models.py:191
+#: main/models/base.py:79 main/models/base.py:138
 msgid "books"
 msgstr "書籍"
 
-#: main/models.py:117 main/models.py:195
+#: main/models/base.py:102 main/models/base.py:142
 msgid "title"
 msgstr "タイトル"
 
-#: main/models.py:118
+#: main/models/base.py:103
 msgid "author"
 msgstr "著者"
 
-#: main/models.py:119
+#: main/models/base.py:104
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models.py:120
+#: main/models/base.py:105
 msgid "cover"
 msgstr "書影"
 
-#: main/models.py:121
+#: main/models/base.py:106
 msgid "Affiliate URL"
 msgstr "アフィリエイトURL"
 
-#: main/models.py:131 main/models.py:132
+#: main/models/base.py:116 main/models/base.py:117
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models.py:197
+#: main/models/base.py:144
 msgid "Open Graph image"
 msgstr "OGP画像"
 
-#: main/models.py:198
+#: main/models/base.py:145
 msgid "published"
 msgstr "公開"
 
-#: main/models.py:206 main/models.py:254
+#: main/models/base.py:153 main/models/base.py:195
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models.py:271
+#: main/models/base.py:212
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models.py:272
+#: main/models/base.py:213
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 

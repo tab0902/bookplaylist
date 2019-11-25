@@ -1,43 +1,15 @@
 import os
-import re
 import uuid
 
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from .manager import (
+    AllObjectsManager, Manager
+)
+
 # Create your models here.
-
-
-def camel_to_snake(string):
-    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', re.sub('(.)([A-Z][a-z]+)', r'\1_\2', string)).lower()
-
-
-class QuerySet(models.QuerySet):
-
-    def delete(self):
-        return super().update(updated_at=timezone.now(), deleted_at=timezone.now())
-
-    def hard_delete(self):
-        return super().delete()
-
-
-class AllObjectsQuerySet(QuerySet):
-
-    def restore(self):
-        return super().update(updated_at=timezone.now(), deleted_at=None)
-
-    def only_deleted(self):
-        return self.filter(deleted_at__isnull=False)
-
-
-class Manager(models.Manager.from_queryset(QuerySet)):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(deleted_at__isnull=True)
-
-
-AllObjectsManager = models.Manager.from_queryset(AllObjectsQuerySet)
 
 
 class BaseModel(models.Model):
@@ -79,30 +51,3 @@ class FileModel(BaseModel):
         filename = str(self.pk) + os.path.splitext(filename)[-1]
         path = os.path.join(directory, filename)
         return path
-
-
-class NullFieldMixin:
-
-    def get_prep_value(self, value):
-        value = super().get_prep_value(value) if value else None
-        return value
-
-
-class NullCharField(NullFieldMixin, models.CharField):
-    pass
-
-
-class NullEmailField(NullFieldMixin, models.EmailField):
-    pass
-
-
-class NullSlugField(NullFieldMixin, models.SlugField):
-    pass
-
-
-class NullTextField(NullFieldMixin, models.TextField):
-    pass
-
-
-class NullURLField(NullFieldMixin, models.URLField):
-    pass
