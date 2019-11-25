@@ -12,16 +12,16 @@ UserModel = get_user_model()
 
 
 class TabularInline(admin.TabularInline):
-    exclude = ('deleted_at', )
+    exclude = ('deleted_at',)
 
 
 class StackedInline(admin.StackedInline):
-    exclude = ('deleted_at', )
+    exclude = ('deleted_at',)
 
 
 class Admin(admin.ModelAdmin):
-    exclude = ('deleted_at', )
-    readonly_fields = ('pk', 'created_at', 'updated_at', )
+    exclude = ('deleted_at',)
+    readonly_fields = ('pk', 'created_at', 'updated_at',)
 
 
 class SlimTabularInline(TabularInline):
