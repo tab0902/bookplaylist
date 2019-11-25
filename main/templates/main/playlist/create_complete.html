@@ -13,7 +13,7 @@
         <h2 class="text-center mt-4 mt-md-5">{% trans 'Playlist created successfully!' %}</h2>
         <div class="mt-4 box-shadow border-radius">
             <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
-                <img src="{{ playlist.card.url }}" width="100%">
+                <img src="{{ playlist.og_image.url }}" width="100%">
             </a>
         </div>
             <div class="row">

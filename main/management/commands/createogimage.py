@@ -5,23 +5,23 @@ from main.models import Playlist
 
 
 class Command(BaseCommand):
-    help = 'Create OGP image card of Playlist.'
+    help = 'Create Open Graph image of Playlist.'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--override', '--force', '-f',
             action='store_true',
-            help='Override existing cards. Default is False',
+            help='Override existing images. Default is False',
         )
 
     def handle(self, *args, **options):
         if options['override']:
             playlists = Playlist.objects.all()
         else:
-            playlists = Playlist.objects.filter(Q(card=None) | Q(card=''))
+            playlists = Playlist.objects.filter(Q(og_image=None) | Q(og_image=''))
         n = playlists.count()
         if not n:
-            print('No data to create the card.')
+            print('No data to create the image.')
         for i, playlist in enumerate(playlists):
-            playlist.save_card()
+            playlist.save_og_image()
             print('{i}/{n} Done. | title: {title}'.format(i=str(i+1).zfill(len(str(n))), n=n, title=playlist.title))

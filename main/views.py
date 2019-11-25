@@ -217,8 +217,8 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
         instance.save()
         formset.save()
 
-        # save Playlist.card
-        instance.save_card()
+        # save Playlist.og_image
+        instance.save_og_image()
 
         # clear session and redirect
         for key in (SESSION_KEY_FORM, SESSION_KEY_BOOK,):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-25 12:57+0900\n"
+"POT-Creation-Date: 2019-11-25 13:30+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -743,8 +743,8 @@ msgid "book data"
 msgstr "書籍データ"
 
 #: main/models.py:197
-msgid "card"
-msgstr "カード"
+msgid "Open Graph image"
+msgstr "OGP画像"
 
 #: main/models.py:198
 msgid "published"
@@ -908,10 +908,6 @@ msgstr "\"%(q)s\" が含まれる書籍一覧"
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlist/card/layouts/title.html:9
-msgid "Let's create book playlist and share it."
-msgstr "本のプレイリストを作ってシェアしよう。"
-
 #: main/templates/main/playlist/create_complete.html:6
 #: main/templates/main/playlist/create_complete.html:13
 msgid "Playlist created successfully!"
@@ -1035,6 +1031,10 @@ msgstr "\"%(q)s\" が含まれるリスト一覧"
 #, python-format
 msgid "Playlists with #%(theme)s"
 msgstr "#%(theme)s のプレイリスト"
+
+#: main/templates/main/playlist/og_image/layouts/title.html:9
+msgid "Let's create book playlist and share it."
+msgstr "本のプレイリストを作ってシェアしよう。"
 
 #: main/templates/main/playlist/update.html:6
 #: main/templates/main/playlist/update.html:15
