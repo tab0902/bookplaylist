@@ -21,6 +21,7 @@ class StackedInline(admin.StackedInline):
 
 class Admin(admin.ModelAdmin):
     exclude = ('deleted_at',)
+    readonly_fields = ('pk', 'created_at', 'updated_at',)
 
 
 class SlimTabularInline(TabularInline):
