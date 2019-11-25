@@ -24,14 +24,19 @@ class BookDataInline(AllObjectsForeignKeyMixin, StackedInline):
 
 class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInline):
     model = Playlist
-    can_delete = True
+    can_delete = False
     show_change_link = True
+    fields = ('title', 'theme', 'user', 'og_image', 'created_at', 'is_published', )
+    readonly_fields = ('created_at', )
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
         if obj:
             max_num = obj.playlist_set.count()
         return max_num
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
 
 class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):

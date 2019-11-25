@@ -39,8 +39,3 @@ class UserAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, BaseUserAdmin):
     ordering = ('-last_login', )
     filter_horizontal = ('groups', 'user_permissions', )
     inlines = [PlaylistInline]
-
-    def change_view(self, request, object_id, form_url='', extra_context=None):
-        if not self.get_object(request, object_id).is_active:
-            self.inlines = []
-        return super().change_view(request, object_id, form_url, extra_context=extra_context)
