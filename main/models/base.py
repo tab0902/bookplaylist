@@ -9,7 +9,10 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
-    AllObjectsManager, AllObjectsQuerySet, BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, QuerySet,
+    BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
+)
+from .manager import (
+    AllPlaylistManager, BookDataManager, BookManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
 )
 
 # Create your models here.
@@ -34,12 +37,6 @@ class Theme(BaseModel):
         return '%s' % self.name
 
 
-class ProviderManager(Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(is_available=True)
-
-
 class Provider(BaseModel):
     name = NullCharField(_('provider name'), max_length=50)
     slug = NullSlugField(_('slug'), unique=True)
@@ -58,12 +55,6 @@ class Provider(BaseModel):
 
     def __str__(self):
         return '%s' % self.name
-
-
-class BookManager(Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().prefetch_related('book_data_set')
 
 
 class Book(BaseModel):
@@ -89,12 +80,6 @@ class Book(BaseModel):
 
     def __str__(self):
         return '%s' % (self.book_data_set.first() or self.isbn)
-
-
-class BookDataManager(Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().select_related('provider')
 
 
 class BookData(BaseModel):
@@ -139,44 +124,6 @@ class BookData(BaseModel):
 
     def __str__(self):
         return '%s' % self.title
-
-
-class PlaylistQuerySetMixin:
-
-    def hard_delete(self):
-        for playlist in self.all():
-            playlist.og_image.delete(save=False)
-        return super().hard_delete()
-
-
-class PlaylistQuerySet(PlaylistQuerySetMixin, QuerySet):
-    pass
-
-
-class AllPlaylistQuerySet(PlaylistQuerySetMixin, AllObjectsQuerySet):
-    pass
-
-
-class BasePlaylistManager(Manager.from_queryset(PlaylistQuerySet)):
-
-    def get_queryset(self):
-        return super().get_queryset().prefetch_related('playlist_book_set')
-
-
-class PlaylistManager(BasePlaylistManager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(is_published=True, user__is_active=True, user__deleted_at__isnull=True)
-
-
-class PlaylistWithUnpublishedManager(BasePlaylistManager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(user__deleted_at__isnull=True)
-
-
-class AllPlaylistManager(AllObjectsManager.from_queryset(AllPlaylistQuerySet)):
-    pass
 
 
 class Playlist(FileModel):
@@ -237,12 +184,6 @@ class Playlist(FileModel):
         }
         img = imgkit.from_string(template.render(context), False, options=options)
         self.og_image.save('{}.jpg'.format(str(self.pk)), ContentFile(img), save=save)
-
-
-class PlaylistBookManager(Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().select_related('book').prefetch_related('book__book_data_set')
 
 
 class PlaylistBook(BaseModel):
