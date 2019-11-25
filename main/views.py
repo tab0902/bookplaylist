@@ -68,7 +68,7 @@ class IndexView(PlaylistSearchFormView):
 class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
     context_object_name = 'playlists'
     model = Playlist
-    template_name = 'main/playlist/list.html'
+    template_name = 'main/playlists/list.html'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
@@ -112,7 +112,7 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
 
 class PlaylistDetailView(generic.DetailView):
     model = Playlist
-    template_name = 'main/playlist/detail.html'
+    template_name = 'main/playlists/detail.html'
 
     def get_queryset(self):
         return super().get_queryset().select_related('theme', 'user')
@@ -237,7 +237,7 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
 class PlaylistCreateView(BasePlaylistFormView):
     mode = MODE_CREATE
     success_message = None
-    template_name = 'main/playlist/create.html'
+    template_name = 'main/playlists/create.html'
 
     def get(self, request, *args, **kwargs):
         self.object = None
@@ -258,7 +258,7 @@ class PlaylistCreateView(BasePlaylistFormView):
 class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
     mode = MODE_UPDATE
     success_message = _('Playlist updated successfully.')
-    template_name = 'main/playlist/update.html'
+    template_name = 'main/playlists/update.html'
 
     def get(self, request, *args, **kwargs):
         if not hasattr(self, 'object'):
@@ -290,7 +290,7 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
 @login_required
 class BasePlaylistBookView(SearchFormView):
     form_class = BookSearchForm
-    template_name = 'main/playlist/book.html'
+    template_name = 'main/playlists/book.html'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -365,7 +365,7 @@ class BookSearchView(APIMixin, generic.View):
             context['params'] = url_params
         return render(
             self.request,
-            'main/playlist/layouts/book-list.html',
+            'main/playlists/layouts/book-list.html',
             context
         )
 
@@ -443,14 +443,14 @@ class PlaylistUpdateBookStoreView(OwnerOnlyMixin, BasePlaylistBookStoreView):
 @login_required
 class PlaylistCreateCompleteView(OwnerOnlyMixin, generic.DetailView):
     model = Playlist
-    template_name = 'main/playlist/create_complete.html'
+    template_name = 'main/playlists/create_complete.html'
 
 
 @login_required
 class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
     model = Playlist
     success_url = reverse_lazy('accounts:index')
-    template_name = 'main/playlist/delete.html'
+    template_name = 'main/playlists/delete.html'
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, _('Playlist deleted successfully.'))

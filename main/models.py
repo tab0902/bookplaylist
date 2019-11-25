@@ -225,9 +225,9 @@ class Playlist(FileModel):
         # save self.og_image
         book_count = self.playlist_book_set.count()
         if book_count < 6:
-            template = get_template('main/playlist/og_image/{}.html'.format(book_count))
+            template = get_template('main/playlists/og_image/{}.html'.format(book_count))
         else:
-            template = get_template('main/playlist/og_image/6.html')
+            template = get_template('main/playlists/og_image/6.html')
         context = {'playlist': self}
         options = {
             'encoding': 'UTF-8',

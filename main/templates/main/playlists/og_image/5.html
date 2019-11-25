@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+{% include 'main/playlists/og_image/layouts/title.html' with size='small' %}
+<div>
+    {% include 'main/playlists/og_image/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.1.book.data.large_cover %}
+    {% include 'main/playlists/og_image/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.2.book.data.large_cover %}
+    {% include 'main/playlists/og_image/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.3.book.data.large_cover %}
+</div>
+<div>
+    {% include 'main/playlists/og_image/layouts/cover.html' with size='two-third' cover=playlist.playlist_book_set.all.0.book.data.large_cover %}
+    <div class="d-flex">
+        {% include 'main/playlists/og_image/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.4.book.data.large_cover %}
+        {% include 'main/playlists/og_image/layouts/chevron.html' with size='one-third' %}
+    </div>
+</div>
+
+{% endblock %}

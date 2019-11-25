@@ -75,7 +75,7 @@ class FileModel(BaseModel):
         abstract = True
 
     def _get_file_path(self, filename, field, filetype='img'):
-        directory = os.path.join(filetype, camel_to_snake(self.__class__.__name__), field)
+        directory = os.path.join(filetype, self.__class__._meta.db_table, field)
         filename = str(self.pk) + os.path.splitext(filename)[-1]
         path = os.path.join(directory, filename)
         return path

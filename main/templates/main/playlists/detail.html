@@ -120,7 +120,7 @@
             {% trans 'These are also recommended' %}
             {% endif %}
         </h2>
-        {% include 'main/playlist/layouts/list-widget-small.html' with playlists=other_playlists %}
+        {% include 'main/playlists/layouts/list-widget-small.html' with playlists=other_playlists %}
         <a href="{% url 'main:playlist' %}{% if playlist.theme %}?theme={{ playlist.theme.slug }}{% endif %}" class="btn btn-outline-sub w-100 d-md-none my-3">
             {% blocktrans %}Show all{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
         </a>
@@ -135,7 +135,7 @@
 
     <section id="playlist-detail-lets-create">
         <div class="mt-5">
-            {% include 'main/playlist/layouts/lets-create-playlist.html' with theme=playlist.theme %}
+            {% include 'main/playlists/layouts/lets-create-playlist.html' with theme=playlist.theme %}
         </div>
     </section>
 </div>

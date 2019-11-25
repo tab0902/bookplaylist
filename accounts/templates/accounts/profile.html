@@ -61,7 +61,7 @@
     <section id="profile-playlist-list">
         <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
         {% trans "This user have no playlist." as text %}
-        {% include 'main/playlist/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
+        {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
     </section>
 </div>
 
