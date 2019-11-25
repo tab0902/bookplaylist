@@ -64,7 +64,7 @@ class ThemeAdmin(Admin):
     list_display = ('name', 'slug', 'sequence', 'created_at', )
     list_filter = ('created_at', 'updated_at', )
     search_fields = ('name', 'slug', 'description', )
-    inlines = (PlaylistInline,)
+    inlines = [PlaylistInline]
 
 
 @admin.register(Provider)
@@ -79,7 +79,7 @@ class BookAdmin(Admin):
     list_display = ('__str__', 'isbn', 'created_at', )
     list_filter = ('created_at', 'updated_at', )
     search_fields = ('isbn', 'book_data__title', 'book_data__author', 'book_data__publisher', 'book_data__cover', 'book_data__affiliate_url', )
-    inlines = (BookDataInline, PlaylistBookTabularInline,)
+    inlines = [BookDataInline, PlaylistBookTabularInline]
 
 
 @admin.register(Playlist)
@@ -87,4 +87,4 @@ class PlaylistAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, Admin):
     list_display = ('title', 'user', 'theme', 'created_at', 'is_published', )
     list_filter = ('theme__name', 'is_published', 'created_at', 'updated_at', )
     search_fields = ('title', 'description', 'user__username', 'theme__name', 'books__isbn', 'books__book_data__title', 'books__book_data__author', 'books__book_data__publisher', )
-    inlines = (PlaylistBookStackedInline,)
+    inlines = [PlaylistBookStackedInline]
