@@ -6,6 +6,13 @@
 {% blocktrans %}{{ user }}'s profile{% endblocktrans %} | BooxMix
 {% endblock %}
 
+{% block description %}
+{% if user.comment %}
+{{ user.comment }}
+{% else %}
+{% endif %}
+{% endblock %}
+
 {% block content %}
 
 <div class="container">

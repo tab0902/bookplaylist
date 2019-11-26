@@ -6,6 +6,14 @@
 {{ playlist.title }} | BooxMix
 {% endblock %}
 
+{% block description %}
+{% if playlist.description %}
+{{ playlist.description }}
+{% else %}
+BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。
+{% endif %}
+{% endblock %}
+
 {% block og %}
 <meta property="og:title" content="{{ playlist.title }}" />
 <meta property="og:type" content="article" />

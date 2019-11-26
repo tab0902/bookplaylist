@@ -11,6 +11,13 @@
  | BooxMix
 {% endblock %}
 
+{% block description %}
+{% if theme and theme.description %}
+{{ theme.description }}
+{% else %}
+{% endif %}
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
