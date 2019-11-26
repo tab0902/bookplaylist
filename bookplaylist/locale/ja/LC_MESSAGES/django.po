@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-26 15:36+0900\n"
+"POT-Creation-Date: 2019-11-26 15:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -1020,16 +1020,16 @@ msgid "Complete"
 msgstr "完成"
 
 #: main/templates/main/playlists/list.html:9
-#: main/templates/main/playlists/list.html:39
+#: main/templates/main/playlists/list.html:38
 msgid "All Playlists"
 msgstr "プレイリスト一覧"
 
-#: main/templates/main/playlists/list.html:35
+#: main/templates/main/playlists/list.html:34
 #, python-format
 msgid "Playlists related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれるリスト一覧"
 
-#: main/templates/main/playlists/list.html:37
+#: main/templates/main/playlists/list.html:36
 #, python-format
 msgid "Playlists with #%(theme)s"
 msgstr "#%(theme)s のプレイリスト"
