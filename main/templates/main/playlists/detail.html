@@ -6,7 +6,7 @@
 {{ playlist.title }} | BooxMix
 {% endblock %}
 
-{% block ogp %}
+{% block og %}
 <meta property="og:title" content="{{ playlist.title }}" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="{{ request.build_absolute_uri }}" />
@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-md-9">
         {% endif %}
-                <p class="mt-4">{{ playlist.description | default_if_none:'' | linebreaksbr }}</p>
+                <p class="mt-4">{{ playlist.description | default_if_none:'' | linebreaksbr | urlize }}</p>
         {% if request.user == playlist.user %}
             </div>
             <div class="col-md-3">
@@ -78,7 +78,7 @@
                 <div class="col-7 col-sm-6 col-lg-7 pl-0">
                     <h2 class="text-xl">{{ forloop.counter }}. {{ playlist_book.book.data.title | default_if_none:'' }}</h2>
                     <span>{{ playlist_book.book.data.author | default_if_none:'' }}</span>
-                    <p class="d-none d-sm-block mt-4">{{ playlist_book.description | default_if_none:'' | linebreaksbr }}</p>
+                    <p class="d-none d-sm-block mt-4">{{ playlist_book.description | default_if_none:'' | linebreaksbr | urlize }}</p>
                     {% if playlist_book.book.data.affiliate_url %}
                     <a href="{{ playlist_book.book.data.affiliate_url | default_if_none:'' }}" target=”_blank” class="btn btn-main d-sm-none w-100 mt-4 mt-sm-0">
                         {% trans 'Show more' %}
@@ -93,7 +93,7 @@
                 </div>
                 {% endif %}
             </div>
-            <p class="mt-3 d-sm-none">{{ playlist_book.description | default_if_none:'' | linebreaksbr }}</p>
+            <p class="mt-3 d-sm-none">{{ playlist_book.description | default_if_none:'' | linebreaksbr | urlize }}</p>
         </div>
         {% endfor %}
     </section>

@@ -26,7 +26,7 @@
         </div>
 
         <div id="profile-info">
-            <p class="mt-2 mt-md-4">{{ user.comment|default_if_none:''|linebreaksbr }}</p>
+            <p class="mt-2 mt-md-4">{{ user.comment | default_if_none:'' | linebreaksbr | urlize }}</p>
         </div>
 
         {% if user == request.user %}

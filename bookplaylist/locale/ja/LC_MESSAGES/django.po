@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-25 15:43+0900\n"
+"POT-Creation-Date: 2019-11-26 00:53+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -606,7 +606,7 @@ msgstr "プレイリストのタイトル"
 
 #: main/forms.py:40
 msgid "Free theme"
-msgstr "テーマ自由"
+msgstr "なんでも"
 
 #: main/forms.py:73 main/templates/main/playlists/delete.html:19
 msgid "Delete"
