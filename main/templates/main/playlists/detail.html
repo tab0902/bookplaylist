@@ -2,34 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{{ playlist.title }}
-{% endblock %}
-
-{% block description %}
-{% if playlist.description %}
-{{ playlist.description }}
-{% else %}
-BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。
-{% endif %}
-{% endblock %}
-
-{% block og %}
-<meta property="og:title" content="{{ playlist.title }}" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="{{ request.build_absolute_uri }}" />
-<meta property="og:image" content="{{ playlist.og_image.url }}" />
-<meta property="og:description" content="{{ playlist.description | truncatechars:100 }}" />
-<meta property="og:site_name" content="BooxMix" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@BooxMix" />
-{% endblock %}
-
 {% block content %}
 
 <div class="container">
     <section id="playlist-detail-overview">
-        <h1 class="mt-4 mt-md-5 playlist-detail-title">{{ playlist.title | default_if_none:'' }}</h1>
+        <h1 class="mt-4 mt-md-5 playlist-detail-title">{{ page_title }}</h1>
         <a href="{% url 'accounts:profile' playlist.user.username %}" class="color-gray text-xl mt-3">
             {{ playlist.user.username | default_if_none:'' }}
         </a>
@@ -50,7 +27,7 @@ BooxMixのプレイリスト詳細画面では、おすすめの本が詰まっ�
         <div class="row mt-4{% if request.user == playlist.user %} mt-md-0{% endif %}">
             <div class="col-2 col-md-1 offset-3 offset-md-9 text-center">
                 <a
-                    href="https://twitter.com/intent/tweet?text={{ playlist.title }}&url={{ request.build_absolute_uri|urlencode }}"
+                    href="https://twitter.com/intent/tweet?text={{ playlist.title }}&url={{ og_url|urlencode }}"
                     target="_blank"
                 >
                     <i class="fab fa-twitter fa-twitter-color fa-2x"></i>

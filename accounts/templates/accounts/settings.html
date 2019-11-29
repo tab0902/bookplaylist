@@ -2,15 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Settings' %}
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="settings">
-        <h2 class="my-4 my-md-5">{% trans 'Settings' %}</h2>
+        <h2 class="my-4 my-md-5">{{ page_title }}</h2>
         <form action="" method="post">{% csrf_token %}
             {% for field in form %}
             <div class="row mt-2 mt-md-3">

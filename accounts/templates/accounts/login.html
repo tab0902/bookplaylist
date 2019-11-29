@@ -2,21 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Log in' %}
-{% endblock %}
-
-{% block description %}
-BooxMixは、気軽に本を複数冊まとめてプレイリストを作成し、SNSでシェアできるウェブサービスです。誰もが本屋の書店員さんのようにおすすめ本を選びTwitterで共有できます。ログインしてプレイリストを作り、友達に共有しましょう。
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="login">
         <div class="row my-4 mt-md-5">
             <div class="col-6">
-                <h2>{% trans 'Log in' %}</h2>
+                <h2>{{ page_title }}</h2>
             </div>
             <div class="col-6">
                 <a href="{% url 'accounts:signup' %}" class="btn btn-inline-sub float-right">{% trans 'Sign up' %}</a>

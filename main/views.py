@@ -25,7 +25,7 @@ from .models import (
 )
 from bookplaylist.utils import APIMixin
 from bookplaylist.views import (
-    OwnerOnlyMixin, SearchFormView, csrf_protect, login_required,
+    OwnerOnlyMixin, SearchFormView, TemplateContextMixin, csrf_protect, login_required,
 )
 
 # Create your views here.
@@ -46,7 +46,8 @@ class PlaylistSearchFormView(SearchFormView):
         return super().form_valid(form)
 
 
-class IndexView(PlaylistSearchFormView):
+class IndexView(TemplateContextMixin, PlaylistSearchFormView):
+    og_type = 'website'
     template_name = 'main/index.html'
 
     def get_context_data(self, **kwargs):
@@ -65,7 +66,7 @@ class IndexView(PlaylistSearchFormView):
         return context
 
 
-class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
+class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSearchFormView):
     context_object_name = 'playlists'
     model = Playlist
     template_name = 'main/playlists/list.html'
@@ -105,12 +106,18 @@ class PlaylistView(generic.list.BaseListView, PlaylistSearchFormView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        theme = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
+        self.page_title = theme.name if theme else _('All Playlists')
+        self.page_description = \
+            theme.description or \
+            ''
+        self.og_url =  self.request.build_absolute_uri()
         context = super().get_context_data(**kwargs)
-        context['theme'] = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
+        context['theme'] = theme
         return context
 
 
-class PlaylistDetailView(generic.DetailView):
+class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
     model = Playlist
     template_name = 'main/playlists/detail.html'
 
@@ -118,14 +125,20 @@ class PlaylistDetailView(generic.DetailView):
         return super().get_queryset().select_related('theme', 'user')
 
     def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+        self.page_title = self.object.title
+        self.page_description = \
+        self.object.description or \
+        'BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。'
+        self.og_url =  self.request.build_absolute_uri()
+        self.og_image =  self.object.og_image.url
         conditions = {'playlist_book__count__gte': 2}
         if self.object.theme:
             conditions['theme'] = self.object.theme
+        context = super().get_context_data(*args, **kwargs)
         context['other_playlists'] = Playlist.objects \
-            .annotate(Count('playlist_book')) \
-            .exclude(pk=self.object.pk) \
-            .filter(**conditions)[:4]
+                .annotate(Count('playlist_book')) \
+                .exclude(pk=self.object.pk) \
+                .filter(**conditions)[:4]
         return context
 
 
@@ -161,8 +174,10 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
         form_data = self.request.session.get(SESSION_KEY_FORM)
         book_data = self.request.session.get(SESSION_KEY_BOOK)
         formset = kwargs.get('formset') or PlaylistBookFormSet(form_data, instance=self.object, form_kwargs={'request': self.request})
-        context['formset'] = formset
-        context['book_formset'] = zip(formset or [], book_data or [])
+        context.update({
+            'formset': formset,
+            'book_formset': zip(formset or [], book_data or []),
+        })
         return context
 
     def form_valid(self, form):
@@ -234,8 +249,11 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
 
 
 @login_required
-class PlaylistCreateView(BasePlaylistFormView):
+class PlaylistCreateView(TemplateContextMixin, BasePlaylistFormView):
     mode = MODE_CREATE
+    page_title = _('Create book playlist')
+    page_description = \
+        'BooxMixのプレイリスト作成画面では、あなたがおすすめしたい本を追加して、本のプレイリストを作成することができます。本の追加もコメントも簡単でシンプルにできます。完成したらTwitterで友達に共有しましょう。'
     success_message = None
     template_name = 'main/playlists/create.html'
 
@@ -255,8 +273,9 @@ class PlaylistCreateView(BasePlaylistFormView):
 
 
 @login_required
-class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
+class PlaylistUpdateView(TemplateContextMixin, OwnerOnlyMixin, BasePlaylistFormView):
     mode = MODE_UPDATE
+    page_title = _('Update playlist')
     success_message = _('Playlist updated successfully.')
     template_name = 'main/playlists/update.html'
 
@@ -286,10 +305,16 @@ class PlaylistUpdateView(OwnerOnlyMixin, BasePlaylistFormView):
         self.success_url = reverse_lazy('main:playlist_detail', kwargs=self.kwargs)
         return super().get_success_url()
 
+    def get_context_data(self, **kwargs):
+        self.og_url = self.get_full_absolute_url(self.object)
+        self.og_image = self.object.og_image.url
+        return super().get_context_data(**kwargs)
+
 
 @login_required
-class BasePlaylistBookView(SearchFormView):
+class BasePlaylistBookView(TemplateContextMixin, SearchFormView):
     form_class = BookSearchForm
+    page_title = _('Search book to add')
     template_name = 'main/playlists/book.html'
 
     def get_form_kwargs(self):
@@ -441,14 +466,23 @@ class PlaylistUpdateBookStoreView(OwnerOnlyMixin, BasePlaylistBookStoreView):
 
 
 @login_required
-class PlaylistCreateCompleteView(OwnerOnlyMixin, generic.DetailView):
+class PlaylistCreateCompleteView(TemplateContextMixin, OwnerOnlyMixin, generic.DetailView):
     model = Playlist
+    page_title = _('Playlist created successfully!')
+    page_description = \
+        'BooxMixのプレイリスト完成画面では、作成したプレイリストを気軽にTwitterでシェアすることができます。あなたの知識や経験を本を通して友達に共有しましょう。BooxMixは、気軽に本を複数冊まとめてプレイリストを作成し、SNSでシェアできるウェブサービスです。'
     template_name = 'main/playlists/create_complete.html'
+
+    def get_context_data(self, **kwargs):
+        self.og_url = self.get_full_absolute_url(self.object)
+        self.og_image = self.object.og_image.url
+        return super().get_context_data(**kwargs)
 
 
 @login_required
-class PlaylistDeleteView(OwnerOnlyMixin, generic.DeleteView):
+class PlaylistDeleteView(TemplateContextMixin, OwnerOnlyMixin, generic.DeleteView):
     model = Playlist
+    page_title = _('Delete playlist')
     success_url = reverse_lazy('accounts:index')
     template_name = 'main/playlists/delete.html'
 
@@ -466,20 +500,24 @@ class CreateOrSignupView(generic.RedirectView):
         return super().get(request, *args, **kwargs)
 
 
-class TermsView(generic.TemplateView):
+class TermsView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('Terms')
     template_name = 'main/terms.html'
 
 
-class PrivacyView(generic.TemplateView):
+class PrivacyView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('Privacy policy')
     template_name = 'main/privacy.html'
 
 
-class AboutView(generic.TemplateView):
+class AboutView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('About BooxMix')
     template_name = 'main/about.html'
 
 
-class ContactView(generic.FormView):
+class ContactView(TemplateContextMixin, generic.FormView):
     form_class = ContactForm
+    page_title = _('Contact')
     success_url = reverse_lazy('main:contact_complete')
     template_name = 'main/contact.html'
 
@@ -497,5 +535,6 @@ class ContactView(generic.FormView):
         return super().form_valid(form)
 
 
-class ContactCompleteView(generic.TemplateView):
+class ContactCompleteView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('We recieve your inquiry')
     template_name = 'main/contact_complete.html'

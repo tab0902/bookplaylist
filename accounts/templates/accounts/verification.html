@@ -2,15 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Verification complete' %}
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="verification">
-        <h2 class="mt-4 mt-md-5">{% trans 'Verification complete' %}</h2>
+        <h2 class="mt-4 mt-md-5">{{ page_title }}</h2>
         <p class="mt-4 mt-md-5">
             {% blocktrans %}Your email has been verified successfully.{% endblocktrans %}<br class="d-sm-none">
             {% blocktrans %}Enjoy using BooxMix.{% endblocktrans %}

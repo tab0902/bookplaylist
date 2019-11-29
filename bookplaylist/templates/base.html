@@ -6,11 +6,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% spaceless %}{% block title %}{% endblock %}{% endspaceless %} | BooxMix</title>
-    <meta name="description" content="{% spaceless %}{% block description %}{% endblock %}{% endspaceless %}">
 
-    {% block og %}
-    {% endblock %}
+    <title>{% spaceless %}{{ page_title }} | BooxMix{% endspaceless %}</title>
+    <meta name="description" content="{% spaceless %}{{ page_description | truncatechars:120 }}{% endspaceless %}">
+
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:type" content="{{ og_type }}" />
+    <meta property="og:url" content="{{ og_url }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:description" content="{{ page_description | truncatechars:120 }}" />
+    <meta property="og:site_name" content="{{ og_site_name }}" />
+    <meta name="twitter:card" content="{{ twitter_card }}" />
+    <meta name="twitter:site" content="{{ twitter_site }}" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />

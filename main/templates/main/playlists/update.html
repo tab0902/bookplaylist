@@ -2,17 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Update playlist' %}
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="playlist-form">
         <div class="row mt-4 mt-md-5">
             <div class="col-sm-8">
-                <h2>{% trans 'Update playlist' %}</h2>
+                <h2>{{ page_title }}</h2>
             </div>
             <div class="col-4 d-none d-sm-block">
                 <a href="{% url 'main:playlist_delete' playlist.pk %}" class="btn btn-inline-sub text-sm float-right">

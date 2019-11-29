@@ -2,19 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Playlist created successfully!' %}
-{% endblock %}
-
-{% block description %}
-BooxMixのプレイリスト完成画面では、作成したプレイリストを気軽にTwitterでシェアすることができます。あなたの知識や経験を本を通して友達に共有しましょう。BooxMixは、気軽に本を複数冊まとめてプレイリストを作成し、SNSでシェアできるウェブサービスです。
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="playlist-create-complete">
-        <h2 class="text-center mt-4 mt-md-5">{% trans 'Playlist created successfully!' %}</h2>
+        <h2 class="text-center mt-4 mt-md-5">{{ page_title }}</h2>
         <div class="mt-4 box-shadow border-radius">
             <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
                 <img src="{{ playlist.og_image.url }}" width="100%">
