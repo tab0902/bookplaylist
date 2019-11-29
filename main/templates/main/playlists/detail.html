@@ -2,6 +2,51 @@
 {% load static %}
 {% load i18n %}
 
+{% block json_ld %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": ["ItemList", "WebPage"],
+    "headline": "{{ page_title }}",
+    "description": "{{ page_description }}",
+    "url": "{{ og_url }}",
+    "image": "{{ og_image }}",
+    "datePublished": "{{ playlist.created_at | date:'Y-n-d\TH:i:s' }}",
+    "dateModified": "{{ playlist.updated_at | date:'Y-n-d\TH:i:s' }}",
+    "itemListOrder": "http://schema.org/ItemListOrderAscending",
+    "numberOfItems": "{{ playlist.playlist_book_set.count }}",
+    "author": {
+        "@type": "Person",
+        "name": "{{ playlist.user.username }}"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "BooxMix"
+    },
+    "itemListElement": [
+        {% for playlist_book in playlist.playlist_book_set.all %}
+        {
+            "@type": "Book",
+            "position": "{{ forloop.counter }}",
+            "isbn": "{{ playlist_book.book.isbnb }}",
+            "name": "{{ playlist_book.book.data.title }}",
+            "image": "{{ playlist_book.book.data.cover }}",
+            "url": "{{ playlist_book.book.data.affiliate_url | default_if_none:playlist_book.book.data.cover }}",
+            "author": {
+                "@type": "Person",
+                "name": "{{ playlist_book.book.data.author }}"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{ playlist_book.book.data.publisher }}"
+            }
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 <div class="container">

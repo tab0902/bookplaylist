@@ -106,11 +106,23 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
         return queryset
 
     def get_context_data(self, **kwargs):
+        q = self.request.GET.get('q')
         theme = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
-        self.page_title = theme.name if theme else _('All Playlists')
-        self.page_description = \
-            theme.description or \
-            ''
+
+        # page_title
+        if q:
+            self.page_title = _('Playlists related with "%(q)s"') % {'q': q}
+        elif theme:
+            self.page_title = _('Playlists with #%(theme)s') % {'theme': theme.name}
+        else:
+            self.page_title = _('All Playlists')
+
+        # page_description
+        if theme:
+            self.page_description = theme.description
+        else:
+            self.page_description = ''
+
         self.og_url =  self.request.build_absolute_uri()
         context = super().get_context_data(**kwargs)
         context['theme'] = theme
