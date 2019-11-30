@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 15:45+0900\n"
+"POT-Creation-Date: 2019-11-30 11:43+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -494,15 +494,15 @@ msgstr "メール認証エラー"
 msgid "Email for verification sent"
 msgstr "送信完了"
 
-#: bookplaylist/models/base.py:17
+#: bookplaylist/models/base.py:20
 msgid "date created"
 msgstr "作成日時"
 
-#: bookplaylist/models/base.py:18
+#: bookplaylist/models/base.py:21
 msgid "date updated"
 msgstr "更新日時"
 
-#: bookplaylist/models/base.py:19
+#: bookplaylist/models/base.py:22
 msgid "date deleted"
 msgstr "削除日時"
 
