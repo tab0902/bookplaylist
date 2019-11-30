@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-26 00:53+0900\n"
+"POT-Creation-Date: 2019-11-29 15:45+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -38,7 +38,7 @@ msgstr "アカウント"
 msgid "The two password fields didn’t match."
 msgstr ""
 
-#: accounts/forms.py:63 accounts/templates/accounts/settings.html:28
+#: accounts/forms.py:63 accounts/templates/accounts/settings.html:24
 msgid "Password"
 msgstr ""
 
@@ -169,53 +169,40 @@ msgid ""
 "You can't register email address which is the same as a withdrawn user's one."
 msgstr "退会済みのアカウントと同じメールアドレスを登録することは出来ません。"
 
-#: accounts/templates/accounts/index.html:6
-#: accounts/templates/accounts/password_reset_complete.html:23
-#: accounts/templates/accounts/settings.html:59
-#: accounts/templates/accounts/verification.html:23
-#: bookplaylist/templates/layouts/drawer.html:15
-#: bookplaylist/templates/layouts/header.html:28
-#: main/templates/main/playlists/create_complete.html:35
-msgid "My page"
-msgstr "マイページ"
-
-#: accounts/templates/accounts/index.html:15
+#: accounts/templates/accounts/index.html:11
 #, python-format
-msgid "%(user)s's my page"
-msgstr "%(user)s さんのマイページ"
+msgid "%(username)s's my page"
+msgstr "%(username)s さんのマイページ"
 
-#: accounts/templates/accounts/index.html:18
-#: accounts/templates/accounts/settings.html:6
-#: accounts/templates/accounts/settings.html:13
+#: accounts/templates/accounts/index.html:14 accounts/views.py:42
 #: bookplaylist/templates/layouts/drawer.html:16
 msgid "Settings"
 msgstr "アカウント設定"
 
-#: accounts/templates/accounts/index.html:27
+#: accounts/templates/accounts/index.html:23
 msgid "Update profile"
 msgstr "プロフィールを編集する"
 
-#: accounts/templates/accounts/index.html:29
+#: accounts/templates/accounts/index.html:25
 msgid "Add profile"
 msgstr "自己紹介を入力しましょう"
 
-#: accounts/templates/accounts/index.html:32
+#: accounts/templates/accounts/index.html:28
 msgid "Good profile enables other users to understand your playlists deeply."
 msgstr ""
 "自己紹介を充実させることで、あなたのプレイリストを他のユーザーより深く理解し"
 "てもらいましょう。"
 
-#: accounts/templates/accounts/index.html:38
+#: accounts/templates/accounts/index.html:34
 msgid "To profile"
 msgstr "プロフィールへ"
 
-#: accounts/templates/accounts/index.html:46
-#: accounts/templates/accounts/profile.html:62
+#: accounts/templates/accounts/index.html:42
 #, python-format
-msgid "%(user)s's playlists"
-msgstr "%(user)s さんのプレイリスト"
+msgid "%(username)s's playlists"
+msgstr "%(username)s さんのプレイリスト"
 
-#: accounts/templates/accounts/index.html:47
+#: accounts/templates/accounts/index.html:43
 msgid ""
 "You haven't created any playlists. Enter the link below to create your first "
 "one!"
@@ -223,11 +210,11 @@ msgstr ""
 "まだプレイリストが作成されていません。下のリンクから初めてのプレイリストを作"
 "成しましょう！"
 
-#: accounts/templates/accounts/index.html:54
+#: accounts/templates/accounts/index.html:50
 msgid "Let's create a new playlist!"
 msgstr "新しいプレイリストを作成しましょう！"
 
-#: accounts/templates/accounts/index.html:56
+#: accounts/templates/accounts/index.html:52
 msgid "Let's create your first playlist!"
 msgstr "初めてのプレイリストを作成しましょう！"
 
@@ -239,101 +226,84 @@ msgstr "Twitterでログイン"
 msgid "Sign up with Twitter"
 msgstr "Twitterで登録"
 
-#: accounts/templates/accounts/login.html:6
-#: accounts/templates/accounts/login.html:15
-#: accounts/templates/accounts/login.html:23
-#: accounts/templates/accounts/signup.html:18
-#: bookplaylist/templates/layouts/drawer.html:12
-#: bookplaylist/templates/layouts/header.html:16
-msgid "Log in"
-msgstr ""
-
-#: accounts/templates/accounts/login.html:18
-#: accounts/templates/accounts/signup.html:6
-#: accounts/templates/accounts/signup.html:15
+#: accounts/templates/accounts/login.html:14 accounts/views.py:157
 #: bookplaylist/templates/layouts/drawer.html:13
 #: bookplaylist/templates/layouts/header.html:21
 msgid "Sign up"
 msgstr "ユーザー登録"
 
-#: accounts/templates/accounts/login.html:22
-#: accounts/templates/accounts/signup.html:22
+#: accounts/templates/accounts/login.html:18
+#: accounts/templates/accounts/signup.html:18
 msgid "or"
 msgstr ""
 
-#: accounts/templates/accounts/login.html:27
+#: accounts/templates/accounts/login.html:19
+#: accounts/templates/accounts/signup.html:14 accounts/views.py:145
+#: bookplaylist/templates/layouts/drawer.html:12
+#: bookplaylist/templates/layouts/header.html:16
+msgid "Log in"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:23
 msgid "Did you forget your password?"
 msgstr "パスワードをお忘れですか？"
 
-#: accounts/templates/accounts/password_change.html:6
-#: accounts/templates/accounts/password_change.html:13 accounts/views.py:40
-msgid "Password change"
-msgstr ""
-
-#: accounts/templates/accounts/password_change.html:14
-#: accounts/templates/accounts/settings.html:34
+#: accounts/templates/accounts/password_change.html:10
+#: accounts/templates/accounts/settings.html:30
 msgid "Change"
 msgstr ""
 
-#: accounts/templates/accounts/password_change.html:15
-#: accounts/templates/accounts/password_reset.html:16
-#: main/templates/main/playlists/book.html:43
-#: main/templates/main/playlists/delete.html:24
+#: accounts/templates/accounts/password_change.html:11
+#: accounts/templates/accounts/password_reset.html:12
+#: main/templates/main/playlists/book.html:39
+#: main/templates/main/playlists/delete.html:20
 msgid "Back"
 msgstr "戻る"
 
-#: accounts/templates/accounts/password_reset.html:6
-#: accounts/templates/accounts/password_reset.html:13
-#: accounts/templates/accounts/password_reset_confirm.html:6
-#: accounts/templates/accounts/password_reset_confirm.html:13
-msgid "Password reset"
-msgstr "パスワード再設定"
-
-#: accounts/templates/accounts/password_reset.html:14
+#: accounts/templates/accounts/password_reset.html:10
 msgid ""
 "You can recieve an email to reset password by submitting the form below."
 msgstr "登録されたメールアドレスを入力して送信してください。"
 
-#: accounts/templates/accounts/password_reset.html:15
-#: accounts/templates/accounts/verification_again.html:18
+#: accounts/templates/accounts/password_reset.html:11
+#: accounts/templates/accounts/verification_again.html:14
 msgid "Send email"
 msgstr "メール送信"
 
-#: accounts/templates/accounts/password_reset_complete.html:6
-#: accounts/templates/accounts/password_reset_complete.html:13
-msgid "Password reset complete"
-msgstr "パスワード再設定完了"
-
-#: accounts/templates/accounts/password_reset_complete.html:15
+#: accounts/templates/accounts/password_reset_complete.html:11
 msgid "Your password has been reset successfully."
 msgstr "パスワードを再設定しました。"
 
-#: accounts/templates/accounts/password_reset_complete.html:16
-#: accounts/templates/accounts/verification.html:16
+#: accounts/templates/accounts/password_reset_complete.html:12
+#: accounts/templates/accounts/verification.html:12
 msgid "Enjoy using BooxMix."
 msgstr "引き続きBooxMixをお楽しみください。"
 
-#: accounts/templates/accounts/password_reset_complete.html:20
-#: accounts/templates/accounts/verification.html:20
-#: main/templates/main/index.html:18
+#: accounts/templates/accounts/password_reset_complete.html:16
+#: accounts/templates/accounts/verification.html:16
+#: main/templates/main/index.html:32
 #: main/templates/main/playlists/layouts/lets-create-playlist.html:22
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
-#: accounts/templates/accounts/password_reset_confirm.html:14
+#: accounts/templates/accounts/password_reset_complete.html:19
+#: accounts/templates/accounts/settings.html:55
+#: accounts/templates/accounts/verification.html:19 accounts/views.py:33
+#: bookplaylist/templates/layouts/drawer.html:15
+#: bookplaylist/templates/layouts/header.html:28
+#: main/templates/main/playlists/create_complete.html:31
+msgid "My page"
+msgstr "マイページ"
+
+#: accounts/templates/accounts/password_reset_confirm.html:10
 msgid "Reset"
 msgstr "設定する"
 
-#: accounts/templates/accounts/password_reset_done.html:6
-#: accounts/templates/accounts/password_reset_done.html:13
-msgid "Email to reset password sent"
-msgstr "送信完了"
-
-#: accounts/templates/accounts/password_reset_done.html:15
+#: accounts/templates/accounts/password_reset_done.html:11
 msgid "An email to reset password has been sent."
 msgstr "パスワード再設定用メールを送信しました。"
 
-#: accounts/templates/accounts/password_reset_done.html:16
+#: accounts/templates/accounts/password_reset_done.html:12
 msgid "Click the link in the text to reset password."
 msgstr "添付されたURLからパスワードを再設定してください。"
 
@@ -367,62 +337,56 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:6
-#, python-format
-msgid "%(user)s's profile"
-msgstr "%(user)s さんのプロフィール"
-
-#: accounts/templates/accounts/profile.html:21
-#: accounts/templates/accounts/profile.html:33
+#: accounts/templates/accounts/profile.html:17
+#: accounts/templates/accounts/profile.html:29
 msgid "Edit comment"
 msgstr "自己紹介を編集する"
 
-#: accounts/templates/accounts/profile.html:49
-#: accounts/templates/accounts/settings.html:63
+#: accounts/templates/accounts/profile.html:45
+#: accounts/templates/accounts/settings.html:59
 msgid "Save"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:53
+#: accounts/templates/accounts/profile.html:49
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: accounts/templates/accounts/profile.html:63
+#: accounts/templates/accounts/profile.html:58
+#, python-format
+msgid "%(user)s's playlists"
+msgstr "%(user)s さんのプレイリスト"
+
+#: accounts/templates/accounts/profile.html:59
 msgid "This user have no playlist."
 msgstr "プレイリストが作成されていません。"
 
-#: accounts/templates/accounts/settings.html:39
+#: accounts/templates/accounts/settings.html:35
 msgid "Twitter"
 msgstr ""
 
-#: accounts/templates/accounts/settings.html:44
+#: accounts/templates/accounts/settings.html:40
 msgid "Not associated"
 msgstr "未連携"
 
-#: accounts/templates/accounts/settings.html:46
+#: accounts/templates/accounts/settings.html:42
 msgid "Associated"
 msgstr "連携済み"
 
-#: accounts/templates/accounts/settings.html:52
+#: accounts/templates/accounts/settings.html:48
 msgid "Associate"
 msgstr "連携する"
 
-#: accounts/templates/accounts/signup.html:23
+#: accounts/templates/accounts/signup.html:19
 msgid "Register"
 msgstr "登録"
 
-#: accounts/templates/accounts/signup_complete.html:6
-#: accounts/templates/accounts/signup_complete.html:13
-#: accounts/templates/accounts/signup_subject.html:2
-msgid "Sign up complete"
-msgstr "仮登録完了"
-
-#: accounts/templates/accounts/signup_complete.html:15
-#: accounts/templates/accounts/verification_sent.html:15
+#: accounts/templates/accounts/signup_complete.html:11
+#: accounts/templates/accounts/verification_sent.html:11
 msgid "A message has been sent to the email address you registered."
 msgstr "登録されたアドレスに認証メールを送信しました。"
 
-#: accounts/templates/accounts/signup_complete.html:16
-#: accounts/templates/accounts/verification_sent.html:16
+#: accounts/templates/accounts/signup_complete.html:12
+#: accounts/templates/accounts/verification_sent.html:12
 msgid "Click the link in the text to verify your email address."
 msgstr ""
 "メールアドレスを認証するため、受信したメッセージ内のリンクをクリックしてくだ"
@@ -445,25 +409,19 @@ msgstr "メールアドレス"
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
-#: accounts/templates/accounts/verification.html:6
-#: accounts/templates/accounts/verification.html:13
-msgid "Verification complete"
-msgstr "メール認証完了"
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:173
+msgid "Sign up complete"
+msgstr "仮登録完了"
 
-#: accounts/templates/accounts/verification.html:15
+#: accounts/templates/accounts/verification.html:11
 msgid "Your email has been verified successfully."
 msgstr "メールアドレスの認証が完了しました。"
 
-#: accounts/templates/accounts/verification_again.html:6
-#: accounts/templates/accounts/verification_again.html:13
-msgid "Verification failed"
-msgstr "メール認証エラー"
-
-#: accounts/templates/accounts/verification_again.html:15
+#: accounts/templates/accounts/verification_again.html:11
 msgid "This URL is expired."
 msgstr "URLの有効期限が切れています。"
 
-#: accounts/templates/accounts/verification_again.html:16
+#: accounts/templates/accounts/verification_again.html:12
 msgid "Submit the form below if you want to recieve email again."
 msgstr ""
 "もう一度認証メールを受け取りたい場合は、以下のフォームを送信してください。"
@@ -472,11 +430,6 @@ msgstr ""
 msgid "Account verification"
 msgstr "アカウント認証"
 
-#: accounts/templates/accounts/verification_sent.html:6
-#: accounts/templates/accounts/verification_sent.html:13
-msgid "Email for verification sent"
-msgstr "送信完了"
-
 #: accounts/validators.py:10
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers, and _ "
@@ -484,29 +437,62 @@ msgid ""
 msgstr ""
 "有効なユーザー名を入力してください。半角英数、アンダーバーを使用できます。"
 
-#: accounts/views.py:47
+#: accounts/views.py:44 accounts/views.py:72
+msgid "Password change"
+msgstr ""
+
+#: accounts/views.py:51
 msgid "No password set."
 msgstr ""
 
-#: accounts/views.py:48 accounts/views.py:75
+#: accounts/views.py:52 accounts/views.py:80
 msgid "Password set"
 msgstr "パスワード設定"
 
-#: accounts/views.py:55
+#: accounts/views.py:59
 msgid "Settings updated successfully."
 msgstr "アカウント設定を更新しました。"
 
-#: accounts/views.py:79
+#: accounts/views.py:84
 msgid "Password changed successfully."
 msgstr ""
 
-#: accounts/views.py:93
+#: accounts/views.py:98
 msgid "You don't have permission to update other user's profile."
 msgstr "他のユーザーのプロフィールを編集することはできません"
 
-#: accounts/views.py:95
+#: accounts/views.py:100
 msgid "Comment updated successfully."
 msgstr "プロフィールを更新しました。"
+
+#: accounts/views.py:109
+#, python-format
+msgid "%(username)s's profile"
+msgstr "%(username)s さんのプロフィール"
+
+#: accounts/views.py:119 accounts/views.py:133
+msgid "Password reset"
+msgstr "パスワード再設定"
+
+#: accounts/views.py:128
+msgid "Email to reset password sent"
+msgstr "送信完了"
+
+#: accounts/views.py:139
+msgid "Password reset complete"
+msgstr "パスワード再設定完了"
+
+#: accounts/views.py:183
+msgid "Verification complete"
+msgstr "メール認証完了"
+
+#: accounts/views.py:230
+msgid "Verification failed"
+msgstr "メール認証エラー"
+
+#: accounts/views.py:244
+msgid "Email for verification sent"
+msgstr "送信完了"
 
 #: bookplaylist/models/base.py:17
 msgid "date created"
@@ -561,8 +547,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: bookplaylist/templates/layouts/footer.html:9
-#: main/templates/main/terms.html:6
+#: bookplaylist/templates/layouts/footer.html:9 main/views.py:516
 msgid "Terms"
 msgstr "利用規約"
 
@@ -570,13 +555,11 @@ msgstr "利用規約"
 msgid "Privacy"
 msgstr "プライバシー"
 
-#: bookplaylist/templates/layouts/footer.html:15
-#: main/templates/main/about.html:6 main/templates/main/about.html:13
+#: bookplaylist/templates/layouts/footer.html:15 main/views.py:526
 msgid "About BooxMix"
 msgstr "BooxMixについて"
 
-#: bookplaylist/templates/layouts/footer.html:18
-#: main/templates/main/contact.html:6 main/templates/main/contact.html:13
+#: bookplaylist/templates/layouts/footer.html:18 main/views.py:532
 msgid "Contact"
 msgstr "お問い合わせ"
 
@@ -592,7 +575,11 @@ msgstr "BookPlayList 管理サイト"
 msgid "Home"
 msgstr ""
 
-#: bookplaylist/views.py:32
+#: bookplaylist/views.py:24
+msgid "Share Book Playlists on your SNS."
+msgstr "本のプレイリストをSNSでシェアしよう。"
+
+#: bookplaylist/views.py:65
 msgid "You don't have permission to access the page."
 msgstr "ページにアクセスする権限がありません"
 
@@ -608,7 +595,7 @@ msgstr "プレイリストのタイトル"
 msgid "Free theme"
 msgstr "なんでも"
 
-#: main/forms.py:73 main/templates/main/playlists/delete.html:19
+#: main/forms.py:73 main/templates/main/playlists/delete.html:15
 msgid "Delete"
 msgstr "削除する"
 
@@ -763,66 +750,60 @@ msgstr "リスト内の書籍"
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
-#: main/templates/main/about.html:15
+#: main/templates/main/about.html:11
 msgid "What is BooxMix?"
 msgstr "BooxMixとは？"
 
-#: main/templates/main/about.html:21
+#: main/templates/main/about.html:17
 msgid "Administrators"
 msgstr "運営者"
 
-#: main/templates/main/about.html:25
+#: main/templates/main/about.html:21
 msgid "Representative"
 msgstr "代表"
 
-#: main/templates/main/about.html:26
+#: main/templates/main/about.html:22
 msgid "Shogo Minami"
 msgstr "南　昇吾"
 
-#: main/templates/main/about.html:29
+#: main/templates/main/about.html:25
 msgid "Technology officer"
 msgstr "技術責任者"
 
-#: main/templates/main/about.html:30
+#: main/templates/main/about.html:26
 msgid "Sho Tabuchi"
 msgstr "田渕　翔"
 
-#: main/templates/main/about.html:33 main/templates/main/about.html:37
+#: main/templates/main/about.html:29 main/templates/main/about.html:33
 msgid "Developer"
 msgstr "開発者"
 
-#: main/templates/main/about.html:34
+#: main/templates/main/about.html:30
 msgid "Mizuki Ono"
 msgstr "大野　水季"
 
-#: main/templates/main/about.html:38
+#: main/templates/main/about.html:34
 msgid "Takayuki Otomo"
 msgstr "大友　隆之"
 
-#: main/templates/main/about.html:43
+#: main/templates/main/about.html:39
 msgid "Contact address"
 msgstr "連絡先"
 
-#: main/templates/main/contact.html:14
+#: main/templates/main/contact.html:10
 msgid "Send"
 msgstr "送信"
 
-#: main/templates/main/contact_complete.html:6
-#: main/templates/main/contact_complete.html:13
-#: main/templates/main/contact_subject.html:2
-msgid "We recieve your inquiry"
-msgstr "お問い合わせ完了"
-
-#: main/templates/main/contact_complete.html:15
+#: main/templates/main/contact_complete.html:11
 msgid "Your inquiry is sent successfully."
 msgstr "お問い合わせは正常に送信されました。"
 
-#: main/templates/main/contact_complete.html:16
+#: main/templates/main/contact_complete.html:12
 #: main/templates/main/contact_email.html:12
 msgid "Please wait a while for the reply."
 msgstr "内容を確認次第、返答させていただきますので、今しばらくお待ちください。"
 
-#: main/templates/main/contact_complete.html:20
+#: main/templates/main/contact_complete.html:16
 msgid "Top page"
 msgstr "トップページ"
 
@@ -847,126 +828,111 @@ msgstr "お問い合わせを受信しました。内容は以下の通りです
 msgid "User"
 msgstr "ユーザー"
 
+#: main/templates/main/contact_subject.html:2 main/views.py:551
+msgid "We recieve your inquiry"
+msgstr "お問い合わせ完了"
+
 #: main/templates/main/contact_subject_admin.html:2
 msgid "Inquiry sent"
 msgstr "お問い合わせ受信"
 
-#: main/templates/main/index.html:6
-msgid "Share Book Playlists on your SNS."
-msgstr "本のプレイリストをSNSでシェアしよう。"
-
-#: main/templates/main/index.html:13 main/templates/main/index.html:29
+#: main/templates/main/index.html:27 main/templates/main/index.html:43
 msgid "Share your book recommendation <br>and let others motivative."
 msgstr "あなたが選んだ本で、<br>誰かの生き方が<br>変わるかもしれない。"
 
-#: main/templates/main/index.html:16 main/templates/main/index.html:36
+#: main/templates/main/index.html:30 main/templates/main/index.html:50
 msgid ""
 "Let’s create your own book playlist on your phone. You can easily share it "
 "on your social network."
 msgstr ""
 "スマホで簡単に本をまとめてプレイリストを作成し、気軽にSNSでシェアしましょう。"
 
-#: main/templates/main/index.html:34
-#: main/templates/main/playlists/create.html:6
-#: main/templates/main/playlists/create.html:13
+#: main/templates/main/index.html:48 main/views.py:266
 msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
-#: main/templates/main/index.html:38
+#: main/templates/main/index.html:52
 msgid "Create"
 msgstr "作成する"
 
-#: main/templates/main/index.html:43
+#: main/templates/main/index.html:57
 msgid "Hot playlists"
 msgstr "話題のプレイリスト"
 
-#: main/templates/main/index.html:44
+#: main/templates/main/index.html:58
 msgid "We picked up hot topics and playlists."
 msgstr "最近話題になっているトピックとプレイリストをピックアップ"
 
-#: main/templates/main/index.html:53
-#: main/templates/main/playlists/detail.html:125
+#: main/templates/main/index.html:67
+#: main/templates/main/playlists/detail.html:155
 msgid "Show all"
 msgstr "すべて見る"
 
-#: main/templates/main/index.html:56
-#: main/templates/main/playlists/detail.html:129
+#: main/templates/main/index.html:70
+#: main/templates/main/playlists/detail.html:159
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
 
-#: main/templates/main/playlists/book.html:6
-#: main/templates/main/playlists/book.html:17
-msgid "Search book to add"
-msgstr "追加する本を探す"
-
-#: main/templates/main/playlists/book.html:15
+#: main/templates/main/playlists/book.html:11
 #, python-format
 msgid "Books related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれる書籍一覧"
 
-#: main/templates/main/playlists/book.html:27
+#: main/templates/main/playlists/book.html:13 main/views.py:329
+msgid "Search book to add"
+msgstr "追加する本を探す"
+
+#: main/templates/main/playlists/book.html:23
 #: main/templates/main/playlists/layouts/search-playlist-wide.html:15
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlists/create_complete.html:6
-#: main/templates/main/playlists/create_complete.html:13
-msgid "Playlist created successfully!"
-msgstr "プレイリストが完成しました！"
-
-#: main/templates/main/playlists/create_complete.html:27
+#: main/templates/main/playlists/create_complete.html:23
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:32
+#: main/templates/main/playlists/create_complete.html:28
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
-#: main/templates/main/playlists/delete.html:6
-#: main/templates/main/playlists/delete.html:13
-#: main/templates/main/playlists/update.html:19
-#: main/templates/main/playlists/update.html:25
-msgid "Delete playlist"
-msgstr "プレイリストを削除する"
-
-#: main/templates/main/playlists/delete.html:15
+#: main/templates/main/playlists/delete.html:11
 #, python-format
 msgid "Are you sure you want to delete \"%(playlist)s\"?"
 msgstr "\"%(playlist)s\" を削除しますか？"
 
-#: main/templates/main/playlists/delete.html:16
+#: main/templates/main/playlists/delete.html:12
 msgid "Note: You can't cancel this action."
 msgstr "※この操作は取り消せません。"
 
-#: main/templates/main/playlists/detail.html:37
+#: main/templates/main/playlists/detail.html:67
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlists/detail.html:72
+#: main/templates/main/playlists/detail.html:102
 #: main/templates/main/playlists/layouts/book-list.html:25
 msgid "No Image"
 msgstr ""
 
-#: main/templates/main/playlists/detail.html:84
-#: main/templates/main/playlists/detail.html:91
+#: main/templates/main/playlists/detail.html:114
+#: main/templates/main/playlists/detail.html:121
 #: main/templates/main/playlists/layouts/list-widget.html:22
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlists/detail.html:102
+#: main/templates/main/playlists/detail.html:132
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlists/detail.html:118
+#: main/templates/main/playlists/detail.html:148
 msgid "Playlists with same theme"
 msgstr "同じテーマのおすすめ"
 
-#: main/templates/main/playlists/detail.html:120
+#: main/templates/main/playlists/detail.html:150
 msgid "These are also recommended"
 msgstr "あなたへのおすすめ"
 
-#: main/templates/main/playlists/detail.html:131
+#: main/templates/main/playlists/detail.html:161
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
 
@@ -1019,47 +985,46 @@ msgstr "本を追加する"
 msgid "Complete"
 msgstr "完成"
 
-#: main/templates/main/playlists/list.html:9
-#: main/templates/main/playlists/list.html:32
-msgid "All Playlists"
-msgstr "プレイリスト一覧"
-
-#: main/templates/main/playlists/list.html:28
+#: main/templates/main/playlists/list.html:59 main/views.py:114
 #, python-format
 msgid "Playlists related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれるリスト一覧"
 
-#: main/templates/main/playlists/list.html:30
+#: main/templates/main/playlists/list.html:61 main/views.py:116
 #, python-format
 msgid "Playlists with #%(theme)s"
 msgstr "#%(theme)s のプレイリスト"
+
+#: main/templates/main/playlists/list.html:63 main/views.py:118
+msgid "All Playlists"
+msgstr "プレイリスト一覧"
 
 #: main/templates/main/playlists/og_image/layouts/title.html:9
 msgid "Let's create book playlist and share it."
 msgstr "本のプレイリストを作ってシェアしよう。"
 
-#: main/templates/main/playlists/update.html:6
 #: main/templates/main/playlists/update.html:15
-msgid "Update playlist"
-msgstr "プレイリストを編集する"
+#: main/templates/main/playlists/update.html:21 main/views.py:497
+msgid "Delete playlist"
+msgstr "プレイリストを削除する"
 
-#: main/templates/main/privacy.html:6 main/templates/main/privacy.html:13
-msgid "Privacy policy"
-msgstr "プライバシーポリシー"
-
-#: main/templates/main/terms.html:13
+#: main/templates/main/terms.html:9
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:209
+#: main/views.py:236
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:260
+#: main/views.py:290
+msgid "Update playlist"
+msgstr "プレイリストを編集する"
+
+#: main/views.py:291
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:339
+#: main/views.py:376
 msgid ""
 "<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
 "p>"
@@ -1067,19 +1032,27 @@ msgstr ""
 "<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
 "い。</p>"
 
-#: main/views.py:341
+#: main/views.py:378
 msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
 msgstr ""
 "<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
 "い。</p>"
 
-#: main/views.py:386
+#: main/views.py:423
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:456
+#: main/views.py:483
+msgid "Playlist created successfully!"
+msgstr "プレイリストが完成しました！"
+
+#: main/views.py:502
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
+#: main/views.py:521
+msgid "Privacy policy"
+msgstr "プライバシーポリシー"
+
 #~ msgid "Search playlist"
-#~ msgstr "プレイリストを検索する"
+#~ msgstr "プレイリストを検索"

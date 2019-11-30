@@ -2,26 +2,56 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{{ playlist.title }} | BooxMix
-{% endblock %}
-
-{% block og %}
-<meta property="og:title" content="{{ playlist.title }}" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="{{ request.build_absolute_uri }}" />
-<meta property="og:image" content="{{ playlist.og_image.url }}" />
-<meta property="og:description" content="{{ playlist.description | truncatechars:100 }}" />
-<meta property="og:site_name" content="BooxMix" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@BooxMix" />
+{% block json_ld %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": ["ItemList", "WebPage"],
+    "headline": "{{ page_title }}",
+    "description": "{{ page_description }}",
+    "url": "{{ og_url }}",
+    "image": "{{ og_image }}",
+    "datePublished": "{{ playlist.created_at | date:'Y-n-d\TH:i:s' }}",
+    "dateModified": "{{ playlist.updated_at | date:'Y-n-d\TH:i:s' }}",
+    "itemListOrder": "http://schema.org/ItemListOrderAscending",
+    "numberOfItems": "{{ playlist.playlist_book_set.count }}",
+    "author": {
+        "@type": "Person",
+        "name": "{{ playlist.user.username }}"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "BooxMix"
+    },
+    "itemListElement": [
+        {% for playlist_book in playlist.playlist_book_set.all %}
+        {
+            "@type": "Book",
+            "position": "{{ forloop.counter }}",
+            "isbn": "{{ playlist_book.book.isbnb }}",
+            "name": "{{ playlist_book.book.data.title }}",
+            "image": "{{ playlist_book.book.data.cover }}",
+            "url": "{{ playlist_book.book.data.affiliate_url | default_if_none:playlist_book.book.data.cover }}",
+            "author": {
+                "@type": "Person",
+                "name": "{{ playlist_book.book.data.author }}"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{ playlist_book.book.data.publisher }}"
+            }
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
 
 <div class="container">
     <section id="playlist-detail-overview">
-        <h1 class="mt-4 mt-md-5 playlist-detail-title">{{ playlist.title | default_if_none:'' }}</h1>
+        <h1 class="mt-4 mt-md-5 playlist-detail-title">{{ page_title }}</h1>
         <a href="{% url 'accounts:profile' playlist.user.username %}" class="color-gray text-xl mt-3">
             {{ playlist.user.username | default_if_none:'' }}
         </a>
@@ -42,7 +72,7 @@
         <div class="row mt-4{% if request.user == playlist.user %} mt-md-0{% endif %}">
             <div class="col-2 col-md-1 offset-3 offset-md-9 text-center">
                 <a
-                    href="https://twitter.com/intent/tweet?text={{ playlist.title }}&url={{ request.build_absolute_uri|urlencode }}"
+                    href="https://twitter.com/intent/tweet?text={{ playlist.title }}&url={{ og_url|urlencode }}"
                     target="_blank"
                 >
                     <i class="fab fa-twitter fa-twitter-color fa-2x"></i>

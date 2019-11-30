@@ -2,15 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Contact' %} | BooxMix
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="contact">
-        <h2 class="my-4 mt-md-5">{% trans 'Contact' %}</h2>
+        <h2 class="my-4 mt-md-5">{{ page_title }}</h2>
         {% trans 'Send' as submit_text %}
         {% include 'layouts/form.html' with submit_text=submit_text %}
     </section>

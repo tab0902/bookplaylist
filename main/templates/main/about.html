@@ -2,15 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'About BooxMix' %} | BooxMix
-{% endblock %}
-
 {% block content %}
 
 <div class="container">
     <section id="about">
-        <h1 class="mt-4 mt-md-5">{% trans 'About BooxMix' %}</h1>
+        <h1 class="mt-4 mt-md-5">{{ page_title }}</h1>
 
         <h2 class="mt-5">{% trans 'What is BooxMix?' %}</h2>
         <p class="mt-4">

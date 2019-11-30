@@ -19,7 +19,7 @@ from .forms import (
     AuthenticationForm, PasswordCreationForm, SignupForm, UserProfileForm, UserSettingsForm, VerificationAgainForm,
 )
 from bookplaylist.views import (
-    login_required, sensitive_post_parameters,
+    TemplateContextMixin, login_required, sensitive_post_parameters,
 )
 
 # Create your views here.
@@ -29,13 +29,17 @@ UserModel = get_user_model()
 
 
 @login_required
-class IndexView(generic.TemplateView):
+class IndexView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('My page')
+    page_description = \
+        'BooxMixのマイページでは、今までに自分が作成した本のプレイリストの一覧をチェックできます。何かシェアしたいことが見つかったときは、おすすめしたい本をまとめて新たにプレイリストを作成しましょう。'
     template_name = 'accounts/index.html'
 
 
 @login_required
-class SettingsView(generic.UpdateView):
+class SettingsView(TemplateContextMixin, generic.UpdateView):
     form_class = UserSettingsForm
+    page_title = _('Settings')
     password_text = '************'
     password_link_text = _('Password change')
     success_url = reverse_lazy('accounts:settings')
@@ -64,7 +68,8 @@ class SettingsView(generic.UpdateView):
 
 @login_required
 @sensitive_post_parameters
-class PasswordChangeView(auth_views.PasswordChangeView):
+class PasswordChangeView(TemplateContextMixin, auth_views.PasswordChangeView):
+    page_title = _('Password change')
     success_url = reverse_lazy('accounts:settings')
     template_name = 'accounts/password_change.html'
 
@@ -80,7 +85,7 @@ class PasswordChangeView(auth_views.PasswordChangeView):
         return super().form_valid(form)
 
 
-class ProfileView(generic.UpdateView):
+class ProfileView(TemplateContextMixin, generic.UpdateView):
     form_class = UserProfileForm
     model = UserModel
     template_name = 'accounts/profile.html'
@@ -99,9 +104,19 @@ class ProfileView(generic.UpdateView):
         self.success_url = self.request.path
         return super().get_success_url()
 
+    def get_context_data(self, **kwargs):
+        username = self.object.username
+        self.page_title = _('%(username)s\'s profile') % {'username': username}
+        self.page_description = \
+            self.object.comment or \
+            ''
+        self.og_url = '{}://{}{}'.format(self.request.scheme, self.request.get_host(), self.request.path)
+        return super().get_context_data(**kwargs)
 
-class PasswordResetView(auth_views.PasswordResetView):
+
+class PasswordResetView(TemplateContextMixin, auth_views.PasswordResetView):
     email_template_name = 'accounts/password_reset_email.html'
+    page_title = _('Password reset')
     success_url = reverse_lazy('accounts:password_reset_done')
     template_name = 'accounts/password_reset.html'
 
@@ -109,30 +124,39 @@ class PasswordResetView(auth_views.PasswordResetView):
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
 
 
-class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+class PasswordResetDoneView(TemplateContextMixin, auth_views.PasswordResetDoneView):
+    page_title = _('Email to reset password sent')
     template_name = 'accounts/password_reset_done.html'
 
 
-class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+class PasswordResetConfirmView(TemplateContextMixin, auth_views.PasswordResetConfirmView):
+    page_title = _('Password reset')
     success_url = reverse_lazy('accounts:password_reset_complete')
     template_name = 'accounts/password_reset_confirm.html'
 
 
-class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+class PasswordResetCompleteView(TemplateContextMixin, auth_views.PasswordResetCompleteView):
+    page_title = _('Password reset complete')
     template_name = 'accounts/password_reset_complete.html'
 
 
-class LoginView(auth_views.LoginView):
+class LoginView(TemplateContextMixin, auth_views.LoginView):
     authentication_form = AuthenticationForm
+    page_title = _('Log in')
+    page_description = \
+        'BooxMixは、気軽に本を複数冊まとめてプレイリストを作成し、SNSでシェアできるウェブサービスです。誰もが本屋の書店員さんのようにおすすめ本を選びTwitterで共有できます。ログインしてプレイリストを作り、友達に共有しましょう。'
     template_name = 'accounts/login.html'
 
 
-class LogoutView(auth_views.LogoutView):
+class LogoutView(TemplateContextMixin, auth_views.LogoutView):
     next_page = reverse_lazy('accounts:login')
 
 
-class SignupView(generic.FormView):
+class SignupView(TemplateContextMixin, generic.FormView):
     form_class = SignupForm
+    page_title = _('Sign up')
+    page_description = \
+        'BooxMixは、気軽に本を複数冊まとめてプレイリストを作成し、SNSでシェアできるウェブサービスです。誰もが本屋の書店員さんのようにおすすめ本を選びTwitterで共有できます。あなたも登録してプレイリストを作成しませんか。'
     success_url = reverse_lazy('accounts:signup_complete')
     template_name = 'accounts/signup.html'
 
@@ -145,16 +169,18 @@ class SignupView(generic.FormView):
         return super().form_valid(form)
 
 
-class SignupCompleteView(generic.TemplateView):
+class SignupCompleteView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('Sign up complete')
     template_name = 'accounts/signup_complete.html'
 
 
 INTERNAL_VERIFICATION_SESSION_TOKEN = '_verification_token'
 
 
-class VerificationView(generic.TemplateView):
+class VerificationView(TemplateContextMixin, generic.TemplateView):
     complete_url_token = 'complete'
     error_url = reverse_lazy('accounts:verification_again')
+    page_title = _('Verification complete')
     post_verification_login = True
     post_verification_login_backend = 'accounts.backends.ModelBackend'
     template_name = 'accounts/verification.html'
@@ -199,8 +225,9 @@ class VerificationView(generic.TemplateView):
         return super().get(request, *args, **kwargs)
 
 
-class VerificationAgainView(generic.FormView):
+class VerificationAgainView(TemplateContextMixin, generic.FormView):
     form_class = VerificationAgainForm
+    page_title = _('Verification failed')
     success_url = reverse_lazy('accounts:verification_sent')
     template_name = 'accounts/verification_again.html'
 
@@ -213,5 +240,6 @@ class VerificationAgainView(generic.FormView):
         return super().form_valid(form)
 
 
-class VerificationSentView(generic.TemplateView):
+class VerificationSentView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('Email for verification sent')
     template_name = 'accounts/verification_sent.html'

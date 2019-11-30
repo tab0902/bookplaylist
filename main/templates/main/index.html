@@ -2,8 +2,22 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Share Book Playlists on your SNS.' %} | BooxMix
+{% block json_ld %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "BooxMix",
+    "headline": "{{ page_title }}",
+    "description": "{{ page_description }}",
+    "url": "{{ og_url }}",
+    "image": "{{ og_image }}",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BooxMix"
+    }
+}
+</script>
 {% endblock %}
 
 {% block content %}

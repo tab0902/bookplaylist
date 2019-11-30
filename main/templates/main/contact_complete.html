@@ -2,15 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'We recieve your inquiry' %} | BooxMix
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="contact-complete">
-        <h2 class="mt-4 mt-md-5">{% trans 'We recieve your inquiry' %}</h2>
+        <h2 class="mt-4 mt-md-5">{{ page_title }}</h2>
         <p class="mt-4 mt-md-5">
             {% blocktrans %}Your inquiry is sent successfully.{% endblocktrans %}<br>
             {% blocktrans %}Please wait a while for the reply.{% endblocktrans %}

@@ -2,15 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Email for verification sent' %} | BooxMix
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="verification-sent">
-        <h2 class="mt-4 mt-md-5">{% trans 'Email for verification sent' %}</h2>
+        <h2 class="mt-4 mt-md-5">{{ page_title }}</h2>
         <p class="mt-4 mt-md-5">
             {% blocktrans %}A message has been sent to the email address you registered.{% endblocktrans %}<br>
             {% blocktrans %}Click the link in the text to verify your email address.{% endblocktrans %}

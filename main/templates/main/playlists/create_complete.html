@@ -2,15 +2,11 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'Playlist created successfully!' %} | BooxMix
-{% endblock %}
-
 {% block content %}
 
 <div class="container container-slim">
     <section id="playlist-create-complete">
-        <h2 class="text-center mt-4 mt-md-5">{% trans 'Playlist created successfully!' %}</h2>
+        <h2 class="text-center mt-4 mt-md-5">{{ page_title }}</h2>
         <div class="mt-4 box-shadow border-radius">
             <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
                 <img src="{{ playlist.og_image.url }}" width="100%">

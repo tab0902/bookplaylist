@@ -2,17 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% trans 'My page' %} | BooxMix
-{% endblock %}
-
 {% block content %}
 
 <div class="container">
     <section id="mypage-create-playlist">
         <div class="row">
             <div class="col-md-8">
-                <h1 class="mt-4 mt-md-5 heading-lg">{% blocktrans %}{{ user }}'s my page{% endblocktrans %}</h1>
+                <h1 class="mt-4 mt-md-5 heading-lg">{% blocktrans with username=user.username %}{{ username }}'s my page{% endblocktrans %}</h1>
             </div>
             <div class="col-md-4 d-none d-md-block">
                 <a href="{% url 'accounts:settings' %}" class="btn btn-inline-sub float-right mt-2 mt-md-5">{% trans 'Settings' %}</a>
@@ -43,7 +39,7 @@
 
     {% if request.user.playlist_set.count != 0 %}
     <section id="playlist-list">
-        <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
+        <h2 class="mt-5">{% blocktrans with username=user.username %}{{ username }}'s playlists{% endblocktrans %}</h2>
         {% trans "You haven't created any playlists. Enter the link below to create your first one!" as text %}
         {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
     </section>

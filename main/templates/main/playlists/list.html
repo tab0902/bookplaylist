@@ -2,13 +2,44 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% if theme %}
-{{ theme.name }}
-{% else %}
-{% trans 'All Playlists' %}
-{% endif %}
- | BooxMix
+{% block json_ld %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": ["ItemList", "WebPage"],
+    "headline": "{{ page_title }}",
+    "description": "{{ page_description }}",
+    "url": "{{ og_url }}",
+    "itemListOrder": "http://schema.org/ItemListOrderAscending",
+    "numberOfItems": "{{ playlists.count }}",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BooxMix"
+    },
+    "itemListElement": [
+        {% for playlist in playlists %}
+        {
+            "@type": "WebPage",
+            "position": "{{ forloop.counter }}",
+            "headline": "{{ playlist.title }}",
+            "description": "{{ playlist.description }}",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{{ playlist.get_absolute_url }}",
+            "image": "{{ playlist.og_image.url }}",
+            "datePublished": "{{ playlist.created_at | date:'Y-n-d\TH:i:s' }}",
+            "dateModified": "{{ playlist.updated_at | date:'Y-n-d\TH:i:s' }}",
+            "author": {
+                "@type": "Person",
+                "name": "{{ playlist.user.username }}"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "BooxMix"
+            }
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
