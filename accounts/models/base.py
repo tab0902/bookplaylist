@@ -61,6 +61,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     twitter_id = NullCharField(_('Twitter ID'), max_length=255, blank=True, null=True)
     facebook_id = NullCharField(_('Facebook ID'), max_length=255, blank=True, null=True)
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
+    reason_for_deactivation = NullTextField(_('reason for deactivation'), blank=True, null=True)
 
     objects = UserManager()
     all_objects_without_deleted = UserWithInactiveManager()

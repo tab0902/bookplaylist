@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="container container-slim">
+    <section id="deactivate-complete">
+        <h2 class="mt-4 mt-md-5">{{ page_title }}</h2>
+        <p class="mt-4 mt-md-5">
+            {% blocktrans %}Your account has been deactivated. <br class="d-sm-none">Thank you for using BooxMix.{% endblocktrans %}
+        </p>
+        <div class="row">
+            <div class="col-md-6 offset-md-3 mt-5">
+                <a href="{% url 'main:index' %}" class="btn btn-outline-main w-100">{% trans 'TOP' %}</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

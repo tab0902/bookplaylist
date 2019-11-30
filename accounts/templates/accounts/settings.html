@@ -59,6 +59,9 @@
                     <input type="submit" class="btn btn-main w-100" value="{% trans 'Save' %}">
                 </div>
             </div>
+            <div class="mt-5 text-center text-md-left">
+                <a href="{% url 'accounts:deactivate' %}" class="btn btn-inline-sub text-sm">{% trans 'To Deactivate' %}</a>
+            </div>
         </form>
     </section>
 </div>

@@ -19,4 +19,6 @@ urlpatterns = [
     path('verification/sent/', views.VerificationSentView.as_view(), name='verification_sent'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('deactivate/', views.DeacrivateView.as_view(), name='deactivate'),
+    path('deactivate/complete/', views.DeacrivateCompleteView.as_view(), name='deactivate_complete'),
 ]
