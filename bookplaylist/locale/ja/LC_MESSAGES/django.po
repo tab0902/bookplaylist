@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-30 15:30+0900\n"
+"POT-Creation-Date: 2019-11-30 16:57+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -171,6 +171,40 @@ msgstr ""
 msgid "This account is already in use."
 msgstr ""
 "このアカウントは既に他のユーザーに使用されているため、連携できませんでした。"
+
+#: accounts/templates/accounts/deactivate.html:11
+msgid ""
+"Once you press the \"Deactivate\" button below, the information related with "
+"your account (including all playlists you created) would NEVER be recovered."
+msgstr ""
+"アカウントを削除すると、関連するデータは永久に削除され、二度と復旧することが"
+"できなくなります。削除されるデータには、あなたがこれまで作成した全てのプレイ"
+"リストも含まれます。"
+
+#: accounts/templates/accounts/deactivate.html:14
+msgid ""
+"If you still want to delete this account even after understanding that, "
+"please tell us the reason why you intend to deactivate your account."
+msgstr ""
+"その上でこのアカウントを削除されたい場合は、以下のフォームより退会理由をご記"
+"入の上、「アカウント削除」ボタンを押してください。"
+
+#: accounts/templates/accounts/deactivate.html:16
+msgid "Deactivate"
+msgstr "アカウント削除"
+
+#: accounts/templates/accounts/deactivate_complete.html:11
+msgid ""
+"Your account has been deactivated. <br class=\"d-sm-none\">Thank you for "
+"using BooxMix."
+msgstr ""
+"アカウントは正常に削除されました。<br class=\"d-sm-none\">BooxMixをご利用いた"
+"だき、ありがとうございました。"
+
+#: accounts/templates/accounts/deactivate_complete.html:15
+#: bookplaylist/templates/layouts/drawer.html:8
+msgid "TOP"
+msgstr ""
 
 #: accounts/templates/accounts/index.html:11
 #, python-format
@@ -379,6 +413,10 @@ msgstr "連携済み"
 msgid "Associate"
 msgstr "連携する"
 
+#: accounts/templates/accounts/settings.html:63
+msgid "To Deactivate"
+msgstr "アカウントを削除する"
+
 #: accounts/templates/accounts/signup.html:19
 msgid "Register"
 msgstr "登録"
@@ -497,6 +535,14 @@ msgstr "メール認証エラー"
 msgid "Email for verification sent"
 msgstr "送信完了"
 
+#: accounts/views.py:252
+msgid "Deactivate your account"
+msgstr "アカウント削除"
+
+#: accounts/views.py:268
+msgid "Your account deactivated"
+msgstr "アカウント削除完了"
+
 #: bookplaylist/models/base.py:20
 msgid "date created"
 msgstr "作成日時"
@@ -540,10 +586,6 @@ msgstr "不具合報告"
 #: bookplaylist/settings.py:206
 msgid "Other inquiry"
 msgstr "上記以外のお問い合わせ"
-
-#: bookplaylist/templates/layouts/drawer.html:8
-msgid "TOP"
-msgstr ""
 
 #: bookplaylist/templates/layouts/drawer.html:17
 #: bookplaylist/templates/layouts/header.html:33

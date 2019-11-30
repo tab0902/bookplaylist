@@ -16,7 +16,7 @@
     {% endfor %}
     <div class="row">
         <div class="col-md-4 offset-md-8">
-            <input type="submit" class="btn btn-main w-100 mt-4" value="{% trans submit_text %}">
+            <input type="submit" class="btn {{ button_class | default:'btn-main' }} w-100 mt-4" value="{% trans submit_text %}">
         </div>
     </div>
 </form>

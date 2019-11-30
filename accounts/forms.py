@@ -203,3 +203,14 @@ class VerificationAgainForm(forms.Form, SendEmailMixin):
                 subject_template_name, email_template_name, context, from_email,
                 email, html_email_template_name=html_email_template_name,
             )
+
+
+class DeacrivateForm(forms.ModelForm):
+
+    class Meta:
+        model = UserModel
+        fields = ('reason_for_deactivation',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['reason_for_deactivation'].required = True

@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import (
-    get_user_model, login as auth_login, views as auth_views,
+    get_user_model, login as auth_login, logout as auth_logout, views as auth_views,
 )
 from django.contrib.auth.hashers import is_password_usable
 from django.contrib.auth.tokens import default_token_generator
@@ -16,7 +16,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from .forms import (
-    AuthenticationForm, PasswordCreationForm, SignupForm, UserProfileForm, UserSettingsForm, VerificationAgainForm,
+    AuthenticationForm, DeacrivateForm, PasswordCreationForm, SignupForm, UserProfileForm, UserSettingsForm, VerificationAgainForm,
 )
 from bookplaylist.views import (
     TemplateContextMixin, login_required, sensitive_post_parameters,
@@ -243,3 +243,27 @@ class VerificationAgainView(TemplateContextMixin, generic.FormView):
 class VerificationSentView(TemplateContextMixin, generic.TemplateView):
     page_title = _('Email for verification sent')
     template_name = 'accounts/verification_sent.html'
+
+
+@login_required
+class DeacrivateView(TemplateContextMixin, generic.UpdateView):
+    form_class = DeacrivateForm
+    model = UserModel
+    page_title = _('Deactivate your account')
+    success_url = reverse_lazy('accounts:deactivate_complete')
+    template_name = 'accounts/deactivate.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.is_active = False
+        instance.save()
+        auth_logout(self.request)
+        return super().form_valid(form)
+
+
+class DeacrivateCompleteView(TemplateContextMixin, generic.TemplateView):
+    page_title = _('Your account deactivated')
+    template_name = 'accounts/deactivate_complete.html'

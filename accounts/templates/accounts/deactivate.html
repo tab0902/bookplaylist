@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="container container-slim">
+    <section id="deactivate">
+        <h2 class="mt-4 mt-md-5">{{ page_title }}</h2>
+        <p class="mt-4">
+            {% blocktrans %}Once you press the "Deactivate" button below, the information related with your account (including all playlists you created) would NEVER be recovered.{% endblocktrans %}
+        </p>
+        <p class="mb-4">
+            {% blocktrans %}If you still want to delete this account even after understanding that, please tell us the reason why you intend to deactivate your account.{% endblocktrans %}
+        </p>
+        {% trans 'Deactivate' as submit_text %}
+        {% include 'layouts/form.html' with submit_text=submit_text button_class='btn-sub' %}
+    </section>
+</div>
+
+{% endblock %}
