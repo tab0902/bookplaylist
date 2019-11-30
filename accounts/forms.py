@@ -11,7 +11,6 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 
-from .models import User
 from bookplaylist.utils import SendEmailMixin
 
 UserModel = get_user_model()
@@ -20,7 +19,7 @@ UserModel = get_user_model()
 class UserCreationForm(BaseUserCreationForm):
 
     class Meta:
-        model = User
+        model = UserModel
         fields = ('username', 'email', )
 
     def __init__(self, *args, **kwargs):
@@ -32,14 +31,14 @@ class UserCreationForm(BaseUserCreationForm):
 class UserChangeForm(BaseUserChangeForm):
 
     class Meta:
-        model = User
+        model = UserModel
         fields = '__all__'
 
 
 class UserSettingsForm(forms.ModelForm):
 
     class Meta(UserChangeForm.Meta):
-        model = User
+        model = UserModel
         fields = ('username', 'email')
 
     def __init__(self, *args, **kwargs):
@@ -51,7 +50,7 @@ class UserSettingsForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
-        model = User
+        model = UserModel
         fields = ('comment',)
 
 
