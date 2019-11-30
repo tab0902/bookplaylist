@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-30 14:47+0900\n"
+"POT-Creation-Date: 2019-11-30 14:50+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -542,7 +542,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: bookplaylist/templates/layouts/footer.html:9 main/views.py:516
+#: bookplaylist/templates/layouts/footer.html:9 main/views.py:521
 msgid "Terms"
 msgstr "利用規約"
 
@@ -550,11 +550,11 @@ msgstr "利用規約"
 msgid "Privacy"
 msgstr "プライバシー"
 
-#: bookplaylist/templates/layouts/footer.html:15 main/views.py:526
+#: bookplaylist/templates/layouts/footer.html:15 main/views.py:531
 msgid "About BooxMix"
 msgstr "BooxMixについて"
 
-#: bookplaylist/templates/layouts/footer.html:18 main/views.py:532
+#: bookplaylist/templates/layouts/footer.html:18 main/views.py:537
 msgid "Contact"
 msgstr "お問い合わせ"
 
@@ -823,7 +823,7 @@ msgstr "お問い合わせを受信しました。内容は以下の通りです
 msgid "User"
 msgstr "ユーザー"
 
-#: main/templates/main/contact_subject.html:2 main/views.py:551
+#: main/templates/main/contact_subject.html:2 main/views.py:556
 msgid "We recieve your inquiry"
 msgstr "お問い合わせ完了"
 
@@ -999,7 +999,7 @@ msgid "Let's create book playlist and share it."
 msgstr "本のプレイリストを作ってシェアしよう。"
 
 #: main/templates/main/playlists/update.html:15
-#: main/templates/main/playlists/update.html:21 main/views.py:497
+#: main/templates/main/playlists/update.html:21 main/views.py:502
 msgid "Delete playlist"
 msgstr "プレイリストを削除する"
 
@@ -1037,15 +1037,19 @@ msgstr ""
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:483
+#: main/views.py:461
+msgid "This book has already been added to the playlist."
+msgstr "この本は既にリストに追加されています。"
+
+#: main/views.py:488
 msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
-#: main/views.py:502
+#: main/views.py:507
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
-#: main/views.py:521
+#: main/views.py:526
 msgid "Privacy policy"
 msgstr "プライバシーポリシー"
 

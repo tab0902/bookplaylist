@@ -456,11 +456,16 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
                 'publisher': book['Item']['publisherName'],
                 'cover': book['Item']['largeImageUrl'],
             }
-        if book_json not in request.session.get(SESSION_KEY_BOOK):
-            request.session[SESSION_KEY_BOOK] += [book_json]
-            book_num = len(request.session[SESSION_KEY_BOOK])
-            request.session[SESSION_KEY_FORM]['playlist_book_set-{}-book'.format(book_num-1)] = book_json['isbn']
-            request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS'] = str(int(request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS']) + 1)
+
+        if book_json in request.session.get(SESSION_KEY_BOOK):
+            messages.error(request, _('This book has already been added to the playlist.'))
+            url = self.get_redirect_url()
+            return HttpResponseRedirect(url)
+
+        request.session[SESSION_KEY_BOOK] += [book_json]
+        book_num = len(request.session[SESSION_KEY_BOOK])
+        request.session[SESSION_KEY_FORM]['playlist_book_set-{}-book'.format(book_num-1)] = book_json['isbn']
+        request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS'] = str(int(request.session[SESSION_KEY_FORM]['playlist_book_set-TOTAL_FORMS']) + 1)
         return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
