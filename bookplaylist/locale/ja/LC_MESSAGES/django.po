@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-30 14:50+0900\n"
+"POT-Creation-Date: 2019-11-30 15:30+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -29,6 +29,10 @@ msgstr ""
 #: accounts/admin.py:26
 msgid "Important dates"
 msgstr ""
+
+#: accounts/admin.py:27
+msgid "Others"
+msgstr "その他"
 
 #: accounts/apps.py:7
 msgid "accounts"
@@ -151,11 +155,15 @@ msgstr "フェイスブックID"
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models/base.py:76 main/models/base.py:158
+#: accounts/models/base.py:64
+msgid "reason for deactivation"
+msgstr "退会理由"
+
+#: accounts/models/base.py:77 main/models/base.py:158
 msgid "user"
 msgstr ""
 
-#: accounts/models/base.py:77
+#: accounts/models/base.py:78
 msgid "users"
 msgstr ""
 
