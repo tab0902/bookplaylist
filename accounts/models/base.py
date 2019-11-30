@@ -23,7 +23,6 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     username = NullCharField(
         _('username'),
         max_length=150,
-        unique=True,
         blank=True,
         null=True,
         help_text=_('Required. 150 characters or fewer. Letters, digits and _ only.'),
@@ -34,7 +33,6 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     )
     email = NullEmailField(
         _('email address'),
-        unique=True,
         blank=True,
         null=True,
         help_text=_('Required. Enter a valid email address.'),
@@ -60,8 +58,8 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
     comment = NullTextField(_('comment'), blank=True, null=True)
-    twitter_id = NullCharField(_('Twitter ID'), max_length=255, unique=True, blank=True, null=True)
-    facebook_id = NullCharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
+    twitter_id = NullCharField(_('Twitter ID'), max_length=255, blank=True, null=True)
+    facebook_id = NullCharField(_('Facebook ID'), max_length=255, blank=True, null=True)
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
 
     objects = UserManager()
@@ -78,9 +76,17 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         verbose_name = _('user')
         verbose_name_plural = _('users')
         indexes =  [
+            models.Index(fields=['username'], name='username'),
+            models.Index(fields=['email'], name='email'),
             models.Index(fields=['date_joined'], name='date_joined'),
             models.Index(fields=['last_login'], name='last_login'),
         ] + BaseModel._meta.indexes
+        constraints = [
+            models.UniqueConstraint(fields=['username'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='username'),
+            models.UniqueConstraint(fields=['email'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='email'),
+            models.UniqueConstraint(fields=['twitter_id'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='twitter_id'),
+            models.UniqueConstraint(fields=['facebook_id'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='facebook_id'),
+        ]
 
     def __str__(self):
         return '%s' % (self.get_username() or self.pk)
