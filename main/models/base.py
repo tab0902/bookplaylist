@@ -19,8 +19,8 @@ from .manager import (
 
 
 class Theme(BaseModel):
-    name = NullCharField(_('theme name'), max_length=50, unique=True)
-    slug = NullSlugField(_('slug'), blank=True, null=True, unique=True)
+    name = NullCharField(_('theme name'), max_length=50)
+    slug = NullSlugField(_('slug'), blank=True, null=True)
     sequence = models.SmallIntegerField(_('sequence'), blank=True, null=True)
     description = NullTextField(_('description'), blank=True, null=True)
 
@@ -30,8 +30,14 @@ class Theme(BaseModel):
         verbose_name = _('theme')
         verbose_name_plural = _('themes')
         indexes = [
+            models.Index(fields=['name'], name='name'),
+            models.Index(fields=['slug'], name='slug'),
             models.Index(fields=['sequence'], name='sequence'),
         ] + BaseModel._meta.indexes
+        constraints = [
+            models.UniqueConstraint(fields=['name'], condition=models.Q(deleted_at__isnull=True), name='name'),
+            models.UniqueConstraint(fields=['slug'], condition=models.Q(deleted_at__isnull=True), name='slug'),
+        ]
 
     def __str__(self):
         return '%s' % self.name
@@ -39,9 +45,9 @@ class Theme(BaseModel):
 
 class Provider(BaseModel):
     name = NullCharField(_('provider name'), max_length=50)
-    slug = NullSlugField(_('slug'), unique=True)
+    slug = NullSlugField(_('slug'))
     endpoint = NullURLField(_('endpoint'))
-    priority = models.SmallIntegerField(_('priority'), unique=True)
+    priority = models.SmallIntegerField(_('priority'))
     description = NullTextField(_('description'), blank=True, null=True)
     is_available = models.BooleanField(_('available'), default=True)
     objects = ProviderManager()
@@ -52,6 +58,16 @@ class Provider(BaseModel):
         ordering = ['priority']
         verbose_name = _('provider')
         verbose_name_plural = _('providers')
+        indexes = [
+            models.Index(fields=['name'], name='name'),
+            models.Index(fields=['slug'], name='slug'),
+            models.Index(fields=['priority'], name='priority'),
+        ] + BaseModel._meta.indexes
+        constraints = [
+            models.UniqueConstraint(fields=['name'], condition=models.Q(deleted_at__isnull=True), name='name'),
+            models.UniqueConstraint(fields=['slug'], condition=models.Q(deleted_at__isnull=True), name='slug'),
+            models.UniqueConstraint(fields=['priority'], condition=models.Q(deleted_at__isnull=True), name='priority'),
+        ]
 
     def __str__(self):
         return '%s' % self.name
@@ -120,7 +136,9 @@ class BookData(BaseModel):
             models.Index(fields=['author'], name='author'),
             models.Index(fields=['publisher'], name='publisher'),
         ] + BaseModel._meta.indexes
-        unique_together = [['book', 'provider']]
+        constraints = [
+            models.UniqueConstraint(fields=['book', 'provider'], name='book_isbn_provider_id_uniq'),
+        ]
 
     def __str__(self):
         return '%s' % self.title
@@ -211,7 +229,9 @@ class PlaylistBook(BaseModel):
         ordering = ['playlist', 'created_at']
         verbose_name = _('book in playlist')
         verbose_name_plural = _('books in playlists')
-        unique_together = [['playlist', 'book']]
+        constraints = [
+            models.UniqueConstraint(fields=['playlist', 'book'], condition=models.Q(deleted_at__isnull=True), name='playlist_id_book_isbn_uniq'),
+        ]
 
     def __str__(self):
         return '%s' % self.book
