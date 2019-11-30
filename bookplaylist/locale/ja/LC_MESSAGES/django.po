@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-30 16:57+0900\n"
+"POT-Creation-Date: 2019-11-30 18:40+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -38,43 +38,43 @@ msgstr "その他"
 msgid "accounts"
 msgstr "アカウント"
 
-#: accounts/forms.py:60
+#: accounts/forms.py:59
 msgid "The two password fields didn’t match."
 msgstr ""
 
-#: accounts/forms.py:63 accounts/templates/accounts/settings.html:24
+#: accounts/forms.py:62 accounts/templates/accounts/settings.html:24
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:64 accounts/forms.py:122
+#: accounts/forms.py:63 accounts/forms.py:121
 msgid "At least 8 characters"
 msgstr "最低8文字以上"
 
-#: accounts/forms.py:69
+#: accounts/forms.py:68
 msgid "Password (again)"
 msgstr ""
 
-#: accounts/forms.py:70 accounts/forms.py:123
+#: accounts/forms.py:69 accounts/forms.py:122
 msgid "Enter the same password"
 msgstr "同じパスワードを入力してください"
 
-#: accounts/forms.py:72
+#: accounts/forms.py:71
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: accounts/forms.py:111
+#: accounts/forms.py:110
 msgid "Username or Email Address"
 msgstr "ユーザー名またはメールアドレス"
 
-#: accounts/forms.py:119
+#: accounts/forms.py:118
 msgid "Letters, numbers, and _ characters"
 msgstr "半角英数またはアンダーバー"
 
-#: accounts/forms.py:120
+#: accounts/forms.py:119
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:164 main/forms.py:136
+#: accounts/forms.py:163 main/forms.py:136
 #: main/templates/main/contact_email_admin.html:6
 msgid "Email"
 msgstr ""
@@ -586,6 +586,19 @@ msgstr "不具合報告"
 #: bookplaylist/settings.py:206
 msgid "Other inquiry"
 msgstr "上記以外のお問い合わせ"
+
+#: bookplaylist/templates/404.html:11
+msgid "The requested resource was not found on this server."
+msgstr "お探しのページが見つかりませんでした"
+
+#: bookplaylist/templates/500.html:11
+msgid "An unexpected error has occurred."
+msgstr "予期せぬエラーが発生しました。"
+
+#: bookplaylist/templates/500.html:12
+msgid "If this page have been displayed repeatedly, please inform us."
+msgstr ""
+"この画面が繰り返し表示される場合は、お手数ですが運営までご連絡ください。"
 
 #: bookplaylist/templates/layouts/drawer.html:17
 #: bookplaylist/templates/layouts/header.html:33

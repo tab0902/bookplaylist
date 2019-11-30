@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="container">
+    <section id="not-found">
+        <h1 class="heading-lg text-center mt-4 mt-md-5">Internal Server Error</h1>
+        <p class="font-weight-bold text-center mt-4">
+            {% blocktrans %}An unexpected error has occurred.{% endblocktrans %}<br>
+            {% blocktrans %}If this page have been displayed repeatedly, please inform us.{% endblocktrans %}
+        </p>
+        <div class="row mt-5">
+            <div class="col-8 offset-2 col-md-4 offset-md-4">
+                <img src="{% static 'img/book-people.png' %}" width="100%">
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
