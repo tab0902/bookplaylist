@@ -22,13 +22,14 @@
 
 {% block content %}
 
+{% trans 'Pick your favorite books<br>and share it to your friends!' as hero_title %}
+{% trans 'Let’s create a book-playlist which contains your favorite books, and share it on your social network. ' as text_create_playlist %}
+
 <section id="hero-pc" class="hero d-none d-md-block" style="background-image:url('{% static 'img/hero-pc.jpg' %}');">
     <div class="hero-content-pc container">
-        <h1 class="hero-title-pc mt-2">{% trans 'Share your book recommendation <br>and let others motivative.' %}</h1>
+        <h1 class="hero-title-pc mt-2">{{ hero_title }}</h1>
         {# <h2 class="mt-4">{% trans 'Create playlist' %}</h2> #}
-        <p class="mt-4">
-            {% trans 'Let’s create your own book playlist on your phone. You can easily share it on your social network.' %}
-        </p>
+        <p class="mt-4">{{ text_create_playlist }}</p>
         <a href="{% url 'main:create_or_signup' %}" class="btn btn-main float-right mt-4">{% trans 'Create playlist' %}</a>
 
         {% comment %}
@@ -39,22 +40,40 @@
 </section>
 
 <section id="hero-sp" class="hero d-md-none" style="background-image:url('{% static 'img/hero-sp.jpg' %}');">
-    <h1 class="hero-title-sp">{% trans 'Share your book recommendation <br>and let others motivative.' %}</h1>
+    <h1 class="hero-title-sp">{{ hero_title }}</h1>
 </section>
 
 <div class="container">
     <section id="index-create-playlist-sp" class="d-md-none">
         <h2 class="mt-4">{% trans 'Create book playlist' %}</h2>
-        <p>
-            {% trans 'Let’s create your own book playlist on your phone. You can easily share it on your social network.' %}
-        </p>
+        <p>{{ text_create_playlist }}</p>
         <a href="{% url 'main:create_or_signup' %}" class="btn btn-main w-100">{% trans 'Create' %}</a>
         <div class="line-gray my-4"></div>
     </section>
 
-    <section id="index-theme-list">
-        <h2 class="mt-5">{% trans 'Hot playlists' %}</h2>
-        <div class="text-md d-none d-md-block">{% trans 'We picked up hot topics and playlists.' %}</div>
+    <section id="index-howto">
+        <div class="row pb-2 py-md-4">
+            <div class="col-md-6">
+                <h2 class="mt-3 mt-md-5 heading-lg">1.&nbsp;{% trans 'Easy to pick books' %}</h2>
+                <p class="mt-3">{% trans 'Make your book-playlist on your smartphone. It is easier than any other blog services.' %}</p>
+                <div class="row">
+                    <div class="col-6 offset-3 col-md-4 col-offset-4">
+                        <img src="{% static 'img/howto-1.png' %}" width="100%" class="mt-2">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="mt-5 heading-lg">2.&nbsp;{% trans 'No more picture editing' %}</h2>
+                <p class="mt-3">{% trans 'We make your favorite books into one picture automatically.' %}</p>
+                <div class="row">
+                    <div class="col-6 offset-3 col-md-4 col-offset-4">
+                        <img src="{% static 'img/howto-2.png' %}" width="100%" class="mt-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="heading-lg mt-5">3.&nbsp;{% trans 'Discover your “Want to Read” books' %}</h2>
+        <p class="mt-3">{% trans 'A lot of people are sharing book-playlists. Let’s look around and  find your “want to read” books.' %}</p>
         {% for theme, playlists in themes %}
         <h3 class="mt-4 mt-md-5">
             <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="color-gray">
@@ -69,6 +88,18 @@
             {% blocktrans with theme.name as theme %}Show all {{ theme }}{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
         </a>
         {% endfor %}
+    </section>
+
+    {% trans "Why don't you create your first book-playlist?" as lets_create_text %}
+    <section id="index-lets-create">
+        <div class="d-md-none">
+            <div class="line-gray my-4"></div>
+            <h2 class="mt-sm-3">{{ lets_create_text }}</h2>
+            <button type="button" class="btn btn-main w-100 mt-3 mt-lg-4">{% trans 'Create playlist' %}</button>
+        </div>
+        <div class="d-none d-md-block">
+            {% include 'main/playlists/layouts/lets-create-playlist.html' with lets_create_text=lets_create_text %}
+        </div>
     </section>
 
     {% comment %}
