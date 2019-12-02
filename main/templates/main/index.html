@@ -90,6 +90,18 @@
         {% endfor %}
     </section>
 
+    {% trans "Why don't you create your first book-playlist?" as lets_create_text %}
+    <section id="index-lets-create">
+        <div class="d-md-none">
+            <div class="line-gray my-4"></div>
+            <h2 class="mt-sm-3">{{ lets_create_text }}</h2>
+            <button type="button" class="btn btn-main w-100 mt-3 mt-lg-4">{% trans 'Create playlist' %}</button>
+        </div>
+        <div class="d-none d-md-block">
+            {% include 'main/playlists/layouts/lets-create-playlist.html' with lets_create_text=lets_create_text %}
+        </div>
+    </section>
+
     {% comment %}
     <section id="search-playlist" class="d-md-none">
         <h2>{% trans 'Search playlist' %}</h2>

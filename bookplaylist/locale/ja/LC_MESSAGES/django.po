@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 16:48+0900\n"
+"POT-Creation-Date: 2019-12-02 18:13+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -318,7 +318,7 @@ msgstr "引き続きBooxMixをお楽しみください。"
 
 #: accounts/templates/accounts/password_reset_complete.html:16
 #: accounts/templates/accounts/verification.html:16
-#: main/templates/main/index.html:33
+#: main/templates/main/index.html:33 main/templates/main/index.html:99
 #: main/templates/main/playlists/layouts/lets-create-playlist.html:22
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
@@ -957,6 +957,10 @@ msgstr "すべて見る"
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
+
+#: main/templates/main/index.html:94
+msgid "Why don't you create your first book-playlist?"
+msgstr "さあ、あなたも本のプレイリストを作ってみましょう！"
 
 #: main/templates/main/playlists/book.html:11
 #, python-format
