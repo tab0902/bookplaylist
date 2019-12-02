@@ -12,25 +12,27 @@
                 <img src="{{ playlist.og_image.url }}" width="100%">
             </a>
         </div>
-            <div class="row">
-                <div class="col-sm-8 offset-sm-2">
-                    {% with origin=request.scheme|add:'://'|add:request.get_host absolute_url=playlist.get_absolute_url %}
-                    <a
-                        href="https://twitter.com/intent/tweet?text={{ playlist.title|urlencode }}&url={{ origin|urlencode }}{{ absolute_url|urlencode }}"
-                        target="_blank"
-                        class="btn btn-twitter w-100 mt-5"
-                    >
-                        <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
-                    </a>
-                    {% endwith %}
-                </div>
-                <div class="col-md-6 offset-md-3">
-                    <a href="{% url 'main:playlist_create' %}" class="btn btn-inline-main w-100 mt-5">{% trans 'Create one more playlist' %}</a>
-                </div>
-                <div class="col-md-6 offset-md-3">
-                    <a href="{% url 'accounts:index' %}" class="btn btn-inline-sub w-100 mt-4">{% trans 'My page' %}</a>
-                </div>
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                {% with origin=request.scheme|add:'://'|add:request.get_host absolute_url=playlist.get_absolute_url %}
+                <a
+                    href="https://twitter.com/intent/tweet?text={{ playlist.title|urlencode }}&url={{ origin|urlencode }}{{ absolute_url|urlencode }}"
+                    target="_blank"
+                    class="btn btn-twitter w-100 mt-5"
+                >
+                    <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
+                </a>
+                {% endwith %}
             </div>
+        </div>
+        <div class="line-gray mt-5 mb-4 mb-md-5"></div>
+        <h2 class="mt-4">{% trans 'Create one more playlist' %}</h2>
+        <p>{% trans 'Let’s create another playlist by sharing your knowledge, experience and specialty.' %}</p>
+        <div class="row mb-md-5">
+            <div class="col-md-8 offset-md-2">
+                <a href="{% url 'main:create_or_signup' %}" class="btn btn-outline-main w-100">{% trans 'Create' %}</a>
+            </div>
+        </div>
     </section>
 </div>
 

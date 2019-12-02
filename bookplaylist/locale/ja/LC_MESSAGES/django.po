@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 16:43+0900\n"
+"POT-Creation-Date: 2019-12-02 16:48+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -328,7 +328,6 @@ msgstr "プレイリストを作成する"
 #: accounts/templates/accounts/verification.html:19 accounts/views.py:33
 #: bookplaylist/templates/layouts/drawer.html:15
 #: bookplaylist/templates/layouts/header.html:28
-#: main/templates/main/playlists/create_complete.html:31
 msgid "My page"
 msgstr "マイページ"
 
@@ -911,6 +910,7 @@ msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/index.html:51
+#: main/templates/main/playlists/create_complete.html:33
 msgid "Create"
 msgstr "作成する"
 
@@ -976,9 +976,17 @@ msgstr "検索する"
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:28
+#: main/templates/main/playlists/create_complete.html:29
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
+
+#: main/templates/main/playlists/create_complete.html:30
+msgid ""
+"Let’s create another playlist by sharing your knowledge, experience and "
+"specialty."
+msgstr ""
+"あなたの知識や経験、専門性に関してお勧めな本のプレイリストをもう一つ作成しま"
+"せんか？"
 
 #: main/templates/main/playlists/delete.html:11
 #, python-format
