@@ -1,5 +1,6 @@
 import re
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required as login_required_
 from django.shortcuts import redirect
@@ -26,9 +27,12 @@ class TemplateContextMixin:
         'BooxMixは、気軽に本を複数冊まとめてプレイリストを作成し、SNSでシェアできるウェブサービスです。誰もが本屋の書店員さんのようにおすすめ本を選びTwitterで共有できます。本選びに悩む人も、リストから新しい本を発見できます。'
     og_type = 'article'
     og_image = static('img/hero-sp.jpg')
+    og_image_width = None
+    og_image_height = None
     og_site_name = 'BooxMix'
     twitter_card = 'summary_large_image'
     twitter_site = '@BooxMix'
+    fb_app_id = settings.FACEBOOK_APP_ID
 
     def dispatch(self, *args, **kwargs):
         self.og_url = '{}://{}'.format(self.request.scheme, self.request.get_host())
@@ -42,7 +46,10 @@ class TemplateContextMixin:
             'og_type': self.og_type,
             'og_url': self.og_url,
             'og_image': self.og_image,
+            'og_image_width': self.og_image_width,
+            'og_image_height': self.og_image_height,
             'og_site_name': self.og_site_name,
+            'fb_app_id': self.fb_app_id,
             'twitter_card': self.twitter_card,
             'twitter_site': self.twitter_site,
         })

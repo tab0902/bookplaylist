@@ -24,6 +24,13 @@
                 >
                     <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
                 </a>
+                <a
+                    href="https://www.facebook.com/sharer/sharer.php?u={{ origin|urlencode }}{{ absolute_url|urlencode }}"
+                    target="_blank"
+                    class="btn btn-outline-facebook w-100 mt-3"
+                >
+                    <i class="fab fa-facebook"></i>&nbsp;&nbsp;{% trans 'Share on Facebook' %}
+                </a>
                 {% endwith %}
                 {% endwith %}
                 {% endwith %}

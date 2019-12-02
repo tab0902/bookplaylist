@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 19:16+0900\n"
+"POT-Creation-Date: 2019-12-03 15:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -604,7 +604,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: bookplaylist/templates/layouts/footer.html:9 main/views.py:521
+#: bookplaylist/templates/layouts/footer.html:9 main/views.py:527
 msgid "Terms"
 msgstr "利用規約"
 
@@ -612,11 +612,11 @@ msgstr "利用規約"
 msgid "Privacy"
 msgstr "プライバシー"
 
-#: bookplaylist/templates/layouts/footer.html:15 main/views.py:531
+#: bookplaylist/templates/layouts/footer.html:15 main/views.py:537
 msgid "About BooxMix"
 msgstr "BooxMixについて"
 
-#: bookplaylist/templates/layouts/footer.html:18 main/views.py:537
+#: bookplaylist/templates/layouts/footer.html:18 main/views.py:543
 msgid "Contact"
 msgstr "お問い合わせ"
 
@@ -632,11 +632,11 @@ msgstr "BookPlayList 管理サイト"
 msgid "Home"
 msgstr ""
 
-#: bookplaylist/views.py:24
+#: bookplaylist/views.py:25
 msgid "Share Book Playlists on your SNS."
 msgstr "本のプレイリストをSNSでシェアしよう。"
 
-#: bookplaylist/views.py:65
+#: bookplaylist/views.py:72
 msgid "You don't have permission to access the page."
 msgstr "ページにアクセスする権限がありません"
 
@@ -885,7 +885,7 @@ msgstr "お問い合わせを受信しました。内容は以下の通りです
 msgid "User"
 msgstr "ユーザー"
 
-#: main/templates/main/contact_subject.html:2 main/views.py:556
+#: main/templates/main/contact_subject.html:2 main/views.py:562
 msgid "We recieve your inquiry"
 msgstr "お問い合わせ完了"
 
@@ -905,12 +905,12 @@ msgstr ""
 "大好きな本や、友達にお勧めしたい本をまとめて、プレイリストを作成し、気軽にSNS"
 "でシェアしましょう。"
 
-#: main/templates/main/index.html:49 main/views.py:266
+#: main/templates/main/index.html:49 main/views.py:268
 msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/index.html:51
-#: main/templates/main/playlists/create_complete.html:37
+#: main/templates/main/playlists/create_complete.html:44
 msgid "Create"
 msgstr "作成する"
 
@@ -948,12 +948,12 @@ msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
 #: main/templates/main/index.html:86
-#: main/templates/main/playlists/detail.html:157
+#: main/templates/main/playlists/detail.html:163
 msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:89
-#: main/templates/main/playlists/detail.html:161
+#: main/templates/main/playlists/detail.html:167
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
@@ -967,7 +967,7 @@ msgstr "さあ、あなたも本のプレイリストを作ってみましょう
 msgid "Books related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれる書籍一覧"
 
-#: main/templates/main/playlists/book.html:13 main/views.py:329
+#: main/templates/main/playlists/book.html:13 main/views.py:333
 msgid "Search book to add"
 msgstr "追加する本を探す"
 
@@ -980,11 +980,15 @@ msgstr "検索する"
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:33
+#: main/templates/main/playlists/create_complete.html:32
+msgid "Share on Facebook"
+msgstr "Facebookでシェアする"
+
+#: main/templates/main/playlists/create_complete.html:40
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
-#: main/templates/main/playlists/create_complete.html:34
+#: main/templates/main/playlists/create_complete.html:41
 msgid ""
 "Let’s create another playlist by sharing your knowledge, experience and "
 "specialty."
@@ -1005,30 +1009,30 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlists/detail.html:104
+#: main/templates/main/playlists/detail.html:110
 #: main/templates/main/playlists/layouts/book-list.html:25
 msgid "No Image"
 msgstr ""
 
-#: main/templates/main/playlists/detail.html:116
-#: main/templates/main/playlists/detail.html:123
+#: main/templates/main/playlists/detail.html:122
+#: main/templates/main/playlists/detail.html:129
 #: main/templates/main/playlists/layouts/list-widget.html:22
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlists/detail.html:134
+#: main/templates/main/playlists/detail.html:140
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlists/detail.html:150
+#: main/templates/main/playlists/detail.html:156
 msgid "Playlists with same theme"
 msgstr "同じテーマのおすすめ"
 
-#: main/templates/main/playlists/detail.html:152
+#: main/templates/main/playlists/detail.html:158
 msgid "These are also recommended"
 msgstr "あなたへのおすすめ"
 
-#: main/templates/main/playlists/detail.html:163
+#: main/templates/main/playlists/detail.html:169
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
 
@@ -1100,7 +1104,7 @@ msgid "Let's create book playlist and share it."
 msgstr "本のプレイリストを作ってシェアしよう。"
 
 #: main/templates/main/playlists/update.html:15
-#: main/templates/main/playlists/update.html:21 main/views.py:502
+#: main/templates/main/playlists/update.html:21 main/views.py:508
 msgid "Delete playlist"
 msgstr "プレイリストを削除する"
 
@@ -1108,19 +1112,19 @@ msgstr "プレイリストを削除する"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:236
+#: main/views.py:238
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:290
+#: main/views.py:292
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
 
-#: main/views.py:291
+#: main/views.py:293
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:376
+#: main/views.py:380
 msgid ""
 "<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
 "p>"
@@ -1128,29 +1132,29 @@ msgstr ""
 "<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
 "い。</p>"
 
-#: main/views.py:378
+#: main/views.py:382
 msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
 msgstr ""
 "<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
 "い。</p>"
 
-#: main/views.py:423
+#: main/views.py:427
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:461
+#: main/views.py:465
 msgid "This book has already been added to the playlist."
 msgstr "この本は既にリストに追加されています。"
 
-#: main/views.py:488
+#: main/views.py:492
 msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
-#: main/views.py:507
+#: main/views.py:513
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
-#: main/views.py:526
+#: main/views.py:532
 msgid "Privacy policy"
 msgstr "プライバシーポリシー"
 

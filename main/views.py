@@ -136,21 +136,23 @@ class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
     def get_queryset(self):
         return super().get_queryset().select_related('theme', 'user')
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         self.page_title = self.object.title
         self.page_description = \
         self.object.description or \
         'BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。'
         self.og_url =  self.request.build_absolute_uri()
         self.og_image =  self.object.og_image.url
+        self.og_image_width = 1200
+        self.og_image_height = 630
         conditions = {'playlist_book__count__gte': 2}
         if self.object.theme:
             conditions['theme'] = self.object.theme
-        context = super().get_context_data(*args, **kwargs)
+        context = super().get_context_data(**kwargs)
         context['other_playlists'] = Playlist.objects \
-                .annotate(Count('playlist_book')) \
-                .exclude(pk=self.object.pk) \
-                .filter(**conditions)[:4]
+            .annotate(Count('playlist_book')) \
+            .exclude(pk=self.object.pk) \
+            .filter(**conditions)[:4]
         return context
 
 
@@ -320,6 +322,8 @@ class PlaylistUpdateView(TemplateContextMixin, OwnerOnlyMixin, BasePlaylistFormV
     def get_context_data(self, **kwargs):
         self.og_url = self.get_full_absolute_url(self.object)
         self.og_image = self.object.og_image.url
+        self.og_image_width = 1200
+        self.og_image_height = 630
         return super().get_context_data(**kwargs)
 
 
@@ -493,6 +497,8 @@ class PlaylistCreateCompleteView(TemplateContextMixin, OwnerOnlyMixin, generic.D
     def get_context_data(self, **kwargs):
         self.og_url = self.get_full_absolute_url(self.object)
         self.og_image = self.object.og_image.url
+        self.og_image_width = 1200
+        self.og_image_height = 630
         return super().get_context_data(**kwargs)
 
 
