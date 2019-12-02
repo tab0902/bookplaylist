@@ -14,14 +14,18 @@
         </div>
         <div class="row">
             <div class="col-sm-8 offset-sm-2">
-                {% with origin=request.scheme|add:'://'|add:request.get_host absolute_url=playlist.get_absolute_url %}
+                {% with text='【'|add:playlist.title|add:'】%0a'|add:playlist.description %}
+                {% with origin=request.scheme|add:'://'|add:request.get_host %}
+                {% with absolute_url=playlist.get_absolute_url %}
                 <a
-                    href="https://twitter.com/intent/tweet?text={{ playlist.title|urlencode }}&url={{ origin|urlencode }}{{ absolute_url|urlencode }}"
+                    href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ origin|urlencode }}{{ absolute_url|urlencode }}"
                     target="_blank"
                     class="btn btn-twitter w-100 mt-5"
                 >
                     <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
                 </a>
+                {% endwith %}
+                {% endwith %}
                 {% endwith %}
             </div>
         </div>
