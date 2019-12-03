@@ -9,7 +9,7 @@ from django.db.models import (
     Count, Q,
 )
 from django.http import (
-    HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, HttpResponseServerError,
+    Http404, HttpResponse,
 )
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy
@@ -360,7 +360,7 @@ class BookSearchView(APIMixin, generic.View):
     def search_book(self, data):
         q = data.get('q')
         if not self.request.is_ajax() or not q:
-            return HttpResponseBadRequest()
+            raise Http404
 
         if self.provider.slug == 'rakuten':
             params = {
@@ -447,10 +447,14 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
                 params = {}
             response = self.get_book_data(params)
             if 'error' in response:
-                return HttpResponseServerError()
+                messages.error(_('An error has occurred. Please retry later.'))
+                url = self.get_redirect_url()
+                return HttpResponseRedirect(url)
             response = response.json()
             if int(response['count']) == 0:
-                return HttpResponseServerError()
+                messages.error(_('We could\'t find the book you want to add. Please retry again.'))
+                url = self.get_redirect_url()
+                return HttpResponseRedirect(url)
             book = response['Items'][0]
             book_json = {
                 'isbn': self.kwargs.get('isbn'),
