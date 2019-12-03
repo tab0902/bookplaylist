@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
-    BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField,
+    BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, remove_emoji,
 )
 from .manager import (
     AllPlaylistManager, BookDataManager, BookManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
@@ -187,12 +187,13 @@ class Playlist(FileModel):
         super().hard_delete()
 
     def save_og_image(self, save=True):
-        # save self.og_image
         book_count = self.playlist_book_set.count()
         if book_count < 6:
             template = get_template('main/playlists/og_image/{}.html'.format(book_count))
         else:
             template = get_template('main/playlists/og_image/6.html')
+        raw_title = self.title
+        self.title = remove_emoji(raw_title.strip())
         context = {'playlist': self}
         options = {
             'encoding': 'UTF-8',
@@ -201,6 +202,7 @@ class Playlist(FileModel):
             'quiet': '',
         }
         img = imgkit.from_string(template.render(context), False, options=options)
+        self.title = raw_title
         self.og_image.save('{}.jpg'.format(str(self.pk)), ContentFile(img), save=save)
 
 
