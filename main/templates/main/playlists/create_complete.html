@@ -27,7 +27,7 @@
                 <a
                     href="https://www.facebook.com/sharer/sharer.php?u={{ origin|urlencode }}{{ absolute_url|urlencode }}"
                     target="_blank"
-                    class="btn btn-outline-facebook w-100 mt-3"
+                    class="btn btn-outline-facebook w-100 mt-4"
                 >
                     <i class="fab fa-facebook"></i>&nbsp;&nbsp;{% trans 'Share on Facebook' %}
                 </a>
@@ -41,7 +41,7 @@
         <p>{% trans 'Let’s create another playlist by sharing your knowledge, experience and specialty.' %}</p>
         <div class="row mb-md-5">
             <div class="col-md-8 offset-md-2">
-                <a href="{% url 'main:create_or_signup' %}" class="btn btn-outline-main w-100">{% trans 'Create' %}</a>
+                <a href="{% url 'main:create_or_signup' %}" class="btn btn-main w-100 mt-2">{% trans 'Create' %}</a>
             </div>
         </div>
     </section>
