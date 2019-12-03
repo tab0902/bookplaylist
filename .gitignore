@@ -10,4 +10,6 @@ db.sqlite3
 !/bookplaylist/static/fonts/
 !/bookplaylist/static/img/
 !/bookplaylist/static/js/
+!/bookplaylist/static/favicon.ico
+!/bookplaylist/static/apple-touch-icon.png
 /bookplaylist/secrets/*

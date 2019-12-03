@@ -10,6 +10,9 @@
     <title>{% spaceless %}{{ page_title }} | BooxMix{% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}{{ page_description | truncatechars:120 }}{% endspaceless %}">
 
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}" sizes="180x180">
+
     <meta property="og:title" content="{{ page_title }}" />
     <meta property="og:type" content="{{ og_type }}" />
     <meta property="og:url" content="{{ og_url }}" />
