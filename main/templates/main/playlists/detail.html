@@ -69,22 +69,30 @@
             </div>
         </div>
         {% endif %}
+        {% with text='【'|add:playlist.title|add:'】%0a'|add:playlist.description %}
         <div class="row mt-4{% if request.user == playlist.user %} mt-md-0{% endif %}">
-            <div class="col-2 col-md-1 offset-3 offset-md-9 text-center">
-                <a
-                    href="https://twitter.com/intent/tweet?text={{ playlist.title }}&url={{ og_url|urlencode }}"
-                    target="_blank"
-                >
-                    <i class="fab fa-twitter fa-twitter-color fa-2x"></i>
-                </a>
-            </div>
-            <div class="col-2 col-md-1 text-center">
-                <i class="fab fa-facebook fa-facebook-color fa-2x"></i>
-            </div>
-            <div class="col-2 col-md-1 text-center">
-                <i class="fab fa-instagram fa-2x"></i>
+            <div class="col-md-3 offset-md-9">
+                <div class="row">
+                    <div class="col-3 offset-3 col-md-4 offset-md-2 text-center">
+                        <a
+                            href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ og_url|urlencode }}"
+                            target="_blank"
+                        >
+                            <i class="fab fa-twitter fa-twitter-color fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="col-3 col-md-4 text-center">
+                        <a
+                            href="https://www.facebook.com/sharer/sharer.php?u={{ og_url|urlencode }}"
+                            target="_blank"
+                        >
+                            <i class="fab fa-facebook fa-facebook-color fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+        {% endwith %}
     </section>
 
     <section id="playlist-detail-books">

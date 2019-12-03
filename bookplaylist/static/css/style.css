@@ -287,6 +287,16 @@ textarea {
   border-color: #55acee;
 }
 
+/* button (twitter, outline) */
+.btn-outline-twitter {
+  color: #55acee;
+  border-color: #55acee;
+}
+.btn-outline-twitter:hover, .btn-outline-twitter:focus, .btn-outline-twitter:active {
+  color: #55acee;
+  border-color: #55acee;
+}
+
 /* button (twitter, inline) */
 .btn-inline-twitter {
   padding: 0;
@@ -308,7 +318,17 @@ textarea {
   border-color: #3B5998;
 }
 
-/* button (twitter, inline) */
+/* button (facebook, outline) */
+.btn-outline-facebook {
+  color: #3B5998;
+  border-color: #3B5998;
+}
+.btn-outline-facebook:hover, .btn-outline-facebook:focus, .btn-outline-facebook:active {
+  color: #3B5998;
+  border-color: #3B5998;
+}
+
+/* button (facebook, inline) */
 .btn-inline-facebook {
   padding: 0;
   color: #3B5998;
