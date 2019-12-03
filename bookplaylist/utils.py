@@ -5,9 +5,7 @@ import time
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
 
-from main.models import (
-    Provider
-)
+from main.models import Provider
 
 
 class APIMixin:
