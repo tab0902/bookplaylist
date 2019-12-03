@@ -48,3 +48,9 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+<script>
+dataLayer.push({'theme': '{{ playlist.theme }}'})
+</script>
+{% endblock %}
