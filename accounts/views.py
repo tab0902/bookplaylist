@@ -134,6 +134,14 @@ class PasswordResetConfirmView(TemplateContextMixin, auth_views.PasswordResetCon
     success_url = reverse_lazy('accounts:password_reset_complete')
     template_name = 'accounts/password_reset_confirm.html'
 
+    def get_user(self, uidb64):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = UserModel.all_objects_without_deleted.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist, ValidationError):
+            user = None
+        return user
+
 
 class PasswordResetCompleteView(TemplateContextMixin, auth_views.PasswordResetCompleteView):
     page_title = _('Password reset complete')
@@ -210,7 +218,7 @@ class VerificationView(TemplateContextMixin, generic.TemplateView):
     def get_user(self, uidb64):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
-            user = UserModel._default_manager.get(pk=uid)
+            user = UserModel.all_objects_without_deleted.get(pk=uid)
         except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist, ValidationError):
             user = None
         return user
