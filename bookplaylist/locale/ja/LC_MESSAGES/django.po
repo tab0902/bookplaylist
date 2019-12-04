@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-04 03:15+0900\n"
+"POT-Creation-Date: 2019-12-04 09:43+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -263,7 +263,7 @@ msgstr "Twitterでログイン"
 msgid "Sign up with Twitter"
 msgstr "Twitterで登録"
 
-#: accounts/templates/accounts/login.html:14 accounts/views.py:157
+#: accounts/templates/accounts/login.html:14 accounts/views.py:165
 #: bookplaylist/templates/layouts/drawer.html:13
 #: bookplaylist/templates/layouts/header.html:21
 msgid "Sign up"
@@ -275,7 +275,7 @@ msgid "or"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:19
-#: accounts/templates/accounts/signup.html:14 accounts/views.py:145
+#: accounts/templates/accounts/signup.html:14 accounts/views.py:153
 #: bookplaylist/templates/layouts/drawer.html:12
 #: bookplaylist/templates/layouts/header.html:16
 msgid "Log in"
@@ -449,7 +449,7 @@ msgstr "メールアドレス"
 msgid "Follow the link below to verify your account:"
 msgstr "下のURLから本登録を完了させてください。"
 
-#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:173
+#: accounts/templates/accounts/signup_subject.html:2 accounts/views.py:181
 msgid "Sign up complete"
 msgstr "仮登録完了"
 
@@ -518,27 +518,27 @@ msgstr "パスワード再設定"
 msgid "Email to reset password sent"
 msgstr "送信完了"
 
-#: accounts/views.py:139
+#: accounts/views.py:147
 msgid "Password reset complete"
 msgstr "パスワード再設定完了"
 
-#: accounts/views.py:183
+#: accounts/views.py:191
 msgid "Verification complete"
 msgstr "メール認証完了"
 
-#: accounts/views.py:230
+#: accounts/views.py:238
 msgid "Verification failed"
 msgstr "メール認証エラー"
 
-#: accounts/views.py:244
+#: accounts/views.py:252
 msgid "Email for verification sent"
 msgstr "送信完了"
 
-#: accounts/views.py:252
+#: accounts/views.py:260
 msgid "Deactivate your account"
 msgstr "アカウント削除"
 
-#: accounts/views.py:268
+#: accounts/views.py:276
 msgid "Your account deactivated"
 msgstr "アカウント削除完了"
 
