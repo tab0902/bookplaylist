@@ -21,6 +21,8 @@
                     href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ origin|urlencode }}{{ absolute_url|urlencode }}"
                     target="_blank"
                     class="btn btn-twitter w-100 mt-5"
+                    data-ga-event-category="share_self"
+                    data-ga-event-action="twitter"
                 >
                     <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
                 </a>
@@ -28,6 +30,8 @@
                     href="https://www.facebook.com/sharer/sharer.php?u={{ origin|urlencode }}{{ absolute_url|urlencode }}"
                     target="_blank"
                     class="btn btn-outline-facebook w-100 mt-4"
+                    data-ga-event-category="share_self"
+                    data-ga-event-action="facebook"
                 >
                     <i class="fab fa-facebook"></i>&nbsp;&nbsp;{% trans 'Share on Facebook' %}
                 </a>
@@ -41,10 +45,18 @@
         <p>{% trans 'Let’s create another playlist by sharing your knowledge, experience and specialty.' %}</p>
         <div class="row mb-md-5">
             <div class="col-md-8 offset-md-2">
-                <a href="{% url 'main:create_or_signup' %}" class="btn btn-main w-100 mt-2">{% trans 'Create' %}</a>
+                <a href="{% url 'main:playlist_create' %}" class="btn btn-main w-100 mt-2" data-ga-event-category="create_playlist_another">
+                    {% trans 'Create' %}
+                </a>
             </div>
         </div>
     </section>
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script>
+dataLayer.push({'theme': '{{ playlist.theme }}'})
+</script>
 {% endblock %}
