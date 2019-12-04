@@ -32,7 +32,7 @@ def create_user(strategy, details, backend, user=None, *args, **kwargs):
     if not fields:
         return
     elif not fields['email']:
-        messages.error(request, _('We cannot get your email address. Please modify the settings on your SNS account.'))
+        messages.error(strategy.request, _('We cannot get your email address. Please modify the settings on your SNS account.'))
         return redirect('accounts:signup')
     elif not fields['username']:
         fields['username'] = [x for x in re.split('[^0-9a-zA-Z_]+', fields['email']) if x][0]
