@@ -1,3 +1,5 @@
+import re
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
@@ -29,6 +31,11 @@ def create_user(strategy, details, backend, user=None, *args, **kwargs):
     fields = dict((name, kwargs.get(name, details.get(name))) for name in USER_FIELDS)
     if not fields:
         return
+    elif not fields['email']:
+        messages.error(request, _('We cannot get your email address. Please modify the settings on your SNS account.'))
+        return redirect('accounts:signup')
+    elif not fields['username']:
+        fields['username'] = [x for x in re.split('[^0-9a-zA-Z_]+', fields['email']) if x][0]
 
     return {
         'is_new': True,

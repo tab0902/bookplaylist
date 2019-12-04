@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 17:42+0900\n"
+"POT-Creation-Date: 2019-12-05 18:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -167,10 +167,18 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: accounts/pipeline.py:15
+#: accounts/pipeline.py:17
 msgid "This account is already in use."
 msgstr ""
 "このアカウントは既に他のユーザーに使用されているため、連携できませんでした。"
+
+#: accounts/pipeline.py:35
+msgid ""
+"We cannot get your email address. Please modify the settings on your SNS "
+"account."
+msgstr ""
+"メールアドレスを取得できませんでした。SNSアカウントでの設定を確認した上で再度"
+"お試しください。"
 
 #: accounts/templates/accounts/deactivate.html:11
 msgid ""
