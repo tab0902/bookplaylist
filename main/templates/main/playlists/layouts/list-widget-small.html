@@ -12,11 +12,12 @@
                         <div class="cover-wrapper">
                             <div class="cover-content">
                                 <img
-                                    src="{{ playlist.playlist_book_set.all.0.book.data.cover | default_if_none:'' }}"
+                                    src="{{ dummy_image }}"
+                                    data-original="{{ playlist.playlist_book_set.all.0.book.data.cover | default_if_none:'' }}"
                                     alt="{% blocktrans with title=playlist.playlist_book_set.all.0.book.data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                                     width="100%"
                                     height="100%"
-                                    class="border-radius-left"
+                                    class="border-radius-left lazy"
                                 >
                             </div>
                         </div>
@@ -25,11 +26,12 @@
                         <div class="cover-wrapper">
                             <div class="cover-content">
                                 <img
-                                    src="{{ playlist.playlist_book_set.all.1.book.data.cover | default_if_none:'' }}"
+                                    src="{{ dummy_image }}"
+                                    data-original="{{ playlist.playlist_book_set.all.1.book.data.cover | default_if_none:'' }}"
                                     alt="{% blocktrans with title=playlist.playlist_book_set.all.1.book.data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                                     width="100%"
                                     height="100%"
-                                    class="border-radius-right"
+                                    class="border-radius-right lazy"
                                 >
                             </div>
                         </div>

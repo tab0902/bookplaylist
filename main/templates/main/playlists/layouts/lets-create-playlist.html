@@ -6,7 +6,16 @@
         <div class="row">
             <div class="col-sm-5 order-sm-1">
                 <div class="lets-create-box-img-wrapper">
-                    <img src="{% static 'img/book-people.png' %}" alt="book-people.png" width="100%">
+                    {% comment %}
+                    if LAZY: src="{{ dummy_image }}" data-original="{{ ORIGINAL_IMAGE }}"
+                    else   : src="{{ ORIGINAL_IMAGE }}"
+                    {% endcomment %}
+                    <img
+                        src{% if lazy|default_if_none:True %}="{{ dummy_image }}" data-original{% endif %}="{% static 'img/book-people.png' %}"
+                        alt="book-people.png"
+                        width="100%"
+                        {% if lazy|default_if_none:True %}class="lazy"{% endif %}
+                    >
                 </div>
             </div>
             <div class="col-sm-7 order-sm-0">

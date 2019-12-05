@@ -28,6 +28,13 @@ function get_user_agent() {
 
 $(function() {
 
+  // Lazy Load
+  $(function() {
+      $('img.lazy').lazyload({
+          skip_invisible: true
+      })
+  })
+
   // drawer menu
   let height
   let scrollpos
