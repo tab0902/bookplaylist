@@ -477,8 +477,9 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
         return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
+        isbn = self.kwargs['isbn']
         del self.kwargs['isbn']
-        self.url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
+        self.url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{param}=True#{isbn}'.format(param=GET_KEY_CONTINUE, isbn=isbn)
         return super().get_redirect_url(*args, **kwargs)
 
 

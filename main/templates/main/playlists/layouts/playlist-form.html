@@ -11,6 +11,7 @@
     {% for book_form, book_data in book_formset %}
     <div class="line-gray my-4"></div>
     <div class="playlist-form-book-item" data-isbn="{{ book_data.isbn }}">
+        <div class="playlist-form-book-item-landing-point" id="{{ book_data.isbn }}"></div>
         <div class="row">
             <div class="col-4 col-sm-2">
                 {% comment %}

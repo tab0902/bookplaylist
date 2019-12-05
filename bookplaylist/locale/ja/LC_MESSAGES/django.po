@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 18:57+0900\n"
+"POT-Creation-Date: 2019-12-05 20:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -612,7 +612,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: bookplaylist/templates/layouts/footer.html:9 main/views.py:531
+#: bookplaylist/templates/layouts/footer.html:9 main/views.py:532
 msgid "Terms"
 msgstr "利用規約"
 
@@ -620,11 +620,11 @@ msgstr "利用規約"
 msgid "Privacy"
 msgstr "プライバシー"
 
-#: bookplaylist/templates/layouts/footer.html:15 main/views.py:541
+#: bookplaylist/templates/layouts/footer.html:15 main/views.py:542
 msgid "About BooxMix"
 msgstr "BooxMixについて"
 
-#: bookplaylist/templates/layouts/footer.html:18 main/views.py:547
+#: bookplaylist/templates/layouts/footer.html:18 main/views.py:548
 msgid "Contact"
 msgstr "お問い合わせ"
 
@@ -893,7 +893,7 @@ msgstr "お問い合わせを受信しました。内容は以下の通りです
 msgid "User"
 msgstr "ユーザー"
 
-#: main/templates/main/contact_subject.html:2 main/views.py:566
+#: main/templates/main/contact_subject.html:2 main/views.py:567
 msgid "We recieve your inquiry"
 msgstr "お問い合わせ完了"
 
@@ -990,7 +990,7 @@ msgstr "検索する"
 #: main/templates/main/playlists/layouts/list-widget-small.html:17
 #: main/templates/main/playlists/layouts/list-widget-small.html:31
 #: main/templates/main/playlists/layouts/list-widget.html:16
-#: main/templates/main/playlists/layouts/playlist-form.html:23
+#: main/templates/main/playlists/layouts/playlist-form.html:24
 #, python-format
 msgid "Image of &quot;%(title)s&quot;"
 msgstr "『%(title)s』の画像"
@@ -1085,24 +1085,24 @@ msgid "No playlist found. Please search by other conditions."
 msgstr ""
 "お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:40
+#: main/templates/main/playlists/layouts/playlist-form.html:41
 msgid "Delete book"
 msgstr "本を削除する"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:59
+#: main/templates/main/playlists/layouts/playlist-form.html:60
 #, python-format
 msgid "\"%(book_title)s\" will be delete."
 msgstr "\"%(book_title)s\" は削除されます"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:68
+#: main/templates/main/playlists/layouts/playlist-form.html:69
 msgid "Restore to playlist"
 msgstr "リストに戻す"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:77
+#: main/templates/main/playlists/layouts/playlist-form.html:78
 msgid "Add book"
 msgstr "本を追加する"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:80
+#: main/templates/main/playlists/layouts/playlist-form.html:81
 msgid "Complete"
 msgstr "完成"
 
@@ -1125,7 +1125,7 @@ msgid "Let's create book playlist and share it."
 msgstr "本のプレイリストを作ってシェアしよう。"
 
 #: main/templates/main/playlists/update.html:15
-#: main/templates/main/playlists/update.html:21 main/views.py:512
+#: main/templates/main/playlists/update.html:21 main/views.py:513
 msgid "Delete playlist"
 msgstr "プレイリストを削除する"
 
@@ -1175,15 +1175,15 @@ msgstr "お探しの本が見つかりませんでした。もう一度お試し
 msgid "This book has already been added to the playlist."
 msgstr "この本は既にリストに追加されています。"
 
-#: main/views.py:496
+#: main/views.py:497
 msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
-#: main/views.py:517
+#: main/views.py:518
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
-#: main/views.py:536
+#: main/views.py:537
 msgid "Privacy policy"
 msgstr "プライバシーポリシー"
 
