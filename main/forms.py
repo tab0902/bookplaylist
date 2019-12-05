@@ -37,7 +37,7 @@ class PlaylistForm(BasePlaylistForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['title'].label = _('Playlist\'s title')
-        self.fields['theme'].empty_label = _('Free theme')
+        self.fields['theme'].empty_label = _('Any themes')
         self.fields['title'].widget.attrs['placeholder'] = '例）不思議な恋愛'
         self.fields['description'].widget.attrs['placeholder'] \
             = '例）わたしが読んできたさまざまな恋愛に関係した本の中から、特に強く印象に残っているものをピックアップして紹介します。'

@@ -77,7 +77,7 @@
         {% for theme, playlists in themes %}
         <h3 class="mt-4 mt-md-5">
             <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="color-gray">
-                #{{ theme.name }}
+                {% if theme.slug %}#{% endif %}{{ theme.name }}
             </a>
         </h3>
         {% include 'main/playlists/layouts/list-widget-small.html' with playlists=playlists %}
