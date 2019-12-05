@@ -17,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{% spaceless %}{{ page_title }} | BooxMix{% endspaceless %}</title>
+    <title>{% spaceless %}{% if page_title %}{{ page_title }} | {% else %}{% block title %}{% endblock %} | {% endif %}BooxMix{% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}{{ page_description | truncatechars:120 }}{% endspaceless %}">
     <meta name="theme-color" content="#ff4812">
 
