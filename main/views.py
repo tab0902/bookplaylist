@@ -9,7 +9,7 @@ from django.db.models import (
     Count, Q,
 )
 from django.http import (
-    Http404, HttpResponse,
+    Http404, HttpResponse, HttpResponseRedirect,
 )
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy

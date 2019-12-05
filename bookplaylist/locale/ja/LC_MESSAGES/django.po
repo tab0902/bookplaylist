@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 17:42+0900\n"
+"POT-Creation-Date: 2019-12-05 18:57+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -167,10 +167,18 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: accounts/pipeline.py:15
+#: accounts/pipeline.py:17
 msgid "This account is already in use."
 msgstr ""
 "このアカウントは既に他のユーザーに使用されているため、連携できませんでした。"
+
+#: accounts/pipeline.py:35
+msgid ""
+"We cannot get your email address. Please modify the settings on your SNS "
+"account."
+msgstr ""
+"メールアドレスを取得できませんでした。SNSアカウントでの設定を確認した上で再度"
+"お試しください。"
 
 #: accounts/templates/accounts/deactivate.html:11
 msgid ""
@@ -910,7 +918,7 @@ msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/index.html:51
-#: main/templates/main/playlists/create_complete.html:53
+#: main/templates/main/playlists/create_complete.html:55
 msgid "Create"
 msgstr "作成する"
 
@@ -948,12 +956,12 @@ msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
 #: main/templates/main/index.html:86
-#: main/templates/main/playlists/detail.html:173
+#: main/templates/main/playlists/detail.html:177
 msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:89
-#: main/templates/main/playlists/detail.html:177
+#: main/templates/main/playlists/detail.html:181
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
@@ -977,7 +985,7 @@ msgid "Search"
 msgstr "検索する"
 
 #: main/templates/main/playlists/create_complete.html:14
-#: main/templates/main/playlists/detail.html:112
+#: main/templates/main/playlists/detail.html:116
 #: main/templates/main/playlists/layouts/book-list.html:20
 #: main/templates/main/playlists/layouts/list-widget-small.html:17
 #: main/templates/main/playlists/layouts/list-widget-small.html:31
@@ -987,19 +995,21 @@ msgstr "検索する"
 msgid "Image of &quot;%(title)s&quot;"
 msgstr "『%(title)s』の画像"
 
-#: main/templates/main/playlists/create_complete.html:31
+#: main/templates/main/playlists/create_complete.html:32
+#: main/templates/main/playlists/detail.html:79
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:40
+#: main/templates/main/playlists/create_complete.html:42
+#: main/templates/main/playlists/detail.html:89
 msgid "Share on Facebook"
 msgstr "Facebookでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:48
+#: main/templates/main/playlists/create_complete.html:50
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
-#: main/templates/main/playlists/create_complete.html:49
+#: main/templates/main/playlists/create_complete.html:51
 msgid ""
 "Let’s create another playlist by sharing your knowledge, experience and "
 "specialty."
@@ -1020,30 +1030,30 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlists/detail.html:120
+#: main/templates/main/playlists/detail.html:124
 #: main/templates/main/playlists/layouts/book-list.html:30
 msgid "No Image"
 msgstr ""
 
-#: main/templates/main/playlists/detail.html:132
-#: main/templates/main/playlists/detail.html:139
+#: main/templates/main/playlists/detail.html:136
+#: main/templates/main/playlists/detail.html:143
 #: main/templates/main/playlists/layouts/list-widget.html:26
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlists/detail.html:150
+#: main/templates/main/playlists/detail.html:154
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlists/detail.html:166
+#: main/templates/main/playlists/detail.html:170
 msgid "Playlists with same theme"
 msgstr "同じテーマのおすすめ"
 
-#: main/templates/main/playlists/detail.html:168
+#: main/templates/main/playlists/detail.html:172
 msgid "These are also recommended"
 msgstr "あなたへのおすすめ"
 
-#: main/templates/main/playlists/detail.html:179
+#: main/templates/main/playlists/detail.html:183
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
 

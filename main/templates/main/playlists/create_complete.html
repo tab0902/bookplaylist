@@ -24,6 +24,7 @@
                 <a
                     href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ origin|urlencode }}{{ absolute_url|urlencode }}"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="btn btn-twitter w-100 mt-5"
                     data-ga-event-category="share_self"
                     data-ga-event-action="twitter"
@@ -33,6 +34,7 @@
                 <a
                     href="https://www.facebook.com/sharer/sharer.php?u={{ origin|urlencode }}{{ absolute_url|urlencode }}"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="btn btn-outline-facebook w-100 mt-4"
                     data-ga-event-category="share_self"
                     data-ga-event-action="facebook"
@@ -61,6 +63,7 @@
 
 {% block script %}
 <script>
+window.dataLayer = window.dataLayer || []
 dataLayer.push({'theme': '{{ playlist.theme }}'})
 </script>
 {% endblock %}

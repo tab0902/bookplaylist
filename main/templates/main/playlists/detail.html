@@ -76,7 +76,9 @@
                     <div class="col-3 offset-3 col-md-4 offset-md-2 text-center">
                         <a
                             href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ og_url|urlencode }}"
+                            aria-label="{% trans 'Share on Twitter' %}"
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <i class="fab fa-twitter fa-twitter-color fa-2x" data-ga-event-category="share_nonself" data-ga-event-action="twitter"></i>
                         </a>
@@ -84,7 +86,9 @@
                     <div class="col-3 col-md-4 text-center">
                         <a
                             href="https://www.facebook.com/sharer/sharer.php?u={{ og_url|urlencode }}"
+                            aria-label="{% trans 'Share on Facebook' %}"
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <i class="fab fa-facebook fa-facebook-color fa-2x" data-ga-event-category="share_nonself" data-ga-event-action="facebook"></i>
                         </a>
@@ -191,6 +195,7 @@
 
 {% block script %}
 <script>
+window.dataLayer = window.dataLayer || []
 dataLayer.push({'theme': '{{ playlist.theme }}'})
 </script>
 {% endblock %}
