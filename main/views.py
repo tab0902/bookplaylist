@@ -62,6 +62,16 @@ class IndexView(TemplateContextMixin, PlaylistSearchFormView):
                         playlist_book__count__gte=2)[:4]
             )
             for theme in Theme.objects.filter(sequence__isnull=False)
+        ] + \
+        [
+            (
+                {'name': _('Free theme'), 'slug': ''},
+                Playlist.objects \
+                    .annotate(Count('playlist_book')) \
+                    .filter(
+                        theme__isnull=True,
+                        playlist_book__count__gte=2)[:4]
+            )
         ]
         return context
 
@@ -78,6 +88,8 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
         condition_dict = {}
         if theme:
             condition_dict['theme__slug'] = theme
+        elif not theme and 'theme' in self.request.GET:
+            condition_dict['theme__isnull'] = True
         if query:
             q_list = self._format_query(query)
             condition_lists.append([
@@ -114,6 +126,8 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
             self.page_title = _('Playlists related with "%(q)s"') % {'q': q}
         elif theme:
             self.page_title = _('Playlists with #%(theme)s') % {'theme': theme.name}
+        elif not theme and 'theme' in self.request.GET:
+            self.page_title = _('Playlists with free theme')
         else:
             self.page_title = _('All Playlists')
 
@@ -145,9 +159,10 @@ class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
         self.og_image =  self.object.og_image.url
         self.og_image_width = 1200
         self.og_image_height = 630
-        conditions = {'playlist_book__count__gte': 2}
-        if self.object.theme:
-            conditions['theme'] = self.object.theme
+        conditions = {
+            'playlist_book__count__gte': 2,
+            'theme': self.object.theme,
+        }
         context = super().get_context_data(**kwargs)
         context['other_playlists'] = Playlist.objects \
             .annotate(Count('playlist_book')) \
