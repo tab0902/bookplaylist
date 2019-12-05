@@ -30,7 +30,7 @@ class APIMixin:
         return re.sub(r'\D', '', isbn)
 
     def format_title(self, *args):
-        return ' '.join(args)
+        return re.sub('  ', ' ', ' '.join(args).strip())
 
 
 class SendEmailMixin:
