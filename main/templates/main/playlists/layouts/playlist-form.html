@@ -13,7 +13,16 @@
     <div class="playlist-form-book-item" data-isbn="{{ book_data.isbn }}">
         <div class="row">
             <div class="col-4 col-sm-2">
-                <img class="w-100" src="{{ book_data.cover | default_if_none:'' }}">
+                {% comment %}
+                if LAZY: src="{{ dummy_image }}" data-original="{{ ORIGINAL_IMAGE }}"
+                else   : src="{{ ORIGINAL_IMAGE }}"
+                {% endcomment %}
+                <img
+                    src{% if not forloop.first and not forloop.last %}="{{ dummy_image }}" data-original{% endif %}="{{ book_data.cover | default_if_none:'' }}"
+                    alt="{% blocktrans with title=book_data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                    width="100%"
+                    {% if not forloop.first and not forloop.last %}class="lazy"{% endif %}
+                >
             </div>
             <div class="col-8 col-sm-10 pl-0">
                 <div class="row">

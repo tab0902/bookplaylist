@@ -2,22 +2,22 @@
 {% load i18n %}
 
 <footer id="footer" class="w-100 text-center">
-    <div class="line-gray my-4"></div>
+    <div class="line-gray my-3"></div>
     <div class="container">
         <div class="row font-weight-bold">
             <div class="col-6 col-md-3">
-                <p class="text-sm mb-1"><a href="{% url 'main:terms' %}">{% trans 'Terms' %}</a></p>
+                <a href="{% url 'main:terms' %}" class="btn btn-inline-sub text-sm w-100 py-2">{% trans 'Terms' %}</a>
             </div>
             <div class="col-6 col-md-3">
-                <p class="text-sm mb-1"><a href="{% url 'main:privacy' %}">{% trans 'Privacy' %}</a></p>
+                <a href="{% url 'main:privacy' %}" class="btn btn-inline-sub text-sm w-100 py-2">{% trans 'Privacy' %}</a>
             </div>
             <div class="col-6 col-md-3">
-                <p class="text-sm mb-1"><a href="{% url 'main:about' %}">{% trans 'About BooxMix' %}</a></p>
+                <a href="{% url 'main:about' %}" class="btn btn-inline-sub text-sm w-100 py-2">{% trans 'About BooxMix' %}</a>
             </div>
             <div class="col-6 col-md-3">
-                <p class="text-sm mb-1"><a href="{% url 'main:contact' %}">{% trans 'Contact' %}</a></p>
+                <a href="{% url 'main:contact' %}" class="btn btn-inline-sub text-sm w-100 py-2">{% trans 'Contact' %}</a>
             </div>
         </div>
     </div>
-    <p class="text-sm mt-4 mb-0">&copy; 2019 BooxMix All rights reserved.</p>
+    <p class="text-sm mt-4 mt-md-5 mb-0">&copy; 2019 BooxMix All rights reserved.</p>
 </footer>

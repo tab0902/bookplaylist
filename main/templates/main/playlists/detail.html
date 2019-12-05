@@ -102,7 +102,16 @@
             <div class="row">
                 <div class="col-5 col-sm-3 col-lg-2">
                     {% if playlist_book.book.data.cover %}
-                    <img class="w-100" src="{{ playlist_book.book.data.cover | default_if_none:'' }}">
+                    {% comment %}
+                    if LAZY: src="{{ dummy_image }}" data-original="{{ ORIGINAL_IMAGE }}"
+                    else   : src="{{ ORIGINAL_IMAGE }}"
+                    {% endcomment %}
+                    <img
+                        src{% if not forloop.first %}="{{ dummy_image }}" data-original{% endif %}="{{ playlist_book.book.data.cover | default_if_none:'' }}"
+                        alt="{% blocktrans with title=playlist_book.book.data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                        width="100%"
+                        {% if not forloop.first %}class="lazy"{% endif %}
+                    >
                     {% else %}
                     <div class="blank-box-wrapper no-image-wrapper">
                         <div class="blank-box-content no-image-content">

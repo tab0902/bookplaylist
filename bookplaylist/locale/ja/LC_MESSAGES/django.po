@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-04 09:43+0900\n"
+"POT-Creation-Date: 2019-12-05 17:42+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -234,12 +234,12 @@ msgstr ""
 msgid "To profile"
 msgstr "プロフィールへ"
 
-#: accounts/templates/accounts/index.html:42
+#: accounts/templates/accounts/index.html:43
 #, python-format
 msgid "%(username)s's playlists"
 msgstr "%(username)s さんのプレイリスト"
 
-#: accounts/templates/accounts/index.html:43
+#: accounts/templates/accounts/index.html:44
 msgid ""
 "You haven't created any playlists. Enter the link below to create your first "
 "one!"
@@ -247,11 +247,11 @@ msgstr ""
 "まだプレイリストが作成されていません。下のリンクから初めてのプレイリストを作"
 "成しましょう！"
 
-#: accounts/templates/accounts/index.html:50
+#: accounts/templates/accounts/index.html:51
 msgid "Let's create a new playlist!"
 msgstr "新しいプレイリストを作成しましょう！"
 
-#: accounts/templates/accounts/index.html:52
+#: accounts/templates/accounts/index.html:53
 msgid "Let's create your first playlist!"
 msgstr "初めてのプレイリストを作成しましょう！"
 
@@ -319,7 +319,7 @@ msgstr "引き続きBooxMixをお楽しみください。"
 #: accounts/templates/accounts/password_reset_complete.html:16
 #: accounts/templates/accounts/verification.html:16
 #: main/templates/main/index.html:33 main/templates/main/index.html:99
-#: main/templates/main/playlists/layouts/lets-create-playlist.html:22
+#: main/templates/main/playlists/layouts/lets-create-playlist.html:32
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
 
@@ -636,7 +636,7 @@ msgstr ""
 msgid "Share Book Playlists on your SNS."
 msgstr "本のプレイリストをSNSでシェアしよう。"
 
-#: bookplaylist/views.py:72
+#: bookplaylist/views.py:74
 msgid "You don't have permission to access the page."
 msgstr "ページにアクセスする権限がありません"
 
@@ -910,7 +910,7 @@ msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/index.html:51
-#: main/templates/main/playlists/create_complete.html:49
+#: main/templates/main/playlists/create_complete.html:53
 msgid "Create"
 msgstr "作成する"
 
@@ -948,12 +948,12 @@ msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
 #: main/templates/main/index.html:86
-#: main/templates/main/playlists/detail.html:163
+#: main/templates/main/playlists/detail.html:173
 msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:89
-#: main/templates/main/playlists/detail.html:167
+#: main/templates/main/playlists/detail.html:177
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
@@ -976,19 +976,30 @@ msgstr "追加する本を探す"
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlists/create_complete.html:27
+#: main/templates/main/playlists/create_complete.html:14
+#: main/templates/main/playlists/detail.html:112
+#: main/templates/main/playlists/layouts/book-list.html:20
+#: main/templates/main/playlists/layouts/list-widget-small.html:17
+#: main/templates/main/playlists/layouts/list-widget-small.html:31
+#: main/templates/main/playlists/layouts/list-widget.html:16
+#: main/templates/main/playlists/layouts/playlist-form.html:23
+#, python-format
+msgid "Image of &quot;%(title)s&quot;"
+msgstr "『%(title)s』の画像"
+
+#: main/templates/main/playlists/create_complete.html:31
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:36
+#: main/templates/main/playlists/create_complete.html:40
 msgid "Share on Facebook"
 msgstr "Facebookでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:44
+#: main/templates/main/playlists/create_complete.html:48
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
-#: main/templates/main/playlists/create_complete.html:45
+#: main/templates/main/playlists/create_complete.html:49
 msgid ""
 "Let’s create another playlist by sharing your knowledge, experience and "
 "specialty."
@@ -1009,30 +1020,30 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlists/detail.html:110
-#: main/templates/main/playlists/layouts/book-list.html:25
+#: main/templates/main/playlists/detail.html:120
+#: main/templates/main/playlists/layouts/book-list.html:30
 msgid "No Image"
 msgstr ""
 
-#: main/templates/main/playlists/detail.html:122
-#: main/templates/main/playlists/detail.html:129
-#: main/templates/main/playlists/layouts/list-widget.html:22
+#: main/templates/main/playlists/detail.html:132
+#: main/templates/main/playlists/detail.html:139
+#: main/templates/main/playlists/layouts/list-widget.html:26
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlists/detail.html:140
+#: main/templates/main/playlists/detail.html:150
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlists/detail.html:156
+#: main/templates/main/playlists/detail.html:166
 msgid "Playlists with same theme"
 msgstr "同じテーマのおすすめ"
 
-#: main/templates/main/playlists/detail.html:158
+#: main/templates/main/playlists/detail.html:168
 msgid "These are also recommended"
 msgstr "あなたへのおすすめ"
 
-#: main/templates/main/playlists/detail.html:169
+#: main/templates/main/playlists/detail.html:179
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
 
@@ -1041,47 +1052,47 @@ msgstr "プレイリストをもっと見る"
 msgid "%(first)s-%(last)s of %(count)s results"
 msgstr "%(count)s 件中 %(first)s - %(last)s 件"
 
-#: main/templates/main/playlists/layouts/book-list.html:48
+#: main/templates/main/playlists/layouts/book-list.html:53
 msgid "Add"
 msgstr "追加する"
 
-#: main/templates/main/playlists/layouts/book-list.html:55
+#: main/templates/main/playlists/layouts/book-list.html:60
 msgid "No book found. Please search by other words."
 msgstr ""
 "お探しの本が見つかりませんでした。別のキーワードで検索してみてください。"
 
-#: main/templates/main/playlists/layouts/lets-create-playlist.html:17
+#: main/templates/main/playlists/layouts/lets-create-playlist.html:27
 #, python-format
 msgid "Let's share #%(tag)s!"
 msgstr "あなたも #%(tag)s のプレイリストをシェアしましょう！"
 
-#: main/templates/main/playlists/layouts/lets-create-playlist.html:19
+#: main/templates/main/playlists/layouts/lets-create-playlist.html:29
 msgid "Let's share your book playlist!"
 msgstr "あなたも本のプレイリストをシェアしましょう！"
 
-#: main/templates/main/playlists/layouts/list-widget.html:28
+#: main/templates/main/playlists/layouts/list-widget.html:32
 msgid "No playlist found. Please search by other conditions."
 msgstr ""
 "お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:30
+#: main/templates/main/playlists/layouts/playlist-form.html:40
 msgid "Delete book"
 msgstr "本を削除する"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:49
+#: main/templates/main/playlists/layouts/playlist-form.html:59
 #, python-format
 msgid "\"%(book_title)s\" will be delete."
 msgstr "\"%(book_title)s\" は削除されます"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:58
+#: main/templates/main/playlists/layouts/playlist-form.html:68
 msgid "Restore to playlist"
 msgstr "リストに戻す"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:67
+#: main/templates/main/playlists/layouts/playlist-form.html:77
 msgid "Add book"
 msgstr "本を追加する"
 
-#: main/templates/main/playlists/layouts/playlist-form.html:70
+#: main/templates/main/playlists/layouts/playlist-form.html:80
 msgid "Complete"
 msgstr "完成"
 

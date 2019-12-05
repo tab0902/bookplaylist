@@ -28,6 +28,13 @@ function get_user_agent() {
 
 $(function() {
 
+  // Lazy Load
+  $(function() {
+      $('img.lazy').lazyload({
+          skip_invisible: true
+      })
+  })
+
   // drawer menu
   let height
   let scrollpos
@@ -63,7 +70,7 @@ $(function() {
   $('select').wrap('<div class="select-wrapper">')
 
   // prevent duplicate submit
-  $('form').submit(function() {
+  $('form').on('submit', function() {
     const selector = ':submit:not(.allow-duplicate)'
     if (!$(this).hasClass('allow-duplicate') && !$(this).has('#ajax-form')) {
       $(selector, this).prop('disabled', true)
