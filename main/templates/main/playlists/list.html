@@ -78,3 +78,10 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+<script>
+window.dataLayer = window.dataLayer || []
+dataLayer.push({'theme': '{{ theme }}'})
+</script>
+{% endblock %}
