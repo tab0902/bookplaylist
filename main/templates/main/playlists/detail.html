@@ -76,6 +76,7 @@
                     <div class="col-3 offset-3 col-md-4 offset-md-2 text-center">
                         <a
                             href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ og_url|urlencode }}"
+                            aria-label="{% trans 'Share on Twitter' %}"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -85,6 +86,7 @@
                     <div class="col-3 col-md-4 text-center">
                         <a
                             href="https://www.facebook.com/sharer/sharer.php?u={{ og_url|urlencode }}"
+                            aria-label="{% trans 'Share on Facebook' %}"
                             target="_blank"
                             rel="noopener noreferrer"
                         >

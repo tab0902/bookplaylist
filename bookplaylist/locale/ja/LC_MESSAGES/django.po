@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 18:46+0900\n"
+"POT-Creation-Date: 2019-12-05 18:57+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -956,12 +956,12 @@ msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
 #: main/templates/main/index.html:86
-#: main/templates/main/playlists/detail.html:175
+#: main/templates/main/playlists/detail.html:177
 msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:89
-#: main/templates/main/playlists/detail.html:179
+#: main/templates/main/playlists/detail.html:181
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての #%(theme)s を見る"
@@ -985,7 +985,7 @@ msgid "Search"
 msgstr "検索する"
 
 #: main/templates/main/playlists/create_complete.html:14
-#: main/templates/main/playlists/detail.html:114
+#: main/templates/main/playlists/detail.html:116
 #: main/templates/main/playlists/layouts/book-list.html:20
 #: main/templates/main/playlists/layouts/list-widget-small.html:17
 #: main/templates/main/playlists/layouts/list-widget-small.html:31
@@ -996,10 +996,12 @@ msgid "Image of &quot;%(title)s&quot;"
 msgstr "『%(title)s』の画像"
 
 #: main/templates/main/playlists/create_complete.html:32
+#: main/templates/main/playlists/detail.html:79
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
 #: main/templates/main/playlists/create_complete.html:42
+#: main/templates/main/playlists/detail.html:89
 msgid "Share on Facebook"
 msgstr "Facebookでシェアする"
 
@@ -1028,30 +1030,30 @@ msgstr "※この操作は取り消せません。"
 msgid "Edit"
 msgstr "編集する"
 
-#: main/templates/main/playlists/detail.html:122
+#: main/templates/main/playlists/detail.html:124
 #: main/templates/main/playlists/layouts/book-list.html:30
 msgid "No Image"
 msgstr ""
 
-#: main/templates/main/playlists/detail.html:134
-#: main/templates/main/playlists/detail.html:141
+#: main/templates/main/playlists/detail.html:136
+#: main/templates/main/playlists/detail.html:143
 #: main/templates/main/playlists/layouts/list-widget.html:26
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlists/detail.html:152
+#: main/templates/main/playlists/detail.html:154
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlists/detail.html:168
+#: main/templates/main/playlists/detail.html:170
 msgid "Playlists with same theme"
 msgstr "同じテーマのおすすめ"
 
-#: main/templates/main/playlists/detail.html:170
+#: main/templates/main/playlists/detail.html:172
 msgid "These are also recommended"
 msgstr "あなたへのおすすめ"
 
-#: main/templates/main/playlists/detail.html:181
+#: main/templates/main/playlists/detail.html:183
 msgid "Show more playlists"
 msgstr "プレイリストをもっと見る"
 
