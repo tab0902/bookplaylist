@@ -83,7 +83,7 @@ $('#ajax-form').on('submit', function(e) {
     }).done(response => {
         const ua = get_user_agent()
         const uas = ['sp', 'tab']
-        if (uas.includes(ua)) $('input').blur()
+        if (uas.includes(ua)) $('input').trigger('blur')
         $('#search-loading').hide()
         $('#ajax-result').html(response)
     })
