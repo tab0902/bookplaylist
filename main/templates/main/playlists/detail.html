@@ -102,7 +102,11 @@
             <div class="row">
                 <div class="col-5 col-sm-3 col-lg-2">
                     {% if playlist_book.book.data.cover %}
-                    <img class="w-100" src="{{ playlist_book.book.data.cover | default_if_none:'' }}">
+                    <img
+                        src="{{ playlist_book.book.data.cover | default_if_none:'' }}"
+                        alt="{% blocktrans with title=playlist_book.book.data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                        width="100%"
+                    >
                     {% else %}
                     <div class="blank-box-wrapper no-image-wrapper">
                         <div class="blank-box-content no-image-content">
