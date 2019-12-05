@@ -77,6 +77,7 @@
                         <a
                             href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ og_url|urlencode }}"
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <i class="fab fa-twitter fa-twitter-color fa-2x" data-ga-event-category="share_nonself" data-ga-event-action="twitter"></i>
                         </a>
@@ -85,6 +86,7 @@
                         <a
                             href="https://www.facebook.com/sharer/sharer.php?u={{ og_url|urlencode }}"
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <i class="fab fa-facebook fa-facebook-color fa-2x" data-ga-event-category="share_nonself" data-ga-event-action="facebook"></i>
                         </a>
