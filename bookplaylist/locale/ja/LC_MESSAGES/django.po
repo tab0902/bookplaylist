@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 08:33+0900\n"
+"POT-Creation-Date: 2019-12-09 08:43+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -578,19 +578,19 @@ msgstr "アソシエーション"
 msgid "Nonces"
 msgstr "ノンス"
 
-#: bookplaylist/settings.py:203
+#: bookplaylist/settings.py:207
 msgid "(Please select)"
 msgstr "(選択してください)"
 
-#: bookplaylist/settings.py:204
+#: bookplaylist/settings.py:208
 msgid "Question"
 msgstr "ご質問"
 
-#: bookplaylist/settings.py:205
+#: bookplaylist/settings.py:209
 msgid "Defect report"
 msgstr "不具合報告"
 
-#: bookplaylist/settings.py:206
+#: bookplaylist/settings.py:210
 msgid "Other inquiry"
 msgstr "上記以外のお問い合わせ"
 

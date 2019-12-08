@@ -157,8 +157,8 @@ class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
         'BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。'
         self.og_url =  self.request.build_absolute_uri()
         self.og_image =  self.object.og_image.url
-        self.og_image_width = 1200
-        self.og_image_height = 630
+        self.og_image_width = settings.OG_IMAGE_WIDTH
+        self.og_image_height = settings.OG_IMAGE_HEIGHT
         conditions = {
             'playlist_book__count__gte': 2,
             'theme': self.object.theme,
@@ -337,8 +337,8 @@ class PlaylistUpdateView(TemplateContextMixin, OwnerOnlyMixin, BasePlaylistFormV
     def get_context_data(self, **kwargs):
         self.og_url = self.get_full_absolute_url(self.object)
         self.og_image = self.object.og_image.url
-        self.og_image_width = 1200
-        self.og_image_height = 630
+        self.og_image_width = settings.OG_IMAGE_WIDTH
+        self.og_image_height = settings.OG_IMAGE_HEIGHT
         return super().get_context_data(**kwargs)
 
 
@@ -517,8 +517,8 @@ class PlaylistCreateCompleteView(TemplateContextMixin, OwnerOnlyMixin, generic.D
     def get_context_data(self, **kwargs):
         self.og_url = self.get_full_absolute_url(self.object)
         self.og_image = self.object.og_image.url
-        self.og_image_width = 1200
-        self.og_image_height = 630
+        self.og_image_width = settings.OG_IMAGE_WIDTH
+        self.og_image_height = settings.OG_IMAGE_HEIGHT
         return super().get_context_data(**kwargs)
 
 

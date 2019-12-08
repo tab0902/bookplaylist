@@ -196,9 +196,9 @@ class Playlist(FileModel):
         self.title = remove_emoji(raw_title.strip())
         context = {'playlist': self}
         options = {
+            'width': str(settings.OG_IMAGE_WIDTH),
+            'height': str(settings.OG_IMAGE_HEIGHT),
             'encoding': 'UTF-8',
-            'width': '1200',
-            'height': '630',
             'quiet': '',
         }
         img = imgkit.from_string(template.render(context), False, options=options)
