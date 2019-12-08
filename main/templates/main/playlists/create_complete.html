@@ -18,11 +18,12 @@
         </div>
         <div class="row">
             <div class="col-sm-8 offset-sm-2">
-                {% with text='【'|add:playlist.title|add:'】%0a'|add:playlist.description %}
-                {% with origin=request.scheme|add:'://'|add:request.get_host %}
-                {% with absolute_url=playlist.get_absolute_url %}
+                {% with origin=request.scheme|add:'://'|add:request.get_host|urlencode:'' %}
+                {% with absolute_url=playlist.get_absolute_url|urlencode:'' %}
+                {% with text='【'|add:playlist.title|add:'】%0a'|add:playlist.description|truncatechars:80|urlencode:'%0a' %}
+                {% with tags='%0a#読書好きと繋がりたい #読書 #BooxMix'|urlencode:'%0a' %}
                 <a
-                    href="https://twitter.com/intent/tweet?text={{ text|truncatechars:80|iriencode }}%0a%23読書好きと繋がりたい%20%23読書%20%23BooxMix{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode }}{% endif %}&url={{ origin|urlencode }}{{ absolute_url|urlencode }}"
+                    href="https://twitter.com/intent/tweet?text={{ text }}{{ tags }}{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode:'' }}{% endif %}&url={{ origin }}{{ absolute_url }}"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn btn-twitter w-100 mt-5"
@@ -31,8 +32,10 @@
                 >
                     <i class="fab fa-twitter"></i>&nbsp;&nbsp;{% trans 'Share on Twitter' %}
                 </a>
+                {% endwith %}
+                {% endwith %}
                 <a
-                    href="https://www.facebook.com/sharer/sharer.php?u={{ origin|urlencode }}{{ absolute_url|urlencode }}"
+                    href="https://www.facebook.com/sharer/sharer.php?u={{ origin }}{{ absolute_url }}"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn btn-outline-facebook w-100 mt-4"
@@ -41,7 +44,6 @@
                 >
                     <i class="fab fa-facebook"></i>&nbsp;&nbsp;{% trans 'Share on Facebook' %}
                 </a>
-                {% endwith %}
                 {% endwith %}
                 {% endwith %}
             </div>
