@@ -160,7 +160,7 @@
                     {{ playlist.user.username | default_if_none:'' }}
                 </a>
             </h3>
-            <p class="mb-0">{{ playlist.user.comment | default_if_none:'' }}</p>
+            <p class="mb-0">{{ playlist.user.comment | default_if_none:'' | linebreaksbr | urlize }}</p>
         </div>
     </section>
 
