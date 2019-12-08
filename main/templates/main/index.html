@@ -95,7 +95,7 @@
         <div class="d-md-none">
             <div class="line-gray my-4"></div>
             <h2 class="mt-sm-3">{{ lets_create_text }}</h2>
-            <button type="button" class="btn btn-main w-100 mt-3 mt-lg-4">{% trans 'Create playlist' %}</button>
+            <a href="{% url 'main:create_or_signup' %}" class="btn btn-main w-100 mt-3 mt-lg-4">{% trans 'Create playlist' %}</a>
         </div>
         <div class="d-none d-md-block">
             {% include 'main/playlists/layouts/lets-create-playlist.html' with lets_create_text=lets_create_text %}
