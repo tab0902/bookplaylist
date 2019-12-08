@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 22:57+0900\n"
+"POT-Creation-Date: 2019-12-07 15:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -1000,8 +1000,8 @@ msgstr "『%(title)s』の画像"
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:42
-#: main/templates/main/playlists/detail.html:89
+#: main/templates/main/playlists/create_complete.html:43
+#: main/templates/main/playlists/detail.html:90
 msgid "Share on Facebook"
 msgstr "Facebookでシェアする"
 
