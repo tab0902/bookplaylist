@@ -28,7 +28,7 @@
         {
             "@type": "Book",
             "position": "{{ forloop.counter }}",
-            "isbn": "{{ playlist_book.book.isbnb }}",
+            "isbn": "{{ playlist_book.book.isbn }}",
             "name": "{{ playlist_book.book.data.title }}",
             "image": "{{ playlist_book.book.data.cover }}",
             "url": "{{ playlist_book.book.data.affiliate_url | default_if_none:playlist_book.book.data.cover }}",
@@ -160,7 +160,7 @@
                     {{ playlist.user.username | default_if_none:'' }}
                 </a>
             </h3>
-            <p class="mb-0">{{ playlist.user.comment | default_if_none:'' }}</p>
+            <p class="mb-0">{{ playlist.user.comment | default_if_none:'' | linebreaksbr | urlize }}</p>
         </div>
     </section>
 

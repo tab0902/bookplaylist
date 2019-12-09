@@ -58,7 +58,7 @@
                 <p class="mt-3">{% trans 'Make your book-playlist on your smartphone. It is easier than any other blog services.' %}</p>
                 <div class="row">
                     <div class="col-6 offset-3 col-md-4 col-offset-4">
-                        <img src="{% static 'img/howto-1.png' %}" alt="howto-1.png" width="100%" class="mt-2">
+                        <img src="{{ dummy_image }}" data-original="{% static 'img/howto-1.png' %}" alt="howto-1.png" width="100%" class="lazy mt-2">
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <p class="mt-3">{% trans 'We make your favorite books into one picture automatically.' %}</p>
                 <div class="row">
                     <div class="col-6 offset-3 col-md-4 col-offset-4">
-                        <img src="{% static 'img/howto-2.png' %}" alt="howto-2.png" width="100%" class="mt-2">
+                        <img src="{{ dummy_image }}" data-original="{% static 'img/howto-2.png' %}" alt="howto-2.png" width="100%" class="lazy mt-2">
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         <div class="d-md-none">
             <div class="line-gray my-4"></div>
             <h2 class="mt-sm-3">{{ lets_create_text }}</h2>
-            <button type="button" class="btn btn-main w-100 mt-3 mt-lg-4">{% trans 'Create playlist' %}</button>
+            <a href="{% url 'main:create_or_signup' %}" class="btn btn-main w-100 mt-3 mt-lg-4">{% trans 'Create playlist' %}</a>
         </div>
         <div class="d-none d-md-block">
             {% include 'main/playlists/layouts/lets-create-playlist.html' with lets_create_text=lets_create_text %}

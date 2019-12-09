@@ -199,6 +199,10 @@ ADMIN_REORDER = (
 )
 
 
+OG_IMAGE_WIDTH = 1200
+OG_IMAGE_HEIGHT = 630
+
+
 CONTACT_INQUIRY = (
     ('', _('(Please select)')),
     ('1', _('Question')),
