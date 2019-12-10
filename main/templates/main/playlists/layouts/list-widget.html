@@ -10,10 +10,10 @@
                 <div class="playlist-img scroll-wrapper scroll-wrapper-cover">
                     <div class="playlist-img scroll-inner scroll-inner-cover">
                         {% for playlist_book in playlist.playlist_book_set.all %}
-                        {% if playlist_book.book.data.cover %}
+                        {% if playlist_book.book.cover %}
                         <img
-                            src="{{ playlist_book.book.data.cover | default_if_none:'' }}"
-                            alt="{% blocktrans with title=playlist_book.book.data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                            src="{{ playlist_book.book.cover | default_if_none:'' }}"
+                            alt="{% blocktrans with title=playlist_book.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                             class="scroll-box scroll-box-cover"
                         >
                         {% endif %}
