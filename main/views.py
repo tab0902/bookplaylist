@@ -315,11 +315,11 @@ class PlaylistUpdateView(TemplateContextMixin, OwnerOnlyMixin, BasePlaylistFormV
         self.initial_book_data = [
             {
                 'isbn': x.book.isbn,
-                'provider_id': str(x.book.data.provider.pk),
-                'title': x.book.data.title,
-                'author': x.book.data.author,
-                'publisher': x.book.data.publisher,
-                'cover': x.book.data.cover,
+                'provider_id': str(x.book._default_data.provider.pk),
+                'title': x.book._default_data.title,
+                'author': x.book._default_data.author,
+                'publisher': x.book._default_data.publisher,
+                'cover': x.book._default_data.cover,
             }
             for x in self.object.playlist_book_set.all()
         ]
@@ -443,14 +443,14 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
             return redirect('main:playlist_{}'.format(self.mode), **self.kwargs)
 
         book_obj = Book.objects.filter(isbn=self.kwargs.get('isbn')).first()
-        if book_obj and book_obj.data:
+        if book_obj and book_obj._default_data:
             book_json = {
                 'isbn': self.kwargs.get('isbn'),
-                'provider_id': str(book_obj.data.provider.pk),
-                'title': book_obj.data.title,
-                'author': book_obj.data.author,
-                'publisher': book_obj.data.publisher,
-                'cover': book_obj.data.cover,
+                'provider_id': str(book_obj._default_data.provider.pk),
+                'title': book_obj._default_data.title,
+                'author': book_obj._default_data.author,
+                'publisher': book_obj._default_data.publisher,
+                'cover': book_obj._default_data.cover,
             }
         else:
             if self.provider.slug == 'rakuten':
