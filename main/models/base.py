@@ -91,6 +91,15 @@ class Book(BaseModel):
     def _default_data(self):
         return self.book_data_set.first()
 
+    @property
+    def cover_openbd(self):
+        """
+        Get the cover image from openBD.
+        This function is a temporary one and will be removed
+        if the application of Amazon associate program is approved.
+        """
+        return 'https://cover.openbd.jp/{}.jpg'.format(self.isbn)
+
     class Meta(BaseModel.Meta):
         db_table = 'books'
         ordering = ['isbn']

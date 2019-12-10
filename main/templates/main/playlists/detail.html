@@ -30,8 +30,8 @@
             "position": "{{ forloop.counter }}",
             "isbn": "{{ playlist_book.book.isbn }}",
             "name": "{{ playlist_book.book.title }}",
-            "image": "{{ playlist_book.book.cover }}",
-            "url": "{{ playlist_book.book.affiliate_url | default_if_none:playlist_book.book.cover }}",
+            "image": "{{ playlist_book.book.cover_openbd }}",
+            "url": "{{ playlist_book.book.affiliate_url | default_if_none:playlist_book.book.cover_openbd }}",
             "author": {
                 "@type": "Person",
                 "name": "{{ playlist_book.book.author }}"
@@ -107,13 +107,13 @@
             <div class="line-gray my-4"></div>
             <div class="row">
                 <div class="col-5 col-sm-3 col-lg-2">
-                    {% if playlist_book.book.cover %}
+                    {% if playlist_book.book.cover_openbd %}
                     {% comment %}
                     if LAZY: src="{{ dummy_image }}" data-original="{{ ORIGINAL_IMAGE }}"
                     else   : src="{{ ORIGINAL_IMAGE }}"
                     {% endcomment %}
                     <img
-                        src{% if not forloop.first %}="{{ dummy_image }}" data-original{% endif %}="{{ playlist_book.book.cover | default_if_none:'' }}"
+                        src{% if not forloop.first %}="{{ dummy_image }}" data-original{% endif %}="{{ playlist_book.book.cover_openbd | default_if_none:'' }}"
                         alt="{% blocktrans with title=playlist_book.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                         width="100%"
                         {% if not forloop.first %}class="lazy"{% endif %}
