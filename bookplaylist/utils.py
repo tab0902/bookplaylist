@@ -2,6 +2,7 @@ import re
 import requests
 import time
 
+from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
 
@@ -11,7 +12,7 @@ from main.models import Provider
 class APIMixin:
 
     def __init__(self, *args, **kwargs):
-        self.provider = Provider.objects.first()
+        self.provider = Provider.objects.get(slug=settings.DEFAULT_PROVIDER)
         return super().__init__(*args, **kwargs)
 
     def get_book_data(self, params):

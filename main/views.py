@@ -180,7 +180,7 @@ SESSION_KEY_FORM = 'playlist_form_data'
 SESSION_KEY_BOOK = 'playlist_book_data'
 
 
-class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, generic.edit.ModelFormMixin, generic.edit.ProcessFormView):
+class BasePlaylistFormView(APIMixin, generic.detail.SingleObjectTemplateResponseMixin, generic.edit.ModelFormMixin, generic.edit.ProcessFormView):
     form_class = PlaylistForm
     model = Playlist
 
@@ -231,16 +231,7 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
 
         # create BookData if not exists
         book_data_dict_list = [
-            {
-                'book_id': book_session['isbn'],
-                'provider_id': book_session['provider_id'],
-                'title': book_session['title'],
-                'author': book_session['author'],
-                'publisher': book_session['publisher'],
-                'cover': book_session['cover'],
-                'created_at': timezone.now(),
-                'updated_at': timezone.now(),
-            }
+            self._get_book_data_if_not_exists(book_session)
             for book_session in book_session_list
         ]
         book_data_obj_list = [BookData(**book_data_dict) for book_data_dict in book_data_dict_list]
@@ -252,7 +243,7 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
         if not len(formset.forms) - len(formset.deleted_forms):
             messages.error(self.request, _('You have to add at least one book to your playlist.'))
             self.request.session[SESSION_KEY_FORM] = self.request.POST
-            url = reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
+            url = self.get_error_url()
             return HttpResponseRedirect(url)
         if not formset.is_valid():
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
@@ -275,6 +266,52 @@ class BasePlaylistFormView(generic.detail.SingleObjectTemplateResponseMixin, gen
     def form_invalid(self, form):
         formset = PlaylistBookFormSet(self.request.POST, instance=self.object, form_kwargs={'request': self.request})
         return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+    def get_error_url(self):
+        return reverse_lazy('main:playlist_{}'.format(self.mode), kwargs=self.kwargs) + '?{}=True'.format(GET_KEY_CONTINUE)
+
+    def _get_book_data_if_not_exists(self, book_session):
+        if book_session['provider_id'] == str(self.provider.pk):
+            # if the same data is in db, return existing BookData
+            return self._book_session_to_book_data_dict(book_session)
+
+        if self.provider.slug == 'rakuten':
+            params = {
+                'applicationId': settings.RAKUTEN_APPLICATION_ID,
+                'isbn': book_session['isbn'],
+            }
+        else:
+            params = {}
+        response = self.get_book_data(params).json()
+        if not response or not response[0] == 'null' or 'error' in response or int(response['count']) == 0:
+            # if no data is in the response, return existing BookData
+            return self._book_session_to_book_data_dict(book_session)
+        book = response['Items'][0]
+        book_data_dict = {
+            'book_id': book_session['isbn'],
+            'provider_id': str(self.provider.pk),
+            'title': self.format_title(book['Item']['title'], book['Item']['subTitle'], book['Item']['contents']),
+            'author': book['Item']['author'],
+            'publisher': book['Item']['publisherName'],
+            'cover': book['Item']['largeImageUrl'],
+            'created_at': timezone.now(),
+            'updated_at': timezone.now(),
+        }
+        return book_data_dict
+
+    def _book_session_to_book_data_dict(self, book_session):
+        book_data_dict = {
+            'book_id': book_session['isbn'],
+            'provider_id': book_session['provider_id'],
+            'title': book_session['title'],
+            'author': book_session['author'],
+            'publisher': book_session['publisher'],
+            'cover': book_session['cover'],
+            'created_at': timezone.now(),
+            'updated_at': timezone.now(),
+        }
+        return book_data_dict
+
 
 
 @login_required
@@ -393,10 +430,11 @@ class BookSearchView(APIMixin, generic.View):
         response = self.get_book_data(params)
         if response.status_code == requests.codes.bad_request:
             return HttpResponse(_('<p class="mt-4">The keyword is too short. Please search by longer words.</p>'))
-        elif 'error' in response:
-            return HttpResponse(_('<p class="mt-4">An error has occurred. Please retry later.</p>'))
 
         response = response.json()
+        if 'error' in response:
+            return HttpResponse(_('<p class="mt-4">An error has occurred. Please retry later.</p>'))
+
         context = {
             'mode': data.get('mode'),
             'pk': data.get('pk'),
@@ -460,12 +498,11 @@ class BasePlaylistBookStoreView(APIMixin, generic.RedirectView):
                 }
             else:
                 params = {}
-            response = self.get_book_data(params)
+            response = self.get_book_data(params).json()
             if 'error' in response:
                 messages.error(_('An error has occurred. Please retry later.'))
                 url = self.get_redirect_url()
                 return HttpResponseRedirect(url)
-            response = response.json()
             if int(response['count']) == 0:
                 messages.error(_('We could\'t find the book you want to add. Please retry again.'))
                 url = self.get_redirect_url()
