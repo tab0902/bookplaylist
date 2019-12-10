@@ -88,7 +88,7 @@ class Book(BaseModel):
     objects = BookManager()
 
     @property
-    def data(self):
+    def _default_data(self):
         return self.book_data_set.first()
 
     class Meta(BaseModel.Meta):
