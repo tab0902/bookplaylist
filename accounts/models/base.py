@@ -23,8 +23,6 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     username = NullCharField(
         _('username'),
         max_length=150,
-        blank=True,
-        null=True,
         help_text=_('Required. 150 characters or fewer. Letters, digits and _ only.'),
         validators=[username_validator],
         error_messages={
@@ -33,8 +31,6 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     )
     email = NullEmailField(
         _('email address'),
-        blank=True,
-        null=True,
         help_text=_('Required. Enter a valid email address.'),
         error_messages={
             'unique': _("A user with that email address already exists."),
