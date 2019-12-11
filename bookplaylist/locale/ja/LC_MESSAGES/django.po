@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 11:14+0900\n"
+"POT-Creation-Date: 2019-12-11 11:40+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -38,43 +38,51 @@ msgstr "その他"
 msgid "accounts"
 msgstr "アカウント"
 
-#: accounts/forms.py:59
+#: accounts/forms.py:51
+msgid "Hope"
+msgstr "希望する"
+
+#: accounts/forms.py:52
+msgid "Not hope"
+msgstr "希望しない"
+
+#: accounts/forms.py:66
 msgid "The two password fields didn’t match."
 msgstr ""
 
-#: accounts/forms.py:62 accounts/templates/accounts/settings.html:24
+#: accounts/forms.py:69 accounts/templates/accounts/settings.html:24
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:63 accounts/forms.py:121
+#: accounts/forms.py:70 accounts/forms.py:128
 msgid "At least 8 characters"
 msgstr "最低8文字以上"
 
-#: accounts/forms.py:68
+#: accounts/forms.py:75
 msgid "Password (again)"
 msgstr ""
 
-#: accounts/forms.py:69 accounts/forms.py:122
+#: accounts/forms.py:76 accounts/forms.py:129
 msgid "Enter the same password"
 msgstr "同じパスワードを入力してください"
 
-#: accounts/forms.py:71
+#: accounts/forms.py:78
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: accounts/forms.py:110
+#: accounts/forms.py:117
 msgid "Username or Email Address"
 msgstr "ユーザー名またはメールアドレス"
 
-#: accounts/forms.py:118
+#: accounts/forms.py:125
 msgid "Letters, numbers, and _ characters"
 msgstr "半角英数またはアンダーバー"
 
-#: accounts/forms.py:119
+#: accounts/forms.py:126
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:163 main/forms.py:136
+#: accounts/forms.py:170 main/forms.py:136
 #: main/templates/main/contact_email_admin.html:6
 msgid "Email"
 msgstr ""
