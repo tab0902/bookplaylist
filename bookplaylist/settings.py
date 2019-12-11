@@ -161,6 +161,9 @@ MESSAGE_TAGS = {
 }
 
 
+SILENCED_SYSTEM_CHECKS = ['auth.E003', 'auth.W004']
+
+
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',

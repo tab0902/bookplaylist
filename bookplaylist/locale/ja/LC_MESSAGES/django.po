@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 12:45+0900\n"
+"POT-Creation-Date: 2019-12-11 13:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -553,35 +553,35 @@ msgstr "更新日時"
 msgid "date deleted"
 msgstr "削除日時"
 
-#: bookplaylist/settings.py:192
+#: bookplaylist/settings.py:195
 msgid "python social auth"
 msgstr "ソーシャルログイン"
 
-#: bookplaylist/settings.py:194
+#: bookplaylist/settings.py:197
 msgid "User social auths"
 msgstr "SNSアカウント"
 
-#: bookplaylist/settings.py:195
+#: bookplaylist/settings.py:198
 msgid "Associations"
 msgstr "アソシエーション"
 
-#: bookplaylist/settings.py:196
+#: bookplaylist/settings.py:199
 msgid "Nonces"
 msgstr "ノンス"
 
-#: bookplaylist/settings.py:207
+#: bookplaylist/settings.py:210
 msgid "(Please select)"
 msgstr "(選択してください)"
 
-#: bookplaylist/settings.py:208
+#: bookplaylist/settings.py:211
 msgid "Question"
 msgstr "ご質問"
 
-#: bookplaylist/settings.py:209
+#: bookplaylist/settings.py:212
 msgid "Defect report"
 msgstr "不具合報告"
 
-#: bookplaylist/settings.py:210
+#: bookplaylist/settings.py:213
 msgid "Other inquiry"
 msgstr "上記以外のお問い合わせ"
 
