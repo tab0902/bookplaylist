@@ -57,6 +57,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
+    nickname = NullCharField(_('nickname'), max_length=50, blank=True, null=True)
     comment = NullTextField(_('comment'), blank=True, null=True)
     twitter_id = NullCharField(_('Twitter ID'), max_length=255, blank=True, null=True)
     facebook_id = NullCharField(_('Facebook ID'), max_length=255, blank=True, null=True)
