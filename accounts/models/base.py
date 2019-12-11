@@ -72,6 +72,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         indexes =  [
             models.Index(fields=['username'], name='username'),
             models.Index(fields=['email'], name='email'),
+            models.Index(fields=['nickname'], name='nickname'),
             models.Index(fields=['date_joined'], name='date_joined'),
             models.Index(fields=['last_login'], name='last_login'),
         ] + BaseModel._meta.indexes
