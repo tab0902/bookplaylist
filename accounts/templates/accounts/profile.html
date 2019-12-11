@@ -59,11 +59,22 @@
         {% endif %}
     </section>
 
+    {% with playlists=user.playlist_set.all %}
     <section id="profile-playlist-list">
         <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
-        {% trans "This user have no playlist." as text %}
-        {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
+        {% trans "This user have no playlist." as text_not_found %}
+        {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text_not_found playlists=playlists %}
     </section>
+
+    <section id="profile-lets-create">
+        {% if user == request.user and playlists|length %}
+        {% trans "Let's create a new playlist!" as lets_create_text %}
+        {% elif user == request.user and not playlists|length %}
+        {% trans "Let's create your first playlist!" as lets_create_text %}
+        {% endif %}
+        {% include 'main/playlists/layouts/lets-create-playlist.html' with lets_create_text=lets_create_text lazy=playlists|length %}
+    </section>
+    {% endwith %}
 </div>
 
 {% endblock %}
