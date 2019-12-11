@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 10:49+0900\n"
+"POT-Creation-Date: 2019-12-11 11:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -229,6 +229,8 @@ msgid "Settings"
 msgstr "アカウント設定"
 
 #: accounts/templates/accounts/index.html:23
+#: accounts/templates/accounts/profile.html:19
+#: accounts/templates/accounts/profile.html:29
 msgid "Update profile"
 msgstr "プロフィールを編集する"
 
@@ -237,17 +239,19 @@ msgid "Add profile"
 msgstr "自己紹介を入力しましょう"
 
 #: accounts/templates/accounts/index.html:28
-msgid "Good profile enables other users to understand your playlists deeply."
+msgid ""
+"Input your nickname and profile so that other users can know about you or "
+"your playlists deeply."
 msgstr ""
-"自己紹介を充実させることで、あなたのプレイリストを他のユーザーより深く理解し"
-"てもらいましょう。"
+"ニックネームや自己紹介を入力して、あなたのプレイリストを他のユーザーより深く"
+"理解してもらいましょう。"
 
 #: accounts/templates/accounts/index.html:34
 msgid "To profile"
 msgstr "プロフィールへ"
 
 #: accounts/templates/accounts/index.html:43
-#: accounts/templates/accounts/profile.html:59
+#: accounts/templates/accounts/profile.html:63
 #, python-format
 msgid "%(user)s's playlists"
 msgstr "%(user)s さんのプレイリスト"
@@ -386,21 +390,16 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:18
-#: accounts/templates/accounts/profile.html:30
-msgid "Edit comment"
-msgstr "自己紹介を編集する"
-
-#: accounts/templates/accounts/profile.html:46
+#: accounts/templates/accounts/profile.html:49
 #: accounts/templates/accounts/settings.html:59
 msgid "Save"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:50
+#: accounts/templates/accounts/profile.html:53
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: accounts/templates/accounts/profile.html:60
+#: accounts/templates/accounts/profile.html:64
 msgid "This user have no playlist."
 msgstr "プレイリストが作成されていません。"
 

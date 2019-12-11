@@ -51,7 +51,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserModel
-        fields = ('comment',)
+        fields = ('nickname', 'comment',)
 
 
 class PasswordCreationForm(forms.Form):

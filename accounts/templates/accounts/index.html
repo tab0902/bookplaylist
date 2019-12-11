@@ -19,13 +19,13 @@
                 <div class="d-flex align-items-center h-100">
                     <div>
                         <h2>
-                            {% if user.comment %}
+                            {% if user.comment or user.comment %}
                             {% trans 'Update profile' %}
                             {% else %}
                             {% trans 'Add profile' %}
                             {% endif %}
                         </h2>
-                        <p class="text-sm mb-0">{% trans 'Good profile enables other users to understand your playlists deeply.' %}</p>
+                        <p class="text-sm mb-0">{% trans 'Input your nickname and profile so that other users can know about you or your playlists deeply.' %}</p>
                     </div>
                 </div>
             </div>
