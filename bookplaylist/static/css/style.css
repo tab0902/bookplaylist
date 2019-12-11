@@ -866,3 +866,26 @@ textarea {
     display: none;
   }
 }
+
+/*---------------------------------
+
+  accounts/settings/
+
+---------------------------------*/
+
+ul.radio-inline {
+  list-style-type: none;
+  margin-top: .315rem;
+  padding: 0;
+}
+ul.radio-inline li {
+  display: inline;
+  margin-right: 1.5rem;
+}
+ul.radio-inline label {
+  margin: 0;
+}
+input.radio-inline {
+  position:relative;
+	top: .15rem;
+}

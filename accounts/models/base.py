@@ -23,8 +23,6 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     username = NullCharField(
         _('username'),
         max_length=150,
-        blank=True,
-        null=True,
         help_text=_('Required. 150 characters or fewer. Letters, digits and _ only.'),
         validators=[username_validator],
         error_messages={
@@ -33,15 +31,11 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     )
     email = NullEmailField(
         _('email address'),
-        blank=True,
-        null=True,
         help_text=_('Required. Enter a valid email address.'),
         error_messages={
             'unique': _("A user with that email address already exists."),
         },
     )
-    first_name = NullCharField(_('first name'), max_length=30, blank=True, null=True)
-    last_name = NullCharField(_('last name'), max_length=150, blank=True, null=True)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -57,9 +51,8 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
+    nickname = NullCharField(_('nickname'), max_length=50, blank=True, null=True)
     comment = NullTextField(_('comment'), blank=True, null=True)
-    twitter_id = NullCharField(_('Twitter ID'), max_length=255, blank=True, null=True)
-    facebook_id = NullCharField(_('Facebook ID'), max_length=255, blank=True, null=True)
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
     reason_for_deactivation = NullTextField(_('reason for deactivation'), blank=True, null=True)
 
@@ -79,29 +72,32 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         indexes =  [
             models.Index(fields=['username'], name='username'),
             models.Index(fields=['email'], name='email'),
+            models.Index(fields=['nickname'], name='nickname'),
             models.Index(fields=['date_joined'], name='date_joined'),
             models.Index(fields=['last_login'], name='last_login'),
         ] + BaseModel._meta.indexes
         constraints = [
             models.UniqueConstraint(fields=['username'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='username'),
             models.UniqueConstraint(fields=['email'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='email'),
-            models.UniqueConstraint(fields=['twitter_id'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='twitter_id'),
-            models.UniqueConstraint(fields=['facebook_id'], condition=models.Q(is_active=True, deleted_at__isnull=True), name='facebook_id'),
         ]
 
     def __str__(self):
-        return '%s' % (self.get_username() or self.pk)
+        return '%s' % self.get_display_name()
 
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
-    def get_full_name(self):
-        full_name = '%s %s' % (self.last_name, self.first_name)
-        return full_name.strip()
+    def get_username(self, at_sign=False):
+        username = super().get_username()
+        prefix = '@' if at_sign else ''
+        return '{}{}'.format(prefix, username)
 
-    def get_short_name(self):
-        return self.username or self.uuid
+    def get_username_with_at_sign(self):
+        return self.get_username(at_sign=True)
+
+    def get_display_name(self):
+        return self.nickname or self.get_username_with_at_sign()
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)

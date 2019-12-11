@@ -6,29 +6,27 @@
 
 <div class="container">
     <section id="profile-user">
-        <div class="row mt-4 mt-md-5">
-            <div class="col-md-8">
-                <h1 class="heading-lg">{{ user }}</h1>
-            </div>
-            {% if user == request.user %}
-            <div class="col-md-4 d-none d-md-block" style="display: none;">
-                <div class="d-flex align-items-center h-100">
-                    <div class="w-100">
-                        <button type=button class="profile-edit-btn btn btn-inline-sub float-right">{% trans 'Edit comment' %}</button>
+        <div id="profile-info">
+            <div class="row mt-4 mt-md-5">
+                <div class="col-md-8">
+                    <h1 class="heading-lg">{{ user }}</h1>
+                    {% if user.nickname %}<p class="text-lg">{{ user.get_username_with_at_sign }}</p>{% endif %}
+                </div>
+                {% if user == request.user %}
+                <div class="col-md-4 d-none d-md-block" style="display: none;">
+                    <div class="h-100">
+                        <div class="w-100">
+                            <button type="button" class="profile-edit-btn btn btn-inline-sub float-right">{% trans 'Update profile' %}</button>
+                        </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
-            {% endif %}
-        </div>
-
-        <div id="profile-info">
             <p class="mt-2 mt-md-4">{{ user.comment | default_if_none:'' | linebreaksbr | urlize }}</p>
         </div>
 
         {% if user == request.user %}
-        <button type=button class="btn btn-outline-sub w-100 d-md-none mt-2 profile-edit-btn">{% trans 'Edit comment' %}</button>
-        {% endif %}
-
+        <button type="button" class="btn btn-outline-sub w-100 d-md-none mt-2 profile-edit-btn">{% trans 'Update profile' %}</button>
         <div id="profile-form" style="display: none;">
             <form method="post" class="mt-md-3">{% csrf_token %}
                 {% if form.errors %}
@@ -36,7 +34,13 @@
                     {{ form.non_field_errors }}
                 </div>
                 {% endif %}
-                <div class="mt-2">
+                <div class="mt-4 mt-md-5">
+                    <label>{{ form.nickname.label }}</label>
+                    {{ form.nickname }}
+                    {{ form.nickname.errors }}
+                </div>
+                <div class="mt-4">
+                    <label>{{ form.comment.label }}</label>
                     {{ form.comment }}
                     {{ form.comment.errors }}
                 </div>
@@ -52,6 +56,7 @@
                 </div>
             </form>
         </div>
+        {% endif %}
     </section>
 
     <section id="profile-playlist-list">

@@ -39,19 +39,26 @@ class UserSettingsForm(forms.ModelForm):
 
     class Meta(UserChangeForm.Meta):
         model = UserModel
-        fields = ('username', 'email')
+        fields = ('username', 'email', 'hopes_newsletter')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for fieldname in self.fields:
             self.fields[fieldname].help_text = None
+        self.fields['hopes_newsletter'].widget = forms.RadioSelect(
+            attrs={'class': 'radio-inline'},
+            choices=[
+                (True, _('Hope')),
+                (False, _('Not hope')),
+            ]
+        )
 
 
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserModel
-        fields = ('comment',)
+        fields = ('nickname', 'comment',)
 
 
 class PasswordCreationForm(forms.Form):
