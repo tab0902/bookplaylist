@@ -91,7 +91,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         ]
 
     def __str__(self):
-        return '%s' % (self.get_username() or self.pk)
+        return '%s' % self.get_short_name()
 
     def clean(self):
         super().clean()
@@ -102,7 +102,15 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         return full_name.strip()
 
     def get_short_name(self):
-        return self.username or self.uuid
+        return self.nickname or self.get_username_with_at_sign()
+
+    def get_username(self, at_sign=False):
+        username = super().get_username()
+        prefix = '@' if at_sign else ''
+        return '{}{}'.format(prefix, username)
+
+    def get_username_with_at_sign(self):
+        return self.get_username(at_sign=True)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
