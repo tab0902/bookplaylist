@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from bookplaylist.models import (
-    BaseModel, FileModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, remove_emoji,
+    BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
     AllPlaylistManager, BookDataManager, BookManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
@@ -144,11 +144,11 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
-class Playlist(FileModel):
+def get_og_image_path(instance, filename):
+    return get_file_path(instance, filename, field='og_image')
 
-    def get_og_image_path(self, filename):
-        return self._get_file_path(filename=filename, field='og_image')
 
+class Playlist(BaseModel):
     books = models.ManyToManyField(
         'Book',
         through='PlaylistBook',

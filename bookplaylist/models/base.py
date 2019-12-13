@@ -99,15 +99,3 @@ class BaseModel(models.Model):
                 errors.setdefault(key, []).append(self.unique_error_message(model_class, unique_check))
 
         return errors
-
-
-class FileModel(BaseModel):
-
-    class Meta:
-        abstract = True
-
-    def _get_file_path(self, filename, field, filetype='img'):
-        directory = os.path.join(filetype, self.__class__._meta.db_table, field)
-        filename = str(self.pk) + os.path.splitext(filename)[-1]
-        path = os.path.join(directory, filename)
-        return path
