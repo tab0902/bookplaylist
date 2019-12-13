@@ -17,6 +17,10 @@ from bookplaylist.models import (
 # Create your models here.
 
 
+def get_profile_image_path(instance, filename):
+    return get_file_path(instance, filename, field='profile_image')
+
+
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
 
@@ -53,6 +57,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
     nickname = NullCharField(_('nickname'), max_length=50, blank=True, null=True)
     comment = NullTextField(_('comment'), blank=True, null=True)
+    profile_image = models.ImageField(upload_to=get_profile_image_path, blank=True, null=True, verbose_name=_('Profile image'))
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
     reason_for_deactivation = NullTextField(_('reason for deactivation'), blank=True, null=True)
 

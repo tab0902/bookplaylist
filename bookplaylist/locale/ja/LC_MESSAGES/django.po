@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-11 13:29+0900\n"
+"POT-Creation-Date: 2019-12-13 16:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -87,79 +87,83 @@ msgstr "正しいメールアドレスを入力してください"
 msgid "Email"
 msgstr ""
 
-#: accounts/models/base.py:24
+#: accounts/models/base.py:28
 msgid "username"
 msgstr ""
 
-#: accounts/models/base.py:26
+#: accounts/models/base.py:30
 msgid "Required. 150 characters or fewer. Letters, digits and _ only."
 msgstr ""
 "この項目は必須です。半角アルファベット、半角数字、アンダーバーで150文字以下に"
 "してください。"
 
-#: accounts/models/base.py:29
+#: accounts/models/base.py:33
 msgid "A user with that username already exists."
 msgstr ""
 
-#: accounts/models/base.py:33
+#: accounts/models/base.py:37
 msgid "email address"
 msgstr ""
 
-#: accounts/models/base.py:34
+#: accounts/models/base.py:38
 msgid "Required. Enter a valid email address."
 msgstr "この項目は必須です。有効なメールアドレスを入力してください。"
 
-#: accounts/models/base.py:36
+#: accounts/models/base.py:40
 msgid "A user with that email address already exists."
 msgstr "同じメールアドレスが既に登録済みです。"
 
-#: accounts/models/base.py:40
+#: accounts/models/base.py:44
 msgid "staff status"
 msgstr ""
 
-#: accounts/models/base.py:42
+#: accounts/models/base.py:46
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: accounts/models/base.py:45
+#: accounts/models/base.py:49
 msgid "active"
 msgstr ""
 
-#: accounts/models/base.py:48
+#: accounts/models/base.py:52
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: accounts/models/base.py:52
+#: accounts/models/base.py:56
 msgid "date joined"
 msgstr "登録日時"
 
-#: accounts/models/base.py:53
+#: accounts/models/base.py:57
 msgid "date verified"
 msgstr "認証日時"
 
-#: accounts/models/base.py:54
+#: accounts/models/base.py:58
 msgid "nickname"
 msgstr "ニックネーム"
 
-#: accounts/models/base.py:55
+#: accounts/models/base.py:59
 msgid "comment"
 msgstr "自己紹介"
 
-#: accounts/models/base.py:56
+#: accounts/models/base.py:60
+msgid "Profile image"
+msgstr "プロフィール画像"
+
+#: accounts/models/base.py:61
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models/base.py:57
+#: accounts/models/base.py:62
 msgid "reason for deactivation"
 msgstr "退会理由"
 
-#: accounts/models/base.py:70 main/models/base.py:158
+#: accounts/models/base.py:75 main/models/base.py:158
 msgid "user"
 msgstr ""
 
-#: accounts/models/base.py:71
+#: accounts/models/base.py:76
 msgid "users"
 msgstr ""
 
