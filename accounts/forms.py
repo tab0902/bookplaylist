@@ -39,19 +39,27 @@ class UserSettingsForm(forms.ModelForm):
 
     class Meta(UserChangeForm.Meta):
         model = UserModel
-        fields = ('username', 'email', 'hopes_newsletter')
+        fields = ('username', 'email', 'hopes_newsletter', 'shows_twitter_link')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for fieldname in self.fields:
-            self.fields[fieldname].help_text = None
-        self.fields['hopes_newsletter'].widget = forms.RadioSelect(
-            attrs={'class': 'radio-inline'},
-            choices=[
+        bool_fealds = [
+            ('hopes_newsletter', [
                 (True, _('Hope')),
                 (False, _('Not hope')),
-            ]
-        )
+            ]),
+            ('shows_twitter_link', [
+                (True, _('Show')),
+                (False, _('Not show')),
+            ]),
+        ]
+        for fieldname, choices in bool_fealds:
+            self.fields[fieldname].widget = forms.RadioSelect(
+                attrs={'class': 'radio-inline'},
+                choices=choices,
+            )
+        for fieldname in self.fields:
+            self.fields[fieldname].help_text = None
 
 
 class UserProfileForm(forms.ModelForm):

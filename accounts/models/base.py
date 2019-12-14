@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from social_django.models import UserSocialAuth
+
 from .manager import (
     AllUserManager, UserManager, UserWithInactiveManager,
 )
@@ -59,6 +61,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     comment = NullTextField(_('comment'), blank=True, null=True)
     profile_image = models.ImageField(upload_to=get_profile_image_path, blank=True, null=True, verbose_name=_('Profile image'))
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
+    shows_twitter_link = models.BooleanField(_('showing twitter link in profile'), default=True)
     reason_for_deactivation = NullTextField(_('reason for deactivation'), blank=True, null=True)
 
     objects = UserManager()
@@ -109,3 +112,13 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         return reverse_lazy('accounts:profile', args=[self.username])
+
+    def get_twitter_link(self):
+        if not self.shows_twitter_link:
+            return None
+        twitter = UserSocialAuth.objects.filter(user=self, provider='twitter').first()
+        return twitter \
+           and twitter.extra_data \
+           and twitter.extra_data.get('access_token') \
+           and twitter.extra_data.get('access_token').get('screen_name') \
+           and 'https://twitter.com/{}'.format(twitter.extra_data.get('access_token').get('screen_name'))

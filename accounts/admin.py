@@ -19,7 +19,7 @@ from bookplaylist.admin import (
 class UserAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'pk', 'password',)}),
-        (_('Personal info'), {'fields': ('nickname', 'comment', 'profile_image', 'hopes_newsletter',)}),
+        (_('Personal info'), {'fields': ('nickname', 'comment', 'profile_image', 'hopes_newsletter', 'shows_twitter_link',)}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions',),
         }),
