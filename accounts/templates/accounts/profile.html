@@ -22,7 +22,7 @@
                 </div>
                 {% endif %}
             </div>
-            <p class="mt-2 mt-md-4">{{ user.comment | default_if_none:'' | linebreaksbr | urlize }}</p>
+            <p class="mt-2 mt-md-4">{{ user.comment | linebreaksbr | urlize }}</p>
         </div>
 
         {% if user == request.user %}

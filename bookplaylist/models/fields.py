@@ -10,6 +10,9 @@ class NullFieldMixin:
         value = super().get_prep_value(value) if value else None
         return value
 
+    def from_db_value(self, value, expression, connection):
+        return value or ''
+
 
 class NullCharField(NullFieldMixin, models.CharField):
     pass

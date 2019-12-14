@@ -19,7 +19,7 @@
                 else   : src="{{ ORIGINAL_IMAGE }}"
                 {% endcomment %}
                 <img
-                    src{% if not forloop.first and not forloop.last %}="{{ dummy_image }}" data-original{% endif %}="{{ book_data.cover | default_if_none:'' }}"
+                    src{% if not forloop.first and not forloop.last %}="{{ dummy_image }}" data-original{% endif %}="{{ book_data.cover }}"
                     alt="{% blocktrans with title=book_data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                     width="100%"
                     {% if not forloop.first and not forloop.last %}class="lazy"{% endif %}
@@ -28,8 +28,8 @@
             <div class="col-8 col-sm-10 pl-0">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h3 class="text-md font-weight-bold">{{ forloop.counter }}. {{ book_data.title | default_if_none:'' }}</h3>
-                        <div class="text-xs mt-3">{{ book_data.author | default_if_none:'' }}</div>
+                        <h3 class="text-md font-weight-bold">{{ forloop.counter }}. {{ book_data.title }}</h3>
+                        <div class="text-xs mt-3">{{ book_data.author }}</div>
                     </div>
                     <div class="col-sm-4">
                         <button
@@ -56,7 +56,7 @@
     <div class="playlist-form-book-delete row" data-isbn="{{ book_data.isbn }}" style="display:none;">
         <div class="col-sm-9">
             <h3 class="text-md font-weight-bold">
-                {{ forloop.counter }}. {% blocktrans with book_data.title|default_if_none:'' as book_title %}"{{ book_title }}" will be delete.{% endblocktrans %}
+                {{ forloop.counter }}. {% blocktrans with book_data.title as book_title %}"{{ book_title }}" will be delete.{% endblocktrans %}
             </h3>
         </div>
         <div class="col-sm-3">
