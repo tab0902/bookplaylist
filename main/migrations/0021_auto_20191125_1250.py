@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='playlist',
             name='og_image',
-            field=models.ImageField(blank=True, null=True, upload_to=main.models.Playlist.get_og_image_path, verbose_name='Open Graph image'),
+            field=models.ImageField(blank=True, null=True, upload_to=main.models.get_og_image_path, verbose_name='Open Graph image'),
         ),
         migrations.RunSQL(
             "ALTER TABLE `playlists` MODIFY `og_image` varchar(100) AFTER `description`",
