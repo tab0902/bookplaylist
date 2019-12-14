@@ -73,6 +73,9 @@ class Provider(BaseModel):
         return '%s' % self.name
 
 
+BOOK_DATA_FIELDS = ('provider', 'title', 'author', 'publisher', 'cover', 'large_cover', 'affiliate_url')
+
+
 class Book(BaseModel):
     playlists = models.ManyToManyField(
         'Playlist',
@@ -85,7 +88,7 @@ class Book(BaseModel):
     objects = BookManager()
 
     @property
-    def data(self):
+    def _default_data(self):
         return self.book_data_set.first()
 
     class Meta(BaseModel.Meta):
@@ -94,8 +97,26 @@ class Book(BaseModel):
         verbose_name = _('book')
         verbose_name_plural = _('books')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in BOOK_DATA_FIELDS:
+            self._set_property_from_field_of_book_data(field)
+
     def __str__(self):
         return '%s' % (self.book_data_set.first() or self.isbn)
+
+    def _set_property_from_field_of_book_data(self, field):
+        prop = property(lambda self: self._get_field_of_book_data(field))
+        setattr(self.__class__, field, prop)
+
+    def _get_field_of_book_data(self, field):
+        book_data = self.book_data_set.all()
+        for book_datum in book_data:
+            value = getattr(book_datum, field)
+            if value:
+                return value
+        return getattr(book_data.first(), field) if book_data.first() else None
+
 
 
 class BookData(BaseModel):

@@ -29,16 +29,16 @@
             "@type": "Book",
             "position": "{{ forloop.counter }}",
             "isbn": "{{ playlist_book.book.isbn }}",
-            "name": "{{ playlist_book.book.data.title }}",
-            "image": "{{ playlist_book.book.data.cover }}",
-            "url": "{{ playlist_book.book.data.affiliate_url | default_if_none:playlist_book.book.data.cover }}",
+            "name": "{{ playlist_book.book.title }}",
+            "image": "{{ playlist_book.book.cover }}",
+            "url": "{{ playlist_book.book.affiliate_url | default_if_none:playlist_book.book.cover }}",
             "author": {
                 "@type": "Person",
-                "name": "{{ playlist_book.book.data.author }}"
+                "name": "{{ playlist_book.book.author }}"
             },
             "publisher": {
                 "@type": "Organization",
-                "name": "{{ playlist_book.book.data.publisher }}"
+                "name": "{{ playlist_book.book.publisher }}"
             }
         }{% if not forloop.last %},{% endif %}
         {% endfor %}
@@ -107,14 +107,14 @@
             <div class="line-gray my-4"></div>
             <div class="row">
                 <div class="col-5 col-sm-3 col-lg-2">
-                    {% if playlist_book.book.data.cover %}
+                    {% if playlist_book.book.cover %}
                     {% comment %}
                     if LAZY: src="{{ dummy_image }}" data-original="{{ ORIGINAL_IMAGE }}"
                     else   : src="{{ ORIGINAL_IMAGE }}"
                     {% endcomment %}
                     <img
-                        src{% if not forloop.first %}="{{ dummy_image }}" data-original{% endif %}="{{ playlist_book.book.data.cover | default_if_none:'' }}"
-                        alt="{% blocktrans with title=playlist_book.book.data.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                        src{% if not forloop.first %}="{{ dummy_image }}" data-original{% endif %}="{{ playlist_book.book.cover | default_if_none:'' }}"
+                        alt="{% blocktrans with title=playlist_book.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                         width="100%"
                         {% if not forloop.first %}class="lazy"{% endif %}
                     >
@@ -129,18 +129,18 @@
                     {% endif %}
                 </div>
                 <div class="col-7 col-sm-6 col-lg-7 pl-0">
-                    <h2 class="text-xl">{{ forloop.counter }}. {{ playlist_book.book.data.title | default_if_none:'' }}</h2>
-                    <span>{{ playlist_book.book.data.author | default_if_none:'' }}</span>
+                    <h2 class="text-xl">{{ forloop.counter }}. {{ playlist_book.book.title | default_if_none:'' }}</h2>
+                    <span>{{ playlist_book.book.author | default_if_none:'' }}</span>
                     <p class="d-none d-sm-block mt-4">{{ playlist_book.description | default_if_none:'' | linebreaksbr | urlize }}</p>
-                    {% if playlist_book.book.data.affiliate_url %}
-                    <a href="{{ playlist_book.book.data.affiliate_url | default_if_none:'' }}" target=”_blank” class="btn btn-main d-sm-none w-100 mt-4 mt-sm-0">
+                    {% if playlist_book.book.affiliate_url %}
+                    <a href="{{ playlist_book.book.affiliate_url | default_if_none:'' }}" target=”_blank” class="btn btn-main d-sm-none w-100 mt-4 mt-sm-0">
                         {% trans 'Show more' %}
                     </a>
                     {% endif %}
                 </div>
-                {% if playlist_book.book.data.affiliate_url %}
+                {% if playlist_book.book.affiliate_url %}
                 <div class="col-sm-3 d-none d-sm-block">
-                    <a href="{{ playlist_book.book.data.affiliate_url | default_if_none:'' }}" target=”_blank” class="btn btn-main w-100">
+                    <a href="{{ playlist_book.book.affiliate_url | default_if_none:'' }}" target=”_blank” class="btn btn-main w-100">
                         {% trans 'Show more' %}
                     </a>
                 </div>
