@@ -12,7 +12,7 @@
                         {% for playlist_book in playlist.playlist_book_set.all %}
                         {% if playlist_book.book.cover %}
                         <img
-                            src="{{ playlist_book.book.cover | default_if_none:'' }}"
+                            src="{{ playlist_book.book.cover }}"
                             alt="{% blocktrans with title=playlist_book.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                             class="scroll-box scroll-box-cover"
                         >
@@ -20,9 +20,9 @@
                         {% endfor %}
                     </div>
                 </div>
-                <h3 class="mt-3">{{ playlist.title | default_if_none:'' }}</h3>
-                <p class="d-lg-none">{{ playlist.description | default_if_none:'' | truncatechars:50 }}</p>
-                <p class="d-none d-lg-inline-block">{{ playlist.description | default_if_none:'' | truncatechars:35 }}</p>
+                <h3 class="mt-3">{{ playlist.title }}</h3>
+                <p class="d-lg-none">{{ playlist.description | truncatechars:50 }}</p>
+                <p class="d-none d-lg-inline-block">{{ playlist.description | truncatechars:35 }}</p>
                 <button type="button" class="btn btn-outline-main position-absolute l-0 b-0 w-100">{% trans 'Show more' %}</button>
             </div>
         </a>

@@ -16,7 +16,7 @@
                     <div class="cover-wrapper">
                         <div class="cover-content">
                             <img
-                                src="{{ book.cover | default_if_none:'' }}"
+                                src="{{ book.cover }}"
                                 alt="{% blocktrans with title=book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
                                 width="100%"
                                 height="100%"
@@ -34,8 +34,8 @@
                     {% endif %}
                 </div>
                 <div class="col-8 col-sm-12 book-item-info">
-                    <h3 class="text-md font-weight-normal mt-sm-3">{{ book.title | default_if_none:'' }}</h3>
-                    <div class="text-xs mt-1 mb-2">{{ book.author | default_if_none:'' }}</div>
+                    <h3 class="text-md font-weight-normal mt-sm-3">{{ book.title }}</h3>
+                    <div class="text-xs mt-1 mb-2">{{ book.author }}</div>
                 </div>
             </div>
             <div class="position-absolute r-0 b-0">
