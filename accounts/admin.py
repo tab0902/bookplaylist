@@ -7,7 +7,9 @@ from .forms import (
     UserChangeForm, UserCreationForm,
 )
 from .models import User
-from main.admin import PlaylistInline
+from main.admin import (
+    LikeInline, PlaylistInline,
+)
 from bookplaylist.admin import (
     AllObjectsForeignKeyMixin, AllObjectsMixin,
 )
@@ -40,4 +42,4 @@ class UserAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, BaseUserAdmin):
     search_fields = ('username', 'email', 'nickname', 'first_name', 'last_name', 'comment',)
     ordering = ('-last_login',)
     filter_horizontal = ('groups', 'user_permissions',)
-    inlines = [PlaylistInline]
+    inlines = [PlaylistInline, LikeInline]

@@ -12,7 +12,7 @@ from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
-    AllPlaylistManager, BookDataManager, BookManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
+    AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
 )
 
 # Create your models here.
@@ -258,3 +258,28 @@ class PlaylistBook(BaseModel):
 
     def __str__(self):
         return '%s' % self.book
+
+
+class Like(BaseModel):
+    playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, related_name='likes', related_query_name='like', verbose_name=_('playlist'))
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='likes', related_query_name='like', verbose_name=_('user'))
+    message = NullTextField(_('message'), blank=True, null=True)
+    date_notified = models.DateTimeField(_('date notified'), blank=True, null=True)
+    objects = LikeManager()
+
+    class Meta(BaseModel.Meta):
+        db_table = 'likes'
+        ordering = ['playlist', 'created_at']
+        verbose_name = _('like')
+        verbose_name_plural = _('likes')
+        indexes = BaseModel._meta.indexes + [
+            models.Index(fields=['playlist', 'created_at'], name='idx01'),
+            models.Index(fields=['user', 'created_at'], name='idx02'),
+            models.Index(fields=['playlist', 'date_notified', 'created_at'], name='idx03'),
+        ]
+        constraints = [
+            models.UniqueConstraint(fields=['playlist', 'user'], condition=models.Q(deleted_at__isnull=True), name='playlist_id_user_id_uniq'),
+        ]
+
+    def __str__(self):
+        return '%s' % self.user

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 16:12+0900\n"
+"POT-Creation-Date: 2019-12-16 16:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: accounts/admin.py:22
+#: accounts/admin.py:24
 msgid "Personal info"
 msgstr ""
 
-#: accounts/admin.py:23
+#: accounts/admin.py:25
 msgid "Permissions"
 msgstr ""
 
-#: accounts/admin.py:26
+#: accounts/admin.py:28
 msgid "Important dates"
 msgstr ""
 
-#: accounts/admin.py:27
+#: accounts/admin.py:29
 msgid "Others"
 msgstr "その他"
 
@@ -171,7 +171,7 @@ msgstr "Twitterのリンクをプロフィールに表示"
 msgid "reason for deactivation"
 msgstr "退会理由"
 
-#: accounts/models/base.py:78 main/models/base.py:179
+#: accounts/models/base.py:78 main/models/base.py:179 main/models/base.py:265
 msgid "user"
 msgstr ""
 
@@ -810,7 +810,7 @@ msgstr "OGP画像"
 msgid "published"
 msgstr "公開"
 
-#: main/models/base.py:192 main/models/base.py:236
+#: main/models/base.py:192 main/models/base.py:236 main/models/base.py:264
 msgid "playlist"
 msgstr "プレイリスト"
 
@@ -821,6 +821,22 @@ msgstr "リスト内の書籍"
 #: main/models/base.py:254
 msgid "books in playlists"
 msgstr "リスト内の書籍"
+
+#: main/models/base.py:266
+msgid "message"
+msgstr "メッセージ"
+
+#: main/models/base.py:267
+msgid "date notified"
+msgstr "通知日時"
+
+#: main/models/base.py:273
+msgid "like"
+msgstr "スキ"
+
+#: main/models/base.py:274
+msgid "likes"
+msgstr "スキ"
 
 #: main/templates/main/about.html:11
 msgid "What is BooxMix?"

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (
-    Book, BookData, Playlist, PlaylistBook, Provider, Theme,
+    Book, BookData, Like, Playlist, PlaylistBook, Provider, Theme,
 )
 from bookplaylist.admin import (
     Admin, AllObjectsForeignKeyMixin, AllObjectsMixin, SlimTabularInline, StackedInline, TabularInline,
@@ -54,7 +54,7 @@ class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
         return max_num
 
 
-class PlaylistBookStackedInline(StackedInline):
+class PlaylistBookStackedInline(AllObjectsForeignKeyMixin, StackedInline):
     model = Playlist.books.through
     can_delete = True
     show_change_link = False
@@ -65,6 +65,19 @@ class PlaylistBookStackedInline(StackedInline):
         if obj:
             return extra - obj.playlist_book_set.count() if extra > obj.playlist_book_set.count() else 0
         return extra
+
+
+class LikeInline(TabularInline):
+    model = Like
+    can_delete = False
+    show_change_link = False
+    readonly_fields = ('created_at', 'date_notified',)
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num = 0
+        if obj:
+            max_num = obj.likes.count()
+        return max_num
 
 
 @admin.register(Theme)
@@ -95,4 +108,4 @@ class PlaylistAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, Admin):
     list_display = ('title', 'user', 'theme', 'created_at', 'is_published',)
     list_filter = ('theme__name', 'is_published', 'created_at', 'updated_at',)
     search_fields = ('title', 'description', 'user__username', 'theme__name', 'books__isbn', 'books__book_data__title', 'books__book_data__author', 'books__book_data__publisher',)
-    inlines = [PlaylistBookStackedInline]
+    inlines = [PlaylistBookStackedInline, LikeInline]

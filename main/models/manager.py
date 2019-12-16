@@ -34,7 +34,7 @@ class BookDataManager(Manager):
 class BasePlaylistManager(Manager.from_queryset(PlaylistQuerySet)):
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related('playlist_book_set')
+        return super().get_queryset().prefetch_related('playlist_book_set', 'likes')
 
 
 class PlaylistManager(BasePlaylistManager):
@@ -58,3 +58,10 @@ class PlaylistBookManager(Manager):
 
     def get_queryset(self):
         return super().get_queryset().select_related('book').prefetch_related('book__book_data_set')
+
+
+# Like
+class LikeManager(Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().select_related('playlist', 'user')
