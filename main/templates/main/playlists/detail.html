@@ -193,6 +193,11 @@
                 </a>
             </h3>
             <p class="mb-0">{{ playlist.user.comment | linebreaksbr | urlize }}</p>
+            {% if playlist.user.get_twitter_link %}
+            <a href="{{ playlist.user.get_twitter_link }}" aria-label="{% trans 'Twitter Account' %}" class="d-inline-block mt-3">
+                <i class="fab fa-twitter fa-lg color-light-gray"></i>
+            </a>
+            {% endif %}
         </div>
     </section>
 

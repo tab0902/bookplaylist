@@ -22,11 +22,18 @@
                 </div>
                 {% endif %}
             </div>
-            <p class="mt-2 mt-md-4">{{ user.comment | linebreaksbr | urlize }}</p>
+            <div class="bg-gray border-radius px-2 py-3">
+                <p class="mb-0">{{ user.comment | linebreaksbr | urlize }}</p>
+                {% if user.get_twitter_link %}
+                <a href="{{ user.get_twitter_link }}" aria-label="{% trans 'Twitter Account' %}" class="d-inline-block mt-3">
+                    <i class="fab fa-twitter fa-lg color-light-gray"></i>
+                </a>
+                {% endif %}
+            </div>
         </div>
 
         {% if user == request.user %}
-        <button type="button" class="btn btn-outline-sub w-100 d-md-none mt-2 profile-edit-btn">{% trans 'Update profile' %}</button>
+        <button type="button" class="btn btn-outline-sub w-100 d-md-none mt-4 profile-edit-btn">{% trans 'Update profile' %}</button>
         <div id="profile-form" style="display: none;">
             <form method="post" class="mt-md-3">{% csrf_token %}
                 {% if form.errors %}

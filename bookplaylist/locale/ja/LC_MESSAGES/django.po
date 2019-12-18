@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-18 14:01+0900\n"
+"POT-Creation-Date: 2019-12-18 14:48+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -238,7 +238,7 @@ msgstr "アカウント設定"
 
 #: accounts/templates/accounts/index.html:23
 #: accounts/templates/accounts/profile.html:19
-#: accounts/templates/accounts/profile.html:29
+#: accounts/templates/accounts/profile.html:36
 msgid "Update profile"
 msgstr "プロフィールを編集する"
 
@@ -404,21 +404,26 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:49
+#: accounts/templates/accounts/profile.html:28
+#: main/templates/main/playlists/detail.html:198
+msgid "Twitter Account"
+msgstr "Twitterアカウント"
+
+#: accounts/templates/accounts/profile.html:56
 #: accounts/templates/accounts/settings.html:59
 msgid "Save"
 msgstr ""
 
-#: accounts/templates/accounts/profile.html:53
+#: accounts/templates/accounts/profile.html:60
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: accounts/templates/accounts/profile.html:63
+#: accounts/templates/accounts/profile.html:70
 #, python-format
 msgid "%(user)s's playlists"
 msgstr "%(user)s さんのプレイリスト"
 
-#: accounts/templates/accounts/profile.html:64
+#: accounts/templates/accounts/profile.html:71
 msgid "This user have no playlist."
 msgstr "プレイリストが作成されていません。"
 
@@ -994,12 +999,12 @@ msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
 #: main/templates/main/index.html:86
-#: main/templates/main/playlists/detail.html:211
+#: main/templates/main/playlists/detail.html:216
 msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:89
-#: main/templates/main/playlists/detail.html:215
+#: main/templates/main/playlists/detail.html:220
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての %(theme)s を見る"
@@ -1090,16 +1095,16 @@ msgstr "詳細を見る"
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlists/detail.html:204
+#: main/templates/main/playlists/detail.html:209
 #, python-format
 msgid "Other playlists with #%(theme)s"
 msgstr "他の #%(theme)s"
 
-#: main/templates/main/playlists/detail.html:206
+#: main/templates/main/playlists/detail.html:211
 msgid "Other playlists with free theme"
 msgstr "他の テーマ自由 のプレイリスト"
 
-#: main/templates/main/playlists/detail.html:217
+#: main/templates/main/playlists/detail.html:222
 msgid "Show all playlists with free theme"
 msgstr "全ての テーマ自由 のプレイリストを見る"
 
