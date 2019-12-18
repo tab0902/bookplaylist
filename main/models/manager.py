@@ -6,61 +6,103 @@ from .query import (
 )
 
 
-__all__ = ['ProviderManager', 'BookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager', 'LikeManager', 'AllLikeManager']
+__all__ = ['ProviderManager', 'BookManager', 'AllBookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager', 'LikeManager', 'AllLikeManager']
 
 
-# Provider
+############
+# Provider #
+############
+
 class ProviderManager(Manager):
 
     def get_queryset(self):
         return super().get_queryset().filter(is_available=True)
 
 
-# Book
-class BookManager(Manager):
+########
+# Book #
+########
+
+class BookManagerMixin:
 
     def get_queryset(self):
         return super().get_queryset().prefetch_related('book_data_set')
 
 
-# BookData
-class BookDataManager(Manager):
+class BookManager(BookManagerMixin, Manager):
+    pass
+
+
+class AllBookManager(BookManagerMixin, AllObjectsManager):
+    pass
+
+
+############
+# BookData #
+############
+
+class BookDataManagerMixin:
 
     def get_queryset(self):
         return super().get_queryset().select_related('provider')
 
 
-# Playlist
-class BasePlaylistManager(Manager.from_queryset(PlaylistQuerySet)):
+class BookDataManager(BookDataManagerMixin, Manager):
+    pass
+
+
+class AllBookDataManager(BookDataManagerMixin, AllObjectsManager):
+    pass
+
+
+############
+# Playlist #
+############
+
+class PlaylistManagerMixin:
 
     def get_queryset(self):
         return super().get_queryset().select_related('user').prefetch_related('playlist_book_set', 'likes')
 
 
-class PlaylistManager(BasePlaylistManager):
+class PlaylistManager(PlaylistManagerMixin, Manager.from_queryset(PlaylistQuerySet)):
 
     def get_queryset(self):
         return super().get_queryset().filter(is_published=True, user__is_active=True, user__deleted_at__isnull=True)
 
 
-class PlaylistWithUnpublishedManager(BasePlaylistManager):
+class PlaylistWithUnpublishedManager(PlaylistManagerMixin, Manager.from_queryset(PlaylistQuerySet)):
 
     def get_queryset(self):
         return super().get_queryset().filter(user__deleted_at__isnull=True)
 
 
-class AllPlaylistManager(AllObjectsManager.from_queryset(AllPlaylistQuerySet)):
+class AllPlaylistManager(PlaylistManagerMixin, AllObjectsManager.from_queryset(AllPlaylistQuerySet)):
     pass
 
 
-# PlaylistBook
-class PlaylistBookManager(Manager):
+################
+# PlaylistBook #
+################
+
+class PlaylistBookManagerMixin:
 
     def get_queryset(self):
         return super().get_queryset().select_related('book').prefetch_related('book__book_data_set')
 
 
-# Like
+class PlaylistBookManager(PlaylistBookManagerMixin, Manager):
+    pass
+
+
+class AllPlaylistBookManager(PlaylistBookManagerMixin, AllObjectsManager):
+    pass
+
+
+########
+# Like #
+########
+
 class LikeManagerMixin:
 
     def get_queryset(self):
@@ -69,6 +111,7 @@ class LikeManagerMixin:
 
 class LikeManager(LikeManagerMixin, Manager):
     pass
+
 
 class AllLikeManager(LikeManagerMixin, AllObjectsManager):
     pass

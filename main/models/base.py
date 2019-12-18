@@ -12,7 +12,7 @@ from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
-    AllLikeManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
+    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
 )
 
 # Create your models here.
@@ -79,6 +79,7 @@ BOOK_DATA_FIELDS = ('provider', 'title', 'author', 'publisher', 'cover', 'large_
 class Book(BaseModel):
     isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
     objects = BookManager()
+    all_objects = AllBookManager()
 
     @property
     def _default_data(self):
@@ -135,6 +136,7 @@ class BookData(BaseModel):
     cover = NullURLField(_('cover'), blank=True, null=True)
     affiliate_url = NullURLField(_('Affiliate URL'), blank=True, null=True)
     objects = BookDataManager()
+    all_objects = AllBookDataManager()
 
     @property
     def large_cover(self):
@@ -233,6 +235,8 @@ class PlaylistBook(BaseModel):
     )
     description = NullTextField(_('description'), blank=True, null=True)
     objects = PlaylistBookManager()
+    all_objects = AllPlaylistBookManager()
+
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists_books'
