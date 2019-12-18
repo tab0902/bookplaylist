@@ -77,13 +77,6 @@ BOOK_DATA_FIELDS = ('provider', 'title', 'author', 'publisher', 'cover', 'large_
 
 
 class Book(BaseModel):
-    playlists = models.ManyToManyField(
-        'Playlist',
-        through='PlaylistBook',
-        through_fields=('book', 'playlist'),
-        verbose_name=_('playlists'),
-        blank=True,
-    )
     isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
     objects = BookManager()
 
@@ -170,12 +163,6 @@ def get_og_image_path(instance, filename):
 
 
 class Playlist(BaseModel):
-    books = models.ManyToManyField(
-        'Book',
-        through='PlaylistBook',
-        through_fields=('playlist', 'book'),
-        verbose_name=_('books'),
-    )
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)

@@ -19,7 +19,7 @@ class BookDataInline(AllObjectsForeignKeyMixin, StackedInline):
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
         if obj:
-            max_num = obj.playlist_set.count()
+            max_num = obj.book_data_set.count()
         return max_num
 
 
@@ -41,7 +41,7 @@ class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInli
 
 
 class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
-    model = Book.playlists.through
+    model = PlaylistBook
     can_delete = False
     show_change_link = False
     fields = ('playlist', 'created_at',)
@@ -50,12 +50,12 @@ class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
         if obj:
-            max_num = obj.playlists.count()
+            max_num = obj.playlist_book_set.count()
         return max_num
 
 
 class PlaylistBookStackedInline(AllObjectsForeignKeyMixin, StackedInline):
-    model = Playlist.books.through
+    model = PlaylistBook
     can_delete = True
     show_change_link = False
     readonly_fields = ('pk', 'created_at', 'updated_at',)
@@ -67,7 +67,7 @@ class PlaylistBookStackedInline(AllObjectsForeignKeyMixin, StackedInline):
         return extra
 
 
-class LikeInline(TabularInline):
+class LikeInline(SlimTabularInline):
     model = Like
     can_delete = False
     show_change_link = False
@@ -107,5 +107,5 @@ class BookAdmin(Admin):
 class PlaylistAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, Admin):
     list_display = ('title', 'user', 'theme', 'created_at', 'is_published',)
     list_filter = ('theme__name', 'is_published', 'created_at', 'updated_at',)
-    search_fields = ('title', 'description', 'user__username', 'theme__name', 'books__isbn', 'books__book_data__title', 'books__book_data__author', 'books__book_data__publisher',)
+    search_fields = ('title', 'description', 'user__username', 'theme__name', 'playlist_book__description', 'playlist_book__book__isbn', 'playlist_book__book__book_data__title', 'playlist_book__book__book_data__author', 'playlist_book__book__book_data__publisher',)
     inlines = [PlaylistBookStackedInline, LikeInline]

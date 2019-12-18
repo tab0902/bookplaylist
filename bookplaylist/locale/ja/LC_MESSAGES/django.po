@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-18 17:27+0900\n"
+"POT-Creation-Date: 2019-12-18 17:38+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -171,7 +171,7 @@ msgstr "Twitterのリンクをプロフィールに表示"
 msgid "reason for deactivation"
 msgstr "退会理由"
 
-#: accounts/models/base.py:79 main/models/base.py:179 main/models/base.py:265
+#: accounts/models/base.py:79 main/models/base.py:166 main/models/base.py:252
 msgid "user"
 msgstr ""
 
@@ -537,6 +537,7 @@ msgid "Comment updated successfully."
 msgstr "プロフィールを更新しました。"
 
 #: accounts/views.py:113
+#, python-format
 msgid "%(user)s's profile"
 msgstr "%(user)s さんのプロフィール"
 
@@ -740,12 +741,12 @@ msgstr "スラッグ"
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models/base.py:25 main/models/base.py:51 main/models/base.py:182
-#: main/models/base.py:247
+#: main/models/base.py:25 main/models/base.py:51 main/models/base.py:169
+#: main/models/base.py:234
 msgid "description"
 msgstr "概要"
 
-#: main/models/base.py:30 main/models/base.py:180
+#: main/models/base.py:30 main/models/base.py:167
 msgid "theme"
 msgstr "テーマ"
 
@@ -769,7 +770,7 @@ msgstr "優先順位"
 msgid "available"
 msgstr "利用可能"
 
-#: main/models/base.py:59 main/models/base.py:137
+#: main/models/base.py:59 main/models/base.py:130
 msgid "provider"
 msgstr "書籍データ提供元"
 
@@ -777,79 +778,79 @@ msgstr "書籍データ提供元"
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models/base.py:84 main/models/base.py:193
-msgid "playlists"
-msgstr "プレイリスト"
-
-#: main/models/base.py:87
+#: main/models/base.py:80
 msgid "ISBN"
 msgstr ""
 
-#: main/models/base.py:97 main/models/base.py:130 main/models/base.py:245
+#: main/models/base.py:90 main/models/base.py:123 main/models/base.py:232
 msgid "book"
 msgstr "書籍"
 
-#: main/models/base.py:98 main/models/base.py:177
+#: main/models/base.py:91
 msgid "books"
 msgstr "書籍"
 
-#: main/models/base.py:139 main/models/base.py:181
+#: main/models/base.py:132 main/models/base.py:168
 msgid "title"
 msgstr "タイトル"
 
-#: main/models/base.py:140
+#: main/models/base.py:133
 msgid "author"
 msgstr "著者"
 
-#: main/models/base.py:141
+#: main/models/base.py:134
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models/base.py:142
+#: main/models/base.py:135
 msgid "cover"
 msgstr "書影"
 
-#: main/models/base.py:143
+#: main/models/base.py:136
 msgid "Affiliate URL"
 msgstr "アフィリエイトURL"
 
-#: main/models/base.py:153 main/models/base.py:154
+#: main/models/base.py:146 main/models/base.py:147
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models/base.py:183
+#: main/models/base.py:170
 msgid "Open Graph image"
 msgstr "OGP画像"
 
-#: main/models/base.py:184
+#: main/models/base.py:171
 msgid "published"
 msgstr "公開"
 
-#: main/models/base.py:192 main/models/base.py:236 main/models/base.py:264
+#: main/models/base.py:179 main/models/base.py:223 main/models/base.py:251
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models/base.py:253
+#: main/models/base.py:180
+msgid "playlists"
+msgstr "プレイリスト"
+
+#: main/models/base.py:240
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models/base.py:254
+#: main/models/base.py:241
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
-#: main/models/base.py:266
+#: main/models/base.py:253
 msgid "message"
 msgstr "メッセージ"
 
-#: main/models/base.py:267
+#: main/models/base.py:254
 msgid "date notified"
 msgstr "通知日時"
 
-#: main/models/base.py:274
+#: main/models/base.py:261
 msgid "like"
 msgstr "スキ"
 
-#: main/models/base.py:275
+#: main/models/base.py:262
 msgid "likes"
 msgstr "スキ"
 
