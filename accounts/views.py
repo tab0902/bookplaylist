@@ -21,6 +21,7 @@ from .forms import (
 from bookplaylist.views import (
     TemplateContextMixin, login_required, sensitive_post_parameters,
 )
+from main.models import Playlist
 
 # Create your views here.
 
@@ -29,11 +30,15 @@ UserModel = get_user_model()
 
 
 @login_required
-class IndexView(TemplateContextMixin, generic.TemplateView):
+class IndexView(TemplateContextMixin, generic.ListView):
+    context_object_name = 'playlists_with_like'
     page_title = _('My page')
     page_description = \
         'BooxMixのマイページでは、今までに自分が作成した本のプレイリストの一覧をチェックできます。何かシェアしたいことが見つかったときは、おすすめしたい本をまとめて新たにプレイリストを作成しましょう。'
     template_name = 'accounts/index.html'
+
+    def get_queryset(self):
+        return Playlist.objects.filter(like__user=self.request.user, like__deleted_at__isnull=True)
 
 
 @login_required
@@ -105,8 +110,7 @@ class ProfileView(TemplateContextMixin, generic.UpdateView):
         return super().get_success_url()
 
     def get_context_data(self, **kwargs):
-        username = self.object.username
-        self.page_title = _('%(username)s\'s profile') % {'username': username}
+        self.page_title = _('%(user)s\'s profile') % {'user': self.object}
         self.page_description = \
             self.object.comment or \
             ''

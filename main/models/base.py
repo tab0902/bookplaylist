@@ -176,14 +176,6 @@ class Playlist(BaseModel):
         through_fields=('playlist', 'book'),
         verbose_name=_('books'),
     )
-    users_with_like = models.ManyToManyField(
-        'accounts.User',
-        through='Like',
-        through_fields=('playlist', 'user'),
-        related_name='playlists_with_like',
-        related_query_name='playlist_with_like',
-        verbose_name=_('Users with like'),
-    )
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)

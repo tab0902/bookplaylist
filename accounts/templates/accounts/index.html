@@ -37,7 +37,7 @@
         </div>
     </section>
 
-    {% with playlists=user.playlists_with_like.all %}
+    {% with playlists=playlists_with_like %}
     <section id="playlist-list">
         <h2 class="mt-5">{% trans 'Your favorite playlists' %}</h2>
         {% trans "You haven't liked any playlists." as text %}

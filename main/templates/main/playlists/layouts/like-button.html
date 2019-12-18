@@ -2,13 +2,15 @@
 {% load i18n %}
 
 <div class="d-flex color-{% if is_liked %}pink{% else %}light-gray{% endif %}">
-    <div
-        class="like-button d-inline-block px-1 ml-n1"
-        data-url="{% url 'main:playlist_like' playlist_id %}"
-        data-liked="{{ is_liked | default:False }}"
-        data-count="{{ likes_count }}"
-    >
-        <i class="{% if is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+    <div class="d-inline-block">
+        <i
+            class="like-button {% if is_liked %}fas{% else %}far{% endif %} fa-heart h-100 p-1 ml-n1"
+            data-url="{% url 'main:playlist_like' playlist_id %}"
+            data-liked="{{ is_liked | default:False }}"
+            data-count="{{ likes_count }}"
+            data-ga-event-category="{% if not is_liked %}like_playlist{% endif %}"
+        >
+        </i>
     </div>
     <span class="like-count ml-1">{{ likes_count }}</span>
     {% if is_guest_user %}
