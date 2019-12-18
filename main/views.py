@@ -1,4 +1,5 @@
 import requests
+from distutils.util import strtobool
 from itertools import chain
 
 from django import forms
@@ -6,12 +7,12 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import (
-    Count, Q,
+    Count, Exists, OuterRef, Q,
 )
 from django.http import (
     Http404, HttpResponse, HttpResponseRedirect,
 )
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import get_object_or_404, redirect, render, render_to_response
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -21,7 +22,7 @@ from .forms import (
     BookSearchForm, ContactForm, PlaylistBookFormSet, PlaylistForm, PlaylistSearchForm,
 )
 from .models import (
-    Book, BookData, Playlist, Theme,
+    Book, BookData, Like, Playlist, Theme,
 )
 from bookplaylist.utils import APIMixin
 from bookplaylist.views import (
@@ -148,7 +149,14 @@ class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
     template_name = 'main/playlists/detail.html'
 
     def get_queryset(self):
-        return super().get_queryset().select_related('theme', 'user')
+        queryset = super().get_queryset().select_related('theme')
+        if self.request.user.is_authenticated:
+            like = Like.objects.filter(
+                playlist=OuterRef('pk'),
+                user=self.request.user,
+            )
+            queryset = queryset.annotate(is_liked=Exists(like))
+        return queryset
 
     def get_context_data(self, **kwargs):
         self.page_title = self.object.title
@@ -569,6 +577,52 @@ class PlaylistDeleteView(TemplateContextMixin, OwnerOnlyMixin, generic.DeleteVie
     def delete(self, request, *args, **kwargs):
         messages.success(request, _('Playlist deleted successfully.'))
         return super().delete(request, *args, **kwargs)
+
+
+@csrf_protect
+class PlaylistLikeView(generic.View):
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            raise Http404
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        playlist = get_object_or_404(Playlist, pk=self.kwargs.get('pk'))
+        user = request.user
+        likes_count = int(request.POST.get('count'))
+        is_liked_req = strtobool(request.POST.get('is_liked'))
+        if not user.is_authenticated:
+            is_guest_user = True
+            is_liked = is_liked_req
+        else:
+            is_guest_user = False
+            like = Like.all_objects.filter(playlist=playlist, user=user).first()
+            is_liked = bool(like and not like.is_deleted)
+
+            # If like-status in the request is correct, update data in DB.
+            if is_liked == is_liked_req:
+                if not like:
+                    like = playlist.likes.create(user=user)
+                elif like.is_deleted:
+                    like.restore()
+                elif not like.is_deleted:
+                    like.delete()
+
+            is_liked = bool(like and not like.is_deleted)
+            likes_count = likes_count + 1 if not is_liked_req else likes_count - 1
+
+        context = {
+            'playlist_id': playlist.pk,
+            'is_liked': is_liked,
+            'likes_count': likes_count,
+            'is_guest_user': is_guest_user,
+        }
+        return render(
+            request,
+            'main/playlists/layouts/like-button.html',
+            context
+        )
 
 
 class CreateOrSignupView(generic.RedirectView):

@@ -3,44 +3,60 @@
 
 <div class="row">
     {% for playlist in playlists %}
-        <div class="col-6 col-sm-3 mt-3 mt-md-4">
-            <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
-            {% if playlist.playlist_book_set.all.0.book.cover %}
-            <div class="" style="border-radius:16px;">
-                <div class="row no-gutters">
-                    <div class="col-6">
-                        <div class="cover-wrapper">
-                            <div class="cover-content">
-                                <img
-                                    src="{{ dummy_image }}"
-                                    data-original="{{ playlist.playlist_book_set.all.0.book.cover }}"
-                                    alt="{% blocktrans with title=playlist.playlist_book_set.all.0.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
-                                    width="100%"
-                                    height="100%"
-                                    class="border-radius-left lazy"
-                                >
-                            </div>
+    {% url 'main:playlist_detail' playlist.pk as playlist_detail_url %}
+    {% url 'accounts:profile' playlist.user.username as playlist_user_url %}
+    <div class="col-6 col-sm-3 mt-3 mt-md-4">
+        {% if playlist.playlist_book_set.all.0.book.cover %}
+        <a href="{{ playlist_detail_url }}" class="color-gray d-block pb-1">
+            <div class="row no-gutters">
+                <div class="col-6">
+                    <div class="cover-wrapper">
+                        <div class="cover-content">
+                            <img
+                                src="{{ dummy_image }}"
+                                data-original="{{ playlist.playlist_book_set.all.0.book.cover }}"
+                                alt="{% blocktrans with title=playlist.playlist_book_set.all.0.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                                width="100%"
+                                height="100%"
+                                class="border-radius-left lazy"
+                            >
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="cover-wrapper">
-                            <div class="cover-content">
-                                <img
-                                    src="{{ dummy_image }}"
-                                    data-original="{{ playlist.playlist_book_set.all.1.book.cover }}"
-                                    alt="{% blocktrans with title=playlist.playlist_book_set.all.1.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
-                                    width="100%"
-                                    height="100%"
-                                    class="border-radius-right lazy"
-                                >
-                            </div>
+                </div>
+                <div class="col-6">
+                    <div class="cover-wrapper">
+                        <div class="cover-content">
+                            <img
+                                src="{{ dummy_image }}"
+                                data-original="{{ playlist.playlist_book_set.all.1.book.cover }}"
+                                alt="{% blocktrans with title=playlist.playlist_book_set.all.1.book.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                                width="100%"
+                                height="100%"
+                                class="border-radius-right lazy"
+                            >
                         </div>
                     </div>
                 </div>
             </div>
-            <h4 class="font-weight-bold mt-2">{{ playlist.title }}</h4>
-            {% endif %}
         </a>
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <a href="{{ playlist_user_url }}" class="color-gray d-inline-block pt-1 pb-md-1">
+                    {{ playlist.user }}
+                </a>
+            </div>
+            <div class="col text-right">
+                <a href="{{ playlist_detail_url }}" class="color-pink d-inline-block w-100 pt-1 pb-md-1">
+                    <i class="far fa-heart"></i>&nbsp;{{ playlist.likes.count }}
+                </a>
+            </div>
+        </div>
+        <h4 class="font-weight-bold">
+            <a href="{{ playlist_detail_url }}" class="color-gray d-inline-block w-100 pt-1">
+                {{ playlist.title }}
+            </a>
+        </h4>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

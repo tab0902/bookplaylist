@@ -6,7 +6,7 @@ from .query import (
 )
 
 
-__all__ = ['ProviderManager', 'BookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager']
+__all__ = ['ProviderManager', 'BookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager', 'LikeManager', 'AllLikeManager']
 
 
 # Provider
@@ -34,7 +34,7 @@ class BookDataManager(Manager):
 class BasePlaylistManager(Manager.from_queryset(PlaylistQuerySet)):
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related('playlist_book_set', 'likes')
+        return super().get_queryset().select_related('user').prefetch_related('playlist_book_set', 'likes')
 
 
 class PlaylistManager(BasePlaylistManager):
@@ -61,7 +61,14 @@ class PlaylistBookManager(Manager):
 
 
 # Like
-class LikeManager(Manager):
+class LikeManagerMixin:
 
     def get_queryset(self):
         return super().get_queryset().select_related('playlist', 'user')
+
+
+class LikeManager(LikeManagerMixin, Manager):
+    pass
+
+class AllLikeManager(LikeManagerMixin, AllObjectsManager):
+    pass

@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.mail import send_mail
 from django.db import models
+from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -105,13 +106,16 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         return self.get_username(at_sign=True)
 
     def get_display_name(self):
-        return self.nickname or self.get_username_with_at_sign()
+        return self.nickname or self.get_username()
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def get_absolute_url(self):
         return reverse_lazy('accounts:profile', args=[self.username])
+
+    def get_profile_image(self):
+        return self.profile_image or static('img/default-profile-image.png')
 
     def get_twitter_link(self):
         if not self.shows_twitter_link:

@@ -37,12 +37,21 @@
         </div>
     </section>
 
+    {% with playlists=user.playlists_with_like.all %}
+    <section id="playlist-list">
+        <h2 class="mt-5">{% trans 'Your favorite playlists' %}</h2>
+        {% trans "You haven't liked any playlists." as text %}
+        {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text playlists=playlists %}
+    </section>
+    {% endwith %}
+
     {% with playlists=user.playlist_set.all %}
     {% if playlists|length != 0 %}
     <section id="playlist-list">
-        <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
+        <div class="line-gray my-4 my-md-5"></div>
+        <h2 class="mt-5">{% trans 'Playlists you created' %}</h2>
         {% trans "You haven't created any playlists. Enter the link below to create your first one!" as text %}
-        {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text playlists=playlists %}
+        {% include 'main/playlists/layouts/list-widget.html' with hide_user=True text_not_found=text playlists=playlists %}
     </section>
     {% endif %}
 

@@ -86,6 +86,30 @@ a:hover {
 .color-gray {
   color: #484848;
 }
+.color-gray:hover, .color-gray:active {
+  color: #484848;
+}
+.color-gray:hover {
+  text-decoration: none;
+}
+.color-light-gray {
+  color: #A8ABB1;
+}
+.color-light-gray:hover, .color-light-gray:active {
+  color: #A8ABB1;
+}
+.color-light-gray:hover {
+  text-decoration: none;
+}
+.color-pink {
+  color: #EA3F60;
+}
+.color-pink:hover, .color-pink:active {
+  color: #EA3F60;
+}
+.color-pink:hover {
+  text-decoration: none;
+}
 a.color-gray:hover, a.color-gray:active {
   color: #484848;
 }
@@ -337,6 +361,12 @@ textarea {
   color: #3B5998;
 }
 
+
+/* like buttons */
+.like-button {
+  cursor: pointer;
+}
+
 /* font awesome */
 .fa-twitter-color {
   color: #55acee;
@@ -455,6 +485,9 @@ textarea {
 }
 .border-radius-right {
   border-radius: 0 4px 4px 0;
+}
+.round {
+  border-radius: 50%;
 }
 .errorlist {
   list-style-type: none;
@@ -677,9 +710,6 @@ textarea {
   .playlist-item:nth-child(even) {
     padding-left: 25px;
     padding-right: 15px;
-  }
-  .playlist-item .position-relative {
-    height: calc(100% - 3rem);
   }
   .playlist-item:nth-child(2) .position-relative {
     height: 100% !important;

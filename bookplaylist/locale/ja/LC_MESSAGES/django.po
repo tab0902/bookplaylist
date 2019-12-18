@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-16 16:44+0900\n"
+"POT-Creation-Date: 2019-12-18 14:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -95,87 +95,87 @@ msgstr "正しいメールアドレスを入力してください"
 msgid "Email"
 msgstr ""
 
-#: accounts/models/base.py:30
+#: accounts/models/base.py:31
 msgid "username"
 msgstr ""
 
-#: accounts/models/base.py:32
+#: accounts/models/base.py:33
 msgid "Required. 150 characters or fewer. Letters, digits and _ only."
 msgstr ""
 "この項目は必須です。半角アルファベット、半角数字、アンダーバーで150文字以下に"
 "してください。"
 
-#: accounts/models/base.py:35
+#: accounts/models/base.py:36
 msgid "A user with that username already exists."
 msgstr ""
 
-#: accounts/models/base.py:39
+#: accounts/models/base.py:40
 msgid "email address"
 msgstr ""
 
-#: accounts/models/base.py:40
+#: accounts/models/base.py:41
 msgid "Required. Enter a valid email address."
 msgstr "この項目は必須です。有効なメールアドレスを入力してください。"
 
-#: accounts/models/base.py:42
+#: accounts/models/base.py:43
 msgid "A user with that email address already exists."
 msgstr "同じメールアドレスが既に登録済みです。"
 
-#: accounts/models/base.py:46
+#: accounts/models/base.py:47
 msgid "staff status"
 msgstr ""
 
-#: accounts/models/base.py:48
+#: accounts/models/base.py:49
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: accounts/models/base.py:51
+#: accounts/models/base.py:52
 msgid "active"
 msgstr ""
 
-#: accounts/models/base.py:54
+#: accounts/models/base.py:55
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: accounts/models/base.py:58
+#: accounts/models/base.py:59
 msgid "date joined"
 msgstr "登録日時"
 
-#: accounts/models/base.py:59
+#: accounts/models/base.py:60
 msgid "date verified"
 msgstr "認証日時"
 
-#: accounts/models/base.py:60
+#: accounts/models/base.py:61
 msgid "nickname"
 msgstr "ニックネーム"
 
-#: accounts/models/base.py:61
+#: accounts/models/base.py:62
 msgid "comment"
 msgstr "自己紹介"
 
-#: accounts/models/base.py:62
+#: accounts/models/base.py:63
 msgid "Profile image"
 msgstr "プロフィール画像"
 
-#: accounts/models/base.py:63
+#: accounts/models/base.py:64
 msgid "newsletter status"
 msgstr "メール配信希望"
 
-#: accounts/models/base.py:64
+#: accounts/models/base.py:65
 msgid "showing twitter link in profile"
 msgstr "Twitterのリンクをプロフィールに表示"
 
-#: accounts/models/base.py:65
+#: accounts/models/base.py:66
 msgid "reason for deactivation"
 msgstr "退会理由"
 
-#: accounts/models/base.py:78 main/models/base.py:179 main/models/base.py:265
+#: accounts/models/base.py:79 main/models/base.py:187 main/models/base.py:273
 msgid "user"
 msgstr ""
 
-#: accounts/models/base.py:79
+#: accounts/models/base.py:80
 msgid "users"
 msgstr ""
 
@@ -258,13 +258,19 @@ msgstr ""
 msgid "To profile"
 msgstr "プロフィールへ"
 
-#: accounts/templates/accounts/index.html:43
-#: accounts/templates/accounts/profile.html:63
-#, python-format
-msgid "%(user)s's playlists"
-msgstr "%(user)s さんのプレイリスト"
+#: accounts/templates/accounts/index.html:42
+msgid "Your favorite playlists"
+msgstr "お気に入りのプレイリスト"
 
-#: accounts/templates/accounts/index.html:44
+#: accounts/templates/accounts/index.html:43
+msgid "You haven't liked any playlists."
+msgstr "まだお気に入りに登録されたプレイリストがありません。"
+
+#: accounts/templates/accounts/index.html:52
+msgid "Playlists you created"
+msgstr "作成したプレイリスト"
+
+#: accounts/templates/accounts/index.html:53
 msgid ""
 "You haven't created any playlists. Enter the link below to create your first "
 "one!"
@@ -272,11 +278,11 @@ msgstr ""
 "まだプレイリストが作成されていません。下のリンクから初めてのプレイリストを作"
 "成しましょう！"
 
-#: accounts/templates/accounts/index.html:51
+#: accounts/templates/accounts/index.html:60
 msgid "Let's create a new playlist!"
 msgstr "新しいプレイリストを作成しましょう！"
 
-#: accounts/templates/accounts/index.html:53
+#: accounts/templates/accounts/index.html:62
 msgid "Let's create your first playlist!"
 msgstr "初めてのプレイリストを作成しましょう！"
 
@@ -406,6 +412,11 @@ msgstr ""
 #: accounts/templates/accounts/profile.html:53
 msgid "Cancel"
 msgstr "キャンセル"
+
+#: accounts/templates/accounts/profile.html:63
+#, python-format
+msgid "%(user)s's playlists"
+msgstr "%(user)s さんのプレイリスト"
 
 #: accounts/templates/accounts/profile.html:64
 msgid "This user have no playlist."
@@ -619,7 +630,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: bookplaylist/templates/layouts/footer.html:9 main/views.py:584
+#: bookplaylist/templates/layouts/footer.html:9 main/views.py:638
 msgid "Terms"
 msgstr "利用規約"
 
@@ -627,11 +638,11 @@ msgstr "利用規約"
 msgid "Privacy"
 msgstr "プライバシー"
 
-#: bookplaylist/templates/layouts/footer.html:15 main/views.py:594
+#: bookplaylist/templates/layouts/footer.html:15 main/views.py:648
 msgid "About BooxMix"
 msgstr "BooxMixについて"
 
-#: bookplaylist/templates/layouts/footer.html:18 main/views.py:600
+#: bookplaylist/templates/layouts/footer.html:18 main/views.py:654
 msgid "Contact"
 msgstr "お問い合わせ"
 
@@ -725,12 +736,12 @@ msgstr "スラッグ"
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models/base.py:25 main/models/base.py:51 main/models/base.py:182
-#: main/models/base.py:247
+#: main/models/base.py:25 main/models/base.py:51 main/models/base.py:190
+#: main/models/base.py:255
 msgid "description"
 msgstr "概要"
 
-#: main/models/base.py:30 main/models/base.py:180
+#: main/models/base.py:30 main/models/base.py:188
 msgid "theme"
 msgstr "テーマ"
 
@@ -762,7 +773,7 @@ msgstr "書籍データ提供元"
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models/base.py:84 main/models/base.py:193
+#: main/models/base.py:84 main/models/base.py:201
 msgid "playlists"
 msgstr "プレイリスト"
 
@@ -770,7 +781,7 @@ msgstr "プレイリスト"
 msgid "ISBN"
 msgstr ""
 
-#: main/models/base.py:97 main/models/base.py:130 main/models/base.py:245
+#: main/models/base.py:97 main/models/base.py:130 main/models/base.py:253
 msgid "book"
 msgstr "書籍"
 
@@ -778,7 +789,7 @@ msgstr "書籍"
 msgid "books"
 msgstr "書籍"
 
-#: main/models/base.py:139 main/models/base.py:181
+#: main/models/base.py:139 main/models/base.py:189
 msgid "title"
 msgstr "タイトル"
 
@@ -802,39 +813,43 @@ msgstr "アフィリエイトURL"
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models/base.py:183
+#: main/models/base.py:185
+msgid "Users with like"
+msgstr "「スキ」したユーザー"
+
+#: main/models/base.py:191
 msgid "Open Graph image"
 msgstr "OGP画像"
 
-#: main/models/base.py:184
+#: main/models/base.py:192
 msgid "published"
 msgstr "公開"
 
-#: main/models/base.py:192 main/models/base.py:236 main/models/base.py:264
+#: main/models/base.py:200 main/models/base.py:244 main/models/base.py:272
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models/base.py:253
+#: main/models/base.py:261
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models/base.py:254
+#: main/models/base.py:262
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
-#: main/models/base.py:266
+#: main/models/base.py:274
 msgid "message"
 msgstr "メッセージ"
 
-#: main/models/base.py:267
+#: main/models/base.py:275
 msgid "date notified"
 msgstr "通知日時"
 
-#: main/models/base.py:273
+#: main/models/base.py:282
 msgid "like"
 msgstr "スキ"
 
-#: main/models/base.py:274
+#: main/models/base.py:283
 msgid "likes"
 msgstr "スキ"
 
@@ -916,7 +931,7 @@ msgstr "お問い合わせを受信しました。内容は以下の通りです
 msgid "User"
 msgstr "ユーザー"
 
-#: main/templates/main/contact_subject.html:2 main/views.py:619
+#: main/templates/main/contact_subject.html:2 main/views.py:673
 msgid "We recieve your inquiry"
 msgstr "お問い合わせ完了"
 
@@ -936,7 +951,7 @@ msgstr ""
 "大好きな本や、友達にお勧めしたい本をまとめて、プレイリストを作成し、気軽にSNS"
 "でシェアしましょう。"
 
-#: main/templates/main/index.html:49 main/views.py:320
+#: main/templates/main/index.html:49 main/views.py:328
 msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
@@ -979,12 +994,12 @@ msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
 #: main/templates/main/index.html:86
-#: main/templates/main/playlists/detail.html:179
+#: main/templates/main/playlists/detail.html:211
 msgid "Show all"
 msgstr "すべて見る"
 
 #: main/templates/main/index.html:89
-#: main/templates/main/playlists/detail.html:183
+#: main/templates/main/playlists/detail.html:215
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての %(theme)s を見る"
@@ -998,7 +1013,7 @@ msgstr "さあ、あなたも本のプレイリストを作ってみましょう
 msgid "Books related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれる書籍一覧"
 
-#: main/templates/main/playlists/book.html:13 main/views.py:385
+#: main/templates/main/playlists/book.html:13 main/views.py:393
 msgid "Search book to add"
 msgstr "追加する本を探す"
 
@@ -1010,21 +1025,23 @@ msgstr "検索する"
 #: main/templates/main/playlists/create_complete.html:14
 #: main/templates/main/playlists/detail.html:118
 #: main/templates/main/playlists/layouts/book-list.html:20
-#: main/templates/main/playlists/layouts/list-widget-small.html:17
-#: main/templates/main/playlists/layouts/list-widget-small.html:31
-#: main/templates/main/playlists/layouts/list-widget.html:16
+#: main/templates/main/playlists/layouts/list-widget-small.html:18
+#: main/templates/main/playlists/layouts/list-widget-small.html:32
+#: main/templates/main/playlists/layouts/list-widget.html:18
 #: main/templates/main/playlists/layouts/playlist-form.html:24
 #, python-format
 msgid "Image of &quot;%(title)s&quot;"
 msgstr "『%(title)s』の画像"
 
 #: main/templates/main/playlists/create_complete.html:33
-#: main/templates/main/playlists/detail.html:80
+#: main/templates/main/playlists/detail.html:82
+#: main/templates/main/playlists/detail.html:166
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
 #: main/templates/main/playlists/create_complete.html:45
-#: main/templates/main/playlists/detail.html:92
+#: main/templates/main/playlists/detail.html:94
+#: main/templates/main/playlists/detail.html:178
 msgid "Share on Facebook"
 msgstr "Facebookでシェアする"
 
@@ -1049,6 +1066,11 @@ msgstr "\"%(playlist)s\" を削除しますか？"
 msgid "Note: You can't cancel this action."
 msgstr "※この操作は取り消せません。"
 
+#: main/templates/main/playlists/detail.html:59
+#: main/templates/main/playlists/layouts/list-widget.html:35
+msgid "profile image"
+msgstr "プロフィール画像"
+
 #: main/templates/main/playlists/detail.html:67
 msgid "Edit"
 msgstr "編集する"
@@ -1060,24 +1082,24 @@ msgstr ""
 
 #: main/templates/main/playlists/detail.html:138
 #: main/templates/main/playlists/detail.html:145
-#: main/templates/main/playlists/layouts/list-widget.html:26
+#: main/templates/main/playlists/layouts/list-widget.html:47
 msgid "Show more"
 msgstr "詳細を見る"
 
-#: main/templates/main/playlists/detail.html:156
+#: main/templates/main/playlists/detail.html:189
 msgid "Who created this playlist?"
 msgstr "プレイリストの作者"
 
-#: main/templates/main/playlists/detail.html:172
+#: main/templates/main/playlists/detail.html:204
 #, python-format
 msgid "Other playlists with #%(theme)s"
 msgstr "他の #%(theme)s"
 
-#: main/templates/main/playlists/detail.html:174
+#: main/templates/main/playlists/detail.html:206
 msgid "Other playlists with free theme"
 msgstr "他の テーマ自由 のプレイリスト"
 
-#: main/templates/main/playlists/detail.html:185
+#: main/templates/main/playlists/detail.html:217
 msgid "Show all playlists with free theme"
 msgstr "全ての テーマ自由 のプレイリストを見る"
 
@@ -1104,7 +1126,11 @@ msgstr "あなたも #%(tag)s のプレイリストをシェアしましょう�
 msgid "Let's share your book playlist!"
 msgstr "あなたも本のプレイリストをシェアしましょう！"
 
-#: main/templates/main/playlists/layouts/list-widget.html:32
+#: main/templates/main/playlists/layouts/like-button.html:16
+msgid "Please log in."
+msgstr "ログインが必要です"
+
+#: main/templates/main/playlists/layouts/list-widget.html:53
 msgid "No playlist found. Please search by other conditions."
 msgstr ""
 "お探しのプレイリストが見つかりませんでした。別の条件で検索してみてください。"
@@ -1135,7 +1161,7 @@ msgid "Let's create book playlist and share it."
 msgstr "本のプレイリストを作ってシェアしよう。"
 
 #: main/templates/main/playlists/update.html:15
-#: main/templates/main/playlists/update.html:21 main/views.py:565
+#: main/templates/main/playlists/update.html:21 main/views.py:573
 msgid "Delete playlist"
 msgstr "プレイリストを削除する"
 
@@ -1143,41 +1169,41 @@ msgstr "プレイリストを削除する"
 msgid "Terms of BooxMix"
 msgstr "BooxMix利用規約"
 
-#: main/views.py:68
+#: main/views.py:69
 msgid "Free theme"
 msgstr "テーマ自由"
 
-#: main/views.py:126
+#: main/views.py:127
 #, python-format
 msgid "Playlists related with \"%(q)s\""
 msgstr "\"%(q)s\" が含まれるリスト一覧"
 
-#: main/views.py:128
+#: main/views.py:129
 #, python-format
 msgid "Playlists with #%(theme)s"
 msgstr "#%(theme)s のプレイリスト"
 
-#: main/views.py:130
+#: main/views.py:131
 msgid "Playlists with free theme"
 msgstr "テーマ自由 のプレイリスト"
 
-#: main/views.py:132
+#: main/views.py:133
 msgid "All Playlists"
 msgstr "プレイリスト一覧"
 
-#: main/views.py:244
+#: main/views.py:252
 msgid "You have to add at least one book to your playlist."
 msgstr "プレイリストに本が登録されていません。"
 
-#: main/views.py:344
+#: main/views.py:352
 msgid "Update playlist"
 msgstr "プレイリストを編集する"
 
-#: main/views.py:345
+#: main/views.py:353
 msgid "Playlist updated successfully."
 msgstr "プレイリストを更新しました。"
 
-#: main/views.py:432
+#: main/views.py:440
 msgid ""
 "<p class=\"mt-4\">The keyword is too short. Please search by longer words.</"
 "p>"
@@ -1185,37 +1211,37 @@ msgstr ""
 "<p class=\"mt-4\">キーワードが短すぎます。もう少し長い単語で検索してくださ"
 "い。</p>"
 
-#: main/views.py:436
+#: main/views.py:444
 msgid "<p class=\"mt-4\">An error has occurred. Please retry later.</p>"
 msgstr ""
 "<p class=\"mt-4\">エラーが発生しました。時間をおいてからもう一度お試しくださ"
 "い。</p>"
 
-#: main/views.py:480
+#: main/views.py:488
 msgid "Session timeout. Please retry from the beginning."
 msgstr "セッションの有効期限が切れました。もう一度最初から操作して下さい。"
 
-#: main/views.py:503
+#: main/views.py:511
 msgid "An error has occurred. Please retry later."
 msgstr "エラーが発生しました。時間をおいてからもう一度お試しください。"
 
-#: main/views.py:507
+#: main/views.py:515
 msgid "We could't find the book you want to add. Please retry again."
 msgstr "お探しの本が見つかりませんでした。もう一度お試しください。"
 
-#: main/views.py:521
+#: main/views.py:529
 msgid "This book has already been added to the playlist."
 msgstr "この本は既にリストに追加されています。"
 
-#: main/views.py:549
+#: main/views.py:557
 msgid "Playlist created successfully!"
 msgstr "プレイリストが完成しました！"
 
-#: main/views.py:570
+#: main/views.py:578
 msgid "Playlist deleted successfully."
 msgstr "プレイリストを削除しました。"
 
-#: main/views.py:589
+#: main/views.py:643
 msgid "Privacy policy"
 msgstr "プライバシーポリシー"
 

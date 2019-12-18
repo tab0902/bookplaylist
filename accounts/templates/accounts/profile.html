@@ -10,7 +10,7 @@
             <div class="row mt-4 mt-md-5">
                 <div class="col-md-8">
                     <h1 class="heading-lg">{{ user }}</h1>
-                    {% if user.nickname %}<p class="text-lg">{{ user.get_username_with_at_sign }}</p>{% endif %}
+                    <p class="text-lg">{{ user.get_username_with_at_sign }}</p>
                 </div>
                 {% if user == request.user %}
                 <div class="col-md-4 d-none d-md-block" style="display: none;">
@@ -62,7 +62,7 @@
     <section id="profile-playlist-list">
         <h2 class="mt-5">{% blocktrans %}{{ user }}'s playlists{% endblocktrans %}</h2>
         {% trans "This user have no playlist." as text %}
-        {% include 'main/playlists/layouts/list-widget.html' with text_not_found=text playlists=user.playlist_set.all %}
+        {% include 'main/playlists/layouts/list-widget.html' with hide_user=True text_not_found=text playlists=user.playlist_set.all %}
     </section>
 </div>
 
