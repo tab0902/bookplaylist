@@ -1,5 +1,6 @@
 import imgkit
 import re
+from functools import partial
 
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -160,16 +161,17 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
-def get_og_image_path(instance, filename):
-    return get_file_path(instance, filename, field='og_image')
-
-
 class Playlist(BaseModel):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
-    og_image = models.ImageField(upload_to=get_og_image_path, blank=True, null=True, verbose_name=_('Open Graph image'))
+    og_image = models.ImageField(
+        upload_to=partial(get_file_path, field='og_image'),
+        blank=True,
+        null=True,
+        verbose_name=_('Open Graph image')
+    )
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
@@ -252,8 +254,20 @@ class PlaylistBook(BaseModel):
 
 
 class Like(BaseModel):
-    playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE, related_name='likes', related_query_name='like', verbose_name=_('playlist'))
-    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='likes', related_query_name='like', verbose_name=_('user'))
+    playlist = models.ForeignKey(
+        'Playlist',
+        on_delete=models.CASCADE,
+        related_name='likes',
+        related_query_name='like',
+        verbose_name=_('playlist')
+    )
+    user = models.ForeignKey(
+        'accounts.User',
+        on_delete=models.CASCADE,
+        related_name='likes',
+        related_query_name='like',
+        verbose_name=_('user')
+    )
     message = NullTextField(_('message'), blank=True, null=True)
     date_notified = models.DateTimeField(_('date notified'), blank=True, null=True)
     objects = LikeManager()

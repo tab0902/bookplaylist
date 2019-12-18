@@ -1,3 +1,5 @@
+from functools import partial
+
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.mail import send_mail
@@ -14,14 +16,10 @@ from .manager import (
 )
 from accounts.validators import UnicodeUsernameValidator
 from bookplaylist.models import (
-    BaseModel, NullCharField, NullEmailField, NullTextField,
+    BaseModel, NullCharField, NullEmailField, NullTextField, get_file_path,
 )
 
 # Create your models here.
-
-
-def get_profile_image_path(instance, filename):
-    return get_file_path(instance, filename, field='profile_image')
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
@@ -60,7 +58,12 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     date_verified = models.DateTimeField(_('date verified'), blank=True, null=True)
     nickname = NullCharField(_('nickname'), max_length=50, blank=True, null=True)
     comment = NullTextField(_('comment'), blank=True, null=True)
-    profile_image = models.ImageField(upload_to=get_profile_image_path, blank=True, null=True, verbose_name=_('Profile image'))
+    profile_image = models.ImageField(
+        upload_to=partial(get_file_path, field='profile_image'),
+        blank=True,
+        null=True,
+        verbose_name=_('Profile image')
+    )
     hopes_newsletter = models.BooleanField(_('newsletter status'), default=True)
     shows_twitter_link = models.BooleanField(_('showing twitter link in profile'), default=True)
     reason_for_deactivation = NullTextField(_('reason for deactivation'), blank=True, null=True)
