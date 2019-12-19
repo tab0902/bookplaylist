@@ -1,7 +1,9 @@
 from urllib.parse import urlparse
 
 from django.contrib import admin
+from django.db.models import F
 from django.urls import resolve
+from django.utils.translation import gettext_lazy as _
 
 from .models import (
     Book, BookData, Like, Playlist, PlaylistBook, Provider, Recommendation, Theme,
@@ -95,7 +97,6 @@ class RecommendationInline(TabularInline):
     show_change_link = False
     fields = ('playlist', 'sequence', 'updated_at',)
     readonly_fields = ('updated_at',)
-    # autocomplete_fields = ('playlist',)
 
     def get_extra(self, request, obj=None, **kwargs):
         extra = 4
@@ -122,7 +123,8 @@ class LikeInline(SlimTabularInline):
 
 @admin.register(Theme)
 class ThemeAdmin(Admin):
-    list_display = ('name', 'slug', 'sequence', 'created_at',)
+    list_display = ('name', 'slug', 'created_at', 'sequence',)
+    list_editable = ('sequence',)
     list_filter = ('created_at', 'updated_at',)
     search_fields = ('name', 'slug', 'description',)
     inlines = [RecommendationInline, PlaylistInline]
@@ -130,8 +132,9 @@ class ThemeAdmin(Admin):
 
 @admin.register(Provider)
 class ProviderAdmin(AllObjectsMixin, Admin):
-    list_display = ('name', 'slug', 'priority', 'is_available', 'created_at',)
+    list_display = ('name', 'slug', 'created_at', 'is_available', 'priority',)
     list_filter = ('is_available', 'created_at', 'updated_at',)
+    list_editable = ('priority',)
     search_fields = ('name', 'slug', 'description',)
 
 
@@ -143,19 +146,49 @@ class BookAdmin(Admin):
     inlines = [BookDataInline, PlaylistBookTabularInline]
 
 
+class IsPublishedListFilter(admin.SimpleListFilter):
+    parameter_name = 'is_published'
+
+    def __init__(self, request, params, model, model_admin):
+        self.title = model_admin.model._meta.get_field('is_published').verbose_name
+        super().__init__(request, params, model, model_admin)
+
+    def lookups(self, request, model_admin):
+        return (
+            (['1', None], _('Yes')),
+            (['0'],  _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == '0':
+            return queryset.filter(is_published=False)
+        else:
+            return queryset.filter(is_published=True)
+
+    def choices(self, changelist):
+        for lookups, title in self.lookup_choices:
+            yield {
+                'selected': self.value() in lookups,
+                'query_string': changelist.get_query_string({self.parameter_name: lookups[0]}),
+                'display': title,
+            }
+
+
 @admin.register(Playlist)
 class PlaylistAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, Admin):
-    fields = ('title', 'user', 'theme', 'description', 'og_image', 'pk', 'created_at', 'updated_at', 'is_published',)
-    list_display = ('title', 'user', 'theme', 'created_at', 'is_published',)
-    list_filter = ('theme__name', 'is_published', 'created_at', 'updated_at',)
+    fields = ('title', 'user', 'theme', 'description', 'og_image', 'pk', 'created_at', 'updated_at', 'sequence', 'is_published',)
+    list_display = ('title', 'user', 'theme', 'created_at', 'sequence', 'is_published',)
+    list_editable = ('sequence',)
+    list_filter = (IsPublishedListFilter, 'theme__name', 'created_at', 'updated_at',)
     search_fields = ('title', 'description', 'user__username', 'theme__name', 'playlist_book__description', 'playlist_book__book__isbn', 'playlist_book__book__book_data__title', 'playlist_book__book__book_data__author', 'playlist_book__book__book_data__publisher',)
+    ordering = (F('sequence').asc(nulls_last=True), '-created_at')
     inlines = [PlaylistBookStackedInline, LikeInline]
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('theme')
 
     def get_readonly_fields(self, request, obj=None):
-        EXCLUDE = ('is_published',)
+        EXCLUDE = ('sequence', 'is_published',)
         if not request.user.is_superuser:
             self.readonly_fields = tuple(
                 [f.name for f in self.opts.local_fields if f.name not in EXCLUDE] +

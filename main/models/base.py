@@ -172,6 +172,7 @@ class Playlist(BaseModel):
         null=True,
         verbose_name=_('Open Graph image')
     )
+    sequence = models.SmallIntegerField(_('sequence'), blank=True, null=True)
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
@@ -184,6 +185,7 @@ class Playlist(BaseModel):
         verbose_name_plural = _('playlists')
         indexes = [
             models.Index(fields=['title'], name='title'),
+            models.Index(fields=['sequence'], name='sequence'),
         ] + BaseModel._meta.indexes + [
             models.Index(fields=['user', 'created_at'], name='idx01'),
         ]
