@@ -116,6 +116,7 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
         else:
             condition_list = []
             queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+        queryset = queryset.annotate(Count('like')).order_by('-like__count', '-created_at')
         return queryset
 
     def get_context_data(self, **kwargs):
