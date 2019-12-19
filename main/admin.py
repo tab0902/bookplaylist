@@ -36,6 +36,9 @@ class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInli
             max_num = obj.playlist_set.count()
         return max_num
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('theme')
+
     def has_change_permission(self, request, obj=None):
         return False
 
@@ -45,7 +48,7 @@ class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
     can_delete = False
     show_change_link = False
     fields = ('playlist', 'created_at',)
-    readonly_fields = ('created_at',)
+    readonly_fields = ('playlist', 'created_at',)
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -59,12 +62,18 @@ class PlaylistBookStackedInline(AllObjectsForeignKeyMixin, StackedInline):
     can_delete = True
     show_change_link = False
     readonly_fields = ('pk', 'created_at', 'updated_at',)
+    raw_id_fields = ('book',)
 
     def get_extra(self, request, obj=None, **kwargs):
         extra = 1
         if obj:
             return extra - obj.playlist_book_set.count() if extra > obj.playlist_book_set.count() else 0
         return extra
+
+    def get_autocomplete_fields(self, request):
+        # PlaylistBook.book can't be put in autocomplete_fields
+        # because its db_column is not id but isbn.
+        return tuple([f for f in self.autocomplete_fields if f != 'book'])
 
 
 class LikeInline(SlimTabularInline):
@@ -105,7 +114,20 @@ class BookAdmin(Admin):
 
 @admin.register(Playlist)
 class PlaylistAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, Admin):
+    fields = ('title', 'user', 'theme', 'description', 'og_image', 'pk', 'created_at', 'updated_at', 'is_published',)
     list_display = ('title', 'user', 'theme', 'created_at', 'is_published',)
     list_filter = ('theme__name', 'is_published', 'created_at', 'updated_at',)
     search_fields = ('title', 'description', 'user__username', 'theme__name', 'playlist_book__description', 'playlist_book__book__isbn', 'playlist_book__book__book_data__title', 'playlist_book__book__book_data__author', 'playlist_book__book__book_data__publisher',)
     inlines = [PlaylistBookStackedInline, LikeInline]
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('theme')
+
+    def get_readonly_fields(self, request, obj=None):
+        EXCLUDE = ('is_published',)
+        if not request.user.is_superuser:
+            self.readonly_fields = tuple(
+                [f.name for f in self.opts.local_fields if f.name not in EXCLUDE] +
+                ['pk']
+            )
+        return super().get_readonly_fields(request, obj)
