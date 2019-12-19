@@ -1,13 +1,26 @@
+from urllib.parse import urlparse
+
 from django.contrib import admin
+from django.urls import resolve
 
 from .models import (
-    Book, BookData, Like, Playlist, PlaylistBook, Provider, Theme,
+    Book, BookData, Like, Playlist, PlaylistBook, Provider, Recommendation, Theme,
 )
 from bookplaylist.admin import (
     Admin, AllObjectsForeignKeyMixin, AllObjectsMixin, SlimTabularInline, StackedInline, TabularInline,
 )
 
 # Register your models here.
+
+
+class AutocompleteJsonView(admin.views.autocomplete.AutocompleteJsonView):
+
+    def get_queryset(self):
+        qs = self.queryset or self.model_admin.get_queryset(self.request)
+        qs, search_use_distinct = self.model_admin.get_search_results(self.request, qs, self.term)
+        if search_use_distinct:
+            qs = qs.distinct()
+        return qs
 
 
 class BookDataInline(AllObjectsForeignKeyMixin, StackedInline):
@@ -76,6 +89,24 @@ class PlaylistBookStackedInline(AllObjectsForeignKeyMixin, StackedInline):
         return tuple([f for f in self.autocomplete_fields if f != 'book'])
 
 
+class RecommendationInline(TabularInline):
+    model = Recommendation
+    can_delete = True
+    show_change_link = False
+    fields = ('playlist', 'sequence', 'updated_at',)
+    readonly_fields = ('updated_at',)
+    # autocomplete_fields = ('playlist',)
+
+    def get_extra(self, request, obj=None, **kwargs):
+        extra = 4
+        if obj:
+            return extra - obj.recommendation_set.count() if extra > obj.recommendation_set.count() else 0
+        return extra
+
+    def delete_model(self, request, obj):
+        obj.hard_delete()
+
+
 class LikeInline(SlimTabularInline):
     model = Like
     can_delete = False
@@ -94,7 +125,7 @@ class ThemeAdmin(Admin):
     list_display = ('name', 'slug', 'sequence', 'created_at',)
     list_filter = ('created_at', 'updated_at',)
     search_fields = ('name', 'slug', 'description',)
-    inlines = [PlaylistInline]
+    inlines = [RecommendationInline, PlaylistInline]
 
 
 @admin.register(Provider)
@@ -131,3 +162,22 @@ class PlaylistAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, Admin):
                 ['pk']
             )
         return super().get_readonly_fields(request, obj)
+
+    def _get_parent_object_from_referer(self, request, parent_model):
+        path = urlparse(request.META.get('HTTP_REFERER')).path
+        resolved = resolve(path)
+        if resolved.kwargs and 'object_id' in resolved.kwargs:
+            parent_obj = parent_model.objects.get(id=resolved.kwargs['object_id'])
+        elif resolved.args:
+            parent_obj = parent_model.objects.get(id=resolved.args[0])
+        else:
+            parent_obj = None
+        return parent_obj
+
+    def autocomplete_view(self, request):
+        conditions = {}
+        theme = self._get_parent_object_from_referer(request, parent_model=Theme)
+        if theme:
+            conditions['theme'] = theme
+        queryset = Playlist.objects.filter(**conditions).select_related(None).prefetch_related(None)
+        return AutocompleteJsonView.as_view(model_admin=self, queryset=queryset)(request)

@@ -15,10 +15,11 @@ class BaseAdminMixin:
     exclude = ('deleted_at',)
 
     def get_autocomplete_fields(self, request):
-        self.autocomplete_fields = tuple([
-            f.name for f in self.model._meta.get_fields()
-            if f.many_to_one and f.related_model
-        ])
+        if not self.autocomplete_fields and not self.raw_id_fields:
+            self.autocomplete_fields = tuple([
+                f.name for f in self.model._meta.get_fields()
+                if (f.one_to_one or f.many_to_one) and f.related_model
+            ])
         return super().get_autocomplete_fields(request)
 
 

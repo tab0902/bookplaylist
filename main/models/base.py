@@ -13,7 +13,7 @@ from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
-    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
+    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, AllRecommendationManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager, RecommendationManager,
 )
 
 # Create your models here.
@@ -251,6 +251,36 @@ class PlaylistBook(BaseModel):
 
     def __str__(self):
         return '%s' % self.book
+
+
+class Recommendation(BaseModel):
+    playlist = models.OneToOneField(
+        'Playlist',
+        on_delete=models.CASCADE,
+        verbose_name=_('playlist')
+    )
+    theme = models.ForeignKey(
+        'Theme',
+        on_delete=models.CASCADE,
+        verbose_name=_('theme')
+    )
+    sequence = models.SmallIntegerField(_('sequence'))
+    objects = RecommendationManager()
+    all_objects = AllRecommendationManager()
+
+    class Meta(BaseModel.Meta):
+        db_table = 'recommendations'
+        ordering = ['theme', 'sequence']
+        verbose_name = _('recommendation')
+        verbose_name_plural = _('recommendations')
+        indexes = [
+            models.Index(fields=['sequence'], name='sequence'),
+        ] + BaseModel._meta.indexes + [
+            models.Index(fields=['theme', 'sequence'], name='idx01'),
+        ]
+
+    def __str__(self):
+        return '%s' % self.playlist
 
 
 class Like(BaseModel):

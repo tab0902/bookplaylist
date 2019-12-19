@@ -6,7 +6,7 @@ from .query import (
 )
 
 
-__all__ = ['ProviderManager', 'BookManager', 'AllBookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager', 'LikeManager', 'AllLikeManager']
+__all__ = ['ProviderManager', 'BookManager', 'AllBookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager', 'RecommendationManager', 'AllRecommendationManager', 'LikeManager', 'AllLikeManager']
 
 
 ############
@@ -96,6 +96,24 @@ class PlaylistBookManager(PlaylistBookManagerMixin, Manager):
 
 
 class AllPlaylistBookManager(PlaylistBookManagerMixin, AllObjectsManager):
+    pass
+
+
+##################
+# Recommendation #
+##################
+
+class RecommendationManagerMixin:
+
+    def get_queryset(self):
+        return super().get_queryset().select_related('playlist', 'theme')
+
+
+class RecommendationManager(RecommendationManagerMixin, Manager):
+    pass
+
+
+class AllRecommendationManager(RecommendationManagerMixin, AllObjectsManager):
     pass
 
 
