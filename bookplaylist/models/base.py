@@ -30,6 +30,10 @@ class BaseModel(models.Model):
             models.Index(fields=['updated_at'], name='updated_at'),
         ]
 
+    @property
+    def is_deleted(self):
+        return True if self.deleted_at else False
+
     def delete(self):
         if not self.deleted_at:
             self.deleted_at = timezone.now()

@@ -1,5 +1,6 @@
 import imgkit
 import re
+from functools import partial
 
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -12,7 +13,7 @@ from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
-    AllPlaylistManager, BookDataManager, BookManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
+    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
 )
 
 # Create your models here.
@@ -77,15 +78,9 @@ BOOK_DATA_FIELDS = ('provider', 'title', 'author', 'publisher', 'cover', 'large_
 
 
 class Book(BaseModel):
-    playlists = models.ManyToManyField(
-        'Playlist',
-        through='PlaylistBook',
-        through_fields=('book', 'playlist'),
-        verbose_name=_('playlists'),
-        blank=True,
-    )
     isbn = NullCharField(_('ISBN'), max_length=13, unique=True)
     objects = BookManager()
+    all_objects = AllBookManager()
 
     @property
     def _default_data(self):
@@ -142,6 +137,7 @@ class BookData(BaseModel):
     cover = NullURLField(_('cover'), blank=True, null=True)
     affiliate_url = NullURLField(_('Affiliate URL'), blank=True, null=True)
     objects = BookDataManager()
+    all_objects = AllBookDataManager()
 
     @property
     def large_cover(self):
@@ -165,22 +161,17 @@ class BookData(BaseModel):
         return '%s' % self.title
 
 
-def get_og_image_path(instance, filename):
-    return get_file_path(instance, filename, field='og_image')
-
-
 class Playlist(BaseModel):
-    books = models.ManyToManyField(
-        'Book',
-        through='PlaylistBook',
-        through_fields=('playlist', 'book'),
-        verbose_name=_('books'),
-    )
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
     theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
-    og_image = models.ImageField(upload_to=get_og_image_path, blank=True, null=True, verbose_name=_('Open Graph image'))
+    og_image = models.ImageField(
+        upload_to=partial(get_file_path, field='og_image'),
+        blank=True,
+        null=True,
+        verbose_name=_('Open Graph image')
+    )
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
@@ -246,6 +237,8 @@ class PlaylistBook(BaseModel):
     )
     description = NullTextField(_('description'), blank=True, null=True)
     objects = PlaylistBookManager()
+    all_objects = AllPlaylistBookManager()
+
 
     class Meta(BaseModel.Meta):
         db_table = 'playlists_books'
@@ -258,3 +251,41 @@ class PlaylistBook(BaseModel):
 
     def __str__(self):
         return '%s' % self.book
+
+
+class Like(BaseModel):
+    playlist = models.ForeignKey(
+        'Playlist',
+        on_delete=models.CASCADE,
+        related_name='likes',
+        related_query_name='like',
+        verbose_name=_('playlist')
+    )
+    user = models.ForeignKey(
+        'accounts.User',
+        on_delete=models.CASCADE,
+        related_name='likes',
+        related_query_name='like',
+        verbose_name=_('user')
+    )
+    message = NullTextField(_('message'), blank=True, null=True)
+    date_notified = models.DateTimeField(_('date notified'), blank=True, null=True)
+    objects = LikeManager()
+    all_objects = AllLikeManager()
+
+    class Meta(BaseModel.Meta):
+        db_table = 'likes'
+        ordering = ['playlist', 'created_at']
+        verbose_name = _('like')
+        verbose_name_plural = _('likes')
+        indexes = BaseModel._meta.indexes + [
+            models.Index(fields=['playlist', 'created_at'], name='idx01'),
+            models.Index(fields=['user', 'created_at'], name='idx02'),
+            models.Index(fields=['playlist', 'date_notified', 'created_at'], name='idx03'),
+        ]
+        constraints = [
+            models.UniqueConstraint(fields=['playlist', 'user'], condition=models.Q(deleted_at__isnull=True), name='playlist_id_user_id_uniq'),
+        ]
+
+    def __str__(self):
+        return '%s' % self.user

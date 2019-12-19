@@ -1,0 +1,21 @@
+{% load static %}
+{% load i18n %}
+
+<div class="d-flex color-{% if is_liked %}pink{% else %}light-gray{% endif %}">
+    <div class="d-inline-block">
+        <i
+            class="like-button {% if is_liked %}fas{% else %}far{% endif %} fa-heart h-100 p-1 ml-n1"
+            data-url="{% url 'main:playlist_like' playlist_id %}"
+            data-liked="{{ is_liked | default:False }}"
+            data-count="{{ likes_count }}"
+            data-ga-event-category="{% if not is_liked %}like_playlist{% endif %}"
+        >
+        </i>
+    </div>
+    <span class="like-count ml-1">{{ likes_count }}</span>
+    {% if is_guest_user %}
+    <a href="{% url 'accounts:login' %}" class="btn btn-inline-sub text-md ml-2">
+        {% trans 'Please log in.' %}
+    </a>
+    {% endif %}
+</div>
