@@ -22,8 +22,8 @@
                 <h1 class="lets-create-box-heading mt-sm-3 mt-lg-5">
                     {% if lets_create_text %}
                     {{ lets_create_text }}
-                    {% elif theme %}
-                    {% blocktrans with theme.name as tag %}Let's share #{{ tag }}!{% endblocktrans %}
+                    {% elif theme and theme.slug != slug_no_theme %}
+                    {% blocktrans with theme.tagged_name as tag %}Let's share {{ tag }}!{% endblocktrans %}
                     {% else %}
                     {% blocktrans %}Let's share your book playlist!{% endblocktrans %}
                     {% endif %}
