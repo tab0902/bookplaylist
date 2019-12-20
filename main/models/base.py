@@ -22,7 +22,7 @@ from .manager import (
 class Theme(BaseModel):
     name = NullCharField(_('theme name'), max_length=50)
     slug = NullSlugField(_('slug'), blank=True, null=True)
-    sequence = models.SmallIntegerField(_('sequence'), blank=True, null=True)
+    sequence = models.PositiveSmallIntegerField(_('sequence'), blank=True, null=True)
     description = NullTextField(_('description'), blank=True, null=True)
 
     @property
@@ -54,7 +54,7 @@ class Provider(BaseModel):
     name = NullCharField(_('provider name'), max_length=50)
     slug = NullSlugField(_('slug'))
     endpoint = NullURLField(_('endpoint'))
-    priority = models.SmallIntegerField(_('priority'))
+    priority = models.PositiveSmallIntegerField(_('priority'))
     description = NullTextField(_('description'), blank=True, null=True)
     is_available = models.BooleanField(_('available'), default=True)
     objects = ProviderManager()
@@ -178,7 +178,7 @@ class Playlist(BaseModel):
         null=True,
         verbose_name=_('Open Graph image')
     )
-    sequence = models.SmallIntegerField(_('sequence'), blank=True, null=True)
+    sequence = models.PositiveSmallIntegerField(_('sequence'), blank=True, null=True)
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
@@ -272,7 +272,7 @@ class Recommendation(BaseModel):
         on_delete=models.CASCADE,
         verbose_name=_('theme')
     )
-    sequence = models.SmallIntegerField(_('sequence'))
+    sequence = models.PositiveSmallIntegerField(_('sequence'))
     objects = RecommendationManager()
     all_objects = RecommendationManager()
 
