@@ -65,6 +65,12 @@ class IndexView(TemplateContextMixin, PlaylistSearchFormView):
                 .filter(
                     playlist_book__count__gte=2) \
                 .order_by('-like__count', '-created_at')[:4],
+            'playlists_recent': Playlist.objects \
+                .annotate(
+                    Count('playlist_book', distinct=True)) \
+                .filter(
+                    playlist_book__count__gte=2) \
+                .order_by('-created_at')[:4],
             'themes': Theme.objects \
                 .prefetch_related(
                     Prefetch(
@@ -84,51 +90,37 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
     template_name = 'main/playlists/list.html'
 
     def get_queryset(self):
-        condition_lists = []
+        condition_list = []
         condition_dict = {}
         theme = self.request.GET.get('theme')
         query = self.request.GET.get('q')
+        ordering = self.request.GET.get('ordering') or 'popular'
+
         if theme:
             condition_dict['theme__slug'] = theme
         if query:
             q_list = self._format_query(query)
-            condition_lists.append([
-                  Q(title__iexact=q)\
-                | Q(description__iexact=q)\
-                | Q(playlist_book__book__book_data__title__iexact=q)\
-                | Q(playlist_book__book__book_data__author__iexact=q)
-                | Q(playlist_book__book__book_data__publisher__iexact=q)
-                for q in q_list
-            ])
-            condition_lists.append([
+            condition_list = [
                   Q(title__icontains=q)\
                 | Q(description__icontains=q)\
                 | Q(playlist_book__book__book_data__title__icontains=q)\
                 | Q(playlist_book__book__book_data__author__icontains=q)
                 | Q(playlist_book__book__book_data__publisher__icontains=q)
                 for q in q_list
-            ])
-            queryset = Playlist.objects.none()
-            for condition_list in condition_lists:
-                queryset = chain(
-                    queryset,
-                    Playlist.objects \
-                        .filter(*condition_list, **condition_dict) \
-                        .annotate(Count('like', distinct=True)) \
-                        .order_by('-like__count', '-created_at') \
-                        .distinct()
-                )
-            queryset = list(dict.fromkeys(queryset))
-        else:
-            queryset = Playlist.objects \
-                .filter(**condition_dict) \
-                .annotate(Count('like', distinct=True)) \
-                .order_by('-like__count', '-created_at') \
-                .distinct()
+            ]
+
+        queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+
+        if ordering == 'popular':
+            queryset = queryset.annotate(Count('like', distinct=True)).order_by('-like__count', '-created_at')
+        elif ordering == 'recent':
+            queryset = queryset.order_by('-created_at')
+
         return queryset
 
     def get_context_data(self, **kwargs):
         q = self.request.GET.get('q')
+        ordering = self.request.GET.get('ordering')
         theme_slug = self.request.GET.get('theme')
         theme = Theme.objects.filter(slug=theme_slug).first()
 
@@ -137,8 +129,10 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
             self.page_title = _('Playlists related with "%(q)s"') % {'q': q}
         elif theme_slug and theme:
             self.page_title = _('Playlists with %(theme)s') % {'theme': theme.tagged_name}
-        elif not theme_slug:
-            self.page_title = _('All popular Playlists')
+        elif ordering == 'popular':
+            self.page_title = _('All popular playlists')
+        elif ordering == 'recent':
+            self.page_title = _('All recent playlists')
         else:
             self.page_title = _('All playlists')
 
