@@ -67,7 +67,10 @@ class IndexView(TemplateContextMixin, PlaylistSearchFormView):
                     like__count=Count('like', distinct=True)) \
                 .filter(
                     playlist_book__count__gte=2) \
-                .order_by('-like__count', '-created_at')[:4],
+                .order_by(
+                    '-like__count',
+                    '-created_at') \
+                 [:4],
             'playlists_recent': Playlist.objects \
                 .filter(
                     playlist_book__deleted_at__isnull=True) \
@@ -75,9 +78,10 @@ class IndexView(TemplateContextMixin, PlaylistSearchFormView):
                     playlist_book__count=Count('playlist_book',distinct=True)) \
                 .filter(
                     playlist_book__count__gte=2) \
-                .order_by('-created_at')[:4],
+                .order_by(
+                    '-created_at') \
+                 [:4],
             'themes': Theme.objects \
-                .filter()
                 .prefetch_related(
                     Prefetch(
                         'playlist_set',
@@ -174,22 +178,30 @@ class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         self.page_title = self.object.title
         self.page_description = \
-        self.object.description or \
-        'BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。'
+            self.object.description or \
+            'BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。'
         self.og_url =  self.request.build_absolute_uri()
         self.og_image =  self.object.og_image.url
         self.og_image_width = settings.OG_IMAGE_WIDTH
         self.og_image_height = settings.OG_IMAGE_HEIGHT
-        conditions = {
-            'playlist_book__count__gte': 2,
-            'theme': self.object.theme,
-        }
+
         context = super().get_context_data(**kwargs)
         context['other_playlists'] = Playlist.objects \
-            .filter(playlist_book__deleted_at__isnull=True) \
-            .annotate(playlist_book__count=Count('playlist_book', distinct=True)) \
-            .exclude(pk=self.object.pk) \
-            .filter(**conditions)[:4]
+            .exclude(
+                pk=self.object.pk) \
+            .filter(
+                theme=self.object.theme,
+                playlist_book__deleted_at__isnull=True,
+                like__deleted_at__isnull=True) \
+            .annotate(
+                playlist_book__count=Count('playlist_book', distinct=True),
+                like__count=Count('like', distinct=True)) \
+            .filter(
+                playlist_book__count__gte=2) \
+            .order_by(
+                '-like__count',
+                '-created_at') \
+             [:4]
         return context
 
 
