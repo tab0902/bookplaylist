@@ -25,6 +25,12 @@ class Theme(BaseModel):
     sequence = models.SmallIntegerField(_('sequence'), blank=True, null=True)
     description = NullTextField(_('description'), blank=True, null=True)
 
+    @property
+    def tagged_name(self):
+        tag = '#' if self.slug != settings.SLUG_NO_THEME else ''
+        name = self.name
+        return '{}{}'.format(tag, name)
+
     class Meta(BaseModel.Meta):
         db_table = 'themes'
         ordering = ['sequence']
@@ -163,7 +169,7 @@ class BookData(BaseModel):
 
 class Playlist(BaseModel):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
-    theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
+    theme = models.ForeignKey('Theme', on_delete=models.PROTECT, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
     og_image = models.ImageField(
