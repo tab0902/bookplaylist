@@ -59,19 +59,25 @@ class IndexView(TemplateContextMixin, PlaylistSearchFormView):
                 .filter(sequence__isnull=False) \
                 .order_by('sequence'),
             'playlists_popular': Playlist.objects \
+                .filter(
+                    playlist_book__deleted_at__isnull=True,
+                    like__deleted_at__isnull=True) \
                 .annotate(
-                    Count('playlist_book', distinct=True),
-                    Count('like', distinct=True)) \
+                    playlist_book__count=Count('playlist_book', distinct=True),
+                    like__count=Count('like', distinct=True)) \
                 .filter(
                     playlist_book__count__gte=2) \
                 .order_by('-like__count', '-created_at')[:4],
             'playlists_recent': Playlist.objects \
+                .filter(
+                    playlist_book__deleted_at__isnull=True) \
                 .annotate(
-                    Count('playlist_book', distinct=True)) \
+                    playlist_book__count=Count('playlist_book',distinct=True)) \
                 .filter(
                     playlist_book__count__gte=2) \
                 .order_by('-created_at')[:4],
             'themes': Theme.objects \
+                .filter()
                 .prefetch_related(
                     Prefetch(
                         'playlist_set',
@@ -112,7 +118,10 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
         queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
 
         if ordering == 'popular':
-            queryset = queryset.annotate(Count('like', distinct=True)).order_by('-like__count', '-created_at')
+            queryset = queryset \
+                .filter(like__deleted_at__isnull=True) \
+                .annotate(like__count=Count('like',distinct=True)) \
+                .order_by('-like__count', '-created_at')
         elif ordering == 'recent':
             queryset = queryset.order_by('-created_at')
 
@@ -177,7 +186,8 @@ class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
         }
         context = super().get_context_data(**kwargs)
         context['other_playlists'] = Playlist.objects \
-            .annotate(Count('playlist_book', distinct=True)) \
+            .filter(playlist_book__deleted_at__isnull=True) \
+            .annotate(playlist_book__count=Count('playlist_book', distinct=True)) \
             .exclude(pk=self.object.pk) \
             .filter(**conditions)[:4]
         return context
