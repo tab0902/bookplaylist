@@ -347,7 +347,6 @@ class BasePlaylistFormView(APIMixin, generic.detail.SingleObjectTemplateResponse
         return book_data_dict
 
 
-
 @login_required
 class PlaylistCreateView(TemplateContextMixin, BasePlaylistFormView):
     mode = MODE_CREATE
