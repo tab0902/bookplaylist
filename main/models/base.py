@@ -13,7 +13,7 @@ from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
-    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, AllRecommendationManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager, RecommendationManager,
+    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager, RecommendationManager,
 )
 
 # Create your models here.
@@ -268,7 +268,7 @@ class Recommendation(BaseModel):
     )
     sequence = models.SmallIntegerField(_('sequence'))
     objects = RecommendationManager()
-    all_objects = AllRecommendationManager()
+    all_objects = RecommendationManager()
 
     class Meta(BaseModel.Meta):
         db_table = 'recommendations'
@@ -283,6 +283,9 @@ class Recommendation(BaseModel):
 
     def __str__(self):
         return '%s' % self.playlist
+
+    def delete(self):
+        self.hard_delete()
 
 
 class Like(BaseModel):

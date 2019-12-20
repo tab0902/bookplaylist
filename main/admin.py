@@ -104,9 +104,6 @@ class RecommendationInline(TabularInline):
             return extra - obj.recommendation_set.count() if extra > obj.recommendation_set.count() else 0
         return extra
 
-    def delete_model(self, request, obj):
-        obj.hard_delete()
-
 
 class LikeInline(SlimTabularInline):
     model = Like

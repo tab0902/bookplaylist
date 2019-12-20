@@ -1,3 +1,5 @@
+from django.db import models
+
 from bookplaylist.models import (
     AllObjectsManager, Manager,
 )
@@ -6,7 +8,7 @@ from .query import (
 )
 
 
-__all__ = ['ProviderManager', 'BookManager', 'AllBookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager', 'RecommendationManager', 'AllRecommendationManager', 'LikeManager', 'AllLikeManager']
+__all__ = ['ProviderManager', 'BookManager', 'AllBookManager', 'BookDataManager', 'PlaylistManager', 'PlaylistWithUnpublishedManager', 'AllPlaylistManager', 'PlaylistBookManager', 'RecommendationManager', 'LikeManager', 'AllLikeManager']
 
 
 ############
@@ -103,18 +105,10 @@ class AllPlaylistBookManager(PlaylistBookManagerMixin, AllObjectsManager):
 # Recommendation #
 ##################
 
-class RecommendationManagerMixin:
+class RecommendationManager(models.Manager):
 
     def get_queryset(self):
         return super().get_queryset().select_related('playlist', 'theme')
-
-
-class RecommendationManager(RecommendationManagerMixin, Manager):
-    pass
-
-
-class AllRecommendationManager(RecommendationManagerMixin, AllObjectsManager):
-    pass
 
 
 ########

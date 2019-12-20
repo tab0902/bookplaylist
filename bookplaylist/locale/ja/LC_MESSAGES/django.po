@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-20 01:21+0900\n"
+"POT-Creation-Date: 2019-12-20 14:24+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -171,7 +171,7 @@ msgstr "Twitterのリンクをプロフィールに表示"
 msgid "reason for deactivation"
 msgstr "退会理由"
 
-#: accounts/models/base.py:82 main/models/base.py:165 main/models/base.py:301
+#: accounts/models/base.py:82 main/models/base.py:165 main/models/base.py:304
 msgid "user"
 msgstr ""
 
@@ -671,11 +671,11 @@ msgstr "本のプレイリストをSNSでシェアしよう。"
 msgid "You don't have permission to access the page."
 msgstr "ページにアクセスする権限がありません"
 
-#: main/admin.py:157
+#: main/admin.py:155
 msgid "Yes"
 msgstr ""
 
-#: main/admin.py:158
+#: main/admin.py:156
 msgid "No"
 msgstr ""
 
@@ -831,7 +831,7 @@ msgid "published"
 msgstr "公開"
 
 #: main/models/base.py:184 main/models/base.py:229 main/models/base.py:262
-#: main/models/base.py:294
+#: main/models/base.py:297
 msgid "playlist"
 msgstr "プレイリスト"
 
@@ -855,19 +855,19 @@ msgstr "おすすめのプレイリスト"
 msgid "recommendations"
 msgstr "おすすめのプレイリスト"
 
-#: main/models/base.py:303
+#: main/models/base.py:306
 msgid "message"
 msgstr "メッセージ"
 
-#: main/models/base.py:304
+#: main/models/base.py:307
 msgid "date notified"
 msgstr "通知日時"
 
-#: main/models/base.py:311
+#: main/models/base.py:314
 msgid "like"
 msgstr "スキ"
 
-#: main/models/base.py:312
+#: main/models/base.py:315
 msgid "likes"
 msgstr "スキ"
 
