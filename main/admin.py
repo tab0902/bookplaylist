@@ -157,10 +157,16 @@ class IsPublishedListFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        if self.value() == '0':
-            return queryset.filter(is_published=False)
+        published = {
+            'is_published': True,
+            'user__is_active': True,
+        }
+        if self.value() in ('1', None):
+            return queryset.filter(**published)
+        elif self.value() == '0':
+            return queryset.exclude(**published)
         else:
-            return queryset.filter(is_published=True)
+            return queryset.none()
 
     def choices(self, changelist):
         for lookups, title in self.lookup_choices:
