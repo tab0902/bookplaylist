@@ -12,7 +12,9 @@ from django.db.models import (
 from django.http import (
     Http404, HttpResponse, HttpResponseRedirect,
 )
-from django.shortcuts import get_object_or_404, redirect, render, render_to_response
+from django.shortcuts import (
+    get_object_or_404, redirect, render,
+)
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
