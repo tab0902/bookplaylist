@@ -7,12 +7,14 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import (
-    Count, Exists, OuterRef, Q,
+    Count, Exists, OuterRef, Prefetch, Q,
 )
 from django.http import (
     Http404, HttpResponse, HttpResponseRedirect,
 )
-from django.shortcuts import get_object_or_404, redirect, render, render_to_response
+from django.shortcuts import (
+    get_object_or_404, redirect, render,
+)
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -43,7 +45,8 @@ class PlaylistSearchFormView(SearchFormView):
 
     def form_valid(self, form):
         theme = form.cleaned_data['theme']
-        self.param['theme'] = theme.slug if theme else ''
+        if theme:
+            self.param['theme'] = theme.slug
         return super().form_valid(form)
 
 
@@ -53,27 +56,43 @@ class IndexView(TemplateContextMixin, PlaylistSearchFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['themes'] = [
-            (
-                theme,
-                Playlist.objects \
-                    .annotate(Count('playlist_book')) \
-                    .filter(
-                        theme=theme,
-                        playlist_book__count__gte=2)[:4]
-            )
-            for theme in Theme.objects.filter(sequence__isnull=False)
-        ] + \
-        [
-            (
-                {'name': _('Free theme'), 'slug': ''},
-                Playlist.objects \
-                    .annotate(Count('playlist_book')) \
-                    .filter(
-                        theme__isnull=True,
-                        playlist_book__count__gte=2)[:4]
-            )
-        ]
+        context.update({
+            'playlists_recommended': Playlist.objects \
+                .filter(sequence__isnull=False) \
+                .order_by('sequence'),
+            'playlists_popular': Playlist.objects \
+                .filter(
+                    playlist_book__deleted_at__isnull=True,
+                    like__deleted_at__isnull=True) \
+                .annotate(
+                    playlist_book__count=Count('playlist_book', distinct=True),
+                    like__count=Count('like', distinct=True)) \
+                .filter(
+                    playlist_book__count__gte=2) \
+                .order_by(
+                    '-like__count',
+                    '-created_at') \
+                 [:4],
+            'playlists_recent': Playlist.objects \
+                .filter(
+                    playlist_book__deleted_at__isnull=True) \
+                .annotate(
+                    playlist_book__count=Count('playlist_book',distinct=True)) \
+                .filter(
+                    playlist_book__count__gte=2) \
+                .order_by(
+                    '-created_at') \
+                 [:4],
+            'themes': Theme.objects \
+                .prefetch_related(
+                    Prefetch(
+                        'playlist_set',
+                        queryset=Playlist.objects \
+                            .filter(
+                                recommendation__isnull=False,
+                                recommendation__sequence__isnull=False) \
+                            .order_by('recommendation__sequence')))
+        })
         return context
 
 
@@ -83,54 +102,54 @@ class PlaylistView(TemplateContextMixin, generic.list.BaseListView, PlaylistSear
     template_name = 'main/playlists/list.html'
 
     def get_queryset(self):
-        query = self.request.GET.get('q')
-        theme = self.request.GET.get('theme')
-        condition_lists = []
+        condition_list = []
         condition_dict = {}
+        theme = self.request.GET.get('theme')
+        query = self.request.GET.get('q')
+        ordering = self.request.GET.get('ordering') or 'popular'
+
         if theme:
             condition_dict['theme__slug'] = theme
-        elif not theme and 'theme' in self.request.GET:
-            condition_dict['theme__isnull'] = True
         if query:
             q_list = self._format_query(query)
-            condition_lists.append([
-                  Q(title__iexact=q)\
-                | Q(description__iexact=q)\
-                | Q(books__title__iexact=q)\
-                | Q(books__title_collation_key__iexact=q)\
-                | Q(books__author__iexact=q)
-                for q in q_list
-            ])
-            condition_lists.append([
+            condition_list = [
                   Q(title__icontains=q)\
                 | Q(description__icontains=q)\
-                | Q(books__title__icontains=q)\
-                | Q(books__title_collation_key__icontains=q)\
-                | Q(books__author__icontains=q)
+                | Q(playlist_book__book__book_data__title__icontains=q)\
+                | Q(playlist_book__book__book_data__author__icontains=q)
+                | Q(playlist_book__book__book_data__publisher__icontains=q)
                 for q in q_list
-            ])
-            queryset = Playlist.objects.none()
-            for condition_list_ in condition_lists:
-                queryset = chain(queryset, Playlist.objects.filter(*condition_list_, **condition_dict))
-            queryset = list(dict.fromkeys(queryset))
-        else:
-            condition_list = []
-            queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+            ]
+
+        queryset = Playlist.objects.filter(*condition_list, **condition_dict).distinct()
+
+        if ordering == 'popular':
+            queryset = queryset \
+                .filter(like__deleted_at__isnull=True) \
+                .annotate(like__count=Count('like',distinct=True)) \
+                .order_by('-like__count', '-created_at')
+        elif ordering == 'recent':
+            queryset = queryset.order_by('-created_at')
+
         return queryset
 
     def get_context_data(self, **kwargs):
         q = self.request.GET.get('q')
-        theme = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
+        ordering = self.request.GET.get('ordering')
+        theme_slug = self.request.GET.get('theme')
+        theme = Theme.objects.filter(slug=theme_slug).first()
 
         # page_title
         if q:
             self.page_title = _('Playlists related with "%(q)s"') % {'q': q}
-        elif theme:
-            self.page_title = _('Playlists with #%(theme)s') % {'theme': theme.name}
-        elif not theme and 'theme' in self.request.GET:
-            self.page_title = _('Playlists with free theme')
+        elif theme_slug and theme:
+            self.page_title = _('Playlists with %(theme)s') % {'theme': theme.tagged_name}
+        elif ordering == 'popular':
+            self.page_title = _('All popular playlists')
+        elif ordering == 'recent':
+            self.page_title = _('All recent playlists')
         else:
-            self.page_title = _('All Playlists')
+            self.page_title = _('All playlists')
 
         # page_description
         if theme:
@@ -161,21 +180,30 @@ class PlaylistDetailView(TemplateContextMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         self.page_title = self.object.title
         self.page_description = \
-        self.object.description or \
-        'BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。'
+            self.object.description or \
+            'BooxMixのプレイリスト詳細画面では、おすすめの本が詰まったプレイリストを閲覧することができます。入門書から個性のある本まで、多様な順番でまとめられています。興味ある本を発見したら購入してみましょう。'
         self.og_url =  self.request.build_absolute_uri()
         self.og_image =  self.object.og_image.url
         self.og_image_width = settings.OG_IMAGE_WIDTH
         self.og_image_height = settings.OG_IMAGE_HEIGHT
-        conditions = {
-            'playlist_book__count__gte': 2,
-            'theme': self.object.theme,
-        }
+
         context = super().get_context_data(**kwargs)
         context['other_playlists'] = Playlist.objects \
-            .annotate(Count('playlist_book')) \
-            .exclude(pk=self.object.pk) \
-            .filter(**conditions)[:4]
+            .exclude(
+                pk=self.object.pk) \
+            .filter(
+                theme=self.object.theme,
+                playlist_book__deleted_at__isnull=True,
+                like__deleted_at__isnull=True) \
+            .annotate(
+                playlist_book__count=Count('playlist_book', distinct=True),
+                like__count=Count('like', distinct=True)) \
+            .filter(
+                playlist_book__count__gte=2) \
+            .order_by(
+                '-like__count',
+                '-created_at') \
+             [:4]
         return context
 
 
@@ -319,7 +347,6 @@ class BasePlaylistFormView(APIMixin, generic.detail.SingleObjectTemplateResponse
             'updated_at': timezone.now(),
         }
         return book_data_dict
-
 
 
 @login_required

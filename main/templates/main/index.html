@@ -72,15 +72,55 @@
                 </div>
             </div>
         </div>
+
         <h2 class="heading-lg mt-5">3.&nbsp;{% trans 'Discover your “Want to Read” books' %}</h2>
-        <p class="mt-3">{% trans 'A lot of people are sharing book-playlists. Let’s look around and  find your “want to read” books.' %}</p>
-        {% for theme, playlists in themes %}
+        <p class="mt-3 pb-3">{% trans 'A lot of people are sharing book-playlists. Let’s look around and  find your “want to read” books.' %}</p>
+
+        {# Recommended playlists #}
         <h3 class="mt-4 mt-md-5">
-            <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="color-gray">
-                {% if theme.slug %}#{% endif %}{{ theme.name }}
+            {% trans 'Recommended playlists' %}
+        </h3>
+        {% include 'main/playlists/layouts/list-widget-small.html' with playlists=playlists_recommended %}
+        <div class="line-gray my-4 my-md-5"></div>
+
+        {# Popular playlists #}
+        <h3 class="mt-4 mt-md-5">
+            <a href="{% url 'main:playlist' %}?ordering=popular" class="color-gray">
+                {% trans 'Popular playlists' %}
             </a>
         </h3>
-        {% include 'main/playlists/layouts/list-widget-small.html' with playlists=playlists %}
+        {% include 'main/playlists/layouts/list-widget-small.html' with playlists=playlists_popular %}
+        <a href="{% url 'main:playlist' %}?ordering=popular" class="btn btn-outline-sub w-100 d-md-none my-3">
+            {% blocktrans %}Show all{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="{% url 'main:playlist' %}?ordering=popular" class="btn btn-inline-sub d-none d-md-inline-block mt-3">
+            {% blocktrans %}Show all popular playlists{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
+        </a>
+        <div class="line-gray my-4 my-md-5"></div>
+
+        {# Recent playlists #}
+        <h3 class="mt-4 mt-md-5">
+            <a href="{% url 'main:playlist' %}?ordering=recent" class="color-gray">
+                {% trans 'Recent playlists' %}
+            </a>
+        </h3>
+        {% include 'main/playlists/layouts/list-widget-small.html' with playlists=playlists_recent %}
+        <a href="{% url 'main:playlist' %}?ordering=recent" class="btn btn-outline-sub w-100 d-md-none my-3">
+            {% blocktrans %}Show all{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="{% url 'main:playlist' %}?ordering=recent" class="btn btn-inline-sub d-none d-md-inline-block mt-3">
+            {% blocktrans %}Show all recent playlists{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
+        </a>
+        <div class="line-gray my-4 my-md-5"></div>
+
+        {# Playlists by theme #}
+        {% for theme in themes %}
+        <h3 class="mt-4 mt-md-5">
+            <a href="{% url 'main:playlist' %}{% if theme.slug is not None %}?theme={{ theme.slug }}{% endif %}" class="color-gray">
+                {{ theme.tagged_name }}
+            </a>
+        </h3>
+        {% include 'main/playlists/layouts/list-widget-small.html' with playlists=theme.playlist_set.all %}
         <a href="{% url 'main:playlist' %}?theme={{ theme.slug }}" class="btn btn-outline-sub w-100 d-md-none my-3">
             {% blocktrans %}Show all{% endblocktrans %}&nbsp;<i class="fas fa-chevron-right"></i>
         </a>

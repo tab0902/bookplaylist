@@ -11,16 +11,27 @@ from main.models import (
 UserModel = get_user_model()
 
 
-class TabularInline(admin.TabularInline):
+class BaseAdminMixin:
     exclude = ('deleted_at',)
 
+    def get_autocomplete_fields(self, request):
+        if not self.autocomplete_fields and not self.raw_id_fields:
+            self.autocomplete_fields = tuple([
+                f.name for f in self.model._meta.get_fields()
+                if (f.one_to_one or f.many_to_one) and f.related_model
+            ])
+        return super().get_autocomplete_fields(request)
 
-class StackedInline(admin.StackedInline):
-    exclude = ('deleted_at',)
+
+class TabularInline(BaseAdminMixin, admin.TabularInline):
+    pass
 
 
-class Admin(admin.ModelAdmin):
-    exclude = ('deleted_at',)
+class StackedInline(BaseAdminMixin, admin.StackedInline):
+    pass
+
+
+class Admin(BaseAdminMixin, admin.ModelAdmin):
     readonly_fields = ('pk', 'created_at', 'updated_at',)
 
 

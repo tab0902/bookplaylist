@@ -13,7 +13,7 @@ from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
-    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager,
+    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager, RecommendationManager,
 )
 
 # Create your models here.
@@ -22,8 +22,14 @@ from .manager import (
 class Theme(BaseModel):
     name = NullCharField(_('theme name'), max_length=50)
     slug = NullSlugField(_('slug'), blank=True, null=True)
-    sequence = models.SmallIntegerField(_('sequence'), blank=True, null=True)
+    sequence = models.PositiveSmallIntegerField(_('sequence'), blank=True, null=True)
     description = NullTextField(_('description'), blank=True, null=True)
+
+    @property
+    def tagged_name(self):
+        tag = '#' if self.slug != settings.SLUG_NO_THEME else ''
+        name = self.name
+        return '{}{}'.format(tag, name)
 
     class Meta(BaseModel.Meta):
         db_table = 'themes'
@@ -48,7 +54,7 @@ class Provider(BaseModel):
     name = NullCharField(_('provider name'), max_length=50)
     slug = NullSlugField(_('slug'))
     endpoint = NullURLField(_('endpoint'))
-    priority = models.SmallIntegerField(_('priority'))
+    priority = models.PositiveSmallIntegerField(_('priority'))
     description = NullTextField(_('description'), blank=True, null=True)
     is_available = models.BooleanField(_('available'), default=True)
     objects = ProviderManager()
@@ -163,7 +169,7 @@ class BookData(BaseModel):
 
 class Playlist(BaseModel):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, verbose_name=_('user'))
-    theme = models.ForeignKey('Theme', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('theme'))
+    theme = models.ForeignKey('Theme', on_delete=models.PROTECT, verbose_name=_('theme'))
     title = NullCharField(_('title'), max_length=50)
     description = NullTextField(_('description'))
     og_image = models.ImageField(
@@ -172,6 +178,7 @@ class Playlist(BaseModel):
         null=True,
         verbose_name=_('Open Graph image')
     )
+    sequence = models.PositiveSmallIntegerField(_('sequence'), blank=True, null=True)
     is_published = models.BooleanField(_('published'), default=True)
     objects = PlaylistManager()
     all_objects_without_deleted = PlaylistWithUnpublishedManager()
@@ -184,6 +191,7 @@ class Playlist(BaseModel):
         verbose_name_plural = _('playlists')
         indexes = [
             models.Index(fields=['title'], name='title'),
+            models.Index(fields=['sequence'], name='sequence'),
         ] + BaseModel._meta.indexes + [
             models.Index(fields=['user', 'created_at'], name='idx01'),
         ]
@@ -251,6 +259,39 @@ class PlaylistBook(BaseModel):
 
     def __str__(self):
         return '%s' % self.book
+
+
+class Recommendation(BaseModel):
+    playlist = models.OneToOneField(
+        'Playlist',
+        on_delete=models.CASCADE,
+        verbose_name=_('playlist')
+    )
+    theme = models.ForeignKey(
+        'Theme',
+        on_delete=models.CASCADE,
+        verbose_name=_('theme')
+    )
+    sequence = models.PositiveSmallIntegerField(_('sequence'))
+    objects = RecommendationManager()
+    all_objects = RecommendationManager()
+
+    class Meta(BaseModel.Meta):
+        db_table = 'recommendations'
+        ordering = ['theme', 'sequence']
+        verbose_name = _('recommendation')
+        verbose_name_plural = _('recommendations')
+        indexes = [
+            models.Index(fields=['sequence'], name='sequence'),
+        ] + BaseModel._meta.indexes + [
+            models.Index(fields=['theme', 'sequence'], name='idx01'),
+        ]
+
+    def __str__(self):
+        return '%s' % self.playlist
+
+    def delete(self):
+        self.hard_delete()
 
 
 class Like(BaseModel):

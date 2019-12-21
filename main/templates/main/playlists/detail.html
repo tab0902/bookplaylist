@@ -201,11 +201,12 @@
         </div>
     </section>
 
+    {% if other_playlists %}
     <section id="playlist-detail-others">
         <div class="line-gray my-5"></div>
         <h2>
             {% if playlist.theme %}
-            {% blocktrans with theme=playlist.theme.name %}Other playlists with #{{ theme }}{% endblocktrans %}
+            {% blocktrans with theme=playlist.theme.tagged_name %}Other playlists with {{ theme }}{% endblocktrans %}
             {% else %}
             {% trans 'Other playlists with free theme' %}
             {% endif %}
@@ -222,6 +223,7 @@
             {% endif %}
         </a>
     </section>
+    {% endif %}
 
     <section id="playlist-detail-lets-create">
         <div class="mt-5">

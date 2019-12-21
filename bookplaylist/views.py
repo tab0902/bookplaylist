@@ -33,6 +33,7 @@ class TemplateContextMixin:
     twitter_card = 'summary_large_image'
     twitter_site = '@BooxMix'
     fb_app_id = settings.FACEBOOK_APP_ID
+    slug_no_theme = settings.SLUG_NO_THEME
     dummy_image = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 
     def dispatch(self, *args, **kwargs):
@@ -53,6 +54,7 @@ class TemplateContextMixin:
             'fb_app_id': self.fb_app_id,
             'twitter_card': self.twitter_card,
             'twitter_site': self.twitter_site,
+            'slug_no_theme': self.slug_no_theme,
             'dummy_image': self.dummy_image,
         })
         return context

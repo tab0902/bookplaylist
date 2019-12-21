@@ -204,10 +204,8 @@ ADMIN_REORDER = (
 
 DEFAULT_PROVIDER = 'rakuten'
 
-
 OG_IMAGE_WIDTH = 1200
 OG_IMAGE_HEIGHT = 630
-
 
 CONTACT_INQUIRY = (
     ('', _('(Please select)')),
@@ -215,6 +213,8 @@ CONTACT_INQUIRY = (
     ('2', _('Defect report')),
     ('3', _('Other inquiry')),
 )
+
+SLUG_NO_THEME = 'theme_free'
 
 
 try:

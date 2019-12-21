@@ -39,7 +39,7 @@ class UserAdmin(AllObjectsMixin, AllObjectsForeignKeyMixin, BaseUserAdmin):
     add_form = UserCreationForm
     list_display = ('username', 'email', 'nickname', 'last_login', 'date_joined', 'is_staff', 'is_active',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'hopes_newsletter', 'groups', 'last_login', 'date_joined', 'date_verified',)
-    search_fields = ('username', 'email', 'nickname', 'first_name', 'last_name', 'comment',)
+    search_fields = ('username', 'email', 'nickname', 'comment',)
     ordering = ('-last_login',)
     filter_horizontal = ('groups', 'user_permissions',)
     inlines = [PlaylistInline, LikeInline]
