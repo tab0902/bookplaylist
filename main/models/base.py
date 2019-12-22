@@ -1,4 +1,5 @@
 import imgkit
+import os
 import re
 from functools import partial
 
@@ -44,6 +45,10 @@ class Template(BaseModel):
     )
     name = NullCharField(_('template name'), max_length=50)
     slug = NullSlugField(_('slug'), unique=True)
+
+    @property
+    def directory(self):
+        return 'main/playlists/og_image/{}'.format(self.slug)
 
     class Meta(BaseModel.Meta):
         db_table = 'templates'
@@ -254,20 +259,29 @@ class Playlist(BaseModel):
         super().hard_delete()
 
     def save_og_image(self, save=True):
+        template = self.theme.template
+        template_dir = template.directory
+        book_numbers = template.book_numbers.values_list('number', flat=True)
         book_count = self.playlist_book_set.count()
-        if book_count < 6:
-            template = get_template('main/playlists/og_image/{}.html'.format(book_count))
-        else:
-            template = get_template('main/playlists/og_image/6.html')
+
+        book_number = max(n for n in book_numbers if n <= book_count)
+        template_file = '{}.html'.format(book_number)
+        template_path = os.path.join(template_dir, template_file)
+        template = get_template(template_path)
+
         raw_title = self.title
         self.title = remove_emoji(raw_title.strip())
-        context = {'playlist': self}
+        context = {
+            'playlist': self,
+            'layouts_dir': os.path.join(template_dir, 'layouts')
+        }
         options = {
             'width': str(settings.OG_IMAGE_WIDTH),
             'height': str(settings.OG_IMAGE_HEIGHT),
             'encoding': 'UTF-8',
             'quiet': '',
         }
+
         img = imgkit.from_string(template.render(context), False, options=options)
         self.title = raw_title
         self.og_image.save('{}.jpg'.format(str(self.pk)), ContentFile(img), save=save)
