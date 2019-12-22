@@ -93,7 +93,8 @@ class PlaylistBookStackedInline(AllObjectsForeignKeyMixin, StackedInline):
     def get_extra(self, request, obj=None, **kwargs):
         extra = 1
         if obj:
-            return extra - obj.playlist_book_set.count() if extra > obj.playlist_book_set.count() else 0
+            count = obj.playlist_book_set.count()
+            extra = extra - count if extra > count else 0
         return extra
 
     def get_autocomplete_fields(self, request):
@@ -112,7 +113,8 @@ class RecommendationInline(TabularInline):
     def get_extra(self, request, obj=None, **kwargs):
         extra = 4
         if obj:
-            return extra - obj.recommendation_set.count() if extra > obj.recommendation_set.count() else 0
+            count = obj.recommendation_set.count()
+            extra = extra - count if extra > count else 0
         return extra
 
 
