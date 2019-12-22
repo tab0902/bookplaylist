@@ -180,7 +180,7 @@ SOCIAL_AUTH_PIPELINE = (
 ADMIN_REORDER = (
     {
         'app': 'main',
-        'models': ('main.Book', 'main.Provider', 'main.Playlist', 'main.Theme', 'main.Template', )
+        'models': ('main.Playlist', 'main.Theme', 'main.Template', 'main.Book', 'main.Provider', )
     },
     {
         'app': 'accounts',
