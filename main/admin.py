@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 
 from django.contrib import admin
-from django.db.models import F
+from django.db.models import F, Prefetch
 from django.urls import resolve
 from django.utils.translation import gettext_lazy as _
 
@@ -57,7 +57,7 @@ class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInli
     can_delete = False
     show_change_link = True
     fields = ('title', 'theme', 'user', 'og_image', 'created_at', 'is_published',)
-    readonly_fields = ('created_at',)
+    readonly_fields = fields
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -68,16 +68,13 @@ class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInli
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('theme')
 
-    def has_change_permission(self, request, obj=None):
-        return False
-
 
 class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
     model = PlaylistBook
     can_delete = False
     show_change_link = False
     fields = ('playlist', 'created_at',)
-    readonly_fields = ('playlist', 'created_at',)
+    readonly_fields = fields
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
