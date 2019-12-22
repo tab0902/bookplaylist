@@ -6,7 +6,7 @@ from django.urls import resolve
 from django.utils.translation import gettext_lazy as _
 
 from .models import (
-    Book, BookData, Like, Playlist, PlaylistBook, Provider, Recommendation, Theme,
+    Book, BookData, Like, Playlist, PlaylistBook, Provider, Recommendation, Template, Theme,
 )
 from bookplaylist.admin import (
     Admin, AllObjectsForeignKeyMixin, AllObjectsMixin, SlimTabularInline, StackedInline, TabularInline,
@@ -35,6 +35,20 @@ class BookDataInline(AllObjectsForeignKeyMixin, StackedInline):
         max_num = 0
         if obj:
             max_num = obj.book_data_set.count()
+        return max_num
+
+
+class ThemeInline(TabularInline):
+    model = Theme
+    can_delete = False
+    show_change_link = True
+    fields = ('name', 'slug', 'sequence', 'created_at',)
+    readonly_fields = fields
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num = 0
+        if obj:
+            max_num = obj.theme_set.count()
         return max_num
 
 
@@ -118,11 +132,21 @@ class LikeInline(SlimTabularInline):
         return max_num
 
 
+@admin.register(Template)
+class TemplateAdmin(Admin):
+    fields = ('name', 'slug', 'book_numbers', 'pk', 'created_at', 'updated_at',)
+    list_display = ('name', 'slug', 'created_at',)
+    list_filter = ('created_at', 'updated_at',)
+    search_fields = ('name', 'slug',)
+    filter_horizontal = ('book_numbers',)
+    inlines = [ThemeInline]
+
+
 @admin.register(Theme)
 class ThemeAdmin(Admin):
-    list_display = ('name', 'slug', 'created_at', 'sequence',)
+    list_display = ('name', 'slug', 'template', 'created_at', 'sequence',)
     list_editable = ('sequence',)
-    list_filter = ('created_at', 'updated_at',)
+    list_filter = ('template', 'created_at', 'updated_at',)
     search_fields = ('name', 'slug', 'description',)
     inlines = [RecommendationInline, PlaylistInline]
 

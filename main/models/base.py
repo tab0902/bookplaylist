@@ -13,13 +13,60 @@ from bookplaylist.models import (
     BaseModel, Manager, NullCharField, NullSlugField, NullTextField, NullURLField, get_file_path, remove_emoji,
 )
 from .manager import (
-    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager, ProviderManager, RecommendationManager,
+    AllBookDataManager, AllBookManager, AllLikeManager, AllPlaylistBookManager, AllPlaylistManager, AllTemplateManager,
+    BookDataManager, BookManager, LikeManager, PlaylistBookManager, PlaylistManager, PlaylistWithUnpublishedManager,
+    ProviderManager, RecommendationManager, TemplateManager,
 )
 
 # Create your models here.
 
 
+class Number(BaseModel):
+    number = models.PositiveSmallIntegerField(_('number'), unique=True)
+
+    class Meta(BaseModel.Meta):
+        db_table = 'numbers'
+        ordering = ['number']
+        verbose_name = _('number')
+        verbose_name_plural = _('numbers')
+
+    def __str__(self):
+        return '%s' % self.number
+
+
+class Template(BaseModel):
+    book_numbers = models.ManyToManyField(
+        'Number',
+        db_table='templates_numbers',
+        related_name='templates',
+        related_query_name='template',
+        verbose_name=_('the avarable numbers of books')
+    )
+    name = NullCharField(_('template name'), max_length=50)
+    slug = NullSlugField(_('slug'), unique=True)
+
+    class Meta(BaseModel.Meta):
+        db_table = 'templates'
+        ordering = ['created_at']
+        verbose_name = _('template')
+        verbose_name_plural = _('templates')
+
+    def __str__(self):
+        return '%s' % self.name
+
+
+def get_or_create_default_template():
+    template, _ = Template.objects.get_or_create(slug='default', defaults={'name': 'デフォルト'})
+    return template.pk
+
+
 class Theme(BaseModel):
+    template = models.ForeignKey(
+        'Template',
+        on_delete=models.PROTECT,
+        default=get_or_create_default_template,
+        verbose_name=_('template')
+    )
     name = NullCharField(_('theme name'), max_length=50)
     slug = NullSlugField(_('slug'), blank=True, null=True)
     sequence = models.PositiveSmallIntegerField(_('sequence'), blank=True, null=True)
