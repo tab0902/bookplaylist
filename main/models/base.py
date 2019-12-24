@@ -261,10 +261,11 @@ class Playlist(BaseModel):
     def save_og_image(self, save=True):
         template = self.theme.template
         template_dir = template.directory
-        book_numbers = template.book_numbers.values_list('number', flat=True)
-        book_count = self.playlist_book_set.count()
+        template_book_numbers = template.book_numbers.values_list('number', flat=True)
 
-        book_number = max(n for n in book_numbers if n <= book_count)
+        book_count = self.playlist_book_set.count()
+        book_numbers = [n for n in template_book_numbers if n <= book_count]
+        book_number = max(book_numbers) if book_numbers else min(template_book_numbers)
         template_file = '{}.html'.format(book_number)
         template_path = os.path.join(template_dir, template_file)
         template = get_template(template_path)
