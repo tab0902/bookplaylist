@@ -40,7 +40,7 @@ class PlaylistForm(BasePlaylistForm):
         self.fields['theme'].empty_label = None
         self.fields['title'].widget.attrs['placeholder'] = '例）不思議な恋愛'
         self.fields['description'].widget.attrs['placeholder'] \
-            = '例）わたしが読んできたさまざまな恋愛に関係した本の中から、特に強く印象に残っているものをピックアップして紹介します。'
+            = '例）特に強く印象に残っているものをピックアップして紹介します。'
         if 'theme' in self.request.GET:
             self.fields['theme'].initial = Theme.objects.filter(slug=self.request.GET.get('theme')).first()
         else:
