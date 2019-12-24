@@ -17,13 +17,13 @@ class Command(BaseCommand):
             help='Bucket to manage. Required.',
         )
         parser.add_argument(
-            '--scheme', '-s'
+            '--scheme', '-s',
             type=str,
             default='https',
             help='Specify scheme. Default is "https"',
         )
         parser.add_argument(
-            '--host', '-H'
+            '--host', '-H',
             type=str,
             default='booxmix.com',
             help='Host to allow CORS. Default is "booxmix.com"',
