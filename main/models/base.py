@@ -273,7 +273,7 @@ class Playlist(BaseModel):
         self.title = remove_emoji(raw_title.strip())
         context = {
             'playlist': self,
-            'layouts_dir': os.path.join(template_dir, 'layouts')
+            'directory': template_dir,
         }
         options = {
             'width': str(settings.OG_IMAGE_WIDTH),

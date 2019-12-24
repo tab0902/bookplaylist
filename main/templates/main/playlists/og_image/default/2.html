@@ -4,12 +4,12 @@
 
 {% block content %}
 
-{% include layouts_dir|add:'/title.html' with size='large' %}
+{% include directory|add:'/layouts/title.html' with size='large' %}
 <div>
-    {% include layouts_dir|add:'/cover.html' with size='two-third' cover=playlist.playlist_book_set.all.0.book.large_cover %}
+    {% include directory|add:'/layouts/cover.html' with size='two-third' cover=playlist.playlist_book_set.all.0.book.large_cover %}
     <div class="d-flex">
-        {% include layouts_dir|add:'/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.1.book.large_cover %}
-        {% include layouts_dir|add:'/chevron.html' with size='one-third' %}
+        {% include directory|add:'/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.1.book.large_cover %}
+        {% include directory|add:'/layouts/chevron.html' with size='one-third' %}
     </div>
 </div>
 

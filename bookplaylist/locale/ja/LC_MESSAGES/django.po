@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-22 16:09+0900\n"
+"POT-Creation-Date: 2019-12-24 15:19+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -1218,6 +1218,23 @@ msgstr "本を追加する"
 #: main/templates/main/playlists/layouts/playlist-form.html:81
 msgid "Complete"
 msgstr "完成"
+
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:6
+#, python-format
+msgid "%(user)s's'"
+msgstr "%(user)sが選ぶ"
+
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:9
+msgid "Best 3 Books<br>In This Year"
+msgstr "今年読んだ本<br>ベスト３"
+
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:12
+msgid "Let's create book playlist and share it"
+msgstr "本のプレイリストを作ってシェアしよう"
+
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:15
+msgid "→ MORE"
+msgstr ""
 
 #: main/templates/main/playlists/og_image/default/layouts/title.html:9
 msgid "Let's create book playlist and share it."
