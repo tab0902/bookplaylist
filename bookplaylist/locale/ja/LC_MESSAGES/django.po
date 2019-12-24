@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-24 15:19+0900\n"
+"POT-Creation-Date: 2019-12-24 15:58+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -90,7 +90,7 @@ msgstr "半角英数またはアンダーバー"
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:178 main/forms.py:136
+#: accounts/forms.py:178 main/forms.py:138
 #: main/templates/main/contact_email_admin.html:6
 msgid "Email"
 msgstr ""
@@ -691,49 +691,49 @@ msgstr "プレイリストのタイトル"
 msgid "Any themes"
 msgstr "なんでも"
 
-#: main/forms.py:73 main/templates/main/playlists/delete.html:15
+#: main/forms.py:75 main/templates/main/playlists/delete.html:15
 msgid "Delete"
 msgstr "削除する"
 
-#: main/forms.py:94
+#: main/forms.py:96
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:100
+#: main/forms.py:102
 msgid "Input key words"
 msgstr "キーワードを入力"
 
-#: main/forms.py:108
+#: main/forms.py:110
 msgid "Theme"
 msgstr "テーマ"
 
-#: main/forms.py:109
+#: main/forms.py:111
 msgid "All themes"
 msgstr "すべてのテーマ"
 
-#: main/forms.py:115
+#: main/forms.py:117
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:127
+#: main/forms.py:129
 msgid "Input title name"
 msgstr "書名を入力"
 
-#: main/forms.py:132 main/templates/main/contact_email.html:5
+#: main/forms.py:134 main/templates/main/contact_email.html:5
 #: main/templates/main/contact_email_admin.html:7
 msgid "Content of inquiry"
 msgstr "お問い合わせ内容"
 
-#: main/forms.py:141
+#: main/forms.py:143
 msgid "URL of the target page (option)"
 msgstr "対象ページのURL（任意）"
 
-#: main/forms.py:145 main/templates/main/contact_email.html:8
+#: main/forms.py:147 main/templates/main/contact_email.html:8
 #: main/templates/main/contact_email_admin.html:10
 msgid "Body"
 msgstr "本文"
 
-#: main/forms.py:168
+#: main/forms.py:170
 msgid "Guest user"
 msgstr "ゲストユーザー"
 
