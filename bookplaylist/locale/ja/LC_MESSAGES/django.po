@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-24 16:29+0900\n"
+"POT-Creation-Date: 2019-12-24 17:06+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -994,7 +994,7 @@ msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/index.html:51
-#: main/templates/main/playlists/create_complete.html:57
+#: main/templates/main/playlists/create_complete.html:63
 msgid "Create"
 msgstr "作成する"
 
@@ -1081,7 +1081,7 @@ msgstr "追加する本を探す"
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlists/create_complete.html:14
+#: main/templates/main/playlists/create_complete.html:13
 #: main/templates/main/playlists/detail.html:118
 #: main/templates/main/playlists/layouts/book-list.html:20
 #: main/templates/main/playlists/layouts/list-widget-small.html:18
@@ -1092,23 +1092,31 @@ msgstr "検索する"
 msgid "Image of &quot;%(title)s&quot;"
 msgstr "『%(title)s』の画像"
 
-#: main/templates/main/playlists/create_complete.html:33
+#: main/templates/main/playlists/create_complete.html:18
+msgid "You can save this image by keeping pressing it down."
+msgstr "画像を長押しすると保存できます。"
+
+#: main/templates/main/playlists/create_complete.html:34
 #: main/templates/main/playlists/detail.html:82
 #: main/templates/main/playlists/detail.html:166
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:45
+#: main/templates/main/playlists/create_complete.html:46
 #: main/templates/main/playlists/detail.html:94
 #: main/templates/main/playlists/detail.html:178
 msgid "Share on Facebook"
 msgstr "Facebookでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:52
+#: main/templates/main/playlists/create_complete.html:54
+msgid "Show detail page"
+msgstr "詳細ページへ"
+
+#: main/templates/main/playlists/create_complete.html:58
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
-#: main/templates/main/playlists/create_complete.html:53
+#: main/templates/main/playlists/create_complete.html:59
 msgid ""
 "Let’s create another playlist by sharing your knowledge, experience and "
 "specialty."
