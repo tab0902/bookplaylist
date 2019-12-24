@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-24 17:06+0900\n"
+"POT-Creation-Date: 2019-12-24 17:41+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -349,7 +349,7 @@ msgstr "引き続きBooxMixをお楽しみください。"
 
 #: accounts/templates/accounts/password_reset_complete.html:16
 #: accounts/templates/accounts/verification.html:16
-#: main/templates/main/index.html:33 main/templates/main/index.html:139
+#: main/templates/main/index.html:33 main/templates/main/index.html:150
 #: main/templates/main/playlists/layouts/lets-create-playlist.html:32
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
@@ -998,11 +998,15 @@ msgstr "本のプレイリストを作成する"
 msgid "Create"
 msgstr "作成する"
 
-#: main/templates/main/index.html:58
+#: main/templates/main/index.html:59
+msgid "Let's create Best 3 Books In This Year"
+msgstr "あなたが今年読んだ本ベスト３を作ってシェアしよう！"
+
+#: main/templates/main/index.html:69
 msgid "Easy to pick books"
 msgstr "スマホで簡単に作成！"
 
-#: main/templates/main/index.html:59
+#: main/templates/main/index.html:70
 msgid ""
 "Make your book-playlist on your smartphone. It is easier than any other blog "
 "services."
@@ -1010,60 +1014,60 @@ msgstr ""
 "お勧めしたい本をスマホでまとめて、ブログで書くよりも気軽にシンプルに本のプレ"
 "イリストを作れます。"
 
-#: main/templates/main/index.html:67
+#: main/templates/main/index.html:78
 msgid "No more picture editing"
 msgstr "SNSで気軽にシェア！"
 
-#: main/templates/main/index.html:68
+#: main/templates/main/index.html:79
 msgid "We make your favorite books into one picture automatically."
 msgstr ""
 "プレイリストが完成すると、自動で画像を生成。投稿する画像に悩まずに気軽にSNSで"
 "シェアできます。"
 
-#: main/templates/main/index.html:77
+#: main/templates/main/index.html:88
 msgid "Discover your “Want to Read” books"
 msgstr "みんなのプレイリストから読みたい本を発見！"
 
-#: main/templates/main/index.html:78
+#: main/templates/main/index.html:89
 msgid ""
 "A lot of people are sharing book-playlists. Let’s look around and  find your "
 "“want to read” books."
 msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
-#: main/templates/main/index.html:82
+#: main/templates/main/index.html:93
 msgid "Recommended playlists"
 msgstr "編集部おすすめのプレイリスト"
 
-#: main/templates/main/index.html:90
+#: main/templates/main/index.html:101
 msgid "Popular playlists"
 msgstr "人気のプレイリスト"
 
-#: main/templates/main/index.html:95 main/templates/main/index.html:110
-#: main/templates/main/index.html:126
+#: main/templates/main/index.html:106 main/templates/main/index.html:121
+#: main/templates/main/index.html:137
 #: main/templates/main/playlists/detail.html:217
 msgid "Show all"
 msgstr "すべて見る"
 
-#: main/templates/main/index.html:98
+#: main/templates/main/index.html:109
 msgid "Show all popular playlists"
 msgstr "全ての 人気のプレイリスト を見る"
 
-#: main/templates/main/index.html:105
+#: main/templates/main/index.html:116
 msgid "Recent playlists"
 msgstr "新着のプレイリスト"
 
-#: main/templates/main/index.html:113
+#: main/templates/main/index.html:124
 msgid "Show all recent playlists"
 msgstr "全ての 新着のプレイリスト を見る"
 
-#: main/templates/main/index.html:129
+#: main/templates/main/index.html:140
 #: main/templates/main/playlists/detail.html:221
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての %(theme)s を見る"
 
-#: main/templates/main/index.html:134
+#: main/templates/main/index.html:145
 msgid "Why don't you create your first book-playlist?"
 msgstr "さあ、あなたも本のプレイリストを作ってみましょう！"
 

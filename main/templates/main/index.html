@@ -47,8 +47,19 @@
     <section id="index-create-playlist-sp" class="d-md-none">
         <h2 class="mt-4">{% trans 'Create book playlist' %}</h2>
         <p>{{ text_create_playlist }}</p>
-        <a href="{% url 'main:create_or_signup' %}" class="btn btn-main w-100">{% trans 'Create' %}</a>
+        <a href="{% url 'main:create_or_signup' %}" class="btn btn-outline-main w-100">{% trans 'Create' %}</a>
         <div class="line-gray my-4"></div>
+    </section>
+
+    <section id="index-create-best3">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <a href="{% url 'main:playlist_create' %}?theme=best_3_in_2019&title=今年読んだ本ベスト３">
+                    {% trans "Let's create Best 3 Books In This Year" as test_create_best3 %}
+                    <img src="{% static 'main/img/best_3_in_this_year-hero.png' %}" alt="{{ test_create_best3 }}" width="100%" class="border-radius mb-4 mb-md-0 mt-md-5">
+                </a>
+            </div>
+        </div>
     </section>
 
     <section id="index-howto">
