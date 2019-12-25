@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+
+    /* common */
+    html {
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', sans-serif;
+        overflow-wrap: break-word;
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    /* utils */
+    .d-flex {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+    }
+    .align-items-center {
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .justify-content-center {
+        -webkit-justify-content: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+
+    /* OG image */
+    .og-image {
+        width: 1200px;
+        height: 630px;
+        background-image: url("{% static 'main/img/best_3_in_this_year-bg-og-image.png' %}");
+    }
+
+    /* cover */
+    .og-image-cover {
+        position: absolute;
+    }
+    .og-image-cover.small {
+        top: 126px;
+        left: 72px;
+        height: 315px;
+        width: 210px;
+        z-index: 1;
+    }
+    .og-image-cover.medium {
+        top: 21px;
+        left: 264px;
+        height: 346.5px;
+        width: 231px;
+        z-index: 2;
+    }
+    .og-image-cover.large {
+        bottom: 63px;
+        left: 456px;
+        height: 378px;
+        width: 252px;
+        z-index: 3;
+    }
+
+    /* list */
+    .og-image-list {
+        position: absolute;
+        bottom: 16px;
+        left: 130px;
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+    }
+    .og-image-list-item {
+        margin-top: 1.25rem;
+    }
+
+    /* hero */
+    .og-image-info {
+        position: absolute;
+        right: 24px;
+        bottom: 63px;
+        color: #fff;
+        font-weight: bold;
+        text-align: right;
+    }
+    .og-image-user {
+        font-size: 36px;
+    }
+    .og-image-title {
+        font-size: 64px;
+        letter-spacing: 5px;
+        margin: 2rem -5px 2rem 0;
+        line-height: 1.2em;
+    }
+    .og-image-sub-title {
+        font-size: 22px;
+    }
+    .og-image-button {
+        font-family: 'Prompt', sans-serif;
+        font-size: 20px;
+        letter-spacing: 2px;
+        width: 270px;
+        margin: 2.5rem 4px 0 auto;
+        padding: 1.5rem 0;
+        border: 1px solid #fff;
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body style="background-color: #484848;">
+    <div class="og-image">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

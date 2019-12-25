@@ -4,10 +4,10 @@
 
 {% block content %}
 
-{% include 'main/playlists/og_image/layouts/title.html' with size='small' %}
+{% include directory|add:'/layouts/title.html' with size='small' %}
 <div class="wrapper full">
     <div class="og-image-cover-bg inner d-flex align-items-center justify-content-center">
-        {% include 'main/playlists/og_image/layouts/cover.html' with size='two-third' cover=playlist.playlist_book_set.all.0.book.large_cover %}
+        {% include directory|add:'/layouts/cover.html' with size='two-third' cover=playlist.playlist_book_set.all.0.book.large_cover %}
     </div>
 </div>
 

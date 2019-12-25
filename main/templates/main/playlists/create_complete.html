@@ -8,13 +8,14 @@
     <section id="playlist-create-complete">
         <h2 class="text-center mt-4 mt-md-5">{{ page_title }}</h2>
         <div class="mt-4 box-shadow border-radius">
-            <a href="{% url 'main:playlist_detail' playlist.pk %}" class="color-gray">
-                <img
-                    src="{{ playlist.og_image.url }}"
-                    alt="{% blocktrans with title=playlist.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
-                    width="100%"
-                >
-            </a>
+            <img
+                src="{{ playlist.og_image.url }}"
+                alt="{% blocktrans with title=playlist.title %}Image of &quot;{{ title }}&quot;{% endblocktrans %}"
+                width="100%"
+            >
+        </div>
+        <div class="text-md font-weight-bold text-center mt-3">
+            {% trans 'You can save this image by keeping pressing it down.' %}
         </div>
         <div class="row">
             <div class="col-sm-8 offset-sm-2">
@@ -23,10 +24,10 @@
                 {% with text='【'|add:playlist.title|add:'】%0a'|add:playlist.description|truncatechars:80|urlencode:'%0a' %}
                 {% with tags='%0a#読書好きと繋がりたい #読書 #BooxMix'|urlencode:'%0a' %}
                 <a
-                    href="https://twitter.com/intent/tweet?text={{ text }}{{ tags }}{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode:'' }}{% endif %}&url={{ origin }}{{ absolute_url }}"
+                    href="https://twitter.com/intent/tweet?text={{ text }}{{ tags }}{% if playlist.theme and playlist.theme.name != playlist.title %}%20%23{{ playlist.theme.name|urlencode:'' }}{% endif %}&url={{ origin }}{{ absolute_url }}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="btn btn-twitter w-100 mt-5"
+                    class="btn btn-twitter w-100 mt-3 mt-md-5"
                     data-ga-event-category="share_self"
                     data-ga-event-action="twitter"
                 >
@@ -48,7 +49,12 @@
                 {% endwith %}
             </div>
         </div>
-        <div class="line-gray mt-5 mb-4 mb-md-5"></div>
+        <div class="text-center">
+            <a href="{% url 'main:playlist_detail' playlist.pk %}" class="btn btn-inline-sub mt-4 mt-md-5">
+                {% trans 'Show detail page' %}
+            </a>
+        </div>
+        <div class="line-gray my-4 my-md-5"></div>
         <h2 class="mt-4">{% trans 'Create one more playlist' %}</h2>
         <p>{% trans 'Let’s create another playlist by sharing your knowledge, experience and specialty.' %}</p>
         <div class="row mb-md-5">

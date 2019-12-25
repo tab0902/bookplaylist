@@ -1,12 +1,12 @@
 from urllib.parse import urlparse
 
 from django.contrib import admin
-from django.db.models import F
+from django.db.models import F, Prefetch
 from django.urls import resolve
 from django.utils.translation import gettext_lazy as _
 
 from .models import (
-    Book, BookData, Like, Playlist, PlaylistBook, Provider, Recommendation, Theme,
+    Book, BookData, Like, Playlist, PlaylistBook, Provider, Recommendation, Template, Theme,
 )
 from bookplaylist.admin import (
     Admin, AllObjectsForeignKeyMixin, AllObjectsMixin, SlimTabularInline, StackedInline, TabularInline,
@@ -38,12 +38,26 @@ class BookDataInline(AllObjectsForeignKeyMixin, StackedInline):
         return max_num
 
 
+class ThemeInline(TabularInline):
+    model = Theme
+    can_delete = False
+    show_change_link = True
+    fields = ('name', 'slug', 'sequence', 'created_at',)
+    readonly_fields = fields
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num = 0
+        if obj:
+            max_num = obj.theme_set.count()
+        return max_num
+
+
 class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInline):
     model = Playlist
     can_delete = False
     show_change_link = True
     fields = ('title', 'theme', 'user', 'og_image', 'created_at', 'is_published',)
-    readonly_fields = ('created_at',)
+    readonly_fields = fields
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -54,16 +68,13 @@ class PlaylistInline(AllObjectsMixin, AllObjectsForeignKeyMixin, SlimTabularInli
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('theme')
 
-    def has_change_permission(self, request, obj=None):
-        return False
-
 
 class PlaylistBookTabularInline(AllObjectsForeignKeyMixin, TabularInline):
     model = PlaylistBook
     can_delete = False
     show_change_link = False
     fields = ('playlist', 'created_at',)
-    readonly_fields = ('playlist', 'created_at',)
+    readonly_fields = fields
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -82,7 +93,8 @@ class PlaylistBookStackedInline(AllObjectsForeignKeyMixin, StackedInline):
     def get_extra(self, request, obj=None, **kwargs):
         extra = 1
         if obj:
-            return extra - obj.playlist_book_set.count() if extra > obj.playlist_book_set.count() else 0
+            count = obj.playlist_book_set.count()
+            extra = extra - count if extra > count else 0
         return extra
 
     def get_autocomplete_fields(self, request):
@@ -101,7 +113,8 @@ class RecommendationInline(TabularInline):
     def get_extra(self, request, obj=None, **kwargs):
         extra = 4
         if obj:
-            return extra - obj.recommendation_set.count() if extra > obj.recommendation_set.count() else 0
+            count = obj.recommendation_set.count()
+            extra = extra - count if extra > count else 0
         return extra
 
 
@@ -118,11 +131,21 @@ class LikeInline(SlimTabularInline):
         return max_num
 
 
+@admin.register(Template)
+class TemplateAdmin(Admin):
+    fields = ('name', 'slug', 'book_numbers', 'pk', 'created_at', 'updated_at',)
+    list_display = ('name', 'slug', 'created_at',)
+    list_filter = ('created_at', 'updated_at',)
+    search_fields = ('name', 'slug',)
+    filter_horizontal = ('book_numbers',)
+    inlines = [ThemeInline]
+
+
 @admin.register(Theme)
 class ThemeAdmin(Admin):
-    list_display = ('name', 'slug', 'created_at', 'sequence',)
+    list_display = ('name', 'slug', 'template', 'created_at', 'sequence',)
     list_editable = ('sequence',)
-    list_filter = ('created_at', 'updated_at',)
+    list_filter = ('template', 'created_at', 'updated_at',)
     search_fields = ('name', 'slug', 'description',)
     inlines = [RecommendationInline, PlaylistInline]
 

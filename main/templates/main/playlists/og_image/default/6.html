@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+{% include directory|add:'/layouts/title.html' with size='small' %}
+<div>
+    {% include directory|add:'/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.1.book.large_cover %}
+    {% include directory|add:'/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.2.book.large_cover %}
+    {% include directory|add:'/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.3.book.large_cover %}
+</div>
+<div>
+    {% include directory|add:'/layouts/cover.html' with size='two-third' cover=playlist.playlist_book_set.all.0.book.large_cover %}
+    <div class="d-flex">
+        {% include directory|add:'/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.4.book.large_cover %}
+        {% include directory|add:'/layouts/cover.html' with size='one-third' cover=playlist.playlist_book_set.all.5.book.large_cover %}
+    </div>
+</div>
+
+{% endblock %}

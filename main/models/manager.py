@@ -12,6 +12,25 @@ __all__ = ['ProviderManager', 'BookManager', 'AllBookManager', 'BookDataManager'
 
 
 ############
+# Template #
+############
+
+class TemplateManagerMixin:
+
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('book_numbers')
+
+
+class TemplateManager(TemplateManagerMixin, Manager):
+    pass
+
+
+class AllTemplateManager(TemplateManagerMixin, AllObjectsManager):
+    pass
+
+
+
+############
 # Provider #
 ############
 

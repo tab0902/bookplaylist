@@ -78,7 +78,7 @@
                 {% with text='【'|add:playlist.title|add:'】%0a'|add:playlist.description|truncatechars:80|urlencode:'%0a' %}
                 {% with tags='%0a#読書好きと繋がりたい #読書 #BooxMix'|urlencode:'%0a' %}
                 <a
-                    href="https://twitter.com/intent/tweet?text={{ text }}{{ tags }}{% if playlist.theme %}%20%23{{ playlist.theme.name|urlencode:'' }}{% endif %}&url={{ og_url|urlencode:'' }}"
+                    href="https://twitter.com/intent/tweet?text={{ text }}{{ tags }}{% if playlist.theme and playlist.theme.name != playlist.title %}%20%23{{ playlist.theme.name|urlencode:'' }}{% endif %}&url={{ og_url|urlencode:'' }}"
                     aria-label="{% trans 'Share on Twitter' %}"
                     target="_blank"
                     rel="noopener noreferrer"

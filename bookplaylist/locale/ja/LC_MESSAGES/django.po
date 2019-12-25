@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-21 01:24+0900\n"
+"POT-Creation-Date: 2019-12-24 20:22+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sho Tabuchi <tabuchi@booxmix.com>\n"
 "Language-Team: Sho Tabuchi <tabuchi@booxmix.com>Language: ja_JP\n"
@@ -90,7 +90,7 @@ msgstr "半角英数またはアンダーバー"
 msgid "Enter a valid email address"
 msgstr "正しいメールアドレスを入力してください"
 
-#: accounts/forms.py:178 main/forms.py:136
+#: accounts/forms.py:178 main/forms.py:140
 #: main/templates/main/contact_email_admin.html:6
 msgid "Email"
 msgstr ""
@@ -171,7 +171,7 @@ msgstr "Twitterのリンクをプロフィールに表示"
 msgid "reason for deactivation"
 msgstr "退会理由"
 
-#: accounts/models/base.py:82 main/models/base.py:171 main/models/base.py:310
+#: accounts/models/base.py:82 main/models/base.py:223 main/models/base.py:372
 msgid "user"
 msgstr ""
 
@@ -349,7 +349,7 @@ msgstr "引き続きBooxMixをお楽しみください。"
 
 #: accounts/templates/accounts/password_reset_complete.html:16
 #: accounts/templates/accounts/verification.html:16
-#: main/templates/main/index.html:33 main/templates/main/index.html:139
+#: main/templates/main/index.html:33 main/templates/main/index.html:150
 #: main/templates/main/playlists/layouts/lets-create-playlist.html:32
 msgid "Create playlist"
 msgstr "プレイリストを作成する"
@@ -671,11 +671,11 @@ msgstr "本のプレイリストをSNSでシェアしよう。"
 msgid "You don't have permission to access the page."
 msgstr "ページにアクセスする権限がありません"
 
-#: main/admin.py:155
+#: main/admin.py:178
 msgid "Yes"
 msgstr ""
 
-#: main/admin.py:156
+#: main/admin.py:179
 msgid "No"
 msgstr ""
 
@@ -687,187 +687,207 @@ msgstr "メイン"
 msgid "Playlist's title"
 msgstr "プレイリストのタイトル"
 
-#: main/forms.py:40
-msgid "Any themes"
-msgstr "なんでも"
-
-#: main/forms.py:73 main/templates/main/playlists/delete.html:15
+#: main/forms.py:77 main/templates/main/playlists/delete.html:15
 msgid "Delete"
 msgstr "削除する"
 
-#: main/forms.py:94
+#: main/forms.py:98
 msgid "Key words"
 msgstr "キーワード"
 
-#: main/forms.py:100
+#: main/forms.py:104
 msgid "Input key words"
 msgstr "キーワードを入力"
 
-#: main/forms.py:108
+#: main/forms.py:112
 msgid "Theme"
 msgstr "テーマ"
 
-#: main/forms.py:109
+#: main/forms.py:113
 msgid "All themes"
 msgstr "すべてのテーマ"
 
-#: main/forms.py:115
+#: main/forms.py:119
 msgid "Input theme, title and so on"
 msgstr "テーマ、書名などを入力"
 
-#: main/forms.py:127
+#: main/forms.py:131
 msgid "Input title name"
 msgstr "書名を入力"
 
-#: main/forms.py:132 main/templates/main/contact_email.html:5
+#: main/forms.py:136 main/templates/main/contact_email.html:5
 #: main/templates/main/contact_email_admin.html:7
 msgid "Content of inquiry"
 msgstr "お問い合わせ内容"
 
-#: main/forms.py:141
+#: main/forms.py:145
 msgid "URL of the target page (option)"
 msgstr "対象ページのURL（任意）"
 
-#: main/forms.py:145 main/templates/main/contact_email.html:8
+#: main/forms.py:149 main/templates/main/contact_email.html:8
 #: main/templates/main/contact_email_admin.html:10
 msgid "Body"
 msgstr "本文"
 
-#: main/forms.py:168
+#: main/forms.py:172
 msgid "Guest user"
 msgstr "ゲストユーザー"
 
-#: main/models/base.py:23
-msgid "theme name"
-msgstr "テーマ名"
+#: main/models/base.py:26 main/models/base.py:31
+msgid "number"
+msgstr "数量"
 
-#: main/models/base.py:24 main/models/base.py:55
+#: main/models/base.py:32
+msgid "numbers"
+msgstr "数量"
+
+#: main/models/base.py:44
+msgid "the avarable numbers of books"
+msgstr "表示可能な書籍数"
+
+#: main/models/base.py:46
+msgid "template name"
+msgstr "テンプレート名"
+
+#: main/models/base.py:47 main/models/base.py:76 main/models/base.py:107
 msgid "slug"
 msgstr "スラッグ"
 
-#: main/models/base.py:25 main/models/base.py:181 main/models/base.py:275
+#: main/models/base.py:56 main/models/base.py:73
+msgid "template"
+msgstr "テンプレート"
+
+#: main/models/base.py:57
+msgid "templates"
+msgstr "テンプレート"
+
+#: main/models/base.py:75
+msgid "theme name"
+msgstr "テーマ名"
+
+#: main/models/base.py:77 main/models/base.py:233 main/models/base.py:337
 msgid "sequence"
 msgstr "表示順"
 
-#: main/models/base.py:26 main/models/base.py:58 main/models/base.py:174
-#: main/models/base.py:246
+#: main/models/base.py:78 main/models/base.py:110 main/models/base.py:226
+#: main/models/base.py:308
 msgid "description"
 msgstr "概要"
 
-#: main/models/base.py:37 main/models/base.py:172 main/models/base.py:273
+#: main/models/base.py:89 main/models/base.py:224 main/models/base.py:335
 msgid "theme"
 msgstr "テーマ"
 
-#: main/models/base.py:38
+#: main/models/base.py:90
 msgid "themes"
 msgstr "テーマ"
 
-#: main/models/base.py:54
+#: main/models/base.py:106
 msgid "provider name"
 msgstr "プロバイダー名"
 
-#: main/models/base.py:56
+#: main/models/base.py:108
 msgid "endpoint"
 msgstr "エンドポイント"
 
-#: main/models/base.py:57
+#: main/models/base.py:109
 msgid "priority"
 msgstr "優先順位"
 
-#: main/models/base.py:59
+#: main/models/base.py:111
 msgid "available"
 msgstr "利用可能"
 
-#: main/models/base.py:66 main/models/base.py:138
+#: main/models/base.py:118 main/models/base.py:190
 msgid "provider"
 msgstr "書籍データ提供元"
 
-#: main/models/base.py:67
+#: main/models/base.py:119
 msgid "providers"
 msgstr "書籍データ提供元"
 
-#: main/models/base.py:87
+#: main/models/base.py:139
 msgid "ISBN"
 msgstr ""
 
-#: main/models/base.py:98 main/models/base.py:131 main/models/base.py:244
+#: main/models/base.py:150 main/models/base.py:183 main/models/base.py:306
 msgid "book"
 msgstr "書籍"
 
-#: main/models/base.py:99
+#: main/models/base.py:151
 msgid "books"
 msgstr "書籍"
 
-#: main/models/base.py:140 main/models/base.py:173
+#: main/models/base.py:192 main/models/base.py:225
 msgid "title"
 msgstr "タイトル"
 
-#: main/models/base.py:141
+#: main/models/base.py:193
 msgid "author"
 msgstr "著者"
 
-#: main/models/base.py:142
+#: main/models/base.py:194
 msgid "publisher"
 msgstr "出版社"
 
-#: main/models/base.py:143
+#: main/models/base.py:195
 msgid "cover"
 msgstr "書影"
 
-#: main/models/base.py:144
+#: main/models/base.py:196
 msgid "Affiliate URL"
 msgstr "アフィリエイトURL"
 
-#: main/models/base.py:155 main/models/base.py:156
+#: main/models/base.py:207 main/models/base.py:208
 msgid "book data"
 msgstr "書籍データ"
 
-#: main/models/base.py:179
+#: main/models/base.py:231
 msgid "Open Graph image"
 msgstr "OGP画像"
 
-#: main/models/base.py:182
+#: main/models/base.py:234
 msgid "published"
 msgstr "公開"
 
-#: main/models/base.py:190 main/models/base.py:235 main/models/base.py:268
-#: main/models/base.py:303
+#: main/models/base.py:242 main/models/base.py:297 main/models/base.py:330
+#: main/models/base.py:365
 msgid "playlist"
 msgstr "プレイリスト"
 
-#: main/models/base.py:191
+#: main/models/base.py:243
 msgid "playlists"
 msgstr "プレイリスト"
 
-#: main/models/base.py:254
+#: main/models/base.py:316
 msgid "book in playlist"
 msgstr "リスト内の書籍"
 
-#: main/models/base.py:255
+#: main/models/base.py:317
 msgid "books in playlists"
 msgstr "リスト内の書籍"
 
-#: main/models/base.py:282
+#: main/models/base.py:344
 msgid "recommendation"
 msgstr "おすすめのプレイリスト"
 
-#: main/models/base.py:283
+#: main/models/base.py:345
 msgid "recommendations"
 msgstr "おすすめのプレイリスト"
 
-#: main/models/base.py:312
+#: main/models/base.py:374
 msgid "message"
 msgstr "メッセージ"
 
-#: main/models/base.py:313
+#: main/models/base.py:375
 msgid "date notified"
 msgstr "通知日時"
 
-#: main/models/base.py:320
+#: main/models/base.py:382
 msgid "like"
 msgstr "スキ"
 
-#: main/models/base.py:321
+#: main/models/base.py:383
 msgid "likes"
 msgstr "スキ"
 
@@ -974,15 +994,19 @@ msgid "Create book playlist"
 msgstr "本のプレイリストを作成する"
 
 #: main/templates/main/index.html:51
-#: main/templates/main/playlists/create_complete.html:57
+#: main/templates/main/playlists/create_complete.html:63
 msgid "Create"
 msgstr "作成する"
 
-#: main/templates/main/index.html:58
+#: main/templates/main/index.html:59
+msgid "Let's create Best 3 Books In This Year"
+msgstr "あなたが今年読んだ本ベスト３を作ってシェアしよう！"
+
+#: main/templates/main/index.html:69
 msgid "Easy to pick books"
 msgstr "スマホで簡単に作成！"
 
-#: main/templates/main/index.html:59
+#: main/templates/main/index.html:70
 msgid ""
 "Make your book-playlist on your smartphone. It is easier than any other blog "
 "services."
@@ -990,60 +1014,60 @@ msgstr ""
 "お勧めしたい本をスマホでまとめて、ブログで書くよりも気軽にシンプルに本のプレ"
 "イリストを作れます。"
 
-#: main/templates/main/index.html:67
+#: main/templates/main/index.html:78
 msgid "No more picture editing"
 msgstr "SNSで気軽にシェア！"
 
-#: main/templates/main/index.html:68
+#: main/templates/main/index.html:79
 msgid "We make your favorite books into one picture automatically."
 msgstr ""
 "プレイリストが完成すると、自動で画像を生成。投稿する画像に悩まずに気軽にSNSで"
 "シェアできます。"
 
-#: main/templates/main/index.html:77
+#: main/templates/main/index.html:88
 msgid "Discover your “Want to Read” books"
 msgstr "みんなのプレイリストから読みたい本を発見！"
 
-#: main/templates/main/index.html:78
+#: main/templates/main/index.html:89
 msgid ""
 "A lot of people are sharing book-playlists. Let’s look around and  find your "
 "“want to read” books."
 msgstr ""
 "テーマごとにお勧めなプレイリストが沢山。次に読みたくなる本を発見できます。"
 
-#: main/templates/main/index.html:82
+#: main/templates/main/index.html:93
 msgid "Recommended playlists"
 msgstr "編集部おすすめのプレイリスト"
 
-#: main/templates/main/index.html:90
+#: main/templates/main/index.html:101
 msgid "Popular playlists"
 msgstr "人気のプレイリスト"
 
-#: main/templates/main/index.html:95 main/templates/main/index.html:110
-#: main/templates/main/index.html:126
+#: main/templates/main/index.html:106 main/templates/main/index.html:121
+#: main/templates/main/index.html:137
 #: main/templates/main/playlists/detail.html:217
 msgid "Show all"
 msgstr "すべて見る"
 
-#: main/templates/main/index.html:98
+#: main/templates/main/index.html:109
 msgid "Show all popular playlists"
 msgstr "全ての 人気のプレイリスト を見る"
 
-#: main/templates/main/index.html:105
+#: main/templates/main/index.html:116
 msgid "Recent playlists"
 msgstr "新着のプレイリスト"
 
-#: main/templates/main/index.html:113
+#: main/templates/main/index.html:124
 msgid "Show all recent playlists"
 msgstr "全ての 新着のプレイリスト を見る"
 
-#: main/templates/main/index.html:129
+#: main/templates/main/index.html:140
 #: main/templates/main/playlists/detail.html:221
 #, python-format
 msgid "Show all %(theme)s"
 msgstr "全ての %(theme)s を見る"
 
-#: main/templates/main/index.html:134
+#: main/templates/main/index.html:145
 msgid "Why don't you create your first book-playlist?"
 msgstr "さあ、あなたも本のプレイリストを作ってみましょう！"
 
@@ -1061,7 +1085,7 @@ msgstr "追加する本を探す"
 msgid "Search"
 msgstr "検索する"
 
-#: main/templates/main/playlists/create_complete.html:14
+#: main/templates/main/playlists/create_complete.html:13
 #: main/templates/main/playlists/detail.html:118
 #: main/templates/main/playlists/layouts/book-list.html:20
 #: main/templates/main/playlists/layouts/list-widget-small.html:18
@@ -1072,23 +1096,31 @@ msgstr "検索する"
 msgid "Image of &quot;%(title)s&quot;"
 msgstr "『%(title)s』の画像"
 
-#: main/templates/main/playlists/create_complete.html:33
+#: main/templates/main/playlists/create_complete.html:18
+msgid "You can save this image by keeping pressing it down."
+msgstr "画像を長押しすると保存できます。"
+
+#: main/templates/main/playlists/create_complete.html:34
 #: main/templates/main/playlists/detail.html:82
 #: main/templates/main/playlists/detail.html:166
 msgid "Share on Twitter"
 msgstr "Twitterでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:45
+#: main/templates/main/playlists/create_complete.html:46
 #: main/templates/main/playlists/detail.html:94
 #: main/templates/main/playlists/detail.html:178
 msgid "Share on Facebook"
 msgstr "Facebookでシェアする"
 
-#: main/templates/main/playlists/create_complete.html:52
+#: main/templates/main/playlists/create_complete.html:54
+msgid "Show detail page"
+msgstr "詳細ページへ"
+
+#: main/templates/main/playlists/create_complete.html:58
 msgid "Create one more playlist"
 msgstr "もう一つプレイリストを追加する"
 
-#: main/templates/main/playlists/create_complete.html:53
+#: main/templates/main/playlists/create_complete.html:59
 msgid ""
 "Let’s create another playlist by sharing your knowledge, experience and "
 "specialty."
@@ -1195,7 +1227,24 @@ msgstr "本を追加する"
 msgid "Complete"
 msgstr "完成"
 
-#: main/templates/main/playlists/og_image/layouts/title.html:9
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:6
+#, python-format
+msgid "%(user)s's'"
+msgstr "%(user)s が選ぶ"
+
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:9
+msgid "Best 3 Books<br>In This Year"
+msgstr "今年読んだ本<br>ベスト３"
+
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:12
+msgid "Let's create book playlist and share it"
+msgstr "本のプレイリストを作ってシェアしよう"
+
+#: main/templates/main/playlists/og_image/best_3_in_this_year/layouts/title.html:15
+msgid "→ MORE"
+msgstr ""
+
+#: main/templates/main/playlists/og_image/default/layouts/title.html:9
 msgid "Let's create book playlist and share it."
 msgstr "本のプレイリストを作ってシェアしよう。"
 

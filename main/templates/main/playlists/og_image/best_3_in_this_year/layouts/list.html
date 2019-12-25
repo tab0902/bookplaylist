@@ -1,0 +1,8 @@
+{% load static %}
+{% load i18n %}
+
+<ol class="og-image-list">
+    <li class="og-image-list-item">{{ playlist.playlist_book_set.all.0.book.title | truncatechars:9 }}</li>
+    <li class="og-image-list-item">{{ playlist.playlist_book_set.all.1.book.title | truncatechars:9 }}</li>
+    <li class="og-image-list-item">{{ playlist.playlist_book_set.all.2.book.title | truncatechars:9 }}</li>
+</ol>

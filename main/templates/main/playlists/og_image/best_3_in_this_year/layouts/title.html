@@ -1,0 +1,17 @@
+{% load static %}
+{% load i18n %}
+
+<div class="og-image-info">
+    <div class="og-image-user">
+        {% blocktrans with user=playlist.user %}{{ user }}'s'{% endblocktrans %}
+    </div>
+    <h1 class="og-image-title">
+        {% trans 'Best 3 Books<br>In This Year' %}
+    </h1>
+    <div class="og-image-sub-title">
+        {% trans "Let's create book playlist and share it" %}
+    </div>
+    <div class="og-image-button">
+        {% trans '→ MORE' %}&nbsp;
+    </div>
+</div>
